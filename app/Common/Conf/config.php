@@ -25,13 +25,13 @@ return array(
 
 	
 
-	'DB_HOST'   => '', // 服务器地址
+	'DB_HOST'   => '103.224.83.152', // 服务器地址
 
-	'DB_NAME'   => '',// 数据库名
+	'DB_NAME'   => 'hanshi',// 数据库名
 
-	'DB_USER'   => '',		// 用户名
+	'DB_USER'   => 'hanshi',		// 用户名
 
-	'DB_PWD'    => '', 			// 密码
+	'DB_PWD'    => 'hanshi', 			// 密码
 
 	'DB_PORT'   => '3306', 		// 端口
 
