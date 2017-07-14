@@ -49,6 +49,40 @@ class IndexController extends AuthController {
         $this->display();  
     }
 
+
+    //会员列表
+    public function ajax_get_user_list(){
+        $map=array();
+        if($_GET['username']){
+            $map['username']=array('like','%'.$_GET['username'].'%');
+        }
+            
+        if($_GET['gid']>0){
+            $map['gid']=$_GET['gid'];
+        }
+
+        $map['id']=array('neq',1);
+        $d = D('User');
+        $list = $d->where($map)->order('id desc')->relation(true)->select();
+
+        foreach ($list as $key => $value) {
+            $list[$key]['register_time']=date('Y-m-d',$value['register_time']);
+            $list[$key]['img']="./Uploads".$value['img'];
+        }
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='empty';
+        }
+        echo json_encode($data);
+    }
+
     public function tables(){
         global $user;
 

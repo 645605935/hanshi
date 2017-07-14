@@ -3,11 +3,11 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>ANDON系统-后台登录界面</title>
-		<link type="text/css" rel="stylesheet" href="/hanshi/Public/login_wow/style.css">
-		<script src="/hanshi/Public/Admin/assets/js/jquery.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="/Public/login_wow/style.css">
+		<script src="/Public/Admin/assets/js/jquery.min.js"></script>
 		<style type="text/css">
 			body{
-				background: url('/hanshi/Public/login_wow/log_bg.jpg') no-repeat center center;
+				background: url('/Public/login_wow/log_bg.jpg') no-repeat center center;
 				background-size: 100% 100%;
 			}
 		    .logbg img {
@@ -21,7 +21,7 @@
 			    left: 50%;
 			    margin-top: -218px;
 			    margin-left: -350px;
-			    background: url(/hanshi/Public/login_wow/logk_bg.png) no-repeat;
+			    background: url(/Public/login_wow/logk_bg.png) no-repeat;
 			    z-index: 2;
 			}
 		</style>
