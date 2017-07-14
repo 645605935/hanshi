@@ -353,333 +353,7 @@
 
 
 
-    <script type="text/javascript">
-      //获取列表
-      function _ajax_get_grid_data(pallet, format, size, supplier, Date1, Date2){
-          var grid_data;
-          $.ajax({   
-              async:false,
-              type:'get',  
-              contentType:"application/x-www-form-urlencoded",
-              url : 'http://'+api_url+'/Default.ashx?TaskID=2021',
-              data: {'palletname':pallet, 'format':format, 'size':size, 'supplier':supplier, 'Date1':Date1, 'Date2':Date2},
-              dataType : 'json',
-              success  : function(json) { 
-              console.log(json); 
-                  if(json.code==0){
-                      grid_data=json.data;
-                  }else{
-                      layer.msg(json.msg);
-                  }
-              },
-              error  : function(json) {  
-                  layer.msg(json.msg);
-              }  
-          });  
-          return grid_data;  
-      } 
-
-      //获取单条信息
-      function _ajax_get_row_info(_id){
-          var _data="";
-          $.ajax({  
-              type:'get',  
-              url : 'http://'+api_url+'/Default.ashx?TaskID=2022&RowID='+_id,
-              dataType : 'json',
-              success  : function(json) {  
-                  if(json.code == 0){
-                      var _P_Name=json.data.P_Name;
-                      var _P_Format=json.data.P_Format;
-                      var _P_Size=json.data.P_Size;
-                      var _P_Supplier=json.data.P_Supplier;
-
-                      $('#edit_form .P_Name').val(_P_Name);
-                      $('#edit_form .P_Format').val(_P_Format);
-                      $('#edit_form .P_Size').val(_P_Size);
-                      $('#edit_form .P_Supplier').val(_P_Supplier);
-
-                      _data=json;
-                  }else{
-                      layer.msg(json.msg);
-                      _data=json;
-                  }
-              },
-              error  : function() {  
-                  layer.msg('error');
-              }  
-          }); 
-          return _data;
-      }
-
-      //添加
-       function _ajax_add(_data){
-           var _add_data=JSON.stringify(_data); 
-           var _json;
-           $.ajax({  
-               async:false,
-               type:'post',  
-               contentType:"application/x-www-form-urlencoded",
-               url : 'http://'+api_url+'/Default.ashx?TaskID=20231',
-               data: _add_data,
-               dataType : 'json',
-               success  : function(json) {
-                   if(json.code==0){
-                       layer.msg(json.msg);
-                       window.location.reload();
-                   }else{
-                       layer.msg(json.msg);
-                   }
-               },
-               error  : function() {  
-                   alert('error');
-               }  
-           }); 
-           
-           return _json;
-       }
-
-       //编辑
-      function _ajax_edit(_data, _id){
-          var _edit_data=JSON.stringify(_data); 
-          var _json;
-          $.ajax({  
-              async:false,
-              type:'post',  
-              contentType:"application/x-www-form-urlencoded",
-              url : 'http://'+api_url+'/Default.ashx?TaskID=2024&RowID='+_id,
-              data: _edit_data,
-              dataType : 'json',
-              success  : function(json) {  
-                  if(json.code == 0){
-                      layer.msg(json.msg);
-                      var selectID=$("#grid-table").getGridParam("selrow");
-                      $("#grid-table").setRowData(selectID, _data);
-                      $("div[aria-describedby='dialog-confirm_edit'] .ui-dialog-titlebar-close").trigger("click");
-                  }else{
-                      layer.msg(json.msg);
-                  }
-              },
-              error  : function() {  
-                  layer.msg('error');
-              }  
-          }); 
-          return _json;  
-      }
-
-
-      //异步删除
-      function _ajax_del(ids){
-          var _json;
-          $.ajax({  
-              type:'get',  
-              url : 'http://'+api_url+'/Default.ashx?TaskID=2025&RowID='+ids,
-              dataType : 'json',
-              success  : function(json) {  
-                  if(json.code == 0){
-                      _json=json;
-                      layer.msg(json.msg);
-                      var selectRow = $("#grid-table").jqGrid('getGridParam','selrow');
-                      $("#grid-table").delRowData(selectRow);
-                  }else{
-                      layer.msg(json.msg);
-                      _json=json;
-                  }
-              },
-              error  : function() {  
-                  layer.msg('error');
-              }  
-          }); 
-          return _json;
-      }
-
-      //异步删除板料
-      function _ajax_del_banliao(pid, bid){
-          var _json;
-          $.ajax({  
-              type:'get',  
-              url : 'http://'+api_url+'/Default.ashx?TaskID=2028&pid='+pid+'&bid='+bid,
-              dataType : 'json',
-              success  : function(json) {  
-                  if(json.code == 0){
-                      _json=json;
-                      layer.msg(json.msg);
-                      var selectRow = $("#grid-table-2").jqGrid('getGridParam','selrow');
-                      $("#grid-table-2").delRowData(selectRow);
-                  }else{
-                      layer.msg(json.msg);
-                      _json=json;
-                  }
-              },
-              error  : function() {  
-                  layer.msg('error');
-              }  
-          }); 
-          return _json;
-      }
-
-
-      //异步请求所有板料
-      function _ajax_get_banliao_list(){
-          var _json;
-          $.ajax({  
-              async:false,
-              type:'post',  
-              contentType:"application/x-www-form-urlencoded",
-              url : 'http://'+api_url+'/Default.ashx?TaskID=3001',
-              dataType : 'json',
-              success  : function(json) {  
-                  if(json.code == 0){
-                      var obj = json;
-                      var tmpl = document.getElementById('j-tmpl_banliao_dialog').innerHTML;
-                      var doTtmpl = doT.template(tmpl);
-                      var doT_Str=doTtmpl(obj);
-                      $('#banliao_box').html(doT_Str);
-
-                      _json=json;
-                  }else{
-                      alert(json.msg);
-                      _json=json;
-                  }
-              },
-              error  : function() {  
-                  alert('error');
-              }  
-          }); 
-          return _json;
-      }
-
-      //异步给拖盘添加板料
-      function _ajax_add_banliao_for_tuopan(pid, bid){
-
-          var _data={"pid":pid,"bid":bid};
-
-          var _json;
-          $.ajax({  
-              async:false,
-              type:'get',  
-              contentType:"application/x-www-form-urlencoded",
-              url : 'http://'+api_url+'/Default.ashx?TaskID=2027',
-              data: _data,
-              dataType : 'json',
-              success  : function(json) {  
-                  if(json.code == 0){
-                      _json=json;
-                  }else{
-                      _json=json;
-                  }
-              },
-              error  : function() {  
-                  alert('error');
-              }  
-          }); 
-
-          return _json;
-      }
-
-
-      function init_page(){
-          var pallet=$('#search_table .pallet').val();
-          var format=$('#search_table .format').val();
-          var size=$('#search_table .size').val();
-          var supplier=$('#search_table .supplier').val();
-          var Date1=$('#search_table .Date1').val();
-          var Date2=$('#search_table .Date2').val();
-
-          var grid_data=_ajax_get_grid_data(pallet, format, size, supplier, Date1, Date2);
-
-          init_grid_table(grid_data);
-
-          //初使化按钮操作权限
-          var page="{$page}";
-          _init_button_operate(page);
-      }
-
-      function init_grid_table(grid_data){
-          $(grid_selector).jqGrid({
-              data: grid_data,
-              datatype: "local",
-              height: 430,
-              caption: "拖盘列表",
-
-              colNames:['RowID', '名称','规格','尺寸','添加时间','供应商','操作'],
-              colModel:[
-                {name:'RowID',index:'RowID',  sorttype:"int",align : "center", hidden: true},
-
-                {name:'P_Name',index:'P_Name', align : "center"},
-                {name:'P_Format',index:'P_Format', align : "center"},
-                {name:'P_Size',index:'P_Size', align : "center"},
-                {name:'P_AddTime',index:'P_AddTime', align : "center"},
-                {name:'P_Supplier',index:'P_Supplier', align : "center"},
-
-                {name:'options',index:'options',align:'center',width:200}
-              ], 
-              rownumbers:true,
-              rownumWidth:50,//设置行号列宽度
-              autowidth:true,
-              shrinkToFit:true,//ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
-              viewrecords : true,
-              rowNum:10,
-              rowList:[10,20,30],
-              pager : pager_selector,
-              altRows: true,
-              multiselect: true,
-              multiboxonly: true,
-          
-              loadComplete : function() {
-                var table = this;
-                setTimeout(function(){
-                  updatePagerIcons(table);
-                }, 0);
-              },
-          
-              onSelectRow : function(ids) {
-                  var _rowData = $(grid_selector).jqGrid('getRowData',ids); 
-                  var _id=_rowData.RowID;
-                  var _P_Name=_rowData.P_Name;
-
-                  //板料列表
-                  $('#grid-table-2').jqGrid('clearGridData');
-                  jQuery("#grid-table-2").jqGrid('setGridParam', {
-                        url : "http://"+api_url+"/Default.ashx?TaskID=2026&id=" + _id,
-                        page : 1
-                  });
-                  jQuery("#grid-table-2").jqGrid('setCaption',"板料列表: " + _P_Name).trigger('reloadGrid');
-              },
-
-              gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
-                  var ids=jQuery(grid_selector).jqGrid('getDataIDs');
-                  for(var i=0; i<ids.length; i++){
-                      var id=ids[i];   console.log(id);
-                      var _rowData = $(grid_selector).jqGrid('getRowData',id);
-
-                      var options="";
-                          options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.RowID+"'><i class='icon-edit bigger-110'></i>修改</button>";
-                          options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del' title='id-btn-dialog2_del' data-id='"+_rowData.RowID+"'><i class='icon-trash bigger-110'></i>删除</button>";  
-                      jQuery(grid_selector).jqGrid('setRowData', ids[i], { options: options });
-                  }
-              }
-          });
-      }
-
-      //replace icons with FontAwesome icons like above   //更新分页图标  
-      function updatePagerIcons(table) {
-        var replacement = 
-        {
-          'ui-icon-seek-first' : 'icon-double-angle-left bigger-140',
-          'ui-icon-seek-prev' : 'icon-angle-left bigger-140',
-          'ui-icon-seek-next' : 'icon-angle-right bigger-140',
-          'ui-icon-seek-end' : 'icon-double-angle-right bigger-140'
-        };
-        $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
-          var icon = $(this);
-          var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
-          
-          if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
-        })
-      }
-
-      
-    </script>
+    
    
     <!-- 确认弹框 start-->
     <div id="dialog-confirm_add" class="hide">
@@ -1211,11 +885,332 @@
         
         
       });
-
-
     </script>
 
+    <script type="text/javascript">
+      function init_page(){
+          var pallet=$('#search_table .pallet').val();
+          var format=$('#search_table .format').val();
+          var size=$('#search_table .size').val();
+          var supplier=$('#search_table .supplier').val();
+          var Date1=$('#search_table .Date1').val();
+          var Date2=$('#search_table .Date2').val();
 
+          var _json_=_ajax_get_list(pallet, format, size, supplier, Date1, Date2);
+
+          if(_json_.code==0){
+              init_grid_table(_json_.data);
+          }else{
+              // $(grid_selector).jqGrid('clearGridData');
+              init_grid_table(_json_.data);
+          }
+
+          //初使化按钮操作权限
+          var page="{$page}";
+          _init_button_operate(page);
+      }
+
+      //获取列表
+      function _ajax_get_list(pallet, format, size, supplier, Date1, Date2){
+          var _data;
+          $.ajax({   
+              async:false,
+              type:'get',  
+              contentType:"application/x-www-form-urlencoded",
+              url : "{:U('Admin/Tender/ajax_get_list')}",
+              data: {
+                'palletname':pallet, 
+                'format':format, 
+                'size':size, 
+                'supplier':supplier, 
+                'Date1':Date1, 
+                'Date2':Date2
+              },
+              dataType : 'json',
+              success  : function(json) { 
+                  if(json.code==0){
+                      _data=json;
+                  }
+                  if(json.code==1){
+                      _data=json;
+                      // layer.msg(json.msg);
+                  }
+              },
+              error  : function(json) {  
+                  layer.msg(json.msg);
+              }  
+          });  
+          return _data;  
+      } 
+
+      //获取单条信息
+      function _ajax_get_row_info(_id){
+          var _data="";
+          $.ajax({  
+              type:'get',  
+              url : 'http://'+api_url+'/Default.ashx?TaskID=2022&RowID='+_id,
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      var _P_Name=json.data.P_Name;
+                      var _P_Format=json.data.P_Format;
+                      var _P_Size=json.data.P_Size;
+                      var _P_Supplier=json.data.P_Supplier;
+
+                      $('#edit_form .P_Name').val(_P_Name);
+                      $('#edit_form .P_Format').val(_P_Format);
+                      $('#edit_form .P_Size').val(_P_Size);
+                      $('#edit_form .P_Supplier').val(_P_Supplier);
+
+                      _data=json;
+                  }else{
+                      layer.msg(json.msg);
+                      _data=json;
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _data;
+      }
+
+      //添加
+      function _ajax_add(_data){
+           var _add_data=JSON.stringify(_data); 
+           var _json;
+           $.ajax({  
+               async:false,
+               type:'post',  
+               contentType:"application/x-www-form-urlencoded",
+               url : 'http://'+api_url+'/Default.ashx?TaskID=20231',
+               data: _add_data,
+               dataType : 'json',
+               success  : function(json) {
+                   if(json.code==0){
+                       layer.msg(json.msg);
+                       window.location.reload();
+                   }else{
+                       layer.msg(json.msg);
+                   }
+               },
+               error  : function() {  
+                   alert('error');
+               }  
+           }); 
+           
+           return _json;
+      }
+
+       //编辑
+      function _ajax_edit(_data, _id){
+          var _edit_data=JSON.stringify(_data); 
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'post',  
+              contentType:"application/x-www-form-urlencoded",
+              url : 'http://'+api_url+'/Default.ashx?TaskID=2024&RowID='+_id,
+              data: _edit_data,
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      layer.msg(json.msg);
+                      var selectID=$("#grid-table").getGridParam("selrow");
+                      $("#grid-table").setRowData(selectID, _data);
+                      $("div[aria-describedby='dialog-confirm_edit'] .ui-dialog-titlebar-close").trigger("click");
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;  
+      }
+
+
+      //异步删除
+      function _ajax_del(ids){
+          var _json;
+          $.ajax({  
+              type:'get',  
+              url : 'http://'+api_url+'/Default.ashx?TaskID=2025&RowID='+ids,
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      _json=json;
+                      layer.msg(json.msg);
+                      var selectRow = $("#grid-table").jqGrid('getGridParam','selrow');
+                      $("#grid-table").delRowData(selectRow);
+                  }else{
+                      layer.msg(json.msg);
+                      _json=json;
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //异步删除板料
+      function _ajax_del_banliao(pid, bid){
+          var _json;
+          $.ajax({  
+              type:'get',  
+              url : 'http://'+api_url+'/Default.ashx?TaskID=2028&pid='+pid+'&bid='+bid,
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      _json=json;
+                      layer.msg(json.msg);
+                      var selectRow = $("#grid-table-2").jqGrid('getGridParam','selrow');
+                      $("#grid-table-2").delRowData(selectRow);
+                  }else{
+                      layer.msg(json.msg);
+                      _json=json;
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+
+      //异步请求所有板料
+      function _ajax_get_banliao_list(){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'post',  
+              contentType:"application/x-www-form-urlencoded",
+              url : 'http://'+api_url+'/Default.ashx?TaskID=3001',
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      var obj = json;
+                      var tmpl = document.getElementById('j-tmpl_banliao_dialog').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=doTtmpl(obj);
+                      $('#banliao_box').html(doT_Str);
+
+                      _json=json;
+                  }else{
+                      alert(json.msg);
+                      _json=json;
+                  }
+              },
+              error  : function() {  
+                  alert('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //异步给拖盘添加板料
+      function _ajax_add_banliao_for_tuopan(pid, bid){
+
+          var _data={"pid":pid,"bid":bid};
+
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              contentType:"application/x-www-form-urlencoded",
+              url : 'http://'+api_url+'/Default.ashx?TaskID=2027',
+              data: _data,
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      _json=json;
+                  }else{
+                      _json=json;
+                  }
+              },
+              error  : function() {  
+                  alert('error');
+              }  
+          }); 
+
+          return _json;
+      }
+
+
+      
+
+      function init_grid_table(grid_data){
+          $(grid_selector).jqGrid({
+              caption: "列表",
+              data: grid_data,
+              datatype: "local",
+              height: 430,
+              colNames:['RowID', '名称','规格','尺寸','添加时间','供应商','操作'],
+              colModel:[
+                {name:'RowID',index:'RowID',  sorttype:"int",align : "center", hidden: true},
+
+                {name:'P_Name',index:'P_Name', align : "center"},
+                {name:'P_Format',index:'P_Format', align : "center"},
+                {name:'P_Size',index:'P_Size', align : "center"},
+                {name:'P_AddTime',index:'P_AddTime', align : "center"},
+                {name:'P_Supplier',index:'P_Supplier', align : "center"},
+
+                {name:'options',index:'options',align:'center',width:200}
+              ], 
+              rownumbers:true,
+              rownumWidth:50,//设置行号列宽度
+              autowidth:true,
+              shrinkToFit:true,//ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
+              viewrecords : true,
+              rowNum:10,
+              rowList:[10,20,30],
+              pager : pager_selector,
+              altRows: true,
+              multiselect: true,
+              multiboxonly: true,
+          
+              loadComplete : function() {
+                var table = this;
+                setTimeout(function(){
+                  updatePagerIcons(table);
+                }, 0);
+              },
+
+              gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
+                  var ids=jQuery(grid_selector).jqGrid('getDataIDs');
+                  for(var i=0; i<ids.length; i++){
+                      var id=ids[i];   console.log(id);
+                      var _rowData = $(grid_selector).jqGrid('getRowData',id);
+
+                      var options="";
+                          options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.RowID+"'><i class='icon-edit bigger-110'></i>修改</button>";
+                          options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del' title='id-btn-dialog2_del' data-id='"+_rowData.RowID+"'><i class='icon-trash bigger-110'></i>删除</button>";  
+                      jQuery(grid_selector).jqGrid('setRowData', ids[i], { options: options });
+                  }
+              }
+          });
+      }
+
+      //replace icons with FontAwesome icons like above   //更新分页图标  
+      function updatePagerIcons(table) {
+          var replacement = {
+              'ui-icon-seek-first' : 'icon-double-angle-left bigger-140',
+              'ui-icon-seek-prev' : 'icon-angle-left bigger-140',
+              'ui-icon-seek-next' : 'icon-angle-right bigger-140',
+              'ui-icon-seek-end' : 'icon-double-angle-right bigger-140'
+          };
+          $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+              var icon = $(this);
+              var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+              
+              if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+          })
+      }
+    </script>
 
     <script>
         layui.use('laydate', function(){

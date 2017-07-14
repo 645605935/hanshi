@@ -3,9 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <title>Document</title>
-    <script src="/hanshi/Uploads/jump_tip/js/jquery-1.7.2.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/hanshi/Uploads/jump_tip/css/tipDialog.css"/>
-    <script type="text/javascript" src="/hanshi/Uploads/jump_tip/js/tipDialog.js"></script>
+    <script src="/Uploads/jump_tip/js/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Uploads/jump_tip/css/tipDialog.css"/>
+    <script type="text/javascript" src="/Uploads/jump_tip/js/tipDialog.js"></script>
 </head>
 <body>
     <?php if(isset($message)) {?>
