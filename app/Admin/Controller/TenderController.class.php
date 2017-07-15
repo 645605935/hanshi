@@ -82,16 +82,12 @@ class TenderController extends AuthController {
         echo json_encode($list);
     }
 
-    //根据ID获取用户信息
-    public function ajax_get_user_info_by_id(){
+    //获取单条信息
+    public function ajax_get_row_info(){
+        $id=I('id');
 
-        $_json=file_get_contents('php://input');
-        $_arr=json_decode($_json,true);
-
-        if($_arr){
-            $id=$_arr['id'];
-
-            $row = D('User')->find($id);
+        if($id){
+            $row = M('Tender')->find($id);
             if($row){
                 $data=array();
                 $data['code']=0;
@@ -213,31 +209,26 @@ class TenderController extends AuthController {
 
     //删除
     public function ajax_del(){
-        $_json=file_get_contents('php://input');
-        $_arr=json_decode($_json,true);
+        $id=I('id'); 
 
+        if($id){
+            $res=M('Tender')->where(array('id'=>$id))->delete();
 
-        $ids=$_arr['ids']; 
-
-        $ids_arr=explode(',', $ids);
-
-        if(is_array($ids_arr)){
-            foreach ($ids_arr as $key => $value) {
-                $_uid=$value;
-                $_user_info=M('User')->where(array('id'=>$_uid))->find();
-                unlink('./Uploads'.$_user_info['img']);
-                //删除相关数据表里的数据
-                if(M('User')->where(array('id'=>$_uid))->delete()){
-                    M('AuthGroupAccess')->where(array('uid'=>$_uid))->delete();
-                    unlink($_SERVER['HTTP_ORIGIN'].'/Uploads'.$_user_info);
-                }
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
             }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
         }
 
-        $data=array();
-        $data['code']=0;
-        $data['msg']='success';
-        
         echo json_encode($data);
     }
 
