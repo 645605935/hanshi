@@ -417,7 +417,7 @@
     
 
     <?php if( name_to_status('Type') == 1 && $user['gid']==427 || in_array('Type', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Type'">class="active open"</if> style="display:none;">
+    <li <if condition="$cur_c eq 'Type'">class="active open"</if>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-edit"></i>
         <span class="menu-text"> 分类管理 </span>
@@ -440,7 +440,7 @@
  <!-- 导航栏分为：我的面板、板料库、生产管理、成品管理、停线管理、工单管理、设备管理、能源管理、基础数据、系统管理 -->   
 
     <?php if( name_to_status('Panel') == 1 && $user['gid']==427 || in_array('Panel', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Panel'">class="active open"</if>>
+    <li <if condition="$cur_c eq 'Panel'">class="active open"</if> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-flag"></i>
         <span class="menu-text">板料库 </span>
@@ -493,7 +493,7 @@
 
 
     <?php if( name_to_status('Course') == 1 && $user['gid']==427 || in_array('Course', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Course'">class="active open"</if>>
+    <li <if condition="$cur_c eq 'Course'">class="active open"</if> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-key"></i>
         <span class="menu-text">生产管理 </span>
@@ -554,7 +554,7 @@
 
 
     <?php if( name_to_status('Banji') == 1 && $user['gid']==427 || in_array('Banji', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Banji'">class="active open"</if>>
+    <li <if condition="$cur_c eq 'Banji'">class="active open"</if> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-cogs"></i>
         <span class="menu-text">成品管理 </span>
@@ -599,7 +599,7 @@
 
 
     <?php if( name_to_status('Stop') == 1 && $user['gid']==427 || in_array('Stop', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Stop'">class="active open"</if>>
+    <li <if condition="$cur_c eq 'Stop'">class="active open"</if> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-eye-close"></i>
         <span class="menu-text">停线管理 </span>
@@ -660,7 +660,7 @@
 
     
     <?php if( name_to_status('Card') == 1 && $user['gid']==427 || in_array('Card', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Card'">class="active open"</if>>
+    <li <if condition="$cur_c eq 'Card'">class="active open"</if> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-credit-card"></i>
         <span class="menu-text">工单管理 </span>
@@ -737,7 +737,7 @@
 
 
     <?php if( name_to_status('Energy') == 1 && $user['gid']==427 || in_array('Energy', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Energy'">class="active open"</if>>
+    <li <if condition="$cur_c eq 'Energy'">class="active open"</if> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-leaf"></i>
         <span class="menu-text">能源管理 </span>
@@ -774,7 +774,7 @@
 
 
     <?php if( name_to_status('Site') == 1 && $user['gid']==427 || in_array('Site', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Site'">class="active open"</if>>
+    <li <if condition="$cur_c eq 'Site'">class="active open"</if> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-beaker"></i>
         <span class="menu-text">基础数据 </span>
