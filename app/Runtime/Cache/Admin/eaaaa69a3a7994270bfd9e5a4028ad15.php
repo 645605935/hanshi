@@ -582,8 +582,7 @@
     </li>
     <?php } ?>
 
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Tender'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
         <span class="menu-text"> 招标管理 </span>
@@ -591,17 +590,14 @@
       </a>
 
       <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="招标管理">
+        <li <?php if($cur_v == 'Tender-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Tender/index');?>" page="Admin/Tender/index" title="index" data-title="招标管理">
             <i class="icon-double-angle-right"></i>
             招标管理
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
 
     <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
