@@ -49,9 +49,7 @@ class TenderController extends AuthController {
 
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
-            if($value['img']){
-                $list[$key]['img']="./Uploads/".$value['img'];
-            }
+            $list[$key]['end_time']=date('Y-m-d',$value['end_time']);
         }
 
         if($list){
@@ -107,80 +105,25 @@ class TenderController extends AuthController {
         echo json_encode($data);
     }
 
-    //编辑
-    public function ajax_edit_user(){
-
-
-        $_json=file_get_contents('php://input');
-        $_arr=json_decode($_json,true);
-
-        if($_arr){
-            $id=$_arr['id'];
-            $where=array('id'=>$id);
-
-            $data=array();
-            $data['truename']=$_arr['truename'];
-            $data['username']=$_arr['username'];
-            $data['gid']=$_arr['gid'];
-            if($_arr['img']!=''){
-                //删除原来的图片
-                $_old_img = D('User')->where('id='.$id)->getField('img');
-                unlink('./Uploads'.$_old_img);
-
-                $data['img']=$_arr['img'];
-            }
-            
-
-            $res = D('User')->where($where)->save($data);
-            $row = D('User')->relation(true)->find($id);
-            if($res){
-                // 赋权限,如果没有则添加
-                if( !$_row_=M('AuthGroupAccess')->where(array('uid'=>$id))->find() ){
-                    $ga_data=array();
-                    $ga_data['uid']=$id;
-                    $ga_data['group_id']=$_arr['gid'];
-                    M('AuthGroupAccess')->add($ga_data);
-                }else{
-                    $ga_data=array();
-                    $ga_data['group_id']=$_arr['gid'];
-                    M('AuthGroupAccess')->where(array('uid'=>$id))->save($ga_data);
-                }
-
-                $data=array();
-                $data['code']=0;
-                $data['msg']='success';
-                $data['data']=$row;
-            }else{
-                $data=array();
-                $data['code']=1;
-                $data['msg']='error';
-            }
-        }else{
-            $data=array();
-            $data['code']=2;
-            $data['msg']='error';
-        }
-
-        echo json_encode($data);
-    }
 
     //添加
     public function ajax_add(){
         global $user;
 
-        $_json=file_get_contents('php://input');
-        $_arr=json_decode($_json,true);
-
-        if($_arr){
-            $data=array();
-            $data['title']=$_arr['title'];
-            $data['content']=$_arr['content'];
-            $data['uid']=$user['id'];
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['uid']=$user['uid'];
             $data['time']=time();
+            $data['end_time']=strtotime($data['end_time']);
 
-            $id = M('Tender')->where($where)->add($data);
+            $id = M('Tender')->add($data);
             if($id){
-                $row= M('Tender')->relation(true)->find($id);
+                $row= D('Tender')->relation(true)->find($id);
+
+                $row['time']=date('Y-m-d H:i',$value['time']);
+                $row['end_time']=date('Y-m-d H:i',$value['end_time']);
+
                 if($row){
                     $data=array();
                     $data['code']=0;
@@ -196,8 +139,47 @@ class TenderController extends AuthController {
                 $data['code']=1;
                 $data['msg']='error';
             }
-            
-            
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //编辑
+    public function ajax_edit(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+
+            $res = M('Tender')->save($data);
+            if($res){
+                $id=$data['id'];
+                $row= D('Tender')->relation(true)->find($id);
+
+                $row['time']=date('Y-m-d H:i',$value['time']);
+                $row['end_time']=date('Y-m-d H:i',$value['end_time']);
+
+                if($row){
+                    $data=array();
+                    $data['code']=0;
+                    $data['msg']='success';
+                    $data['data']=$row;
+                }else{
+                    $data=array();
+                    $data['code']=1;
+                    $data['msg']='error';
+                }
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
         }else{
             $data=array();
             $data['code']=2;
@@ -235,7 +217,7 @@ class TenderController extends AuthController {
 
     // 上传文件
     public function lay_upload_file(){
-        if($_FILES['UpFile']['size']>0){
+        if($_FILES['file']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
             $upload->maxSize   =     31457280 ;// 设置附件上传大小
             $upload->exts      =     array('zip', 'rar', 'xls','xlsx', 'doc','docx','ppt','pptx','pdf','jpg','png','jpeg','gif');// 设置附件上传类型
@@ -253,7 +235,7 @@ class TenderController extends AuthController {
                 $data['code']=0;
                 $data['msg']=$upload->getError();
             }else{
-                $img=$info['UpFile']['savename'];
+                $img=$info['file']['savename'];
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';

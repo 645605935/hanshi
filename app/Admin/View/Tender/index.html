@@ -141,39 +141,12 @@
                               <td>
                                 <div class="layui-inline" style="margin-top: 5px;">
                                   <div class="layui-form-item">
-                                    <label class="layui-form-label">托盘名称</label>
+                                    <label class="layui-form-label">任务名称</label>
                                     <div class="layui-input-inline">
-                                      <input type="text" name="pallet" placeholder="全部" value="{$_POST['pallet']}" autocomplete="off" class="layui-input pallet">
+                                      <input type="text" name="title" placeholder="" value="{$_POST['title']}" autocomplete="off" class="layui-input title">
                                     </div>
                                   </div>
                                 </div>  
-
-                                <div class="layui-inline" style="margin-top: 5px;">
-                                  <div class="layui-form-item">
-                                    <label class="layui-form-label">规格</label>
-                                    <div class="layui-input-inline">
-                                      <input type="text" name="format" placeholder="全部" value="{$_POST['format']}" autocomplete="off" class="layui-input format">
-                                    </div>
-                                  </div>
-                                </div> 
-
-                                <div class="layui-inline" style="margin-top: 5px;">
-                                  <div class="layui-form-item">
-                                    <label class="layui-form-label">尺寸</label>
-                                    <div class="layui-input-inline">
-                                      <input type="text" name="size" placeholder="全部" value="{$_POST['size']}" autocomplete="off" class="layui-input size">
-                                    </div>
-                                  </div>
-                                </div>  
-
-                                <div class="layui-inline" style="margin-top: 5px;">
-                                  <div class="layui-form-item">
-                                    <label class="layui-form-label">供应商</label>
-                                    <div class="layui-input-inline">
-                                      <input type="text" name="supplier" placeholder="全部" value="{$_POST['supplier']}" autocomplete="off" class="layui-input supplier">
-                                    </div>
-                                  </div>
-                                </div>    
 
                                 <div class="layui-inline" style="margin-top: 5px;">
                                   <div class="layui-form-item">
@@ -361,12 +334,12 @@
               <table class="table table-striped table-bordered table-hover">
                 <tbody>
                   <tr>
-                    <td class="center">
+                    <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
                           <label class="layui-form-label">任务名称</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="title" placeholder="" class="layui-input title">
+                            <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
                           </div>
                         </div>
                       </div>
@@ -376,7 +349,30 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">报名结束时间</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="end_time" class="layui-input end_time" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                            <input type="text" name="end_time" lay-verify="required" class="layui-input end_time" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">上传文件</label>
+                          <div class="layui-input-inline">
+                            <input type="file" id="add_upload_img" name="file" lay-type="file" class="layui-upload-file">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">文件名称</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="file_name" lay-verify="required" class="layui-input file_name" readonly>
                           </div>
                         </div>
                       </div>
@@ -384,39 +380,7 @@
                   </tr>
                   
                   <tr>
-                    <td class="center">
-
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              <div class="layui-inline">
-                                <div class="layui-form-item">
-                                  <label class="layui-form-label">上传文件</label>
-                                  <div class="layui-input-inline">
-                                    <input type="text" name="img" placeholder="" autocomplete="off" class="layui-input img">
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                          <div class="panel-body">
-                            <table class="table table-striped table-bordered table-hover">
-                                <tr>
-                                  <td class="center">
-                                    <input type="file" name="UpFile">
-                                  </td>
-                                  <td class="center">
-                                    <button type="button" onclick="doUpload()" class="layui-btn layui-btn-normal layui-btn-mini">上传</button>
-                                  </td>
-                                </tr>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-
+                    <td>
                  
                     </td>
                     <td>
@@ -426,9 +390,9 @@
                           <div class="layui-input-inline">
                             <select name="type" lay-verify="required" class="type">
                               <option value="">请选择</option>
-                              <option value="浙江" selected="">浙江省</option>
-                              <option value="你的工号">江西省</option>
-                              <option value="你最喜欢的老师">福建省</option>
+                              <option value="1">浙江省</option>
+                              <option value="2">江西省</option>
+                              <option value="3">福建省</option>
                             </select>
                           </div>
                         </div>
@@ -438,32 +402,30 @@
                   <tr>
                     <td class="center" colspan="2">
                       <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">任务简介
-                              <a class="layui-btn layui-btn-normal layui-btn-mini site-demo-layedit" data-type="content" style="float: right;">获取编辑器内容</a>
-                          </label>
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">任务简介</label>
                           <div class="layui-input-block">
-                            <textarea id="editer_add" name="content" style="display: none;" placeholder=""></textarea>
+                              <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_add"></textarea>
                           </div>
                       </div>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">报名要求</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="P_Supplier" lay-verify="required" placeholder="" class="layui-input P_Supplier">
+                    <td class="center" colspan="2">
+                      <div class="layui-form-item layui-form-text">
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">报名要求</label>
+                          <div class="layui-input-block">
+                              <textarea name="desc" class="layui-textarea desc"></textarea>
                           </div>
-                        </div>
                       </div>
                     </td>
-                    <td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
                       <div class="layui-inline">
                         <div class="layui-form-item">
                           <label class="layui-form-label">项目开展地点</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="P_Supplier" lay-verify="required" placeholder="" class="layui-input P_Supplier">
+                            <input type="text" name="address" style="width:628px;" lay-verify="required" placeholder="" class="layui-input address">
                           </div>
                         </div>
                       </div>
@@ -475,7 +437,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">负责人</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="P_Size" placeholder="" autocomplete="off" class="layui-input P_Size">
+                            <input type="text" name="contact" lay-verify="required" placeholder="" autocomplete="off" class="layui-input contact">
                           </div>
                         </div>
                       </div>
@@ -485,7 +447,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">联系方式</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="P_Supplier" lay-verify="required" placeholder="" class="layui-input P_Supplier">
+                            <input type="text" name="phone" lay-verify="required" placeholder="" class="layui-input phone">
                           </div>
                         </div>
                       </div>
@@ -496,6 +458,7 @@
                   <tr>
                     <td colspan="2" style="text-align:right;">
                       <button class="layui-btn" lay-submit="" lay-filter="demo1_add">确认</button>
+                      <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
                     </td>
                   </tr>
                 </tfoot>
@@ -515,12 +478,12 @@
               <table class="table table-striped table-bordered table-hover">
                 <tbody>
                   <tr>
-                    <td class="center">
+                    <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
                           <label class="layui-form-label">任务名称</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="title" placeholder="" class="layui-input title">
+                            <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
                           </div>
                         </div>
                       </div>
@@ -530,7 +493,30 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">报名结束时间</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="end_time" class="layui-input end_time" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                            <input type="text" name="end_time" lay-verify="required" class="layui-input end_time" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">上传文件</label>
+                          <div class="layui-input-inline">
+                            <input type="file" id="edit_upload_img" name="file" lay-type="file" class="layui-upload-file">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">文件名称</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="file_name" lay-verify="required" class="layui-input file_name" readonly>
                           </div>
                         </div>
                       </div>
@@ -538,39 +524,7 @@
                   </tr>
                   
                   <tr>
-                    <td class="center">
-
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              <div class="layui-inline">
-                                <div class="layui-form-item">
-                                  <label class="layui-form-label">上传文件</label>
-                                  <div class="layui-input-inline">
-                                    <input type="text" name="img" placeholder="" autocomplete="off" class="layui-input img">
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                          <div class="panel-body">
-                            <table class="table table-striped table-bordered table-hover">
-                                <tr>
-                                  <td class="center">
-                                    <input type="file" name="UpFile">
-                                  </td>
-                                  <td class="center">
-                                    <button type="button" onclick="doUpload()" class="layui-btn layui-btn-normal layui-btn-mini">上传</button>
-                                  </td>
-                                </tr>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-
+                    <td>
                  
                     </td>
                     <td>
@@ -580,9 +534,9 @@
                           <div class="layui-input-inline">
                             <select name="type" lay-verify="required" class="type">
                               <option value="">请选择</option>
-                              <option value="浙江" selected="">浙江省</option>
-                              <option value="你的工号">江西省</option>
-                              <option value="你最喜欢的老师">福建省</option>
+                              <option value="1">浙江省</option>
+                              <option value="2">江西省</option>
+                              <option value="3">福建省</option>
                             </select>
                           </div>
                         </div>
@@ -592,32 +546,30 @@
                   <tr>
                     <td class="center" colspan="2">
                       <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">任务简介
-                              <a class="layui-btn layui-btn-normal layui-btn-mini site-demo-layedit" data-type="content" style="float: right;">获取编辑器内容</a>
-                          </label>
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">任务简介</label>
                           <div class="layui-input-block">
-                            <textarea id="editer_edit" name="content" style="display: none;" placeholder="" class="content"></textarea>
+                              <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_edit"></textarea>
                           </div>
                       </div>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">报名要求</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="P_Supplier" lay-verify="required" placeholder="" class="layui-input P_Supplier">
+                    <td class="center" colspan="2">
+                      <div class="layui-form-item layui-form-text">
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">报名要求</label>
+                          <div class="layui-input-block">
+                              <textarea name="desc" class="layui-textarea desc"></textarea>
                           </div>
-                        </div>
                       </div>
                     </td>
-                    <td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
                       <div class="layui-inline">
                         <div class="layui-form-item">
                           <label class="layui-form-label">项目开展地点</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="P_Supplier" lay-verify="required" placeholder="" class="layui-input P_Supplier">
+                            <input type="text" name="address" style="width:628px;" lay-verify="required" placeholder="" class="layui-input address">
                           </div>
                         </div>
                       </div>
@@ -629,7 +581,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">负责人</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="P_Size" placeholder="" autocomplete="off" class="layui-input P_Size">
+                            <input type="text" name="contact" lay-verify="required" autocomplete="off" class="layui-input contact">
                           </div>
                         </div>
                       </div>
@@ -639,7 +591,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">联系方式</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="P_Supplier" lay-verify="required" placeholder="" class="layui-input P_Supplier">
+                            <input type="text" name="phone" lay-verify="required" placeholder="" class="layui-input phone">
                           </div>
                         </div>
                       </div>
@@ -649,8 +601,9 @@
                 <tfoot>
                   <tr>
                     <td colspan="2" style="text-align:right;">
-                      <input type="text" name="id" lay-verify="required" class="layui-input id">
+                      <input type="hidden" name="id" class="layui-input id">
                       <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确认</button>
+                      <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
                     </td>
                   </tr>
                 </tfoot>
@@ -660,101 +613,6 @@
        
         </div>
     </div><!-- #dialog-confirm -->
-
-
-    <!-- 添加板料 start-->
-    <div id="dialog-confirm_add_banliao" class="hide">
-       <div class="row">
-              <table id="sample-table-1" class="table table-striped table-bordered table-hover">
-                <tbody id="banliao_box">
-                  <tr>
-                    <td class="center">
-                        拖盘列表
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
-    </div><!-- #dialog-confirm -->
-
-    <!-- 模板引擎doT.js    start -->
-    <script id="j-tmpl" type="text/template">
-        {{ if(it.success){ }}
-
-                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
-
-                      <tr>
-                        <td class="center">
-                          <label>
-                            <input type="checkbox" class="ace" />
-                            <span class="lbl"></span>
-                          </label>
-                        </td>
-                        <td>
-                          <a href="#">{{=it.data[i].id}}</a>
-                        </td>
-                        <td>{{=it.data[i].title}}</td>
-                        <td class="hidden-480">{{=it.data[i].time}}</td>
-                        <td>{{=it.data[i].username}}</td>
-                        <td class="hidden-480">
-                          <span class="label label-sm label-warning">待判定</span>
-                        </td>
-                        <td>
-                          <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                            <button class="btn btn-xs btn-success">
-                              <i class="icon-ok bigger-120"></i>
-                            </button>
-                            <button class="btn btn-xs btn-info">
-                              <a href="#modal-form" role="button" data-toggle="modal"><i class="icon-edit bigger-120"></i></a>
-                            </button>
-                            <button class="btn btn-xs btn-danger">
-                              <i class="icon-trash bigger-120"></i>
-                            </button>
-                            <button class="btn btn-xs btn-warning">
-                              <i class="icon-flag bigger-120"></i>
-                            </button>
-                          </div>
-                          <div class="visible-xs visible-sm hidden-md hidden-lg">
-                            <div class="inline position-relative">
-                              <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-cog icon-only bigger-110"></i>
-                              </button>
-                              <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                <li>
-                                  <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                    <span class="blue">
-                                      <i class="icon-zoom-in bigger-120"></i>
-                                    </span>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                    <span class="green">
-                                      <i class="icon-edit bigger-120"></i>
-                                    </span>
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                    <span class="red">
-                                      <i class="icon-trash bigger-120"></i>
-                                    </span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-
-                {{ } }}
-
-        {{ }else{ }}
-
-                <h2>暂无数据</h2>
-
-        {{ } }}
-    </script>
 
 
     <!-- 模板引擎doT.js    start -->
@@ -786,84 +644,7 @@
       jQuery(function($) {
           init_page();
 
-          //添加板料
-          $( "body" ).on('click', '.id-btn-dialog2_add_banliao', function(e) {
-            e.preventDefault();
-
-            //获取所有板料
-            var json=_ajax_get_banliao_list();
-
-            if(json.code==0){
-                $( "#dialog-confirm_add_banliao" ).removeClass('hide').dialog({
-                  resizable: false,
-                  modal: true,
-                  title: "",
-                  title_html: true,
-                  buttons: [
-                    {
-                      html: "<i class='icon-remove bigger-110'></i>&nbsp; 取消",
-                      "class" : "btn btn-xs",
-                      click: function() {
-                        $( this ).dialog( "close" );
-                      }
-                    }
-                  ]
-                });
-
-                $("div[aria-describedby='dialog-confirm_add_banliao'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 添加板料：</h4></div>");
-            }
-          });
-
-
-          //点击 banliao_box 里面的一行
-          $( "body" ).on('click','#banliao_box tr', function() {
-
-              var _id = $(grid_selector).jqGrid('getGridParam', 'selrow');
-              var _rowData = $(grid_selector).jqGrid('getRowData',_id);
-
-
-              var pid=_rowData.RowID;
-              var bid=$(this).attr('data-RowID');
-
-              var RowID=$(this).attr('data-RowID');
-              var B_Name=$(this).attr('data-B_Name');
-
-              var json=_ajax_add_banliao_for_tuopan(pid, bid);
-
-              if(json.code==0){
-                  console.log(99999999);
-                  console.log(json);
-                  $("#grid-table-2").addRowData("1", {"RowID":RowID,"B_Name":B_Name}, "first");  
-                  layer.msg(json.msg);
-              }else{
-                  layer.msg(json.msg);
-              }
-          });
-
-          //点击右侧零件里面的tr删除一条
-          $( "body" ).on('click','#_lingjian_list tr .del_lingjian', function() {
-              if(typeof($("#right_lingjian_btn").attr("disabled"))=="undefined"){
-                  var _mould_id=$('#right_lingjian_btn').attr('data-mould-id');
-                  var _part_id=$(this).attr('data-id');
-
-                  var json=_ajax_del_lingjian_of_mould_relation(_mould_id,_part_id);
-
-                  if(json.code==0){
-                      $(this).parents('tr').remove();
-                  }
-              }else{
-                  layer.msg("无权限");
-                  return;
-              }
-          });
-
-          //删除
-          $( "body" ).on('click', '.id-btn-dialog2_del', function() {
-            if(confirm("确定要删除？")){
-                var ids=$(this).attr('data-id');
-                _ajax_del(ids);
-            }
-          });
+          
 
           //添加
           $( "body" ).on('click','.id-btn-dialog2_add', function(e) {
@@ -886,22 +667,32 @@
           $( "body" ).on('click','.id-btn-dialog2_edit', function(e) {
             e.preventDefault();
 
-            init_editer('editer_edit');
-
             var id=$(this).attr('data-id');
             if(id){
-                _ajax_get_row_info(id);
-            }
-            
-            $( "#dialog-confirm_edit" ).removeClass('hide').dialog({
-              resizable: false,
-              modal: true,
-              title: "",
-              width:800,
-              title_html: true,
-            });
+                var _json=_ajax_get_row_info(id);
+                if(_json.code==0){
+                    init_editer('editer_edit');
 
-            $("div[aria-describedby='dialog-confirm_edit'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 编辑：</h4></div>");
+                    $( "#dialog-confirm_edit" ).removeClass('hide').dialog({
+                      resizable: false,
+                      modal: true,
+                      title: "",
+                      width:800,
+                      title_html: true,
+                    });
+
+                    $("div[aria-describedby='dialog-confirm_edit'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 编辑：</h4></div>");
+                }
+            }
+          });
+
+
+          //删除
+          $( "body" ).on('click', '.id-btn-dialog2_del', function() {
+            if(confirm("确定要删除？")){
+                var ids=$(this).attr('data-id');
+                _ajax_del(ids);
+            }
           });
         
         
@@ -910,21 +701,12 @@
 
     <script type="text/javascript">
       function init_page(){
-          var pallet=$('#search_table .pallet').val();
-          var format=$('#search_table .format').val();
-          var size=$('#search_table .size').val();
-          var supplier=$('#search_table .supplier').val();
+          var title=$('#search_table .title').val();
           var Date1=$('#search_table .Date1').val();
           var Date2=$('#search_table .Date2').val();
 
-          var _json_=_ajax_get_list(pallet, format, size, supplier, Date1, Date2);
-
-          if(_json_.code==0){
-              init_grid_table(_json_.data);
-          }else{
-              // $(grid_selector).jqGrid('clearGridData');
-              init_grid_table(_json_.data);
-          }
+          var _json_=_ajax_get_list(title, Date1, Date2);
+          init_grid_table(_json_.data);
 
           //初使化按钮操作权限
           var page="{$page}";
@@ -932,7 +714,7 @@
       }
 
       //获取列表
-      function _ajax_get_list(pallet, format, size, supplier, Date1, Date2){
+      function _ajax_get_list(title, Date1, Date2){
           var _data;
           $.ajax({   
               async:false,
@@ -940,10 +722,7 @@
               contentType:"application/x-www-form-urlencoded",
               url : "{:U('Admin/Tender/ajax_get_list')}",
               data: {
-                'palletname':pallet, 
-                'format':format, 
-                'size':size, 
-                'supplier':supplier, 
+                'title':title, 
                 'Date1':Date1, 
                 'Date2':Date2
               },
@@ -966,7 +745,9 @@
 
       //获取单条信息
       function _ajax_get_row_info(id){
+          var _json;
           $.ajax({  
+              async:false,
               type:'get',  
               url : "{:U('Admin/Tender/ajax_get_row_info')}",
               data:{
@@ -979,9 +760,16 @@
 
                       $('#edit_form .id').val(data.id);
                       $('#edit_form .title').val(data.title);
+                      $('#edit_form .end_time').val(data.end_time);
+                      $('#edit_form .file_name').val(data.file_name);
+                      $("#edit_form .type").find("option[value='"+data.type+"']").attr("selected",true);
                       $('#edit_form .desc').val(data.desc);
                       $('#edit_form .content').val(data.content);
-                      $('#edit_form .end_time').val(data.end_time);
+                      $('#edit_form .address').val(data.address);
+                      $('#edit_form .contact').val(data.contact);
+                      $('#edit_form .phone').val(data.phone);
+
+                      _json=json;
                   }else{
                       layer.msg(json.msg);
                   }
@@ -990,23 +778,25 @@
                   layer.msg('error');
               }  
           }); 
+          return _json;
       }
 
       //添加
       function _ajax_add(_data){
-           var _add_data=JSON.stringify(_data); 
            var _json;
            $.ajax({  
                async:false,
                type:'post',  
                contentType:"application/x-www-form-urlencoded",
-               url : 'http://'+api_url+'/Default.ashx?TaskID=20231',
-               data: _add_data,
+               url : "{:U('Admin/Tender/ajax_add')}",
+               data: _data,
                dataType : 'json',
                success  : function(json) {
                    if(json.code==0){
                        layer.msg(json.msg);
-                       window.location.reload();
+                       $("#grid-table").addRowData(1, json.data, "first");
+                       $("#add_form .reset").trigger('click');
+                       $("div[aria-describedby='dialog-confirm_add'] .ui-dialog-titlebar-close").trigger("click");
                    }else{
                        layer.msg(json.msg);
                    }
@@ -1015,26 +805,24 @@
                    alert('error');
                }  
            }); 
-           
            return _json;
       }
 
        //编辑
-      function _ajax_edit(_data, _id){
-          var _edit_data=JSON.stringify(_data); 
+      function _ajax_edit(_data){
           var _json;
           $.ajax({  
               async:false,
               type:'post',  
               contentType:"application/x-www-form-urlencoded",
-              url : 'http://'+api_url+'/Default.ashx?TaskID=2024&RowID='+_id,
-              data: _edit_data,
+              url : "{:U('Admin/Tender/ajax_edit')}",
+              data: _data,
               dataType : 'json',
               success  : function(json) {  
                   if(json.code == 0){
                       layer.msg(json.msg);
                       var selectID=$("#grid-table").getGridParam("selrow");
-                      $("#grid-table").setRowData(selectID, _data);
+                      $("#grid-table").setRowData(selectID, json.data);
                       $("div[aria-describedby='dialog-confirm_edit'] .ui-dialog-titlebar-close").trigger("click");
                   }else{
                       layer.msg(json.msg);
@@ -1046,30 +834,6 @@
           }); 
           return _json;  
       }
-
-      function doUpload() {  
-           var formData = new FormData($( "#add_form" )[0]);  
-
-           $.ajax({  
-                url: "{:U('Admin/Tender/lay_upload_file')}" ,  
-                type: 'POST',  
-                data: formData,  
-                async: false,  
-                cache: false,  
-                contentType: false,  
-                processData: false,  
-                success: function (json) {  
-                    var json=JSON.parse(json);
-                    if(json.code==0){
-                        layer.msg(json.msg);
-                    }
-                },  
-                error: function (json) {  
-                    layer.msg(json.msg);
-                }  
-           });  
-      }  
-
 
       //异步删除
       function _ajax_del(ids){
@@ -1099,63 +863,6 @@
           return _json;
       }
 
-      //异步请求所有板料
-      function _ajax_get_banliao_list(){
-          var _json;
-          $.ajax({  
-              async:false,
-              type:'post',  
-              contentType:"application/x-www-form-urlencoded",
-              url : 'http://'+api_url+'/Default.ashx?TaskID=3001',
-              dataType : 'json',
-              success  : function(json) {  
-                  if(json.code == 0){
-                      var obj = json;
-                      var tmpl = document.getElementById('j-tmpl_banliao_dialog').innerHTML;
-                      var doTtmpl = doT.template(tmpl);
-                      var doT_Str=doTtmpl(obj);
-                      $('#banliao_box').html(doT_Str);
-
-                      _json=json;
-                  }else{
-                      alert(json.msg);
-                      _json=json;
-                  }
-              },
-              error  : function() {  
-                  alert('error');
-              }  
-          }); 
-          return _json;
-      }
-
-      //异步给拖盘添加板料
-      function _ajax_add_banliao_for_tuopan(pid, bid){
-
-          var _data={"pid":pid,"bid":bid};
-
-          var _json;
-          $.ajax({  
-              async:false,
-              type:'get',  
-              contentType:"application/x-www-form-urlencoded",
-              url : 'http://'+api_url+'/Default.ashx?TaskID=2027',
-              data: _data,
-              dataType : 'json',
-              success  : function(json) {  
-                  if(json.code == 0){
-                      _json=json;
-                  }else{
-                      _json=json;
-                  }
-              },
-              error  : function() {  
-                  alert('error');
-              }  
-          }); 
-
-          return _json;
-      }
 
       function imgFormatter(cellvalue, options, rowdata){ 
           if (cellvalue){
@@ -1180,14 +887,15 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '名称','图片','描述','时间','状态','操作'],
+              colNames:['id', '任务名称','任务行业分类','描述','项目开展地点','报名结束时间','状态','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
                 {name:'title',index:'title', align : "center"},
-                {name:'img',index:'img', align : "center", formatter: imgFormatter},
+                {name:'type',index:'type', align : "center"},
                 {name:'desc',index:'desc', align : "center"},
-                {name:'content',index:'content', align : "center"},
+                {name:'address',index:'address', align : "center"},
+                {name:'end_time',index:'end_time', align : "center"},
                 {name:'status',index:'status', align : "center", formatter: statusFormatter},
 
                 {name:'options',index:'options',align:'center',width:200}
@@ -1275,82 +983,63 @@
     </script>
     
     <script>
-        layui.use(['form', 'laydate'], function(){
-          var form = layui.form()
-          ,layer = layui.layer
-          ,laydate = layui.laydate;
-
-          //自定义验证规则
-          form.verify({
-            title: function(value){
-              if(value.length < 5){
-                return '标题至少得5个字符啊';
-              }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-          });
-
-          //监听提交
-          form.on('submit(demo1_add)', function(data){
-            console.log(data);
-            return false;
-            var _json=_ajax_add(data.field);
-            return false;
-          });
-
-          //监听提交
-          form.on('submit(demo1_edit)', function(data){
-            var _id=$(this).attr('data-id');
-            var _json=_ajax_edit(data.field, _id);
-            return false;
-          });
-        });
-    </script>
-
-    <script>
         function init_editer(edit_type){
-            layui.use('layedit', function(){
-                var layedit = layui.layedit
-                ,$ = layui.jquery;
+            layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
+              var form = layui.form()
+              ,layer = layui.layer
+              ,layedit = layui.layedit
+              ,laydate = layui.laydate;
 
 
-            　　//上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
-                layedit.set({
-                    uploadImage: {
-                        url: "{:U('Admin/Config/lay_upload_img')}", //接口url
-                        type: 'post', //默认post
-                    }
-                });
+              var arr=edit_type.split('_');
+              var form_type=arr[1];
 
-                //构建一个默认的编辑器 //自定义工具栏
-                var index = layedit.build(edit_type, {
-                  // tool: ['face', 'link', 'unlink', '|', 'left', 'center', 'right']
-                  // ,height: 300
-                });
-                // //创建编辑器
-                // layedit.build('demo'),{
-                //     width:600,
-                //     height: 180 //设置编辑器高度
-                // }; //建立编辑器
+              //上传文件
+              layui.upload({
+                 url: "{:U('Admin/Tender/lay_upload_file')}" //上传接口
+                 ,elem: '#'+form_type+'_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
+                 ,success: function(res){ //上传成功后的回调
+                   if(res.code==0){
+                      $('#'+form_type+'_form .file_name').val(res.data.src);
+                   }
+                 }
+              });
 
-
-                //编辑器外部操作
-              var active = {
-                  content: function(){
-                    alert(layedit.getContent(index)); //获取编辑器内容
-                    $('#editer_add').val(layedit.getContent(index));
+              
+              //上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
+              layedit.set({
+                  uploadImage: {
+                      url: "{:U('Admin/Tender/lay_upload_file')}", //接口url
+                      type: 'post', //默认post
                   }
-                  ,text: function(){
-                    alert(layedit.getText(index)); //获取编辑器纯文本内容
+              });
+
+              //创建一个编辑器
+              var editIndex = layedit.build(edit_type);
+
+              //自定义验证规则
+              form.verify({
+                title: function(value){
+                  if(value.length < 5){
+                    return '标题至少得5个字符啊';
                   }
-                  ,selection: function(){
-                    alert(layedit.getSelection(index));
-                  }
-              };
-                
-              $('.site-demo-layedit').on('click', function(){
-                  var type = $(this).data('type');
-                  active[type] ? active[type].call(this) : '';
+                }
+                ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+                ,content: function(value){
+                  layedit.sync(editIndex);
+                }
+              });
+
+              //监听提交
+              form.on('submit(demo1_add)', function(data){
+                var _json=_ajax_add(data.field);
+                return false;
+              });
+
+              //监听提交
+              form.on('submit(demo1_edit)', function(data){
+                var _json=_ajax_edit(data.field);
+                return false;
               });
             });
         }

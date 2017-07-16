@@ -795,7 +795,7 @@
     
 
     <?php if( name_to_status('Type') == 1 && $user['gid']==427 || in_array('Type', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Type'): ?>class="active open"<?php endif; ?> style="display:none;">
+    <li <?php if($cur_c == 'Type'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-edit"></i>
         <span class="menu-text"> 分类管理 </span>
@@ -818,7 +818,7 @@
  <!-- 导航栏分为：我的面板、板料库、生产管理、成品管理、停线管理、工单管理、设备管理、能源管理、基础数据、系统管理 -->   
 
     <?php if( name_to_status('Panel') == 1 && $user['gid']==427 || in_array('Panel', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Panel'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Panel'): ?>class="active open"<?php endif; ?> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-flag"></i>
         <span class="menu-text">板料库 </span>
@@ -871,7 +871,7 @@
 
 
     <?php if( name_to_status('Course') == 1 && $user['gid']==427 || in_array('Course', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Course'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Course'): ?>class="active open"<?php endif; ?> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-key"></i>
         <span class="menu-text">生产管理 </span>
@@ -932,7 +932,7 @@
 
 
     <?php if( name_to_status('Banji') == 1 && $user['gid']==427 || in_array('Banji', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Banji'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Banji'): ?>class="active open"<?php endif; ?> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-cogs"></i>
         <span class="menu-text">成品管理 </span>
@@ -977,7 +977,7 @@
 
 
     <?php if( name_to_status('Stop') == 1 && $user['gid']==427 || in_array('Stop', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Stop'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Stop'): ?>class="active open"<?php endif; ?> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-eye-close"></i>
         <span class="menu-text">停线管理 </span>
@@ -1038,7 +1038,7 @@
 
     
     <?php if( name_to_status('Card') == 1 && $user['gid']==427 || in_array('Card', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Card'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Card'): ?>class="active open"<?php endif; ?> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-credit-card"></i>
         <span class="menu-text">工单管理 </span>
@@ -1115,7 +1115,7 @@
 
 
     <?php if( name_to_status('Energy') == 1 && $user['gid']==427 || in_array('Energy', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Energy'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Energy'): ?>class="active open"<?php endif; ?> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-leaf"></i>
         <span class="menu-text">能源管理 </span>
@@ -1152,7 +1152,7 @@
 
 
     <?php if( name_to_status('Site') == 1 && $user['gid']==427 || in_array('Site', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Site'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Site'): ?>class="active open"<?php endif; ?> style="display:none;">
       <a href="#" class="dropdown-toggle">
         <i class="icon-beaker"></i>
         <span class="menu-text">基础数据 </span>
@@ -2083,9 +2083,9 @@
               async:false,
               type:'get',  
               contentType:"application/x-www-form-urlencoded",
-              url : "<?php echo U('Admin/User/ajax_get_user_list');?>",
+              url : "<?php echo U('Admin/Tender/ajax_get_list');?>",
               data: {
-                  'pallet':'1'
+                  'type':'1'
               },
               dataType : 'json',
               success  : function(json) { 
@@ -2109,9 +2109,9 @@
               async:false,
               type:'get',  
               contentType:"application/x-www-form-urlencoded",
-              url : "<?php echo U('Admin/User/ajax_get_user_list');?>",
+              url : "<?php echo U('Admin/Tender/ajax_get_list');?>",
               data: {
-                  'pallet':'1'
+                  'type':'2'
               },
               dataType : 'json',
               success  : function(json) { 
@@ -2135,9 +2135,9 @@
               async:false,
               type:'get',  
               contentType:"application/x-www-form-urlencoded",
-              url : "<?php echo U('Admin/User/ajax_get_user_list');?>",
+              url : "<?php echo U('Admin/Tender/ajax_get_list');?>",
               data: {
-                  'pallet':'1'
+                  'status':'1'
               },
               dataType : 'json',
               success  : function(json) { 
@@ -2170,24 +2170,27 @@
           _init_button_operate(page);
       }
 
+      function optionsFormatter(cellvalue, options, rowdata){ 
+          return "<button class='btn btn-primary btn-xs join' title='join' data-id='"+rowdata.id+"'><i class='icon-edit bigger-110'></i>参与</button>";
+      }
+
       function init_grid_table(grid_data){
           jQuery(grid_selector).jqGrid({
+            caption: "列表",
             data: grid_data,
             datatype: "local",
-            height: 430,
-            caption: "拖盘列表",
+            height: '400',
 
-            colNames:['RowID', '名称','规格','尺寸','添加时间','供应商','操作'],
+            colNames:['id', '标题', '政府LOGO', '政府全称', '时间', '操作'],
             colModel:[
-              {name:'RowID',index:'RowID',  sorttype:"int",align : "center", hidden: true, editable: true ,sortable: false},
+              {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
-              {name:'P_Name',index:'P_Name', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Format',index:'P_Format', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Size',index:'P_Size', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_AddTime',index:'P_AddTime', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Supplier',index:'P_Supplier', editable: true,align : "center",editrules: { required: true }},
+              {name:'title', index:'title', align : "center"},
+              {name:'img', index:'img', align : "center"},
+              {name:'company', index:'company', align : "center"},
+              {name:'time', index:'time', align : "center"},
 
-              {name:'options',index:'options',align:'center',sortable:false,width:200}
+              {name:'options',index:'options',align:'center', width:200, formatter: optionsFormatter}
             ], 
             rownumbers:true,
             rownumWidth:50,//设置行号列宽度
@@ -2198,8 +2201,8 @@
             rowList:[10,20,30],
             pager : pager_selector,
             altRows: true,
-            multiselect: true,
-            multiboxonly: true,
+            multiselect: false,
+            multiboxonly: false,
           
             loadComplete : function() {
               var table = this;
@@ -2208,55 +2211,33 @@
               }, 0);
             },
           
-            
             onSelectRow : function(ids) {
-                var _rowData = $(grid_selector).jqGrid('getRowData',ids); 
-                var _id=_rowData.RowID;
-                var _P_Name=_rowData.P_Name;
-
-                //板料列表
-                $('#grid-table-2').jqGrid('clearGridData');
-                jQuery("#grid-table-2").jqGrid('setGridParam', {
-                      url : "http://"+api_url+"/Default.ashx?TaskID=2026&id=" + _id,
-                      page : 1
-                });
-                jQuery("#grid-table-2").jqGrid('setCaption',"板料列表: " + _P_Name).trigger('reloadGrid');
+                
             },
 
             gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
-                var ids=jQuery(grid_selector).jqGrid('getDataIDs');
-                for(var i=0; i<ids.length; i++){
-                    var id=ids[i];   console.log(id);
-                    var _rowData = $(grid_selector).jqGrid('getRowData',id);
-
-                    var options="";
-                        options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_add_banliao' title='id-btn-dialog2_add_banliao' data-id='"+_rowData.RowID+"'><i class='icon-edit bigger-110'></i>添加</button>";
-                        options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.RowID+"'><i class='icon-edit bigger-110'></i>修改</button>";
-                        options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del' title='id-btn-dialog2_del' data-id='"+_rowData.RowID+"'><i class='icon-trash bigger-110'></i>删除</button>";  
-                    jQuery(grid_selector).jqGrid('setRowData', ids[i], { options: options });
-                }
+                
             }
           });
       }
 
       function init_grid_table_1(grid_data_1){
           jQuery('#grid-table-1').jqGrid({
+            caption: "列表",
             data: grid_data_1,
             datatype: "local",
-            height: 430,
-            caption: "拖盘列表",
+            height: '400',
 
-            colNames:['RowID', '名称','规格','尺寸','添加时间','供应商','操作'],
+            colNames:['id', '标题', '企业LOGO', '企业全称', '时间', '操作'],
             colModel:[
-              {name:'RowID',index:'RowID',  sorttype:"int",align : "center", hidden: true, editable: true ,sortable: false},
+              {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
-              {name:'P_Name',index:'P_Name', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Format',index:'P_Format', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Size',index:'P_Size', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_AddTime',index:'P_AddTime', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Supplier',index:'P_Supplier', editable: true,align : "center",editrules: { required: true }},
+              {name:'title', index:'title', align : "center"},
+              {name:'img', index:'img', align : "center"},
+              {name:'company', index:'company', align : "center"},
+              {name:'time', index:'time', align : "center"},
 
-              {name:'options',index:'options',align:'center',sortable:false,width:200}
+              {name:'options',index:'options',align:'center', width:200, formatter: optionsFormatter}
             ], 
             rownumbers:true,
             rownumWidth:50,//设置行号列宽度
@@ -2267,8 +2248,8 @@
             rowList:[10,20,30],
             pager : '#grid-pager-1',
             altRows: true,
-            multiselect: true,
-            multiboxonly: true,
+            multiselect: false,
+            multiboxonly: false,
           
             loadComplete : function() {
               var table = this;
@@ -2278,51 +2259,36 @@
             },
           
             gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
-                var ids=jQuery('#grid-table-1').jqGrid('getDataIDs');
-                for(var i=0; i<ids.length; i++){
-                    var id=ids[i];
-                    var _rowData = $('#grid-table-1').jqGrid('getRowData',id);
-
-                    var options="";
-                        options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_add_banliao' title='id-btn-dialog2_add_banliao' data-id='"+_rowData.RowID+"'><i class='icon-edit bigger-110'></i>添加</button>";
-                        options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.RowID+"'><i class='icon-edit bigger-110'></i>修改</button>";
-                        options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del' title='id-btn-dialog2_del' data-id='"+_rowData.RowID+"'><i class='icon-trash bigger-110'></i>删除</button>";  
-                    jQuery('#grid-table-1').jqGrid('setRowData', ids[i], { options: options });
-                }
+                
             }
           });
       }
 
       function init_grid_table_2(grid_data_2){
           jQuery('#grid-table-2').jqGrid({
+            caption: "列表",
             data: grid_data_2,
             datatype: "local",
-            height: 430,
-            caption: "拖盘列表",
-
-            colNames:['RowID', '名称','规格','尺寸','添加时间','供应商','操作'],
+            height: '600',
+            colNames:['id', '企业名称','操作'],
             colModel:[
-              {name:'RowID',index:'RowID',  sorttype:"int",align : "center", hidden: true, editable: true ,sortable: false},
+              {name:'id', index:'id', sorttype:"int", align : "center", hidden: true},
 
-              {name:'P_Name',index:'P_Name', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Format',index:'P_Format', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Size',index:'P_Size', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_AddTime',index:'P_AddTime', editable: true,align : "center",editrules: { required: true }},
-              {name:'P_Supplier',index:'P_Supplier', editable: true,align : "center",editrules: { required: true }},
+              {name:'title',index:'title', align : "center"},
 
-              {name:'options',index:'options',align:'center',sortable:false,width:200}
+              {name:'options', index:'options', align:'center', width:200, hidden: true}
             ], 
             rownumbers:true,
             rownumWidth:50,//设置行号列宽度
             autowidth:true,
             shrinkToFit:true,//ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
             viewrecords : true,
-            rowNum:10,
+            rowNum:18,
             rowList:[10,20,30],
             pager : '#grid-pager-2',
             altRows: true,
-            multiselect: true,
-            multiboxonly: true,
+            multiselect: false,
+            multiboxonly: false,
           
             loadComplete : function() {
               var table = this;
@@ -2332,17 +2298,7 @@
             },
 
             gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
-                var ids=jQuery('#grid-table-2').jqGrid('getDataIDs');
-                for(var i=0; i<ids.length; i++){
-                    var id=ids[i];   console.log(id);
-                    var _rowData = $('#grid-table-2').jqGrid('getRowData',id);
-
-                    var options="";
-                        options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_add_banliao' title='id-btn-dialog2_add_banliao' data-id='"+_rowData.RowID+"'><i class='icon-edit bigger-110'></i>添加</button>";
-                        options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.RowID+"'><i class='icon-edit bigger-110'></i>修改</button>";
-                        options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del' title='id-btn-dialog2_del' data-id='"+_rowData.RowID+"'><i class='icon-trash bigger-110'></i>删除</button>";  
-                    jQuery('#grid-table-2').jqGrid('setRowData', ids[i], { options: options });
-                }
+                
             }
           });
       }
