@@ -454,8 +454,7 @@
     <?php } ?>
 
 
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Introduction'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
         <span class="menu-text"> 简介管理 </span>
@@ -463,42 +462,34 @@
       </a>
 
       <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="简介管理">
+        <li <?php if($cur_v == 'Introduction-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Introduction/index');?>" page="Admin/Introduction/index" title="index" data-title="简介管理">
             <i class="icon-double-angle-right"></i>
             简介管理
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
 
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Activity'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
-        <span class="menu-text"> 新闻活动管理 </span>
+        <span class="menu-text"> 活动管理 </span>
         <b class="arrow icon-angle-down"></b>
       </a>
 
       <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="新闻活动管理">
+        <li <?php if($cur_v == 'Activity-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Activity/index');?>" page="Admin/Activity/index" title="index" data-title="活动管理">
             <i class="icon-double-angle-right"></i>
-            新闻活动管理
+            活动管理
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Product'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
         <span class="menu-text"> 产品管理 </span>
@@ -506,17 +497,14 @@
       </a>
 
       <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="产品管理">
+        <li <?php if($cur_v == 'Product-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Product/index');?>" page="Admin/Product/index" title="index" data-title="产品管理">
             <i class="icon-double-angle-right"></i>
             产品管理
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
     <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
     <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
@@ -2170,6 +2158,14 @@
           _init_button_operate(page);
       }
 
+      function imgFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue){
+              return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
+          }else{
+              return "暂无";
+          }
+      }
+
       function optionsFormatter(cellvalue, options, rowdata){ 
           return "<button class='btn btn-primary btn-xs join' title='join' data-id='"+rowdata.id+"'><i class='icon-edit bigger-110'></i>参与</button>";
       }
@@ -2186,7 +2182,7 @@
               {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
               {name:'title', index:'title', align : "center"},
-              {name:'img', index:'img', align : "center"},
+              {name:'img', index:'img', align : "center", formatter: optionsFormatter},
               {name:'company', index:'company', align : "center"},
               {name:'time', index:'time', align : "center"},
 
@@ -2233,7 +2229,7 @@
               {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
               {name:'title', index:'title', align : "center"},
-              {name:'img', index:'img', align : "center"},
+              {name:'img', index:'img', align : "center", formatter: optionsFormatter},
               {name:'company', index:'company', align : "center"},
               {name:'time', index:'time', align : "center"},
 
