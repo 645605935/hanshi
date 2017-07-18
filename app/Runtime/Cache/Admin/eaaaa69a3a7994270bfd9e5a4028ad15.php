@@ -22,6 +22,7 @@
 			var grid_selector = "#grid-table";
 			var pager_selector = "#grid-pager";
 			var login_user="<?php echo ($user["username"]); ?>";
+			var login_uid="<?php echo ($user["uid"]); ?>";
 		</script>
 
     <!-- basic styles -->
@@ -2177,12 +2178,12 @@
             datatype: "local",
             height: '400',
 
-            colNames:['id', '标题', '政府LOGO', '政府全称', '时间', '操作'],
+            colNames:['id', '任务名称', '政府LOGO', '政府全称', '时间', '操作'],
             colModel:[
               {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
               {name:'title', index:'title', align : "center"},
-              {name:'img', index:'img', align : "center", formatter: optionsFormatter},
+              {name:'img', index:'img', align : "center", formatter: imgFormatter},
               {name:'company', index:'company', align : "center"},
               {name:'time', index:'time', align : "center"},
 
@@ -2224,12 +2225,12 @@
             datatype: "local",
             height: '400',
 
-            colNames:['id', '标题', '企业LOGO', '企业全称', '时间', '操作'],
+            colNames:['id', '任务名称', '企业LOGO', '企业全称', '时间', '操作'],
             colModel:[
               {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
               {name:'title', index:'title', align : "center"},
-              {name:'img', index:'img', align : "center", formatter: optionsFormatter},
+              {name:'img', index:'img', align : "center", formatter: imgFormatter},
               {name:'company', index:'company', align : "center"},
               {name:'time', index:'time', align : "center"},
 

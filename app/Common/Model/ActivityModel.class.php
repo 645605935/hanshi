@@ -8,6 +8,12 @@ class ActivityModel extends RelationModel{
 			'class_name'=>'User',
 			'foreign_key'=>'uid',
 			'as_fields' => 'truename:_truename',
+		),
+		'_type'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'type',
+			'as_fields' => 'title:type',
 		)
 	);
 }

@@ -33,7 +33,7 @@ class ActivityController extends AuthController {
         $this->page_buttons=$page_buttons;
         $this->page=$page;
 
-        
+        $this->type=A('Communal/Type')->getSon(1239);
         $this->display();
     }
 
@@ -48,8 +48,9 @@ class ActivityController extends AuthController {
         $list = $d->where($map)->order('id desc')->relation(true)->select();
 
         foreach ($list as $key => $value) {
-            $list[$key]['time']=date('Y-m-d',$value['time']);
-            $list[$key]['end_time']=date('Y-m-d',$value['end_time']);
+            $list[$key]['time']=date('Y-m-d H:i',$value['time']);
+            $list[$key]['start_time']=date('Y-m-d H:i',$value['start_time']);
+            $list[$key]['end_time']=date('Y-m-d H:i',$value['end_time']);
         }
 
         if($list){
@@ -66,26 +67,17 @@ class ActivityController extends AuthController {
         echo json_encode($data);
     }
 
-   
-    //根据ID获取用户关联的信息
-    public function ajax_get_user_relation_logs(){
-
-        $id=$_GET['id'];
-        if($id==0){
-            $list = array();
-        }else{
-            $list = D('Log')->where(array('uid'=>$id))->order('time desc')->select();
-        }
-
-        echo json_encode($list);
-    }
-
     //获取单条信息
     public function ajax_get_row_info(){
         $id=I('id');
 
         if($id){
-            $row = M('Activity')->find($id);
+            $row = D('Activity')->relation(true)->find($id);
+
+            $row['time']=date('Y-m-d H:i',$row['time']);
+            $row['start_time']=date('Y-m-d H:i',$row['start_time']);
+            $row['end_time']=date('Y-m-d H:i',$row['end_time']);
+
             if($row){
                 $data=array();
                 $data['code']=0;
@@ -115,14 +107,16 @@ class ActivityController extends AuthController {
         if($data){
             $data['uid']=$user['uid'];
             $data['time']=time();
+            $data['start_time']=strtotime($data['start_time']);
             $data['end_time']=strtotime($data['end_time']);
 
             $id = M('Activity')->add($data);
             if($id){
                 $row= D('Activity')->relation(true)->find($id);
 
-                $row['time']=date('Y-m-d H:i',$value['time']);
-                $row['end_time']=date('Y-m-d H:i',$value['end_time']);
+                $row['time']=date('Y-m-d H:i',$row['time']);
+                $row['start_time']=date('Y-m-d H:i',$row['start_time']);
+                $row['end_time']=date('Y-m-d H:i',$row['end_time']);
 
                 if($row){
                     $data=array();

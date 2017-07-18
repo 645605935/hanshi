@@ -33,107 +33,28 @@ class IntroductionController extends AuthController {
         $this->page_buttons=$page_buttons;
         $this->page=$page;
 
-        
         $this->display();
-    }
-
-    //列表
-    public function ajax_get_list(){
-        $map=array();
-        if($_GET['title']){
-            $map['title']=array('like','%'.$_GET['title'].'%');
-        }
-
-        $d = D('Introduction');
-        $list = $d->where($map)->order('id desc')->relation(true)->select();
-
-        foreach ($list as $key => $value) {
-            $list[$key]['time']=date('Y-m-d',$value['time']);
-            $list[$key]['end_time']=date('Y-m-d',$value['end_time']);
-        }
-
-        if($list){
-            $data=array();
-            $data['code']=0;
-            $data['msg']='success';
-            $data['data']=$list;
-        }else{
-            $data=array();
-            $data['code']=1;
-            $data['msg']='未搜索到数据';
-            $data['data']=array();
-        }
-        echo json_encode($data);
-    }
-
-   
-    //根据ID获取用户关联的信息
-    public function ajax_get_user_relation_logs(){
-
-        $id=$_GET['id'];
-        if($id==0){
-            $list = array();
-        }else{
-            $list = D('Log')->where(array('uid'=>$id))->order('time desc')->select();
-        }
-
-        echo json_encode($list);
     }
 
     //获取单条信息
     public function ajax_get_row_info(){
         $id=I('id');
 
+        $field=array(
+            'id',
+            'company_address',
+            'company_content',
+            'company_logo',
+            'company_phone'
+        );
+
         if($id){
-            $row = M('Introduction')->find($id);
+            $row = M('User')->field($field)->find($id);
             if($row){
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
                 $data['data']=$row;
-            }else{
-                $data=array();
-                $data['code']=1;
-                $data['msg']='error';
-            }
-        }else{
-            $data=array();
-            $data['code']=2;
-            $data['msg']='error';
-        }
-
-        echo json_encode($data);
-    }
-
-
-    //添加
-    public function ajax_add(){
-        global $user;
-
-        $data=array();
-        $data=$_POST;
-        if($data){
-            $data['uid']=$user['uid'];
-            $data['time']=time();
-            $data['end_time']=strtotime($data['end_time']);
-
-            $id = M('Introduction')->add($data);
-            if($id){
-                $row= D('Introduction')->relation(true)->find($id);
-
-                $row['time']=date('Y-m-d H:i',$value['time']);
-                $row['end_time']=date('Y-m-d H:i',$value['end_time']);
-
-                if($row){
-                    $data=array();
-                    $data['code']=0;
-                    $data['msg']='success';
-                    $data['data']=$row;
-                }else{
-                    $data=array();
-                    $data['code']=1;
-                    $data['msg']='error';
-                }
             }else{
                 $data=array();
                 $data['code']=1;
@@ -157,45 +78,7 @@ class IntroductionController extends AuthController {
         if($data){
             $data['time']=time();
 
-            $res = M('Introduction')->save($data);
-            if($res){
-                $id=$data['id'];
-                $row= D('Introduction')->relation(true)->find($id);
-
-                $row['time']=date('Y-m-d H:i',$value['time']);
-                $row['end_time']=date('Y-m-d H:i',$value['end_time']);
-
-                if($row){
-                    $data=array();
-                    $data['code']=0;
-                    $data['msg']='success';
-                    $data['data']=$row;
-                }else{
-                    $data=array();
-                    $data['code']=1;
-                    $data['msg']='error';
-                }
-            }else{
-                $data=array();
-                $data['code']=1;
-                $data['msg']='error';
-            }
-        }else{
-            $data=array();
-            $data['code']=2;
-            $data['msg']='error';
-        }
-
-        echo json_encode($data);
-    }
-
-    //删除
-    public function ajax_del(){
-        $id=I('id'); 
-
-        if($id){
-            $res=M('Introduction')->where(array('id'=>$id))->delete();
-
+            $res = M('User')->save($data);
             if($res){
                 $data=array();
                 $data['code']=0;
@@ -214,7 +97,7 @@ class IntroductionController extends AuthController {
         echo json_encode($data);
     }
 
-
+    
     // 上传文件
     public function lay_upload_file(){
         if($_FILES['file']['size']>0){
