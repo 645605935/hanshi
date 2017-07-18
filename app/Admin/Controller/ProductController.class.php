@@ -33,7 +33,9 @@ class ProductController extends AuthController {
         $this->page_buttons=$page_buttons;
         $this->page=$page;
 
-        
+
+        //三级分类
+        $this->type_1=A('Communal/Type')->getSon(1238);
         $this->display();
     }
 
@@ -65,6 +67,46 @@ class ProductController extends AuthController {
         }
         echo json_encode($data);
     }
+
+    public function ajax_get_type_2(){
+        $type_1=I('id');
+
+        $type_2 = A('Communal/Type')->getSon($type_1);
+
+        if($type_2){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$type_2;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
+    public function ajax_get_type_3(){
+        $type_2=I('id');
+
+        $type_3 = A('Communal/Type')->getSon($type_2);
+
+        if($type_3){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$type_3;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
+    
 
    
     //根据ID获取用户关联的信息

@@ -401,27 +401,21 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品分类</label>
                           <div class="layui-input-inline">
-                            <select name="type" lay-verify="required" class="type">
+                            <select name="type_1" lay-verify="required" class="type_1" lay-filter="type_1">
                               <option value="">请选择</option>
-                              <option value="1">浙江省</option>
-                              <option value="2">江西省</option>
-                              <option value="3">福建省</option>
+                              <foreach name="type_1" item="v">
+                                  <option value="{$v.id}">{$v.title}</option>
+                              </foreach>
                             </select>
                           </div>
                           <div class="layui-input-inline">
-                            <select name="type" lay-verify="required" class="type">
+                            <select name="type_2" lay-verify="required" class="type_2" lay-filter="type_2">
                               <option value="">请选择</option>
-                              <option value="1">浙江省</option>
-                              <option value="2">江西省</option>
-                              <option value="3">福建省</option>
                             </select>
                           </div>
                           <div class="layui-input-inline">
-                            <select name="type" lay-verify="required" class="type">
+                            <select name="type_3" lay-verify="required" class="type_3" lay-filter="type_3">
                               <option value="">请选择</option>
-                              <option value="1">浙江省</option>
-                              <option value="2">江西省</option>
-                              <option value="3">福建省</option>
                             </select>
                           </div>
                         </div>
@@ -435,32 +429,62 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品价格</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="address" style="width:628px;" lay-verify="required" placeholder="" class="layui-input address">
+                            <input type="text" name="address" lay-verify="required" placeholder="" class="layui-input address">
                           </div>
                         </div>
                       </div>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">优惠价格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="contact" lay-verify="required" placeholder="" autocomplete="off" class="layui-input contact">
+                    <td colspan="2">
+                      <div class="layui-form-item">
+                        <div class="layui-inline">
+                          <label class="layui-form-label">套系</label>
+                          <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" placeholder="规格" autocomplete="off" class="layui-input attr_1">
                           </div>
+                          <div class="layui-form-mid">-</div>
+                          <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" placeholder="价格" autocomplete="off" class="layui-input attr_2">
+                          </div>
+                          <div class="layui-form-mid">-</div>
+                          <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" placeholder="库存" autocomplete="off" class="layui-input attr_3">
+                          </div>
+                          <label class="layui-form-label btn-danger add_tx">添加</label>
                         </div>
                       </div>
+
+                      <div class="layui-inline" style="display: none;">
+                          <div class="layui-form-item">
+                            <div class="layui-input-inline">
+                              <input type="text" name="tx_attr" lay-verify="required" class="layui-input tx_attr" readonly>
+                            </div>
+                          </div>
+                        </div>
                     </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">产品规格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="phone" lay-verify="required" placeholder="" class="layui-input phone">
-                          </div>
-                        </div>
-                      </div>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                        <table class="layui-table" lay-even="" lay-skin="row">
+                          <colgroup>
+                            <col width="150">
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                          </colgroup>
+                          <thead>
+                            <tr>
+                              <th>序号</th>
+                              <th>规格</th>
+                              <th>价格</th>
+                              <th>库存</th>
+                            </tr> 
+                          </thead>
+                          <tbody id="attr_list_box">
+                            
+                          </tbody>
+                        </table>  
                     </td>
                   </tr>
                 </tbody>
@@ -553,27 +577,21 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品分类</label>
                           <div class="layui-input-inline">
-                            <select name="type" lay-verify="required" class="type">
+                            <select name="type_1" lay-verify="required" class="type_1" lay-filter="type_1">
                               <option value="">请选择</option>
-                              <option value="1">浙江省</option>
-                              <option value="2">江西省</option>
-                              <option value="3">福建省</option>
+                              <foreach name="type_1" item="v">
+                                  <option value="{$v.id}">{$v.title}</option>
+                              </foreach>
                             </select>
                           </div>
                           <div class="layui-input-inline">
-                            <select name="type" lay-verify="required" class="type">
+                            <select name="type_2" lay-verify="required" class="type_2" lay-filter="type_2">
                               <option value="">请选择</option>
-                              <option value="1">浙江省</option>
-                              <option value="2">江西省</option>
-                              <option value="3">福建省</option>
                             </select>
                           </div>
                           <div class="layui-input-inline">
-                            <select name="type" lay-verify="required" class="type">
+                            <select name="type_3" lay-verify="required" class="type_3" lay-filter="type_3">
                               <option value="">请选择</option>
-                              <option value="1">浙江省</option>
-                              <option value="2">江西省</option>
-                              <option value="3">福建省</option>
                             </select>
                           </div>
                         </div>
@@ -653,6 +671,40 @@
 
         {{ } }}
     </script>
+
+    <!-- 模板引擎doT.js    start -->
+    <script id="j-tmpl_type_2" type="text/template">
+        {{ if(it.code==0){ }}
+
+                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+
+                      <option value="{{=it.data[i].id}}">{{=it.data[i].title}}</option>
+
+                {{ } }}
+
+        {{ }else{ }}
+
+                
+
+        {{ } }}
+    </script>
+
+    <!-- 模板引擎doT.js    start -->
+    <script id="j-tmpl_type_3" type="text/template">
+        {{ if(it.code==0){ }}
+
+                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+
+                      <option value="{{=it.data[i].id}}">{{=it.data[i].title}}</option>
+
+                {{ } }}
+
+        {{ }else{ }}
+
+                
+
+        {{ } }}
+    </script>
     <script src="__PUBLIC__/Admin/doT-master/doT.js"></script>
 
 
@@ -712,12 +764,60 @@
                 _ajax_del(ids);
             }
           });
+
+
+          //添加套系
+          $('#add_form .add_tx').click(function(){
+              var attr_1=$('.attr_1').val();
+              var attr_2=$('.attr_2').val();
+              var attr_3=$('.attr_3').val();
+
+              if(attr_1&&attr_2&&attr_3){
+                  var str='';
+                  var len=++$('#attr_list_box tr').length;
+                        str+= '<tr attr_1="'+attr_1+'" attr_2="'+attr_2+'" attr_3="'+attr_3+'">'+
+                                '<td>'+len+'</td>'+
+                                '<td>'+attr_1+'</td>'+
+                                '<td>'+attr_2+'</td>'+
+                                '<td>'+attr_3+'</td>'+
+                              '</tr>';
+
+                  $('#attr_list_box').append(str); 
+
+                  render_attr();
+
+                  $('#add_form .attr_1').val('');
+                  $('#add_form .attr_2').val('');
+                  $('#add_form .attr_3').val('');
+              }
+          });
+
+          $('body').on('dblclick','#attr_list_box tr',function(){
+              $(this).remove();
+              render_attr();
+          })  
         
         
       });
     </script>
 
     <script type="text/javascript">
+      function render_attr(){
+          var attr_str='';
+          var attr_arr=[];
+          $.each($('#attr_list_box tr'), function(name, value){
+              var attr_1=$(value).attr('attr_1');
+              var attr_2=$(value).attr('attr_2');
+              var attr_3=$(value).attr('attr_3'); 
+
+              attr_arr.push(attr_1+'#'+attr_2+'#'+attr_3);
+          });
+          attr_str=attr_arr.join('||');
+          alert(attr_str);
+          $('#add_form .tx_attr').val(attr_str);
+      }
+
+
       function init_page(){
           var title=$('#search_table .title').val();
           var Date1=$('#search_table .Date1').val();
@@ -730,6 +830,8 @@
           var page="{$page}";
           _init_button_operate(page);
       }
+
+      
 
       //获取列表
       function _ajax_get_list(title, Date1, Date2){
@@ -798,6 +900,78 @@
           }); 
           return _json;
       }
+
+      //获取分类二
+      function _ajax_get_type_2(type_1){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Product/ajax_get_type_2')}",
+              data:{
+                  id: type_1
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_2').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#add_form .type_2').html(doT_Str);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //获取分类二
+      function _ajax_get_type_3(type_2){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Product/ajax_get_type_3')}",
+              data:{
+                  id: type_2
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_3').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#add_form .type_3').html(doT_Str);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      
 
       //添加
       function _ajax_add(_data){
@@ -1077,6 +1251,24 @@
                 var _json=_ajax_edit(data.field);
                 return false;
               });
+
+              form.on('select(type_1)', function(data){
+                  $('#add_form .type_2').html('<option value="">请选择</option>');
+                  $('#add_form .type_3').html('<option value="">请选择</option>');
+
+                  var type_1=data.value;
+                  _ajax_get_type_2(type_1);
+                  console.log(data);
+              });
+
+              form.on('select(type_2)', function(data){
+                  $('#add_form .type_3').html('<option value="">请选择</option>');
+                  
+                  var type_2=data.value;
+                  _ajax_get_type_3(type_2);
+                  console.log(data);
+              });
+
             });
         }
     </script>
