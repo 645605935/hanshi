@@ -366,7 +366,7 @@
                         <div class="layui-inline" style="display: none;">
                           <div class="layui-form-item">
                             <div class="layui-input-inline">
-                              <input type="text" name="file_name" lay-verify="required" class="layui-input file_name" readonly>
+                              <input type="text" name="images" lay-verify="required" class="layui-input images" readonly>
                             </div>
                           </div>
                         </div>
@@ -401,7 +401,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品分类</label>
                           <div class="layui-input-inline">
-                            <select name="type_1" lay-verify="required" class="type_1" lay-filter="type_1">
+                            <select name="type_1" lay-verify="required" class="type_1" lay-filter="add_type_1">
                               <option value="">请选择</option>
                               <foreach name="type_1" item="v">
                                   <option value="{$v.id}">{$v.title}</option>
@@ -409,12 +409,12 @@
                             </select>
                           </div>
                           <div class="layui-input-inline">
-                            <select name="type_2" lay-verify="required" class="type_2" lay-filter="type_2">
+                            <select name="type_2" lay-verify="required" class="type_2" lay-filter="add_type_2">
                               <option value="">请选择</option>
                             </select>
                           </div>
                           <div class="layui-input-inline">
-                            <select name="type_3" lay-verify="required" class="type_3" lay-filter="type_3">
+                            <select name="type_3" lay-verify="required" class="type_3" lay-filter="add_type_3">
                               <option value="">请选择</option>
                             </select>
                           </div>
@@ -429,7 +429,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品价格</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="address" lay-verify="required" placeholder="" class="layui-input address">
+                            <input type="text" name="sale_price" lay-verify="required" placeholder="" class="layui-input sale_price">
                           </div>
                         </div>
                       </div>
@@ -481,7 +481,7 @@
                               <th>库存</th>
                             </tr> 
                           </thead>
-                          <tbody id="attr_list_box">
+                          <tbody class="attr_list_box">
                             
                           </tbody>
                         </table>  
@@ -539,13 +539,15 @@
                       </div>
                     </td>
                     <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <div class="layui-input-inline">
-                            <input type="text" name="file_name" lay-verify="required" class="layui-input file_name" readonly>
+                        <div class="row image_box" style="width: 400px;"></div>
+                        
+                        <div class="layui-inline" style="display: none;">
+                          <div class="layui-form-item">
+                            <div class="layui-input-inline">
+                              <input type="text" name="images" lay-verify="required" class="layui-input images" readonly>
+                            </div>
                           </div>
                         </div>
-                      </div>
                     </td>
                   </tr>
                   
@@ -577,7 +579,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品分类</label>
                           <div class="layui-input-inline">
-                            <select name="type_1" lay-verify="required" class="type_1" lay-filter="type_1">
+                            <select name="type_1" lay-verify="required" class="type_1" lay-filter="edit_type_1">
                               <option value="">请选择</option>
                               <foreach name="type_1" item="v">
                                   <option value="{$v.id}">{$v.title}</option>
@@ -585,12 +587,12 @@
                             </select>
                           </div>
                           <div class="layui-input-inline">
-                            <select name="type_2" lay-verify="required" class="type_2" lay-filter="type_2">
+                            <select name="type_2" lay-verify="required" class="type_2" lay-filter="edit_type_2">
                               <option value="">请选择</option>
                             </select>
                           </div>
                           <div class="layui-input-inline">
-                            <select name="type_3" lay-verify="required" class="type_3" lay-filter="type_3">
+                            <select name="type_3" lay-verify="required" class="type_3" lay-filter="edit_type_3">
                               <option value="">请选择</option>
                             </select>
                           </div>
@@ -605,32 +607,62 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品价格</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="address" style="width:628px;" lay-verify="required" placeholder="" class="layui-input address">
+                            <input type="text" name="sale_price" lay-verify="required" placeholder="" class="layui-input sale_price">
                           </div>
                         </div>
                       </div>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">优惠价格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="contact" lay-verify="required" placeholder="" autocomplete="off" class="layui-input contact">
+                    <td colspan="2">
+                      <div class="layui-form-item">
+                        <div class="layui-inline">
+                          <label class="layui-form-label">套系</label>
+                          <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" placeholder="规格" autocomplete="off" class="layui-input attr_1">
                           </div>
+                          <div class="layui-form-mid">-</div>
+                          <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" placeholder="价格" autocomplete="off" class="layui-input attr_2">
+                          </div>
+                          <div class="layui-form-mid">-</div>
+                          <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" placeholder="库存" autocomplete="off" class="layui-input attr_3">
+                          </div>
+                          <label class="layui-form-label btn-danger add_tx">添加</label>
                         </div>
                       </div>
+
+                      <div class="layui-inline" style="display: none;">
+                          <div class="layui-form-item">
+                            <div class="layui-input-inline">
+                              <input type="text" name="tx_attr" lay-verify="required" class="layui-input tx_attr" readonly>
+                            </div>
+                          </div>
+                        </div>
                     </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">产品规格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="phone" lay-verify="required" placeholder="" class="layui-input phone">
-                          </div>
-                        </div>
-                      </div>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                        <table class="layui-table" lay-even="" lay-skin="row">
+                          <colgroup>
+                            <col width="150">
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                          </colgroup>
+                          <thead>
+                            <tr>
+                              <th>序号</th>
+                              <th>规格</th>
+                              <th>价格</th>
+                              <th>库存</th>
+                            </tr> 
+                          </thead>
+                          <tbody class="attr_list_box">
+                            
+                          </tbody>
+                        </table>  
                     </td>
                   </tr>
                 </tbody>
@@ -668,6 +700,23 @@
         {{ }else{ }}
 
                 <h2>暂无数据</h2>
+
+        {{ } }}
+    </script>
+
+    <!-- 模板引擎doT.js    start -->
+    <script id="j-tmpl_type_1" type="text/template">
+        {{ if(it.code==0){ }}
+
+                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+
+                      <option value="{{=it.data[i].id}}">{{=it.data[i].title}}</option>
+
+                {{ } }}
+
+        {{ }else{ }}
+
+                
 
         {{ } }}
     </script>
@@ -774,7 +823,7 @@
 
               if(attr_1&&attr_2&&attr_3){
                   var str='';
-                  var len=++$('#attr_list_box tr').length;
+                  var len=++$('#add_form .attr_list_box tr').length;
                         str+= '<tr attr_1="'+attr_1+'" attr_2="'+attr_2+'" attr_3="'+attr_3+'">'+
                                 '<td>'+len+'</td>'+
                                 '<td>'+attr_1+'</td>'+
@@ -782,7 +831,7 @@
                                 '<td>'+attr_3+'</td>'+
                               '</tr>';
 
-                  $('#attr_list_box').append(str); 
+                  $('#add_form .attr_list_box').append(str); 
 
                   render_attr();
 
@@ -792,7 +841,7 @@
               }
           });
 
-          $('body').on('dblclick','#attr_list_box tr',function(){
+          $('body').on('dblclick','#add_form .attr_list_box tr',function(){
               $(this).remove();
               render_attr();
           })  
@@ -805,7 +854,7 @@
       function render_attr(){
           var attr_str='';
           var attr_arr=[];
-          $.each($('#attr_list_box tr'), function(name, value){
+          $.each($('#edit_form .attr_list_box tr'), function(name, value){
               var attr_1=$(value).attr('attr_1');
               var attr_2=$(value).attr('attr_2');
               var attr_3=$(value).attr('attr_3'); 
@@ -813,8 +862,7 @@
               attr_arr.push(attr_1+'#'+attr_2+'#'+attr_3);
           });
           attr_str=attr_arr.join('||');
-          alert(attr_str);
-          $('#add_form .tx_attr').val(attr_str);
+          $('#edit_form .tx_attr').val(attr_str);
       }
 
 
@@ -880,14 +928,185 @@
 
                       $('#edit_form .id').val(data.id);
                       $('#edit_form .title').val(data.title);
-                      $('#edit_form .end_time').val(data.end_time);
-                      $('#edit_form .file_name').val(data.file_name);
-                      $("#edit_form .type").find("option[value='"+data.type+"']").attr("selected",true);
-                      $('#edit_form .desc').val(data.desc);
+                      $('#edit_form .images').val(data.images);
+
+                      var images=data.images;
+                      if(images){
+                        console.log(images);
+                          render_images(images);
+                      }
+
+                      
+                      var type_1=data.type_1;
+                      var type_2=data.type_2;
+                      var type_3=data.type_3;
+                      if(type_1, type_2, type_3){
+                          render_type(type_1, type_2, type_3);
+                      }
+
+                      var tx_attr=data.tx_attr;
+
+                      console.log(tx_attr);
+                      render_tx_attr(tx_attr);
+
+
+                      $('#edit_form .sale_price').val(data.desc);
                       $('#edit_form .content').val(data.content);
-                      $('#edit_form .address').val(data.address);
-                      $('#edit_form .contact').val(data.contact);
-                      $('#edit_form .phone').val(data.phone);
+                      $('#edit_form .desc').val(data.desc);
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      function render_images(images){
+          var arr_image=images.split('#');
+
+          var str='';
+          $.each(arr_image, function(name, value){
+              str+=''+
+                  '<div class="col-xs-6 col-md-3">'+
+                    '<a href="#" class="thumbnail">'+
+                      '<img src="'+value+'">'+
+                    '</a>'+
+                  '</div>'+
+                '';
+          });
+
+          $('#edit_form .image_box').html(str);
+          $('#edit_form .images').val(images);
+      }
+      
+      function render_tx_attr(tx_attr){
+          var arr_tx_attr=tx_attr.split('||');
+
+          var str='';
+          $.each(arr_tx_attr, function(key, value){
+              var arr_row=value.split('#');
+
+              str+= '<tr attr_1="'+arr_row[0]+'" attr_2="'+arr_row[1]+'" attr_3="'+arr_row[2]+'">'+
+                      '<td>'+key+'</td>'+
+                      '<td>'+arr_row[0]+'</td>'+
+                      '<td>'+arr_row[1]+'</td>'+
+                      '<td>'+arr_row[2]+'</td>'+
+                    '</tr>';
+              
+          });
+
+          $('#edit_form .attr_list_box').html(str); 
+          render_attr();
+
+          $('#edit_form .attr_1').val('');
+          $('#edit_form .attr_2').val('');
+          $('#edit_form .attr_3').val('');
+      }
+
+      //
+      function render_type(type_1, type_2, type_3){
+          render_type_1(type_1);
+          render_type_2(type_1, type_2);
+          render_type_3(type_2, type_3);
+      }
+
+      function render_type_1(type_1){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Product/ajax_get_type_1')}",
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_1').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_1').html(doT_Str);
+
+                      $("#edit_form .type_1").find("option[value='"+type_1+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      function render_type_2(type_1, type_2){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Product/ajax_get_type_2')}",
+              data:{
+                id:type_1
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_2').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_2').html(doT_Str);
+
+                      $("#edit_form .type_2").find("option[value='"+type_2+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      function render_type_3(type_2, type_3){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Product/ajax_get_type_3')}",
+              data:{
+                id:type_2
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_3').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_3').html(doT_Str);
+
+                      $("#edit_form .type_3").find("option[value='"+type_3+"']").attr("selected",true);
+
+                      layui.form().render();
 
                       _json=json;
                   }else{
@@ -902,7 +1121,7 @@
       }
 
       //获取分类二
-      function _ajax_get_type_2(type_1){
+      function _ajax_get_type_2(form, type_1){
           var _json;
           $.ajax({  
               async:false,
@@ -920,7 +1139,7 @@
                       var tmpl = document.getElementById('j-tmpl_type_2').innerHTML;
                       var doTtmpl = doT.template(tmpl);
                       var doT_Str=str+doTtmpl(json);
-                      $('#add_form .type_2').html(doT_Str);
+                      $('#'+form+' .type_2').html(doT_Str);
 
                       layui.form().render();
 
@@ -937,7 +1156,7 @@
       }
 
       //获取分类二
-      function _ajax_get_type_3(type_2){
+      function _ajax_get_type_3(form, type_2){
           var _json;
           $.ajax({  
               async:false,
@@ -955,7 +1174,7 @@
                       var tmpl = document.getElementById('j-tmpl_type_3').innerHTML;
                       var doTtmpl = doT.template(tmpl);
                       var doT_Str=str+doTtmpl(json);
-                      $('#add_form .type_3').html(doT_Str);
+                      $('#'+form+' .type_3').html(doT_Str);
 
                       layui.form().render();
 
@@ -1065,6 +1284,33 @@
 
       }
 
+      function tx_attrFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue){
+              var arr_tx_attr=cellvalue.split('||');
+
+              var str='<div class="row">';
+              $.each(arr_tx_attr, function(key, value){
+                  var arr_row=value.split('#');
+                        
+                      str+= '<div class="col-sm-6 col-md-4">'+
+                        '<div class="thumbnail">'+
+                          '<div class="caption">'+
+                            '<h3>'+arr_row[0]+'</h3>'+
+                            '<p>...</p>'+
+                            '<p><a href="#" class="btn btn-primary btn-xs" role="button">'+arr_row[1]+'元</a> <a href="#" class="btn btn-default btn-xs" role="button">'+arr_row[2]+'个</a></p>'+
+                          '</div>'+
+                        '</div>'+
+                      '</div>';
+                  
+              });
+              str+='</div>';
+
+              return str;
+          }else{
+              return "暂无";
+          }
+      }
+
       function statusFormatter(cellvalue, options, rowdata){ 
           if (cellvalue == "1"){
               return '<span class="label label-success" alt="'+cellvalue+'">通过</span>';
@@ -1079,13 +1325,13 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '产品名称','产品图片','库存数量','时间','状态','操作'],
+              colNames:['id', '产品名称','产品图片','规格|价格|库存','时间','状态','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
                 {name:'title',index:'title', align : "center"},
-                {name:'img',index:'img', align : "center"},
-                {name:'num',index:'num', align : "center"},
+                {name:'images',index:'images', align : "center", formatter: imgFormatter},
+                {name:'tx_attr',index:'tx_attr', align : "center", formatter: tx_attrFormatter},
                 {name:'time',index:'time', align : "center"},
                 {name:'status',index:'status', align : "center", formatter: statusFormatter},
 
@@ -1210,7 +1456,7 @@
                       });
                       var arr2str=arr.join('#');
                       console.log(arr2str);
-                      $('#'+form_type+'_form .file_name').val(arr2str);
+                      $('#'+form_type+'_form .images').val(arr2str);
                    }
                  }
               });
@@ -1252,20 +1498,41 @@
                 return false;
               });
 
-              form.on('select(type_1)', function(data){
+              form.on('select(add_type_1)', function(data){
+                  var form="add_form";
                   $('#add_form .type_2').html('<option value="">请选择</option>');
                   $('#add_form .type_3').html('<option value="">请选择</option>');
 
                   var type_1=data.value;
-                  _ajax_get_type_2(type_1);
+                  _ajax_get_type_2(form, type_1);
                   console.log(data);
               });
 
-              form.on('select(type_2)', function(data){
+              form.on('select(add_type_2)', function(data){
+                  var form="add_form";
                   $('#add_form .type_3').html('<option value="">请选择</option>');
                   
                   var type_2=data.value;
-                  _ajax_get_type_3(type_2);
+                  _ajax_get_type_3(form, type_2);
+                  console.log(data);
+              });
+
+              form.on('select(edit_type_1)', function(data){
+                  var form="edit_form";
+                  $('#edit_form .type_2').html('<option value="">请选择</option>');
+                  $('#edit_form .type_3').html('<option value="">请选择</option>');
+
+                  var type_1=data.value;
+                  _ajax_get_type_2(form, type_1);
+                  console.log(data);
+              });
+
+              form.on('select(edit_type_2)', function(data){
+                  var form="edit_form";
+                  $('#edit_form .type_3').html('<option value="">请选择</option>');
+                  
+                  var type_2=data.value;
+                  _ajax_get_type_3(form, type_2);
                   console.log(data);
               });
 

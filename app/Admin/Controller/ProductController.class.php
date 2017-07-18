@@ -68,6 +68,23 @@ class ProductController extends AuthController {
         echo json_encode($data);
     }
 
+    public function ajax_get_type_1(){
+        $type_1 = A('Communal/Type')->getSon(1238);
+
+        if($type_1){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$type_1;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
     public function ajax_get_type_2(){
         $type_1=I('id');
 
