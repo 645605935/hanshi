@@ -1,56 +1,37 @@
 <?php
-    // 返回json 
-    function backJson($code,$info){ 
-        $arr['status']=$code; 
-        $arr['info']=$info; 
-        print_r(json_encode($arr)); 
-        exit; 
-    } 
-     
-    //oss上传 
-    /* 
-     *$fFiles:文件域 
-     *$n：上传的路径目录 
-     *$ossClient   
-     *$bucketName 
-     *$web:oss访问地址 
-     *$isThumb:是否缩略图 
-     */ 
-    function ossUpPic($fFiles,$n,$ossClient,$bucketName,$web,$isThumb=0){ 
-        $fType=$fFiles['type']; 
-        $back=array( 
-            'code'=>0, 
-            'msg'=>'', 
-        ); 
-        if(!in_array($fType, C('oss_exts'))){ 
-            $back['msg']='文件格式不正确'; 
-            return $back; 
-            exit; 
-        } 
-        $fSize=$fFiles['size']; 
-        if($fSize>C('oss_maxSize')){ 
-            $back['msg']='文件超过了1M'; 
-            return $back; 
-            exit; 
-        } 
-         
-        $fname=$fFiles['name']; 
-        $ext=substr($fname,stripos($fname,'.')); 
-         
-        $fup_n=$fFiles['tmp_name']; 
-        $file_n=time().'_'.rand(100,999); 
-        $object = $n."/".$file_n.$ext;//目标文件名 
-         
-     
-        if (is_null($ossClient)) exit(1);     
-        $ossClient->uploadFile($bucketName, $object, $fup_n); 
-        if($isThumb==1){ 
-            // 图片缩放，参考https://help.aliyun.com/document_detail/44688.html?spm=5176.doc32174.6.481.RScf0S  
-            $back['thumb']= $web.$object."?x-oss-process=image/resize,h_300,w_300"; 
-        }     
-        $back['code']=1; 
-        $back['msg']=$web.$object; 
-        return $back; 
-        exit;     
+    /**
+     * 实例化阿里云oos
+     * @return object 实例化得到的对象
+     */
+    function new_oss(){
+        vendor('Alioss.autoload');
+        $config=C('ALIOSS_CONFIG');
+        $oss=new \OSS\OssClient($config['KEY_ID'],$config['KEY_SECRET'],$config['END_POINT']);
+        return $oss;
     }
-?>
+    /**
+     * 上传文件到oss并删除本地文件
+     * @param  string $path 文件路径
+     * @return bollear      是否上传
+     */
+    function oss_upload($path){
+
+        // 获取配置项
+        $bucket=C('ALIOSS_CONFIG.BUCKET');
+
+        // 先统一去除左侧的.或者/ 再添加./
+        $oss_path=ltrim($path,'./');
+        $path='./'.$oss_path;
+
+        if (file_exists($path)) {
+            // echo 1 ;die;
+            // 实例化oss类
+            $oss=new_oss();
+            // 上传到oss
+            $oss->uploadFile($bucket,$oss_path,$path);
+            // 如需上传到oss后 自动删除本地的文件 则删除下面的注释
+            // unlink($path);
+            return true;
+        }
+        return false;
+    }
