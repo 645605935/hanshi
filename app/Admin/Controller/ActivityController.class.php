@@ -243,8 +243,6 @@ class ActivityController extends AuthController {
 
     // 上传视频
     public function lay_upload_file_video(){
-
-        dump($_FILES['file_video']);die;
         if($_FILES['file_video']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
             $upload->maxSize   =     31457280 ;// 设置附件上传大小
@@ -264,11 +262,16 @@ class ActivityController extends AuthController {
                 $data['msg']=$upload->getError();
             }else{
                 $video=$info['file_video']['savename'];
+                $video_url='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$video;
+
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$video;
+                $data['data']["src"]=$video_url;
             }
+
+            //上传到阿里云OSS
+            oss_upload( './Uploads/layui/'.$video );
 
             echo json_encode($data);
         }

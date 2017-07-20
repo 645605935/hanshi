@@ -388,7 +388,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">活动图片</label>
                           <div class="layui-input-inline">
-                            <input type="file" id="add_upload_img" name="file" lay-type="file" class="layui-upload-file">
+                            <input type="file" id="add_upload_img" name="file" class="layui-upload-file">
                           </div>
                         </div>
                       </div>
@@ -415,6 +415,9 @@
                           <div class="layui-input-inline">
                             <input type="file" id="add_upload_video" name="file_video" lay-type="video" class="layui-upload-file">
                           </div>
+                          <a target="_blank" class="layui-form-label show_video_btn" style="width:61px!important;display: none;">
+                            预览
+                          </a>
                         </div>
                       </div>
                     </td>
@@ -427,27 +430,9 @@
                           </div>
                         </div>
                       </div>
-                      <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
                     </td>
                   </tr>
 
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">活动视频</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="video" placeholder="http://player.youku.com/embed/XMjg5NTMxODM2MA==" class="layui-input video">
-                          </div>
-                          <label class="layui-form-label show_video_btn" style="width:61px!important;">预览</label>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <iframe style="display:none;" class="show_video" height=140 width=140 src='' frameborder=0 'allowfullscreen'></iframe>
-                    </td>
-                  </tr>
-                  
                   <tr>
                     <td class="center" colspan="2">
                       <div class="layui-form-item layui-form-text">
@@ -571,7 +556,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">活动图片</label>
                           <div class="layui-input-inline">
-                            <input type="file" id="edit_upload_img" name="file" lay-type="file" class="layui-upload-file">
+                            <input type="file" id="edit_upload_img" name="file" class="layui-upload-file">
                           </div>
                         </div>
                       </div>
@@ -595,14 +580,23 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">活动视频</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="video" placeholder="http://player.youku.com/embed/XMjg5NTMxODM2MA==" class="layui-input video">
+                            <input type="file" id="edit_upload_video" name="file_video" lay-type="video" class="layui-upload-file">
                           </div>
-                          <label class="layui-form-label show_video_btn" style="width:61px!important;">预览</label>
+                          <a target="_blank" class="layui-form-label show_video_btn" style="width:61px!important;display: none;">
+                            预览
+                          </a>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <iframe style="display:none;" class="show_video" height=140 width=140 src='' frameborder=0 'allowfullscreen'></iframe>
+                      <div class="layui-inline" style="display:none;">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">视频</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="video" lay-verify="required" class="layui-input video" readonly>
+                          </div>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                   
@@ -1103,6 +1097,21 @@
               var arr=edit_type.split('_');
               var form_type=arr[1];
 
+              //上传视频
+              layui.upload({
+                 url: "{:U('Admin/Activity/lay_upload_file_video')}" //上传接口
+                 ,elem: '#'+form_type+'_upload_video' //指定原始元素，默认直接查找class="layui-upload-file"
+                 ,ext : 'mp4'
+                 ,method: 'post' //上传接口的http类型
+                 ,success: function(res){ //上传成功后的回调
+                   if(res.code==0){
+                      $('#'+form_type+'_form .video').val(res.data.src);
+                      $('#'+form_type+'_form .show_video_btn').show().attr('href', res.data.src);
+                   }
+                 }
+              });
+
+
               //上传图片
               layui.upload({
                  url: "{:U('Admin/Activity/lay_upload_file')}" //上传接口
@@ -1115,20 +1124,7 @@
                  }
               });
 
-              //上传视频
-              layui.upload({
-                 url: "{:U('Admin/Activity/lay_upload_file_video')}" //上传接口
-                 ,elem: '#'+form_type+'_upload_video' //指定原始元素，默认直接查找class="layui-upload-file"
-                 ,success: function(res){ //上传成功后的回调
-
-                  console.log(res);return;
-                   if(res.code==0){
-                      $('#'+form_type+'_form .video').val(res.data.src);
-                      $('#'+form_type+'_form .show_video').attr('src', res.data.src);
-                   }
-                 }
-              });
-
+              
               
               //上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
               layedit.set({
