@@ -380,6 +380,8 @@
                     </td>
                   </tr>
 
+
+
                   <tr>
                     <td>
                       <div class="layui-inline">
@@ -394,9 +396,34 @@
                     <td>
                       <div class="layui-inline" style="display:none;">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">LOGO</label>
+                          <label class="layui-form-label">图片</label>
                           <div class="layui-input-inline">
                             <input type="text" name="img" lay-verify="required" class="layui-input img" readonly>
+                          </div>
+                        </div>
+                      </div>
+                      <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">活动视频</label>
+                          <div class="layui-input-inline">
+                            <input type="file" id="add_upload_video" name="file_video" lay-type="video" class="layui-upload-file">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline" style="display:none;">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">视频</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="video" lay-verify="required" class="layui-input video" readonly>
                           </div>
                         </div>
                       </div>
@@ -687,7 +714,7 @@
               title_html: true,
             });
 
-            $("div[aria-describedby='dialog-confirm_add'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 新建招标任务：</h4></div>");
+            $("div[aria-describedby='dialog-confirm_add'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 新建活动：</h4></div>");
           });
 
           //编辑
@@ -1076,7 +1103,7 @@
               var arr=edit_type.split('_');
               var form_type=arr[1];
 
-              //上传文件
+              //上传图片
               layui.upload({
                  url: "{:U('Admin/Activity/lay_upload_file')}" //上传接口
                  ,elem: '#'+form_type+'_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
@@ -1084,6 +1111,20 @@
                    if(res.code==0){
                       $('#'+form_type+'_form .img').val(res.data.src);
                       $('#'+form_type+'_form .show_img').attr('src', res.data.src);
+                   }
+                 }
+              });
+
+              //上传视频
+              layui.upload({
+                 url: "{:U('Admin/Activity/lay_upload_file_video')}" //上传接口
+                 ,elem: '#'+form_type+'_upload_video' //指定原始元素，默认直接查找class="layui-upload-file"
+                 ,success: function(res){ //上传成功后的回调
+
+                  console.log(res);return;
+                   if(res.code==0){
+                      $('#'+form_type+'_form .video').val(res.data.src);
+                      $('#'+form_type+'_form .show_video').attr('src', res.data.src);
                    }
                  }
               });

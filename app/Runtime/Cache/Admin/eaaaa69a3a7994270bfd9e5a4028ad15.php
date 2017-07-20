@@ -533,16 +533,16 @@
     <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
-        <span class="menu-text"> 论坛中心 </span>
+        <span class="menu-text"> 智囊中心 </span>
         <b class="arrow icon-angle-down"></b>
       </a>
 
       <ul class="submenu">
         <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
         <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="论坛中心">
+          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="智囊中心">
             <i class="icon-double-angle-right"></i>
-            论坛中心
+            智囊中心
           </a>
         </li>
         <?php } ?>
@@ -580,56 +580,19 @@
 
       <ul class="submenu">
         <li <?php if($cur_v == 'Tender-index'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Tender/index');?>" page="Admin/Tender/index" title="index" data-title="招标管理">
-            <i class="icon-double-angle-right"></i>
-            招标管理
-          </a>
-        </li>
-      </ul>
-    </li>
-
-
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
-      <a href="#" class="dropdown-toggle">
-        <i class="icon-film"></i>
-        <span class="menu-text"> 政采招标 </span>
-        <b class="arrow icon-angle-down"></b>
-      </a>
-
-      <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="政采招标">
+          <a href="<?php echo U('Admin/Tender/index');?>" page="Admin/Tender/index" title="index" data-title="政采招标">
             <i class="icon-double-angle-right"></i>
             政采招标
           </a>
         </li>
-        <?php } ?>
-      </ul>
-    </li>
-    <?php } ?>
-
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
-      <a href="#" class="dropdown-toggle">
-        <i class="icon-film"></i>
-        <span class="menu-text"> 企业招标 </span>
-        <b class="arrow icon-angle-down"></b>
-      </a>
-
-      <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="企业招标">
+        <li <?php if($cur_v == 'Tender-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Tender/index');?>" page="Admin/Tender/index" title="index" data-title="企业招标">
             <i class="icon-double-angle-right"></i>
             企业招标
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
 
     <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
@@ -1730,6 +1693,44 @@
 
             </div>
             <!-- 权限设置  end -->
+
+            <!-- 搜索  start -->
+            <div class="row">
+                <form class="layui-form layui-form-pane col-xs-12" action="" method="post">
+                    <table class="layui-table" id="search_table">
+                      <thead>
+                        <tr>
+                          <th>搜索</th>
+                        </tr> 
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+
+                            <div class="layui-inline" style="margin-top: 5px;">
+                              <div class="layui-form-item">
+                                <label class="layui-form-label">板料名称</label>
+                                <div class="layui-input-inline">
+                                  <input type="text" name="BordName" placeholder="全部" value="<?php echo ($_POST['BordName']); ?>" autocomplete="off" class="layui-input BordName">
+                                </div>
+                              </div>
+                            </div>  
+
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td>
+                            <button style="float:right;" type="submit" class="layui-btn search_btn" title="search_btn">搜索</button>
+                          </td>
+                        </tr> 
+                      </tfoot>
+                    </table>
+                </form>
+
+            </div>
+            <!-- 搜索  end -->
 
             <div class="row"> 
 

@@ -390,7 +390,7 @@
                           <label class="layui-form-label">任务行业分类</label>
                           <div class="layui-input-inline type_box">
                             <foreach name="type" item="v">
-                                <input type="checkbox" name="type[{$v.id}]" lay-skin="primary" title="{$v.title}">
+                                <input type="checkbox" name="type[{$v.id}]" data-id="{$v.id}" lay-skin="primary" title="{$v.title}">
                             </foreach>
                           </div>
                         </div>
@@ -529,7 +529,7 @@
                           <label class="layui-form-label">任务行业分类</label>
                           <div class="layui-input-inline type_box" id="edit_type_box">
                             <foreach name="type" item="v">
-                                <input type="checkbox" name="type[{$v.id}]" lay-skin="primary" title="{$v.title}">
+                                <input type="checkbox" name="type[{$v.id}]" data-id="{$v.id}" lay-skin="primary" title="{$v.title}">
                             </foreach>
                           </div>
                         </div>
@@ -643,7 +643,11 @@
           $( "body" ).on('click','.id-btn-dialog2_add', function(e) {
             e.preventDefault();
 
+            var types='';
+            var form_type='add_form';
+            render_type(form_type, types);
             init_editer('editer_add');
+            layui.form().render();
 
             $( "#dialog-confirm_add" ).removeClass('hide').dialog({
               resizable: false,
@@ -736,6 +740,48 @@
           return _data;  
       } 
 
+
+      function render_type(form_type, types){
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Tender/ajax_get_type')}",
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      var data=json.data;
+
+                      var str='';
+
+                      if(form_type=='add_form'){
+                          $.each(data, function(name, value){
+                              str+='<input type="checkbox" name="type['+value.id+']" data-id="'+value.id+'" lay-skin="primary" title="'+value.title+'">';
+                          });
+                      }else{
+                          var temp=types.split('_');
+
+                          $.each(data, function(name, value){
+
+                              if($.inArray( value.id, temp )>-1){
+                                    str+='<input type="checkbox" checked="checked" name="type['+value.id+']" data-id="'+value.id+'" lay-skin="primary" title="'+value.title+'">';
+                              }else{
+                                    str+='<input type="checkbox" name="type['+value.id+']" data-id="'+value.id+'" lay-skin="primary" title="'+value.title+'">';
+                              }
+                              
+                          });
+                      }
+                      
+                      $('#'+form_type+' .type_box').html(str);
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+      }
+
       //获取单条信息
       function _ajax_get_row_info(id){
           var _json;
@@ -755,13 +801,21 @@
                       $('#edit_form .title').val(data.title);
                       $('#edit_form .end_time').val(data.end_time);
                       $('#edit_form .file_name').val(data.file_name);
-                      $("#edit_form .type").find("option[value='"+data.type+"']").attr("selected",true);
+
+                      if(data.type){
+                          var form_type="edit_form";
+                          var types=data.type;
+                          render_type(form_type, types);
+                      }
+
+
                       $('#edit_form .desc').val(data.desc);
                       $('#edit_form .content').val(data.content);
                       $('#edit_form .address').val(data.address);
                       $('#edit_form .contact').val(data.contact);
                       $('#edit_form .phone').val(data.phone);
 
+                      layui.form().render();
                       _json=json;
                   }else{
                       layer.msg(json.msg);
@@ -1029,17 +1083,19 @@
 
                 var str = '';
                 var arr = [];
+
+                console.log(_data);
                 $.each(_data, function(name, value){
-                    if(name.indexOf("type") > 0 ){
-                        arr.push(value);
+                    if(name.indexOf("type") >=0 ){
+                        var id=parseInt(name.replace(/[^0-9]/ig,""));
+                        arr.push(id);
+                        // delete _data[name]; 
                     }
                 });
                 str=arr.join('_');
                 _data.type=str;
 
-                console.log(_data);
-                return false;
-                var _json=_ajax_add(data.field);
+                var _json=_ajax_add(_data);
                 return false;
               });
 

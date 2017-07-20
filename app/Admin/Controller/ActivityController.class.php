@@ -209,7 +209,7 @@ class ActivityController extends AuthController {
     }
 
 
-    // 上传文件
+    // 上传图片
     public function lay_upload_file(){
         if($_FILES['file']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
@@ -239,5 +239,42 @@ class ActivityController extends AuthController {
             echo json_encode($data);
         }
     }
+
+
+    // 上传视频
+    public function lay_upload_file_video(){
+
+        dump($_FILES['file_video']);die;
+        if($_FILES['file_video']['size']>0){
+            $upload = new \Think\Upload();// 实例化上传类
+            $upload->maxSize   =     31457280 ;// 设置附件上传大小
+            $upload->exts      =     array('mp4');// 设置附件上传类型
+            $upload->uploadReplace  = false;// 存在同名文件是否覆盖
+            $upload->autoSub   =     false;//是否启用子目录保存
+            $upload->rootPath  =     './Uploads/'; // 设置附件上传根目录
+            $upload->savePath  =     'layui/'; // 设置附件上传（子）目录
+            $upload->saveRule  =     ''; // 设置附件上传（子）目录
+             
+            // 上传文件 
+            $info   =   $upload->upload();
+
+            if(!$info) {
+                $data=array();
+                $data['code']=0;
+                $data['msg']=$upload->getError();
+            }else{
+                $video=$info['file_video']['savename'];
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+                $data['data']["src"]='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$video;
+            }
+
+            echo json_encode($data);
+        }
+    }
+
+
+    
 
 }

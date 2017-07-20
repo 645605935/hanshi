@@ -35,8 +35,7 @@ class TenderController extends AuthController {
 
         
         //分类
-        $this->type=A('Communal/Type')->getSon(1273);
-
+        $this->type=M('Type')->where(array('pid'=>1273))->select();
         $this->display();
     }
 
@@ -53,6 +52,8 @@ class TenderController extends AuthController {
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
             $list[$key]['end_time']=date('Y-m-d',$value['end_time']);
+
+            $list[$key]['type']=$this->ids_to_types($value['type']);
         }
 
         if($list){
@@ -67,6 +68,20 @@ class TenderController extends AuthController {
             $data['data']=array();
         }
         echo json_encode($data);
+    }
+
+
+    public function ids_to_types($types){
+        $types_arr=explode('_',$types);
+
+        $str='';
+        $arr=array();
+        foreach ($types_arr as $key => $value) {
+            $temp=M('Type')->find($value);
+            $arr[]=$temp['title'];
+        }
+        $str=implode(',', $arr);
+        return $str;
     }
 
    
@@ -99,6 +114,25 @@ class TenderController extends AuthController {
                 $data['code']=1;
                 $data['msg']='error';
             }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //获取分类
+    public function ajax_get_type(){
+
+        $type=M('Type')->where(array('pid'=>1273))->select();
+
+        if($type){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$type;
         }else{
             $data=array();
             $data['code']=2;
