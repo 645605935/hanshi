@@ -46,6 +46,10 @@ class IndexController extends AuthController {
 
         $this->assign('list',$list);
         $this->cur_v='Index-index';
+
+
+        //分类
+        $this->type=M('Type')->where(array('pid'=>1273))->select();
         $this->display();  
     }
 

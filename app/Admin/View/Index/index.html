@@ -137,9 +137,11 @@
 
                             <div class="layui-inline" style="margin-top: 5px;">
                               <div class="layui-form-item">
-                                <label class="layui-form-label">板料名称</label>
+                                <label class="layui-form-label">任务行业分类</label>
                                 <div class="layui-input-inline">
-                                  <input type="text" name="BordName" placeholder="全部" value="{$_POST['BordName']}" autocomplete="off" class="layui-input BordName">
+                                  <foreach name="type" item="v">
+                                      <input type="checkbox" name="type[{$v.id}]" lay-skin="primary" title="{$v.title}" checked="">
+                                  </foreach>
                                 </div>
                               </div>
                             </div>  
@@ -149,8 +151,8 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          <td>
-                            <button style="float:right;" type="submit" class="layui-btn search_btn" title="search_btn">搜索</button>
+                          <td>  
+                            <button style="float:right;" class="layui-btn demo1_search" lay-submit="" lay-filter="demo1_search">搜索</button>
                           </td>
                         </tr> 
                       </tfoot>
@@ -165,17 +167,15 @@
                   <div class="col-xs-9">
                       <div class="panel panel-default">
                         <div class="panel-heading">政彩招标信息</div>
-                        <div class="panel-body">
-                          <table id="grid-table"></table>
-                          <div id="grid-pager"></div>
+                        <div class="panel-body" id="grid_table">
+                          
                         </div>
                       </div>
 
                       <div class="panel panel-default">
                         <div class="panel-heading">企业招标信息</div>
-                        <div class="panel-body">
-                          <table id="grid-table-1"></table>
-                          <div id="grid-pager-1"></div>
+                        <div class="panel-body" id="grid_table_1">
+                          
                         </div>
                       </div>
                   </div>
@@ -183,9 +183,8 @@
                   <div class="col-xs-3">
                       <div class="panel panel-default">
                         <div class="panel-heading">中标企业公示</div>
-                        <div class="panel-body">
-                          <table id="grid-table-2"></table>
-                          <div id="grid-pager-2"></div>
+                        <div class="panel-body" id="grid_table_2">
+                          
                         </div>
                       </div>
                   </div>
@@ -350,32 +349,10 @@
                   if(json.code == 0){
                       var data=json.data;
 
-                      $('#edit_form .id').val(data.id);
-                      $('#edit_form .title').val(data.title);
-                      $('#edit_form .images').val(data.images);
-
-                      var images=data.images;
-                      if(images){
-                        console.log(images);
-                          render_images(images);
-                      }
-
-                      
-                      var type_1=data.type_1;
-                      var type_2=data.type_2;
-                      var type_3=data.type_3;
-                      if(type_1, type_2, type_3){
-                          render_type(type_1, type_2, type_3);
-                      }
-
-                      var tx_attr=data.tx_attr;
-
-                      console.log(tx_attr);
-                      render_tx_attr(tx_attr);
-
-                      $('#edit_form .price').val(data.price);
-                      $('#edit_form .sale_price').val(data.desc);
-                      $('#edit_form .content').val(data.content);
+                      $('#dialog-confirm_join .id').val(data.id);
+                      $('#dialog-confirm_join .title').html(data.title);
+                      $('#dialog-confirm_join .time').html(data.time);
+                      $('#dialog-confirm_join .content').html(data.content);
 
                       _json=json;
                   }else{
@@ -389,7 +366,7 @@
           return _json;
       }
 
-      function _ajax_get_grid_data(){
+      function _ajax_get_grid_data(types){
           var grid_data;
           $.ajax({   
               async:false,
@@ -397,7 +374,7 @@
               contentType:"application/x-www-form-urlencoded",
               url : "{:U('Admin/Tender/ajax_get_list')}",
               data: {
-                  'type':'1'
+                  types:types
               },
               dataType : 'json',
               success  : function(json) { 
@@ -415,7 +392,7 @@
           return grid_data;  
       } 
 
-      function _ajax_get_grid_data_1(){
+      function _ajax_get_grid_data_1(types){
           var grid_data_1;
           $.ajax({   
               async:false,
@@ -423,7 +400,7 @@
               contentType:"application/x-www-form-urlencoded",
               url : "{:U('Admin/Tender/ajax_get_list')}",
               data: {
-                  'type':'2'
+                  types:types
               },
               dataType : 'json',
               success  : function(json) { 
@@ -441,7 +418,7 @@
           return grid_data_1;  
       } 
 
-      function _ajax_get_grid_data_2(){
+      function _ajax_get_grid_data_2(types){
           var grid_data_2;
           $.ajax({   
               async:false,
@@ -449,7 +426,7 @@
               contentType:"application/x-www-form-urlencoded",
               url : "{:U('Admin/Tender/ajax_get_list')}",
               data: {
-                  'status':'1'
+                  types:types
               },
               dataType : 'json',
               success  : function(json) { 
@@ -468,10 +445,10 @@
       } 
 
      
-      function init_page(){
-          var grid_data=_ajax_get_grid_data();
-          var grid_data_1=_ajax_get_grid_data_1();
-          var grid_data_2=_ajax_get_grid_data_2();
+      function init_page(types){
+          var grid_data=_ajax_get_grid_data(types);
+          var grid_data_1=_ajax_get_grid_data_1(types);
+          var grid_data_2=_ajax_get_grid_data_2(types);
 
           init_grid_table(grid_data);
           init_grid_table_1(grid_data_1);
@@ -495,6 +472,8 @@
       }
 
       function init_grid_table(grid_data){
+          $('#grid_table').html('<table id="grid-table"></table><div id="grid-pager"></div>');
+
           jQuery(grid_selector).jqGrid({
             caption: "列表",
             data: grid_data,
@@ -542,6 +521,8 @@
       }
 
       function init_grid_table_1(grid_data_1){
+          $('#grid_table_1').html('<table id="grid-table-1"></table><div id="grid-pager-1"></div>');
+
           jQuery('#grid-table-1').jqGrid({
             caption: "列表",
             data: grid_data_1,
@@ -585,6 +566,8 @@
       }
 
       function init_grid_table_2(grid_data_2){
+          $('#grid_table_2').html('<table id="grid-table-2"></table><div id="grid-pager-2"></div>');
+
           jQuery('#grid-table-2').jqGrid({
             caption: "列表",
             data: grid_data_2,
@@ -640,30 +623,11 @@
           })
       }
 
+      function trigger_search(){ 
+          $('.demo1_search').trigger('click');
+      }
 
-      $(function() {
-          init_page();
-
-          //参与
-          $( "body" ).on('click','.id-btn-dialog2_join', function(e) {
-            e.preventDefault();
-
-            var id=$(this).attr('data-id');
-
-            //渲染数据
-            var _json=_ajax_get_row_info(id);
-            
-            $( "#dialog-confirm_join" ).removeClass('hide').dialog({
-              resizable: false,
-              modal: true,
-              title: "",
-              width:800,
-              title_html: true,
-            });
-
-            $("div[aria-describedby='dialog-confirm_join'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 参与：</h4></div>");
-          });
-      });
+      
     </script>
     
    
@@ -671,6 +635,18 @@
     <!-- 确认弹框 start-->
     <div id="dialog-confirm_join" class="hide">
        <div class="row">
+
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading title" style="text-align:center;">标题</div>
+                  <div class="panel-heading time" style="text-align:center;">2012-12</div>
+                  <div class="panel-body content">
+                    内容
+                  </div>
+                </div>
+            </div>
+
+
            <form class="layui-form layui-form-pane col-xs-12" action="">
             
             <table id="sample-table-1" class="table table-striped table-bordered table-hover">
@@ -680,9 +656,9 @@
                     <td class="center">
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">名称</label>
+                          <label class="layui-form-label">联系人</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="P_Name" placeholder="" autocomplete="off" class="layui-input P_Name">
+                            <input type="text" name="contact_people" lay-verify="required" autocomplete="off" class="layui-input contact_people">
                           </div>
                         </div>
                       </div>
@@ -690,40 +666,20 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">规格</label>
+                          <label class="layui-form-label">联系方式</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="P_Format" placeholder="" class="layui-input P_Format">
+                            <input type="text" name="contact_phone" lay-verify="required" class="layui-input contact_phone">
                           </div>
                         </div>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td class="center">
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">尺寸</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="P_Size" placeholder="" autocomplete="off" class="layui-input P_Size">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">供应商</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="P_Supplier" lay-verify="required" placeholder="" class="layui-input P_Supplier">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                  
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colspan="2" style="text-align:right;">
+                    <td colspan="2" style="text-align:center;">
+                      <input type="text" name="tender_id" lay-verify="required" class="layui-input tender_id">
                       <button class="layui-btn demo1_edit" lay-submit="" lay-filter="demo1_edit">报名</button>
                     </td>
                   </tr>
@@ -943,16 +899,6 @@
     <!-- jQuery smartMenu右键自定义上下文菜单插件  end -->
 
 
-    <script type="text/javascript">
-      jQuery(function($) {
-          
-      });
-
-
-    </script>
-
-
-
     <script>
         layui.use('laydate', function(){
             var laydate = layui.laydate;
@@ -971,15 +917,15 @@
               }
             };
 
-            document.getElementById('LAY_demorange_s').onclick = function(){
-              start.elem = this;
-              laydate(start);
-            }
+            // document.getElementById('LAY_demorange_s').onclick = function(){
+            //   start.elem = this;
+            //   laydate(start);
+            // }
 
-            document.getElementById('LAY_demorange_e').onclick = function(){
-              end.elem = this
-              laydate(end);
-            }
+            // document.getElementById('LAY_demorange_e').onclick = function(){
+            //   end.elem = this
+            //   laydate(end);
+            // }
         });
 
     </script>
@@ -1008,17 +954,53 @@
           });
 
           //监听提交
-          form.on('submit(demo1_add)', function(data){
-            var _json=_ajax_add(data.field);
-            return false;
-          });
+          form.on('submit(demo1_search)', function(data){
+            var _data=data.field;
 
-          //监听提交
-          form.on('submit(demo1_edit)', function(data){
-            var _id=$(this).attr('data-id');
-            var _json=_ajax_edit(data.field, _id);
+            var str = '';
+            var arr = [];
+
+            console.log(_data);
+            $.each(_data, function(name, value){
+                if(name.indexOf("type") >=0 ){
+                    var id=parseInt(name.replace(/[^0-9]/ig,""));
+                    arr.push(id);
+                    // delete _data[name]; 
+                }
+            });
+            str=arr.join('_');
+            _data.type=str;
+
+            init_page(str);
             return false;
           });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $(function() {
+            setTimeout("trigger_search()",200); 
+
+            //参与
+            $( "body" ).on('click','.id-btn-dialog2_join', function(e) {
+              e.preventDefault();
+
+              var id=$(this).attr('data-id');
+
+              //渲染数据
+              var _json=_ajax_get_row_info(id);
+              
+              $( "#dialog-confirm_join" ).removeClass('hide').dialog({
+                resizable: false,
+                modal: true,
+                title: "",
+                width:800,
+                title_html: true,
+              });
+
+              $("div[aria-describedby='dialog-confirm_join'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 参与：</h4></div>");
+            });
         });
     </script>
   </body>

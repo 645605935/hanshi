@@ -44,9 +44,9 @@ class TenderController extends AuthController {
     //列表
     public function ajax_get_list(){
         $map=array();
-        if($_GET['title']){
-            $map['title']=array('like','%'.$_GET['title'].'%');
-        }
+        // if($_GET['types']){
+        //     $map['title']=array('like','%'.$_GET['title'].'%');
+        // }
 
         $d = D('Tender');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
@@ -106,6 +106,7 @@ class TenderController extends AuthController {
 
         if($id){
             $row = M('Tender')->find($id);
+            $row['time']=date('Y-m-d', $row['time']);
             if($row){
                 $data=array();
                 $data['code']=0;
