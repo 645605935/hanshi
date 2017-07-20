@@ -335,6 +335,60 @@
       //数据列表初使化
       jQuery.support.cors=true;
 
+      //获取单条信息
+      function _ajax_get_row_info(id){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Tender/ajax_get_row_info')}",
+              data:{
+                id:id
+              },
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      var data=json.data;
+
+                      $('#edit_form .id').val(data.id);
+                      $('#edit_form .title').val(data.title);
+                      $('#edit_form .images').val(data.images);
+
+                      var images=data.images;
+                      if(images){
+                        console.log(images);
+                          render_images(images);
+                      }
+
+                      
+                      var type_1=data.type_1;
+                      var type_2=data.type_2;
+                      var type_3=data.type_3;
+                      if(type_1, type_2, type_3){
+                          render_type(type_1, type_2, type_3);
+                      }
+
+                      var tx_attr=data.tx_attr;
+
+                      console.log(tx_attr);
+                      render_tx_attr(tx_attr);
+
+                      $('#edit_form .price').val(data.price);
+                      $('#edit_form .sale_price').val(data.desc);
+                      $('#edit_form .content').val(data.content);
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
       function _ajax_get_grid_data(){
           var grid_data;
           $.ajax({   
@@ -437,7 +491,7 @@
       }
 
       function optionsFormatter(cellvalue, options, rowdata){ 
-          return "<button class='btn btn-primary btn-xs join' title='join' data-id='"+rowdata.id+"'><i class='icon-edit bigger-110'></i>参与</button>";
+          return "<button class='btn btn-primary btn-xs id-btn-dialog2_join' title='id-btn-dialog2_join' data-id='"+rowdata.id+"'><i class='icon-edit bigger-110'></i>参与</button>";
       }
 
       function init_grid_table(grid_data){
@@ -590,32 +644,16 @@
       $(function() {
           init_page();
 
-          //添加
-          $( ".id-btn-dialog2_add" ).on('click', function(e) {
-            e.preventDefault();
-            
-            $( "#dialog-confirm_add" ).removeClass('hide').dialog({
-              resizable: false,
-              modal: true,
-              title: "",
-              width:800,
-              title_html: true,
-            });
-
-            $("div[aria-describedby='dialog-confirm_add'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 添加：</h4></div>");
-          });
-
-          //编辑
-          $( "body" ).on('click','.id-btn-dialog2_edit', function(e) {
+          //参与
+          $( "body" ).on('click','.id-btn-dialog2_join', function(e) {
             e.preventDefault();
 
-            var _id=$(this).attr('data-id');
-            $('.demo1_edit').attr('data-id',_id);
+            var id=$(this).attr('data-id');
 
             //渲染数据
-            var _json=_ajax_get_row_info(_id);
+            var _json=_ajax_get_row_info(id);
             
-            $( "#dialog-confirm_edit" ).removeClass('hide').dialog({
+            $( "#dialog-confirm_join" ).removeClass('hide').dialog({
               resizable: false,
               modal: true,
               title: "",
@@ -623,83 +661,17 @@
               title_html: true,
             });
 
-            $("div[aria-describedby='dialog-confirm_edit'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 编辑：</h4></div>");
+            $("div[aria-describedby='dialog-confirm_join'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 参与：</h4></div>");
           });
       });
     </script>
     
    
-    <!-- 确认弹框 start-->
-    <div id="dialog-confirm_add" class="hide">
-       <div class="row">
-           <form class="layui-form layui-form-pane col-xs-12" action="{:U('Admin/Course/index')}">
-            
-            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
-                <tbody id="un_banliao_list_box">
-
-                  <tr>
-                    <td class="center">
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">名称</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="P_Name" placeholder="" autocomplete="off" class="layui-input P_Name">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">规格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="P_Format" lay-verify="required" placeholder="" class="layui-input P_Format">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="center">
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">尺寸</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="P_Size" placeholder="" autocomplete="off" class="layui-input P_Size">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">供应商</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="P_Supplier" lay-verify="required" placeholder="" class="layui-input P_Supplier">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="2" style="text-align:right;">
-                      <button class="layui-btn" lay-submit="" lay-filter="demo1_add">确认</button>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-
-           </form>
-        </div>
-    </div><!-- #dialog-confirm -->
-
 
     <!-- 确认弹框 start-->
-    <div id="dialog-confirm_edit" class="hide">
+    <div id="dialog-confirm_join" class="hide">
        <div class="row">
-           <form class="layui-form layui-form-pane col-xs-12" action="{:U('Admin/Course/index')}">
+           <form class="layui-form layui-form-pane col-xs-12" action="">
             
             <table id="sample-table-1" class="table table-striped table-bordered table-hover">
                 <tbody id="edit_form">
@@ -752,7 +724,7 @@
                 <tfoot>
                   <tr>
                     <td colspan="2" style="text-align:right;">
-                      <button class="layui-btn demo1_edit" lay-submit="" lay-filter="demo1_edit">确认</button>
+                      <button class="layui-btn demo1_edit" lay-submit="" lay-filter="demo1_edit">报名</button>
                     </td>
                   </tr>
                 </tfoot>

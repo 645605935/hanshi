@@ -507,8 +507,7 @@
       </ul>
     </li>
 
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Video'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
         <span class="menu-text"> 视频管理 </span>
@@ -516,21 +515,17 @@
       </a>
 
       <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="视频管理">
+        <li <?php if($cur_v == 'Video-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Video/index');?>" page="Admin/Video/index" title="setting" data-title="视频管理">
             <i class="icon-double-angle-right"></i>
             视频管理
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
 
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Ideas'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
         <span class="menu-text"> 智囊中心 </span>
@@ -538,17 +533,14 @@
       </a>
 
       <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="智囊中心">
+        <li <?php if($cur_v == 'Ideas-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Ideas/index');?>" page="Admin/Ideas/index" title="index" data-title="智囊中心">
             <i class="icon-double-angle-right"></i>
             智囊中心
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
     <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
     <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
@@ -595,8 +587,7 @@
     </li>
 
 
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Pinglun'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
         <span class="menu-text"> 评论中心 </span>
@@ -604,17 +595,14 @@
       </a>
 
       <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="评论中心">
+        <li <?php if($cur_v == 'Pinglun-index'): ?>class="active"<?php endif; ?>>
+          <a href="http://changyan.kuaizhan.com/" page="Admin/Pinglun/index" title="index" data-title="评论中心">
             <i class="icon-double-angle-right"></i>
             评论中心
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
     <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
     <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>

@@ -39,6 +39,8 @@ class TenderController extends AuthController {
         $this->display();
     }
 
+
+
     //列表
     public function ajax_get_list(){
         $map=array();

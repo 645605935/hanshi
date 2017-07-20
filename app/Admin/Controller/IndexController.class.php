@@ -49,7 +49,6 @@ class IndexController extends AuthController {
         $this->display();  
     }
 
-
     //会员列表
     public function ajax_get_user_list(){
         $map=array();

@@ -337,7 +337,7 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">剧目名称</label>
+                          <label class="layui-form-label">智囊主题</label>
                           <div class="layui-input-inline">
                             <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
                           </div>
@@ -347,41 +347,21 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">选择专辑</label>
+                          <label class="layui-form-label">智囊用途</label>
                           <div class="layui-input-inline">
-                            <select name="special" class="special">
-                               <option value="请选择">请选择</option>
-                               <foreach name="special" item="v">
+                            <select name="type" class="type">
+                               <option value="">请选择</option>
+                               <foreach name="type" item="v">
                                   <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
                                </foreach>
                             </select>
                           </div>
-                          <label class="layui-form-label new_special_btn" style="width:89px!important;">
-                            新建专辑
-                          </label>
                         </div>
                       </div>
                     </td>
                   </tr>
 
-                  <tr>
-                    <td colspan="2">
-
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">热播时间</label>
-                          <div class="layui-input-inline">
-                            <input class="layui-input start_time LAY_demorange_s" name="start_time" placeholder="开始日">
-                          </div>
-                          <div class="layui-form-mid">-</div>
-                          <div class="layui-input-inline">
-                            <input class="layui-input end_time LAY_demorange_e" name="end_time" placeholder="截止日">
-                          </div>
-                        </div>
-                      </div> 
-
-                    </td>
-                  </tr>
+                  
 
 
 
@@ -389,7 +369,7 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">上传封面</label>
+                          <label class="layui-form-label">上传图片</label>
                           <div class="layui-input-inline">
                             <input type="file" id="add_upload_img" name="file" class="layui-upload-file">
                           </div>
@@ -411,92 +391,36 @@
 
 
                   <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">上传视频</label>
-                          <div class="layui-input-inline">
-                            <input type="file" id="add_upload_video" name="file_video" lay-type="video" class="layui-upload-file">
-                          </div>
-                          <a target="_blank" class="layui-form-label show_video_btn" style="width:61px!important;display: none;">
-                            预览
-                          </a>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline" style="display:none;">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">视频</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="video" lay-verify="required" class="layui-input video" readonly>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
                     <td class="center" colspan="2">
                       <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">介绍</label>
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">请求问题</label>
                           <div class="layui-input-block">
                               <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_add"></textarea>
                           </div>
                       </div>
                     </td>
                   </tr>
-                  
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">导演/指导</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="director" lay-verify="required" placeholder="" class="layui-input director">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">表演团队</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="team" lay-verify="required" placeholder="" autocomplete="off" class="layui-input team">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
 
                   <tr>
                     <td colspan="2">
+
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">表演类型</label>
+                          <label class="layui-form-label">时间</label>
                           <div class="layui-input-inline">
-                            <select name="type_1" lay-verify="required" class="type_1" lay-filter="add_type_1">
-                              <option value="">请选择</option>
-                              <foreach name="type_1" item="v">
-                                  <option value="{$v.id}">{$v.title}</option>
-                              </foreach>
-                            </select>
+                            <input class="layui-input start_time LAY_demorange_s" name="start_time" placeholder="开始日">
                           </div>
+                          <div class="layui-form-mid">-</div>
                           <div class="layui-input-inline">
-                            <select name="type_2" lay-verify="required" class="type_2" lay-filter="add_type_2">
-                              <option value="">请选择</option>
-                            </select>
-                          </div>
-                          <div class="layui-input-inline">
-                            <select name="type_3" lay-verify="required" class="type_3" lay-filter="add_type_3">
-                              <option value="">请选择</option>
-                            </select>
+                            <input class="layui-input end_time LAY_demorange_e" name="end_time" placeholder="截止日">
                           </div>
                         </div>
-                      </div>
+                      </div> 
+
                     </td>
                   </tr>
+                 
+                 
                 </tbody>
                 <tfoot>
                   <tr>
@@ -598,9 +522,9 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">活动视频</label>
                           <div class="layui-input-inline">
-                            <input type="file" id="edit_upload_video" name="file_video" lay-type="video" class="layui-upload-file">
+                            <input type="file" id="edit_upload_Ideas" name="file_Ideas" lay-type="Ideas" class="layui-upload-file">
                           </div>
-                          <a target="_blank" class="layui-form-label show_video_btn" style="width:61px!important;display: none;">
+                          <a target="_blank" class="layui-form-label show_Ideas_btn" style="width:61px!important;display: none;">
                             预览
                           </a>
                         </div>
@@ -611,7 +535,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">视频</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="video" lay-verify="required" class="layui-input video" readonly>
+                            <input type="text" name="Ideas" lay-verify="required" class="layui-input Ideas" readonly>
                           </div>
                         </div>
                       </div>
@@ -777,7 +701,7 @@
               title_html: true,
             });
 
-            $("div[aria-describedby='dialog-confirm_add'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 新建视频：</h4></div>");
+            $("div[aria-describedby='dialog-confirm_add'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 新建智囊任务：</h4></div>");
           });
 
           //编辑
@@ -813,17 +737,17 @@
           });
 
 
-          $('#add_form .show_video_btn').click(function(){
-              var video_url=$('#add_form .video').val();
-              if(video_url){
-                  $('#add_form .show_video').attr('src', video_url).show();
+          $('#add_form .show_Ideas_btn').click(function(){
+              var Ideas_url=$('#add_form .Ideas').val();
+              if(Ideas_url){
+                  $('#add_form .show_Ideas').attr('src', Ideas_url).show();
               }
           });
 
-          $('#edit_form .show_video_btn').click(function(){
-              var video_url=$('#edit_form .video').val();
-              if(video_url){
-                  $('#edit_form .show_video').attr('src', video_url).show();
+          $('#edit_form .show_Ideas_btn').click(function(){
+              var Ideas_url=$('#edit_form .Ideas').val();
+              if(Ideas_url){
+                  $('#edit_form .show_Ideas').attr('src', Ideas_url).show();
               }
           });
         
@@ -852,7 +776,7 @@
               async:false,
               type:'get',  
               contentType:"application/x-www-form-urlencoded",
-              url : "{:U('Admin/Video/ajax_get_list')}",
+              url : "{:U('Admin/Ideas/ajax_get_list')}",
               data: {
                 'title':title, 
                 'Date1':Date1, 
@@ -881,7 +805,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Video/ajax_get_row_info')}",
+              url : "{:U('Admin/Ideas/ajax_get_row_info')}",
               data:{
                 id:id
               },
@@ -903,11 +827,11 @@
                           $('#edit_form .show_img').attr('src', '').hide();
                       }
 
-                      if(data.video){
-                          $('#edit_form .video').val(data.video);
-                          $('#edit_form .show_video_btn').attr('href', data.video).show();
+                      if(data.Ideas){
+                          $('#edit_form .Ideas').val(data.Ideas);
+                          $('#edit_form .show_Ideas_btn').attr('href', data.Ideas).show();
                       }else{
-                          $('#edit_form .show_video_btn').attr('href', '').hide();
+                          $('#edit_form .show_Ideas_btn').attr('href', '').hide();
                       }
                       
                       
@@ -969,7 +893,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Video/ajax_get_type_1')}",
+              url : "{:U('Admin/Ideas/ajax_get_type_1')}",
               dataType : 'json',
               success  : function(json) { 
 
@@ -1002,7 +926,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Video/ajax_get_type_2')}",
+              url : "{:U('Admin/Ideas/ajax_get_type_2')}",
               data:{
                 id:type_1
               },
@@ -1038,7 +962,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Video/ajax_get_type_3')}",
+              url : "{:U('Admin/Ideas/ajax_get_type_3')}",
               data:{
                 id:type_2
               },
@@ -1075,7 +999,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Video/ajax_get_type_2')}",
+              url : "{:U('Admin/Ideas/ajax_get_type_2')}",
               data:{
                   id: type_1
               },
@@ -1110,7 +1034,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Video/ajax_get_type_3')}",
+              url : "{:U('Admin/Ideas/ajax_get_type_3')}",
               data:{
                   id: type_2
               },
@@ -1146,7 +1070,7 @@
                async:false,
                type:'post',  
                contentType:"application/x-www-form-urlencoded",
-               url : "{:U('Admin/Video/ajax_add')}",
+               url : "{:U('Admin/Ideas/ajax_add')}",
                data: _data,
                dataType : 'json',
                success  : function(json) {
@@ -1173,7 +1097,7 @@
               async:false,
               type:'post',  
               contentType:"application/x-www-form-urlencoded",
-              url : "{:U('Admin/Video/ajax_edit')}",
+              url : "{:U('Admin/Ideas/ajax_edit')}",
               data: _data,
               dataType : 'json',
               success  : function(json) {  
@@ -1198,7 +1122,7 @@
           var _json;
           $.ajax({  
               type:'get',  
-              url : "{:U('Admin/Video/ajax_del')}",
+              url : "{:U('Admin/Ideas/ajax_del')}",
               data:{ 
                 id:ids 
               },
@@ -1245,17 +1169,16 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '主题名称','活动图片','审核状态','活动类型','开始日期','结束日期','点击量','操作'],
+              colNames:['id', '智囊主题','智囊分类','状态','开始日期','结束日期','回复量','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
                 {name:'title',index:'title', align : "center"},
-                {name:'img',index:'img', align : "center", formatter: imgFormatter},
-                {name:'status',index:'status', align : "center", formatter: statusFormatter},
                 {name:'type',index:'type', align : "center"},
+                {name:'status',index:'status', align : "center", formatter: statusFormatter},
                 {name:'start_time',index:'start_time', align : "center"},
                 {name:'end_time',index:'end_time', align : "center"},
-                {name:'eye',index:'eye', align : "center"},
+                {name:'reply',index:'reply', align : "center"},
 
                 {name:'options',index:'options',align:'center',width:200}
               ], 
@@ -1355,14 +1278,14 @@
 
               //上传视频
               layui.upload({
-                 url: "{:U('Admin/Video/lay_upload_file_video')}" //上传接口
-                 ,elem: '#'+form_type+'_upload_video' //指定原始元素，默认直接查找class="layui-upload-file"
+                 url: "{:U('Admin/Ideas/lay_upload_file_Ideas')}" //上传接口
+                 ,elem: '#'+form_type+'_upload_Ideas' //指定原始元素，默认直接查找class="layui-upload-file"
                  ,ext : 'mp4'
                  ,method: 'post' //上传接口的http类型
                  ,success: function(res){ //上传成功后的回调
                    if(res.code==0){
-                      $('#'+form_type+'_form .video').val(res.data.src);
-                      $('#'+form_type+'_form .show_video_btn').show().attr('href', res.data.src);
+                      $('#'+form_type+'_form .Ideas').val(res.data.src);
+                      $('#'+form_type+'_form .show_Ideas_btn').show().attr('href', res.data.src);
                    }
                  }
               });
@@ -1370,7 +1293,7 @@
 
               //上传图片
               layui.upload({
-                 url: "{:U('Admin/Video/lay_upload_file')}" //上传接口
+                 url: "{:U('Admin/Ideas/lay_upload_file')}" //上传接口
                  ,elem: '#'+form_type+'_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
                  ,success: function(res){ //上传成功后的回调
                    if(res.code==0){
@@ -1385,7 +1308,7 @@
               //上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
               layedit.set({
                   uploadImage: {
-                      url: "{:U('Admin/Video/lay_upload_file')}", //接口url
+                      url: "{:U('Admin/Ideas/lay_upload_file')}", //接口url
                       type: 'post', //默认post
                   }
               });

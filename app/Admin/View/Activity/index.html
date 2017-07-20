@@ -825,9 +825,26 @@
                       $('#edit_form .title').val(data.title);
                       $('#edit_form .start_time').val(data.start_time);
                       $('#edit_form .end_time').val(data.end_time);
-                      $('#edit_form .img').val(data.img);
-                      $('#edit_form .video').val(data.video);
                       
+                      if(data.img){
+                          $('#edit_form .img').val(data.img);
+                          $('#edit_form .show_img').attr('src', data.img).show();
+                      }else{
+                          $('#edit_form .img').val('');
+                          $('#edit_form .show_img').attr('src', '').hide();
+                      }
+
+                      if(data.video){
+                          $('#edit_form .video').val(data.video);
+                          $('#edit_form .show_video_btn').attr('href', data.video).show();
+                      }else{
+                          $('#edit_form .show_video_btn').attr('href', '').hide();
+                      }
+                      
+                      
+                      if(data.type){
+
+                      }
 
                       $.each($("#edit_form .type option"), function(name, value){
                           if($(value).attr('alt')==data.type){
@@ -841,7 +858,6 @@
                       $('#edit_form .content').val(data.content);
 
 
-
                       var str='';
                       if(1==data.open){
                           str+='<input type="radio" name="open" class="open" value="1" title="开" checked="checked">';
@@ -851,23 +867,12 @@
                           str+='<input type="radio" name="open" class="open" value="0" title="关" checked="checked">';
                       }
                       $("#edit_form .open_box").html(str);
+                      
 
 
                       $('#edit_form .contact_people').val(data.contact_people);
                       $('#edit_form .contact_phone').val(data.contact_phone);
 
-                      
-                      if(data.img){
-                          $('#edit_form .show_img').attr('src', data.img).show();
-                      }else{
-                          $('#edit_form .show_img').attr('src', '').hide();
-                      }
-
-                      if(data.video){
-                          $('#edit_form .show_video').attr('src', data.video).show();
-                      }else{
-                          $('#edit_form .show_video').attr('src', '').hide();
-                      }
 
                       _json=json;
 

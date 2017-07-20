@@ -2,14 +2,14 @@
 namespace Admin\Controller;
 use Common\Controller\AuthController;
 
-class VideoController extends AuthController {
+class IdeasController extends AuthController {
     
     public function _initialize() {
         parent::_initialize();
         global $user;
         $user=session('auth');
         $this->user=$user;
-        $this->cur_c='Video';
+        $this->cur_c='Ideas';
 
         if($_POST){
             $this->_POST=$_POST;
@@ -26,18 +26,16 @@ class VideoController extends AuthController {
         $this->group=$group;
 
 
-        $this->cur_v='Video-index';
+        $this->cur_v='Ideas-index';
 
-        $page="Video/index";
+        $page="Ideas/index";
         $page_buttons=M('PageButtons')->where(array('page'=>$page))->select();
         $this->page_buttons=$page_buttons;
         $this->page=$page;
 
-        //三级分类
-        $this->special=M('Special')->where(array('uid'=>$user['uid']))->select();
 
         //三级分类
-        $this->type_1=M('Type')->where(array('pid'=>1238))->select();
+        $this->type=M('Type')->where(array('pid'=>1279))->select();
         $this->display();
     }
 
@@ -48,7 +46,7 @@ class VideoController extends AuthController {
             $map['title']=array('like','%'.$_GET['title'].'%');
         }
 
-        $d = D('Video');
+        $d = D('Ideas');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
 
         foreach ($list as $key => $value) {
@@ -132,7 +130,7 @@ class VideoController extends AuthController {
         $id=I('id');
 
         if($id){
-            $row = D('Video')->relation(true)->find($id);
+            $row = D('Ideas')->relation(true)->find($id);
 
             $row['time']=date('Y-m-d H:i',$row['time']);
             $row['start_time']=date('Y-m-d H:i',$row['start_time']);
@@ -170,9 +168,9 @@ class VideoController extends AuthController {
             $data['start_time']=strtotime($data['start_time']);
             $data['end_time']=strtotime($data['end_time']);
 
-            $id = M('Video')->add($data);
+            $id = M('Ideas')->add($data);
             if($id){
-                $row= D('Video')->relation(true)->find($id);
+                $row= D('Ideas')->relation(true)->find($id);
 
                 $row['time']=date('Y-m-d H:i',$row['time']);
                 $row['start_time']=date('Y-m-d H:i',$row['start_time']);
@@ -211,10 +209,10 @@ class VideoController extends AuthController {
         if($data){
             $data['time']=time();
 
-            $res = M('Video')->save($data);
+            $res = M('Ideas')->save($data);
             if($res){
                 $id=$data['id'];
-                $row= D('Video')->relation(true)->find($id);
+                $row= D('Ideas')->relation(true)->find($id);
 
                 $row['time']=date('Y-m-d H:i',$value['time']);
                 $row['end_time']=date('Y-m-d H:i',$value['end_time']);
@@ -248,7 +246,7 @@ class VideoController extends AuthController {
         $id=I('id'); 
 
         if($id){
-            $res=M('Video')->where(array('id'=>$id))->delete();
+            $res=M('Ideas')->where(array('id'=>$id))->delete();
 
             if($res){
                 $data=array();
@@ -302,8 +300,8 @@ class VideoController extends AuthController {
 
 
     // 上传视频
-    public function lay_upload_file_video(){
-        if($_FILES['file_video']['size']>0){
+    public function lay_upload_file_Ideas(){
+        if($_FILES['file_Ideas']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
             $upload->maxSize   =     31457280 ;// 设置附件上传大小
             $upload->exts      =     array('mp4');// 设置附件上传类型
@@ -321,17 +319,17 @@ class VideoController extends AuthController {
                 $data['code']=0;
                 $data['msg']=$upload->getError();
             }else{
-                $video=$info['file_video']['savename'];
-                $video_url='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$video;
+                $Ideas=$info['file_Ideas']['savename'];
+                $Ideas_url='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$Ideas;
 
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]=$video_url;
+                $data['data']["src"]=$Ideas_url;
             }
 
             //上传到阿里云OSS
-            oss_upload( './Uploads/layui/'.$video );
+            oss_upload( './Uploads/layui/'.$Ideas );
 
             echo json_encode($data);
         }
