@@ -122,6 +122,44 @@
             </div>
             <!-- 权限设置  end -->
 
+            <!-- 搜索  start -->
+            <div class="row">
+                <form class="layui-form layui-form-pane col-xs-12" action="" method="post">
+                    <table class="layui-table" id="search_table">
+                      <thead>
+                        <tr>
+                          <th>搜索</th>
+                        </tr> 
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+
+                            <div class="layui-inline" style="margin-top: 5px;">
+                              <div class="layui-form-item">
+                                <label class="layui-form-label">板料名称</label>
+                                <div class="layui-input-inline">
+                                  <input type="text" name="BordName" placeholder="全部" value="{$_POST['BordName']}" autocomplete="off" class="layui-input BordName">
+                                </div>
+                              </div>
+                            </div>  
+
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td>
+                            <button style="float:right;" type="submit" class="layui-btn search_btn" title="search_btn">搜索</button>
+                          </td>
+                        </tr> 
+                      </tfoot>
+                    </table>
+                </form>
+
+            </div>
+            <!-- 搜索  end -->
+
             <div class="row"> 
 
                   <div class="col-xs-9">

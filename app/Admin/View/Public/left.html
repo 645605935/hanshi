@@ -154,16 +154,16 @@
     <li <if condition="$cur_c eq 'Config'">class="active open"</if>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
-        <span class="menu-text"> 论坛中心 </span>
+        <span class="menu-text"> 智囊中心 </span>
         <b class="arrow icon-angle-down"></b>
       </a>
 
       <ul class="submenu">
         <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
         <li <if condition="$cur_v eq 'Config-setting'">class="active"</if>>
-          <a href="{:U('Admin/Config/setting')}" page="Admin/Config/setting" title="setting" data-title="论坛中心">
+          <a href="{:U('Admin/Config/setting')}" page="Admin/Config/setting" title="setting" data-title="智囊中心">
             <i class="icon-double-angle-right"></i>
-            论坛中心
+            智囊中心
           </a>
         </li>
         <?php } ?>
@@ -201,56 +201,19 @@
 
       <ul class="submenu">
         <li <if condition="$cur_v eq 'Tender-index'">class="active"</if>>
-          <a href="{:U('Admin/Tender/index')}" page="Admin/Tender/index" title="index" data-title="招标管理">
-            <i class="icon-double-angle-right"></i>
-            招标管理
-          </a>
-        </li>
-      </ul>
-    </li>
-
-
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Config'">class="active open"</if>>
-      <a href="#" class="dropdown-toggle">
-        <i class="icon-film"></i>
-        <span class="menu-text"> 政采招标 </span>
-        <b class="arrow icon-angle-down"></b>
-      </a>
-
-      <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <if condition="$cur_v eq 'Config-setting'">class="active"</if>>
-          <a href="{:U('Admin/Config/setting')}" page="Admin/Config/setting" title="setting" data-title="政采招标">
+          <a href="{:U('Admin/Tender/index')}" page="Admin/Tender/index" title="index" data-title="政采招标">
             <i class="icon-double-angle-right"></i>
             政采招标
           </a>
         </li>
-        <?php } ?>
-      </ul>
-    </li>
-    <?php } ?>
-
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <if condition="$cur_c eq 'Config'">class="active open"</if>>
-      <a href="#" class="dropdown-toggle">
-        <i class="icon-film"></i>
-        <span class="menu-text"> 企业招标 </span>
-        <b class="arrow icon-angle-down"></b>
-      </a>
-
-      <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <if condition="$cur_v eq 'Config-setting'">class="active"</if>>
-          <a href="{:U('Admin/Config/setting')}" page="Admin/Config/setting" title="setting" data-title="企业招标">
+        <li <if condition="$cur_v eq 'Tender-index'">class="active"</if>>
+          <a href="{:U('Admin/Tender/index')}" page="Admin/Tender/index" title="index" data-title="企业招标">
             <i class="icon-double-angle-right"></i>
             企业招标
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
 
 
     <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>

@@ -384,16 +384,6 @@
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td class="center" colspan="2">
-                      <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">产品参数</label>
-                          <div class="layui-input-block">
-                              <textarea name="desc" class="layui-textarea desc"></textarea>
-                          </div>
-                      </div>
-                    </td>
-                  </tr>
 
                   <tr>
                     <td colspan="2">
@@ -424,10 +414,20 @@
                   </tr>
 
                   <tr>
-                    <td colspan="2">
+                    <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品价格</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="price" lay-verify="required" placeholder="" class="layui-input price">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">优惠价格</label>
                           <div class="layui-input-inline">
                             <input type="text" name="sale_price" lay-verify="required" placeholder="" class="layui-input sale_price">
                           </div>
@@ -562,17 +562,7 @@
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td class="center" colspan="2">
-                      <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">产品参数</label>
-                          <div class="layui-input-block">
-                              <textarea name="desc" class="layui-textarea desc"></textarea>
-                          </div>
-                      </div>
-                    </td>
-                  </tr>
-
+                 
                   <tr>
                     <td colspan="2">
                       <div class="layui-inline">
@@ -602,10 +592,20 @@
                   </tr>
 
                   <tr>
-                    <td colspan="2">
+                    <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
                           <label class="layui-form-label">产品价格</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="price" lay-verify="required" placeholder="" class="layui-input price">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">优惠价格</label>
                           <div class="layui-input-inline">
                             <input type="text" name="sale_price" lay-verify="required" placeholder="" class="layui-input sale_price">
                           </div>
@@ -613,6 +613,7 @@
                       </div>
                     </td>
                   </tr>
+                  
                   <tr>
                     <td colspan="2">
                       <div class="layui-form-item">
@@ -845,6 +846,37 @@
               $(this).remove();
               render_attr();
           })  
+
+          //添加套系
+          $('#edit_form .add_tx').click(function(){
+              var attr_1=$('#edit_form .attr_1').val();
+              var attr_2=$('#edit_form .attr_2').val();
+              var attr_3=$('#edit_form .attr_3').val();
+
+              if(attr_1&&attr_2&&attr_3){
+                  var str='';
+                  var len=++$('#edit_form .attr_list_box tr').length;
+                        str+= '<tr attr_1="'+attr_1+'" attr_2="'+attr_2+'" attr_3="'+attr_3+'">'+
+                                '<td>'+len+'</td>'+
+                                '<td>'+attr_1+'</td>'+
+                                '<td>'+attr_2+'</td>'+
+                                '<td>'+attr_3+'</td>'+
+                              '</tr>';
+
+                  $('#edit_form .attr_list_box').append(str); 
+
+                  render_attr();
+
+                  $('#edit_form .attr_1').val('');
+                  $('#edit_form .attr_2').val('');
+                  $('#edit_form .attr_3').val('');
+              }
+          });
+
+          $('body').on('dblclick','#add_form .attr_list_box tr',function(){
+              $(this).remove();
+              render_attr();
+          })  
         
         
       });
@@ -949,10 +981,9 @@
                       console.log(tx_attr);
                       render_tx_attr(tx_attr);
 
-
+                      $('#edit_form .price').val(data.price);
                       $('#edit_form .sale_price').val(data.desc);
                       $('#edit_form .content').val(data.content);
-                      $('#edit_form .desc').val(data.desc);
 
                       _json=json;
                   }else{
@@ -1288,22 +1319,27 @@
           if (cellvalue){
               var arr_tx_attr=cellvalue.split('||');
 
-              var str='<div class="row">';
+              var str= '<table class="table table-bordered">'+
+                        '<thead style="display:none;">'+
+                          '<tr>'+
+                            '<th>First Name</th>'+
+                            '<th>Last Name</th>'+
+                            '<th>Username</th>'+
+                          '</tr>'+
+                        '</thead>'+
+                        '<tbody>';
               $.each(arr_tx_attr, function(key, value){
                   var arr_row=value.split('#');
-                        
-                      str+= '<div class="col-sm-6 col-md-4">'+
-                        '<div class="thumbnail">'+
-                          '<div class="caption">'+
-                            '<h3>'+arr_row[0]+'</h3>'+
-                            '<p>...</p>'+
-                            '<p><a href="#" class="btn btn-primary btn-xs" role="button">'+arr_row[1]+'元</a> <a href="#" class="btn btn-default btn-xs" role="button">'+arr_row[2]+'个</a></p>'+
-                          '</div>'+
-                        '</div>'+
-                      '</div>';
+                          
+                          str+='<tr>'+
+                                '<td><span class="label label-default">'+arr_row[0]+'</span></td>'+
+                                '<td>'+arr_row[1]+'元</td>'+
+                                '<td>'+arr_row[2]+'个</td>'+
+                              '</tr>';
                   
               });
-              str+='</div>';
+                str+='</tbody>'+
+                    '</table>';
 
               return str;
           }else{

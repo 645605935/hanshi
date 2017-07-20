@@ -34,6 +34,9 @@ class TenderController extends AuthController {
         $this->page=$page;
 
         
+        //分类
+        $this->type=A('Communal/Type')->getSon(1273);
+
         $this->display();
     }
 
