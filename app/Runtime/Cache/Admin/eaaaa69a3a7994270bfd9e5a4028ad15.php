@@ -1184,7 +1184,7 @@
       </a>
       <ul class="submenu">
         <?php if( name_to_status('Admin/AuthRule/index') == 1 && $user['gid']==427 || in_array('Admin/AuthRule/index', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'AuthRule-index'): ?>class="active"<?php endif; ?> style="display:none;">
+        <li <?php if($cur_v == 'AuthRule-index'): ?>class="active"<?php endif; ?>>
           <a href="<?php echo U('Admin/AuthRule/index');?>" page="Admin/AuthRule/index" title="index" data-title="权限列表">
             <i class="icon-double-angle-right"></i>
             权限列表
