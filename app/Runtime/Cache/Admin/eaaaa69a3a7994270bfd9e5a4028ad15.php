@@ -596,7 +596,7 @@
 
       <ul class="submenu">
         <li <?php if($cur_v == 'Pinglun-index'): ?>class="active"<?php endif; ?>>
-          <a href="http://changyan.kuaizhan.com/" page="Admin/Pinglun/index" title="index" data-title="评论中心">
+          <a href="http://changyan.kuaizhan.com/" page="Admin/Pinglun/index" target="_blank" title="index" data-title="评论中心">
             <i class="icon-double-angle-right"></i>
             评论中心
           </a>
