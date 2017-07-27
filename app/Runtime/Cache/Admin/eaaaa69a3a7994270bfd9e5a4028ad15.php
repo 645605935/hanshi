@@ -345,6 +345,21 @@
 									</a>
 								</li>
 
+								<?php if($user['gid'] == 427): ?><li class="divider"></li>
+
+									<li>
+										<a href="<?php echo U('Admin/Index/index');?>">
+											<i class="icon-cog"></i>
+											首页面板
+										</a>
+									</li>
+									<li>
+										<a href="<?php echo U('Admin/Config/setting');?>">
+											<i class="icon-cog"></i>
+											网站设置
+										</a>
+									</li><?php endif; ?>
+
 								<li class="divider"></li>
 								<li>
 									<a href="<?php echo U('Admin/Login/logout');?>">
@@ -408,52 +423,23 @@
 
 
   <ul class="nav nav-list">
-
-    <?php if( name_to_status('Index') == 1 && $user['gid']==427 || in_array('Index', $user['auth_controller_names'])){ ?>
-      <li <?php if($cur_c == 'Index'): ?>class="active open"<?php endif; ?>>
-        <a href="#" class="dropdown-toggle">
-          <i class="icon-dashboard"></i>
-          <span class="menu-text"> 我的面板 </span>
-          <b class="arrow icon-angle-down"></b>
-        </a>
-
-        <ul class="submenu">
-          <?php if( name_to_status('Admin/Index/index') == 1 && $user['gid']==427 || in_array('Admin/Index/index', $user['auth_action_names'])){ ?>
-          <li <?php if($cur_v == 'Index-index'): ?>class="active"<?php endif; ?>>
-            <a href="<?php echo U('Admin/Index/index');?>" page="Admin/Index/index" title="index">
-              <i class="icon-double-angle-right"></i>
-              首页
-            </a>
-          </li>
-          <?php } ?>
-        </ul>
-
-      </li>
-    <?php } ?>
-
     
-
-    <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
-    <li <?php if($cur_c == 'Config'): ?>class="active open"<?php endif; ?>>
+    <li <?php if($cur_c == 'Match'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
-        <span class="menu-text"> 网站设置 </span>
+        <span class="menu-text"> 比赛管理 </span>
         <b class="arrow icon-angle-down"></b>
       </a>
 
       <ul class="submenu">
-        <?php if( name_to_status('Admin/Config/setting') == 1 && $user['gid']==427 || in_array('Admin/Config/setting', $user['auth_action_names'])){ ?>
-        <li <?php if($cur_v == 'Config-setting'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Config/setting');?>" page="Admin/Config/setting" title="setting" data-title="网站设置">
+        <li <?php if($cur_v == 'Match-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Match/index');?>" page="Admin/Match/index" title="index" data-title="比赛管理">
             <i class="icon-double-angle-right"></i>
-            网站设置
+            比赛管理
           </a>
         </li>
-        <?php } ?>
       </ul>
     </li>
-    <?php } ?>
-
 
     <li <?php if($cur_c == 'Introduction'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">

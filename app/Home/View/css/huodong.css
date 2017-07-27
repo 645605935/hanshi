@@ -1,0 +1,132 @@
+﻿/* css document */
+@charset "UTF-8";
+body, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ul, ol, li, input, textarea, th, td {color: #333;}
+.overhid{overflow: hidden;}
+.block{display: block;}
+
+.bgfff {background: #fff;}
+.comContent{padding-top:30px;}
+.comLeft{float: left;width: 260px;margin-left: 20px;}
+.comRight{padding-left: 280px;padding-bottom: 20px;}
+.comRight .content{padding-left: 20px;padding-right: 20px;box-sizing: border-box;}
+.bread{height: 40px;line-height: 40px;font-size: 14px;}
+.bread li{display: inline-block;}
+.bread li img{width: 19px;height: 18px;vertical-align: middle;}
+.bread li a{color: #666;display: inline-block;}
+.bread li .icon{vertical-align: middle;}
+.bread li a.on{color: #019eff}
+
+.hezuo .comLeft .area1{background: #2b2b2b;font-size: 14px;padding-bottom: 20px;margin-bottom: 20px;}
+.hezuo .comLeft .area1 ul{padding: 0 20px;}
+.hezuo .comLeft .area1 li .aParent{height: 56px;display: block;padding-top: 8px;}
+.hezuo .comLeft .area1 li .aParent a{color: #fff;display: block;height: 40px;line-height: 40px;text-indent: 15px;}
+.hezuo .comLeft .area1 li .aParent a > span.L{display: inline-block;width: 180px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+.hezuo .comLeft .area1 li .aParent a.on,.hezuo .comLeft .area1 li .aParent a:hover{background: #009cff;}
+.hezuo .comLeft .area1 li .aParent .icon-yjt{display: none;}
+.hezuo .comLeft .area1 li .aParent a.on .icon-yjt,.hezuo .comLeft .area1 li .aParent a:hover .icon-yjt{display: block;}
+.hezuo .comLeft .area1 li .border1{border-bottom: 1px solid #3e3e3e;}
+.hezuo .comLeft .area1 li .border2{border-bottom: 1px solid #1e1e1e;}
+.hezuo .comLeft .area2{font-size: 14px;border-bottom: 2px solid #009cff;color: #333;margin-bottom: 20px;}
+.hezuo .comLeft .area2 a{color: #333}
+.hezuo .comLeft .area2 .icon{color: #999;font-size: 40px;}
+.hezuo .comLeft .area2 .left{width: 40px;line-height: normal;}
+.hezuo .comLeft .area2 .right{padding-left: 10px;line-height: 20px;}
+.hezuo .comLeft .area2 .table{margin-bottom: 10px;}
+.hezuo .comLeft .area2 .table:last-child{margin-bottom: 20px;}
+.hezuo .comRight .list{margin-top: 20px;}
+.hezuo .comRight .list img{width: 100px;height: 100px;vertical-align: middle;}
+.hezuo .comRight .list li{border-bottom: 1px dashed #ccc;padding-bottom: 20px;margin-bottom: 20px;}
+.hezuo .comRight .list .right{vertical-align: top;padding-left: 20px;}
+.hezuo .comRight .list .right h3{color: #333;font-size: 18px;height: 40px;line-height: 40px;margin-bottom: 5px;}
+.hezuo .comRight .list .right p{color: #666;font-size: 14px;line-height: 22px;height: 44px;}
+.hezuo .comRight .list .table{table-layout: fixed;}
+.hezuo .comRight .neirong{font-size: 14px;padding-top:20px;line-height:28px;}
+.icon-yjt {width: 30px;height: 30px;display: inline-block;background: url(../images/yjt.png) no-repeat;background-size: 80%;vertical-align: middle;margin-top: 8px;}
+.news .oneZhanMing{margin-bottom: 20px;}
+.news .newslist li{margin-bottom: 30px;}
+.news .newslist li a{color: #666}
+.news .newslist li .left{width: 120px;height: 120px;position: relative;}
+.news .newslist li .left img{width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
+.news .newslist li .left .time{color: #fff;background: rgba(21,69,115,0.8);width: 80px;height: 22px;line-height: 22px;text-align: center;position: absolute;left: 8px;bottom: 8px;font-size: 12px;}
+.news .newslist li .right{padding-left: 140px;}
+.news .newslist li .right h3{color: #154573;font-size: 16px;margin-bottom: 15px;margin-top: 10px;line-height: 22px;height: 44px;}
+.news .newslist li .right p{font-size: 14px;line-height: 22px;height: 44px;}
+
+.newsdetailMaxWidth{padding: 50px 0;margin: 20px auto;}
+.newsdetail .titArea{border-bottom: 1px solid #ddd;padding-bottom: 35px;position: relative;}
+.newsdetail .titArea h3{font-size: 20px;text-align: center;color: #333;margin-bottom: 15px;}
+.newsdetail .titArea p{color: #666;font-size: 14px;}
+.newsdetail .wenzhang{padding: 30px 0;color: #333;font-size: 14px;line-height: 24px;}
+.newsdetail .wenzhang p{text-indent: 2em;margin-top: 10px;margin-bottom: 10px;line-height: 24px;}
+.newsdetail .wenzhang h3 {font-size: 18px;line-height: 34px;}
+
+.bisai img {text-align: center;width: 100%;margin-top: 20px;}
+.tit-sub {text-align: center;}
+.tit-sub span {margin-left: 20px;}
+.tit-right {position: absolute;right: 0;top: 0;}
+.tit-right ul li {float: left;line-height: 30px;margin-left: 20px;}
+.tit-right ul li .tit-pl {color: #f00;}
+.tit-right ul li .tit-lp {color: #fff;background: #F94B15;width: 90px;height: 30px;line-height: 30px;text-align: center;display: inline-block;}
+.tit-right ul li .tit-tp {color: #fff;background: #A01724;width: 90px;height: 30px;line-height: 30px;text-align: center;display: inline-block;}
+.tit-right ul li p {text-align: center;}
+.cs-con {text-align: center;}
+.cs-con img {width: 80%;margin-bottom: 20px;}
+
+.swpierr ul li {width: 260px;height: 350px;float: left;}
+.swpierr ul li img {width: 100%;height: 100%;}
+.table{display: table;}
+.tablec{display: table-cell;}
+
+.borderbox{box-sizing: border-box;}
+.icon-ii {width: 40px;height: 40px;display: inline-block;position: relative;background: url(../images/xing.png) no-repeat;background-size: 100%}
+.pad010{padding: 0 10px;}
+.vermid{vertical-align: middle;}
+.overhid{overflow: hidden;}
+.textL{text-align: left;}
+.textC{text-align: center;}
+.textR{text-align: right;}
+.hezuo .comLeft .area2{font-size: 14px;border-bottom: 2px solid #009cff;color: #333;margin-bottom: 20px;}
+.hezuo .comLeft .area2 a{color: #333}
+.hezuo .comLeft .area2 .icon{color: #999;font-size: 40px;}
+.hezuo .comLeft .area2 .left{width: 40px;line-height: normal;}
+.hezuo .comLeft .area2 .right{padding-left: 10px;line-height: 20px;}
+.hezuo .comLeft .area2 .table{margin-bottom: 10px;}
+.hezuo .comLeft .area2 .table:last-child{margin-bottom: 20px;}
+.hezuo .comRight .list{margin-top: 20px;}
+.hezuo .comRight .list img{width: 100px;height: 100px;vertical-align: middle;}
+.hezuo .comRight .list li{border-bottom: 1px dashed #ccc;padding-bottom: 20px;margin-bottom: 20px;}
+.hezuo .comRight .list .right{vertical-align: top;padding-left: 20px;}
+.hezuo .comRight .list .right h3{color: #333;font-size: 18px;height: 40px;line-height: 40px;margin-bottom: 5px;}
+.hezuo .comRight .list .right p{color: #666;font-size: 14px;line-height: 22px;height: 44px;}
+.hezuo .comRight .list .table{table-layout: fixed;}
+.hezuo .comRight .neirong{font-size: 14px;padding-top:20px;line-height:28px;}
+.r-c {float: left;width: 100%;}
+.bsgz {color: #f00;position: absolute;bottom: 60px;right: 10px;}
+.bsgz:hover {color: #f00;}
+@media screen and (max-width: 760px){
+  .mePinglun .rightCon .cont{width: 100%;padding: 0 10px;}
+  .hezuo .comRight .neirong{padding:20px 10px 0 10px;}
+}
+.activityList li{float: left;width: 33.33%;border:1px solid #cde9ff;border-bottom: 2px solid #14619f;padding-bottom: 15px;margin-bottom: 20px;position: relative;box-sizing: border-box;}
+.activityList li .imgP{position: relative;width: 100%;padding-bottom: 120%;}
+.activityList li img{width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
+.activityList li h3{color: #333;font-size: 14px;font-weight: normal;text-align: center;padding: 0 10px;margin-top: -30px;height: 44px;line-height: 22px;}
+.activityList li .timeCir{border-radius: 50%;background: #fff;width: 100px;height: 100px;box-shadow: 0 0 10px #ccc;margin:0 auto;position: relative;top:-50px;text-align: center;}
+.activityList li .timeCir .date{color: #666;font-size: 18px;height: 50px;line-height: 70px;border-bottom:1px solid #bee2ff;display: inline-block;}
+.activityList li .timeCir .year{color: #ccc;font-size: 14px;height: 50px;line-height: 30px;}
+.activity .oneZhanMing{margin-bottom: 20px;}
+@media screen and (max-width:1100px) and (min-width: 901px){
+  .activityList li .timeCir{width: 80px;height: 80px;}
+  .activityList li .timeCir .date{height: 40px;line-height: 55px;font-size: 16px;}
+  .activityList li .timeCir .year{height: 40px;line-height: 20px;}
+  .activityList li h3{margin-top: -40px;}
+}
+@media screen and (max-width:900px){
+  .activityList li{width: 50%;}
+}
+@media screen and (max-width:400px){
+  .activityList li .timeCir{width: 80px;height: 80px;}
+  .activityList li .timeCir .date{height: 40px;line-height: 55px;font-size: 16px;}
+  .activityList li .timeCir .year{height: 40px;line-height: 20px;}
+  .activityList li h3{margin-top: -40px;}
+}

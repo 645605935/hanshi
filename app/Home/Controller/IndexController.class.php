@@ -1,105 +1,106 @@
 <?php
 
 namespace Home\Controller;
-
 use Think\CommonController;
 
-
-
 class IndexController extends CommonController{
-
     public function _initialize(){
-
         parent::_initialize();
 
+        global $user;
+        $user=session('userinfo');
+        $this->user=$user;
     }
-
-
-
-    // 登录--远程服务器
 
     public function index(){
-
-        $url = $_SERVER['HTTP_HOST'];
-
-        $temp_school=explode('.baidulab.', $url);
-
-        $school=$temp_school[0];
-
-
-
-        $url = $school;
-
-        $this->school=D('School')->where(array('url'=>$url))->find();
-
-
-
-        $this->url=$url;
-
-
-
-        // 记住我  start
-
-        $password = cookie('remember_password');
-
-        $username = cookie('remember_username');
-
-        $remember = cookie('remember_remember');
-
-        
-
-        if($password && $username){
-
-            $this->assign('password',$password);
-
-            $this->assign('username',$username);
-
-            $this->assign('remember',$remember);
-
-        }
-
-        // 记住我  end
-
-        
-
         $this->display();
-
     }
 
 
+
+    public function baojia(){
+        global $user;
+
+        $province=M('Province')->select();
+
+        $zhuanyedengji=M('Type')->where(array('pid'=>1292))->select();
+
+        //左侧分类菜单
+        $type=M('Type')->where(array('pid'=>1275,'id'=>array('in',array('1292','1293'))))->select();
+        foreach ($type as $key => $value) {
+            $type[$key]['_child']=M('Type')->where(array('pid'=>$value['id']))->select();
+        }
+
+        $this->type=$type;
+        $this->province=$province;
+        $this->zhuanyedengji=$zhuanyedengji;
+        $this->display();
+    }
+
+    public function daiban(){
+        global $user;
+
+        $province=M('Province')->select();
+        if($_GET['fit_3']){
+            $city=M('City')->where(array('fatherid'=>$_GET['fit_3']))->select();
+        }
+
+        $type_1=M('Type')->where(array('pid'=>1273))->select();
+        if($_GET['fit_1']){
+            $type_2=M('Type')->where(array('pid'=>$_GET['fit_1']))->select();
+        }
+
+        $this->type_1=$type_1;
+        $this->type_2=$type_2;
+        $this->province=$province;
+        $this->city=$city;
+        $this->display();
+    }
+
+    public function safe(){
+        global $user;
+
+        $province=M('Province')->select();
+        if($_GET['fit_3']){
+            $city=M('City')->where(array('fatherid'=>$_GET['fit_3']))->select();
+        }
+
+        $type_1=M('Type')->where(array('pid'=>1273))->select();
+        if($_GET['fit_1']){
+            $type_2=M('Type')->where(array('pid'=>$_GET['fit_1']))->select();
+        }
+
+        $this->type_1=$type_1;
+        $this->type_2=$type_2;
+        $this->province=$province;
+        $this->city=$city;
+        $this->display();
+    }
 
     //是否到期，可否继续登录
-
     public function ajaxIsCanLogin(){
-
         if(IS_POST){
-
             $url = $_SERVER['HTTP_HOST'];
-
             $temp_school=explode('.baidulab.', $url);
-
             $url=$temp_school[0];
-
             $school=D('School')->where(array('url'=>$url))->find();
 
-
-
             if( $school['start_time'] < time() && time() < $school['end_time']){
-
                 $data['status']="1";
-
             }else{
-
                 $data['status']="1";
-
             }
-
             echo json_encode($data);
-
         }
-
     }
 
+    public function news(){
+        $this->display();
+    }
+
+    public function news_detail(){
+        $this->display();
+    }
 
     //临时接口
     public function isokphone(){
@@ -110,90 +111,138 @@ class IndexController extends CommonController{
         }else{
             echo 'false';
         }
+    }
 
-        
+    public function aboutus(){
+        $this->display();
+    }
+
+    public function contact(){
+        $this->display();
+    }
+
+    public function join(){
+        $this->display();
+    }
+
+    public function mzsm(){
+        $this->display();
+    }
+
+    public function team(){
+        $this->display();
+    }
+
+    public function tuiguang(){
+        $this->display();
+    }
+
+    public function xunzheng(){
+        $this->display();
+    }
+
+    public function baike(){
+        $this->display();
+    }
+
+    public function ajax_get_city_list(){
+        $map=array();
+        if($provinceid=$_GET['provinceid']){
+            $map['fatherid']=$provinceid;
+        }
+            
+        $list = M('City')->where($map)->order('first_name desc')->select();
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='empty';
+        }
+        echo json_encode($data);
     }
 
 
-    //临时接口
-    public function oss_img(){
-        $this->display();        
+    public function ajax_get_type_list(){
+        $map=array();
+        if($type=$_GET['type']){
+            $map['pid']=$type;
+        }
+            
+        $list = M('Type')->where($map)->select();
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='empty';
+        }
+        echo json_encode($data);
     }
 
+    public function ajax_get_autoprice_info(){
+        $map=array();
+        if($type=$_GET['type']){
+            $map['type']=$type;
+        }
 
-    public function upPic(){  
-        //oss上传 
-        $bucketName = C('OSS_TEST_BUCKET'); 
-        $ossClient = new \Org\OSS\OssClient(C('OSS_ACCESS_ID'), C('OSS_ACCESS_KEY'), C('OSS_ENDPOINT'), false); 
-        $web=C('OSS_WEB_SITE'); 
+        $row = M('Autoprice')->where($map)->find();
 
-        //图片  
-        $fFiles=$_FILES['pic_1']; 
-        $rs=ossUpPic($fFiles,'s',$ossClient,$bucketName,$web,0); 
-
-        if($rs['code']==1){ 
-            //图片  
-            $img = $rs['msg']; 
-            //如返回里面有缩略图： 
-            $thumb=$rs['thumb'];             
-        }else{ 
-            $this->error('图片有误：'.$rs['msg']); 
-            return; 
-        }  
+        if($row){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$row;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='empty';
+        }
+        echo json_encode($data);
     }
 
     
-    //视频上传
-    public function plupload_video(){
-        $this->display();        
-    }
-
-    //ajax视频上传
-    public function ajax_plupload_video(){
-        $typeArr = array("jpg", "png", "gif", "jpeg", "mov", "gears", "html5", "html4", "silverlight", "flash","mp4"); //允许上传文件格式
-
-        if($username){
-            $path = "./Public/plupload_video/uploads/".$username."/"; //上传路径
-        }else{
-            $path = "./Public/plupload_video/uploads/guest/"; //上传路径
-        }
-
-        //PHP判断文件夹是否存在和创建文件夹的方法
-        if (!file_exists($path)){
-            mkdir($path); 
-        }
+   
 
 
-        if (isset($_POST)) {
-            $name = $_FILES['file']['name'];
-            $size = $_FILES['file']['size'];
-            $name_tmp = $_FILES['file']['tmp_name'];
-            if (empty($name)) {
-                echo json_encode(array("error" => "您还未选择文件"));
-                exit;
-            }
-            //    print_r($_FILES['file']);
-            $type = strtolower(substr(strrchr($name, '.'), 1)); //获取文件类型
-            if (!in_array($type, $typeArr)) {
-                echo json_encode(array("error" => "清上传指定类型的文件！","type"=>"types"));
-                exit;
-            }
-            if ($size > (50000 * 1024)) { //上传大小
-                echo json_encode(array("error" => "文件大小已超过50000KB！","type"=>"size"));
-                exit;
+    // 上传文件
+    public function lay_upload_file(){
+        if($_FILES['file']['size']>0){
+            $upload = new \Think\Upload();// 实例化上传类
+            $upload->maxSize   =     31457280 ;// 设置附件上传大小
+            $upload->exts      =     array('zip', 'rar', 'xls','xlsx', 'doc','docx','ppt','pptx','pdf','jpg','png','jpeg','gif');// 设置附件上传类型
+            $upload->uploadReplace  = false;// 存在同名文件是否覆盖
+            $upload->autoSub   =     false;//是否启用子目录保存
+            $upload->rootPath  =     './Uploads/'; // 设置附件上传根目录
+            $upload->savePath  =     'layui/'; // 设置附件上传（子）目录
+            $upload->saveRule  =     ''; // 设置附件上传（子）目录
+             
+            // 上传文件 
+            $info   =   $upload->upload();
+
+            if(!$info) {
+                $data=array();
+                $data['code']=0;
+                $data['msg']=$upload->getError();
+            }else{
+                $img=$info['file']['savename'];
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+                $data['data']["src"]='/Uploads/layui/'.$img;
             }
 
-            $pic_name = time() . rand(10000, 99999) . "." . $type; //文件名称
-            $pic_url = $path . $pic_name; //上传后图片路径+名称
-            if (move_uploaded_file($name_tmp, $pic_url)) { //临时文件转移到目标文件夹
-                echo json_encode(array("error" => "0", "pic" => $pic_url, "name" => $pic_name));
-            } else {
-                echo json_encode(array("error" => "上传有误，清检查服务器配置！","type"=>"config"));
-            }
+            echo json_encode($data);
         }
     }
-
-
 
 
 }
