@@ -166,7 +166,7 @@
                           <tfoot>
                             <tr>
                               <td>
-                                <button style="float:left;" class="layui-btn id-btn-dialog2_add" title="id-btn-dialog2_add"> 添加 </button>
+                                <!-- <button style="float:left;" class="layui-btn id-btn-dialog2_add" title="id-btn-dialog2_add"> 添加 </button> -->
                                 <button style="float:right;" class="layui-btn search_btn" lay-submit="" title="search_btn">搜索</button>
                               </td>
                             </tr> 
@@ -661,7 +661,7 @@
               async:false,
               type:'get',  
               contentType:"application/x-www-form-urlencoded",
-              url : "{:U('Admin/Match/ajax_get_list')}",
+              url : "{:U('Admin/Baoming/ajax_get_list')}",
               data: {
                 'title':title, 
                 'Date1':Date1, 
@@ -690,7 +690,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Match/ajax_get_row_info')}",
+              url : "{:U('Admin/Baoming/ajax_get_row_info')}",
               data:{
                 id:id
               },
@@ -744,7 +744,7 @@
                async:false,
                type:'post',  
                contentType:"application/x-www-form-urlencoded",
-               url : "{:U('Admin/Match/ajax_add')}",
+               url : "{:U('Admin/Baoming/ajax_add')}",
                data: _data,
                dataType : 'json',
                success  : function(json) {
@@ -771,7 +771,7 @@
               async:false,
               type:'post',  
               contentType:"application/x-www-form-urlencoded",
-              url : "{:U('Admin/Match/ajax_edit')}",
+              url : "{:U('Admin/Baoming/ajax_edit')}",
               data: _data,
               dataType : 'json',
               success  : function(json) {  
@@ -796,7 +796,7 @@
           var _json;
           $.ajax({  
               type:'get',  
-              url : "{:U('Admin/Match/ajax_del')}",
+              url : "{:U('Admin/Baoming/ajax_del')}",
               data:{ 
                 id:ids 
               },
@@ -819,6 +819,13 @@
           return _json;
       }
 
+      function unitFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue==1){
+              return '个人';
+          }else{
+              return "团体";
+          }
+      }
 
       function imgFormatter(cellvalue, options, rowdata){ 
           if (cellvalue){
@@ -826,7 +833,6 @@
           }else{
               return "暂无";
           }
-
       }
 
 
@@ -836,16 +842,18 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '比赛名称','比赛图片','比赛类型','开始日期','结束日期','点击量','操作'],
+              colNames:['id', '用户名','图片','报名单位','作者/单位','联系电话','作品主题','参赛项目','时间','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
-                {name:'title',index:'title', align : "center"},
-                {name:'img',index:'img', align : "center", formatter: imgFormatter},
+                {name:'username',index:'username', align : "center"},
+                {name:'images',index:'images', align : "center", formatter: imgFormatter},
+                {name:'unit',index:'unit', align : "center", formatter: unitFormatter},
+                {name:'phone',index:'phone', align : "center"},
                 {name:'type',index:'type', align : "center"},
-                {name:'start_time',index:'start_time', align : "center"},
-                {name:'end_time',index:'end_time', align : "center"},
-                {name:'eye',index:'eye', align : "center"},
+                {name:'title',index:'title', align : "center"},
+                {name:'match',index:'match', align : "center"},
+                {name:'time',index:'time', align : "center"},
 
                 {name:'options',index:'options',align:'center',width:200}
               ], 
@@ -945,7 +953,7 @@
 
               //上传视频
               layui.upload({
-                 url: "{:U('Admin/Match/lay_upload_file_video')}" //上传接口
+                 url: "{:U('Admin/Baoming/lay_upload_file_video')}" //上传接口
                  ,elem: '#'+form_type+'_upload_video' //指定原始元素，默认直接查找class="layui-upload-file"
                  ,ext : 'mp4'
                  ,method: 'post' //上传接口的http类型
@@ -960,7 +968,7 @@
 
               //上传图片
               layui.upload({
-                 url: "{:U('Admin/Match/lay_upload_file')}" //上传接口
+                 url: "{:U('Admin/Baoming/lay_upload_file')}" //上传接口
                  ,elem: '#'+form_type+'_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
                  ,success: function(res){ //上传成功后的回调
                    if(res.code==0){
@@ -975,7 +983,7 @@
               //上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
               layedit.set({
                   uploadImage: {
-                      url: "{:U('Admin/Match/lay_upload_file')}", //接口url
+                      url: "{:U('Admin/Baoming/lay_upload_file')}", //接口url
                       type: 'post', //默认post
                   }
               });

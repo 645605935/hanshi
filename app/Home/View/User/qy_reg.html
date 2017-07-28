@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/re/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/re/bootstrap/css/bootstrap-theme.css" />
+<script type="text/javascript" src="__PUBLIC__/Home/re/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/re/bootstrap/js/bootstrap.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Home/re/css/test.css" />
+<body>
+<form action="{:U('User/register')}" method="post" onSubmit="return submitForm();">
+    <div class="title">
+      <h3 class="gr_title">企业注册</h3>
+      <span class="yizc">已有账号,请<a href="index.html">登录 ></a></span>
+    </div>
+    <div class="line"></div>
+    <div class="information">
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon">用户名</span>
+        <input type="text" class="form-control defined" name="username" value=""> &nbsp;&nbsp; * 6位以上英文字母或数字组成
+      </div>
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon">电子邮箱</span>
+        <input type="text" class="form-control defined" name="email" value=""> &nbsp;&nbsp; * 用于密码找回及登录
+      </div>
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon">手机号</span>
+        <input type="text" class="form-control defined" name="mobile" value=""> &nbsp;&nbsp; * 用于密码找回及登录
+      </div>
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon">密码</span>
+        <input type="password" class="form-control defined" name="password" value=""> &nbsp;&nbsp; * 英文字母或数字组成
+      </div>
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon">确认密码</span>
+        <input type="password" class="form-control defined" name="repassword" value=""> &nbsp;&nbsp; * 请再次确认密码
+      </div>
+    </div>
+    <div>
+      <div class="renzheng">
+        <div class="qyrz">企业认证</div>
+        <div class="shortline"></div>
+      </div>
+      <div class="qyrzInfo">
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">社会统一代码</span>
+          <input type="text" class="form-control defined" name="sh_code" placeholder="请输入18位社会统一代码">
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">企业名称</span>
+          <input type="text" class="form-control defined" name="qy_name" placeholder="瞰世(天津)文化传媒有限公司">
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">注册地址</span>
+          <input type="text" class="form-control defined" name="qy_address" placeholder="天津市红桥区青年路85号A座3楼330号">
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">企业座机</span>
+          <input type="text" class="form-control defined" name="qy_landline" placeholder="022-27599350">
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">有效期限</span>
+          <input type="text" class="form-control defined" name="expiration" placeholder="长期">
+        </div>
+        <div class="dropdown">
+          <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">单位性质
+              <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="#">Java</a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="#">数据通信/网络</a>
+            </li>
+          </ul>
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">企业简称</span>
+          <input type="text" class="jiancheng form-control defined" name="abbreviation" placeholder="瞰世">
+        </div>
+        <div class="input-group input-group-sm">
+          <span class="input-group-addon">主营产品</span>
+          <input type="text" class="form-control defined" name="product" >
+        </div>
+        <div class="yyzz">
+          <label>营业执照副本扫描件</label>
+          <p class="p1">请上传营业执照原件扫描件或复印件加盖公章</p>
+          <p class="p2">支持.jpg .jpeg .bmp .png格式照片,大小不超过5M。</p>
+          <button type="button" class="btn btn-default btn-xs shangchuan">
+            <input type="file" name="business_license" value="">
+          </button>
+          <div><img style="width: 40px;height: 80px;margin-left: 150px;margin-top: 20px;" /></div>
+        </div>
+        <div class="yyzz">
+          <label>经营许可证扫描件</label>
+          <p class="p1">请上传经营许可证原件扫描件或复印件加盖公章</p>
+          <p class="p2">支持.jpg .jpeg .bmp .png格式照片,大小不超过5M。</p>
+          <button type="button" class="btn btn-default btn-xs shangchuan">
+            <input type="file" name="business_permit" value="">
+          </button>
+          <button type="button" class="btn btn-default btn-xs add"><span class="glyphicon glyphicon-plus"></span></button>
+          <div><img style="width: 40px;height: 80px;margin-left: 150px;margin-top: 20px;" /></div>
+        </div>
+      </div>
+      <div class="foot juli">
+        <input type="radio" value=""/>
+          <span class="agree">我已经仔细阅读并接受</span>
+          <a>《服务协议》</a>
+      </div>
+      <!-- <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">立即注册</button> -->
+      <button type="submmit" class="btn btn-warning">立即注册</button>
+</form>
+      <!-- 模态框（Modal） -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+              </button>
+            </div>
+            <div class="modal-body">
+              <div>您的认证信息已受理!</div>
+              <div>我平台将于1-2个工作日内完成审核,</div>
+              <div>审核结果将发送到您的邮箱,</div>
+              <div>请注意查收!</div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">
+                确定
+              </button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+      </div>
+  </div>
+</form>
+</body>
+</html>

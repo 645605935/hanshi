@@ -50,8 +50,8 @@
                                <tr>
                                  <td>
                                    <input type="file" id="add_upload_img" name="img" class="layui-upload-file"><br>
-                                   <div class="layui-elem-quote" style="margin-top: 20px;">
-                                     <p>注：由于服务器资源有限，所以此处每次给你返回的是同一张图片</p>
+                                   <div class="layui-elem-quote" style="margin-top: 20px;border-left: 0px solid red;color: red;">
+                                     注：由于服务器资源有限，所以此处每次给你返回的是同一张图片
                                    </div>
                                  </td>
 
@@ -60,7 +60,8 @@
                                      <div class="layui-form-item">
                                        <label class="layui-form-label">报名单位</label>
                                        <div class="layui-input-inline">
-                                         <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                                          <input type="radio" name="unit" class="unit" value="1" title="个人" checked="">
+                                          <input type="radio" name="unit" class="unit" value="2" title="团体">
                                        </div>
                                      </div>
                                    </div>
@@ -69,7 +70,7 @@
                                      <div class="layui-form-item">
                                        <label class="layui-form-label">作者/单位</label>
                                        <div class="layui-input-inline">
-                                         <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                                         <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
                                        </div>
                                      </div>
                                    </div>
@@ -78,7 +79,7 @@
                                      <div class="layui-form-item">
                                        <label class="layui-form-label">联系电话</label>
                                        <div class="layui-input-inline">
-                                         <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                                         <input type="text" name="phone" lay-verify="required" placeholder="" class="layui-input phone">
                                        </div>
                                      </div>
                                    </div>
@@ -96,7 +97,12 @@
                                      <div class="layui-form-item">
                                        <label class="layui-form-label">参赛项目</label>
                                        <div class="layui-input-inline">
-                                         <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                                           <select name="mid" class="mid" lay-verify="required">
+                                             <option value="">请选择</option>
+                                             <foreach name="match" item='v'>
+                                                <option value="{$v.id}" <if condition="$_GET['id'] eq $v['id']">selected</if>>{$v.title}</option>
+                                             </foreach>
+                                           </select>
                                        </div>
                                      </div>
                                    </div>
@@ -105,7 +111,7 @@
                                      <div class="layui-form-item">
                                        <label class="layui-form-label">参赛宣言</label>
                                        <div class="layui-input-inline">
-                                         <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                                         <input type="text" name="desc" lay-verify="required" placeholder="" class="layui-input title">
                                        </div>
                                      </div>
                                    </div>
@@ -128,7 +134,7 @@
                                        <div class="layui-input-inline">
                                          <input type="file" id="add_upload_file" name="file" lay-type="video" class="layui-upload-file">
                                        </div>
-                                       <a target="_blank" class="layui-form-label show_file_file_btn" style="width:61px!important;display: none;">
+                                       <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
                                          预览
                                        </a>
                                      </div>
@@ -150,9 +156,9 @@
                              <tfoot>
                                <tr>
                                  <td colspan="2" style="text-align:right;">
-                                   <input type="text" name="type" lay-verify="required" class="layui-input type" readonly>
-                                   <input type="text" name="file" lay-verify="required" class="layui-input file" readonly>
-                                   <input type="text" name="images" lay-verify="required" class="layui-input images" readonly>
+                                   <input type="hidden" name="type" lay-verify="required" class="layui-input type" value="{$row.type}" readonly>
+                                   <input type="hidden" name="file_url" lay-verify="required" class="layui-input file_url" readonly>
+                                   <input type="hidden" name="images" lay-verify="required" class="layui-input images" readonly>
                                    <button class="layui-btn" lay-submit="" lay-filter="demo1_add">确认</button>
                                    <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
                                  </td>
@@ -219,17 +225,15 @@
              async:false,
              type:'post',  
              contentType:"application/x-www-form-urlencoded",
-             url : "{:U('Admin/Video/ajax_add')}",
+             url : "{:U('Home/Match/ajax_add')}",
              data: _data,
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
-                     layer.msg(json.msg);
-                     $("#grid-table").addRowData(1, json.data, "first");
-                     $("#add_form .reset").trigger('click');
-                     $("div[aria-describedby='dialog-confirm_add'] .ui-dialog-titlebar-close").trigger("click");
+                     alert(json.msg);
+                     window.location.reload();
                  }else{
-                     layer.msg(json.msg);
+                     alert(json.msg);
                  }
              },
              error  : function() {  
@@ -254,7 +258,7 @@
          ,method: 'post' //上传接口的http类型
          ,success: function(res){ //上传成功后的回调
            if(res.code==0){
-              $('#add_form .file').val(res.data.src);
+              $('#add_form .file_url').val(res.data.src);
               $('#add_form .show_file_btn').show().attr('href', res.data.src);
            }
          }

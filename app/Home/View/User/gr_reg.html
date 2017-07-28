@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/re/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/re/bootstrap/css/bootstrap-theme.css" />
+<script type="text/javascript" src="__PUBLIC__/Home/re/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/re/bootstrap/js/bootstrap.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Home/re/css/test.css" />
+<body>
+    <form action="{:U('User/register')}" method="post" onSubmit="return submitForm();">
+        <div class="title">
+          <h3 class="gr_title">个人注册</h3>
+          <span class="yizc">已有账号,请<a href="{:U('User/login')}">登录 ></a></span>
+        </div>
+        <div class="line"></div>
+        <div class="information">
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">用户名</span>
+            <input type="text" class="form-control defined" name="username" value=""> &nbsp;&nbsp; * 6位以上英文字母或数字组成
+          </div>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">电子邮箱</span>
+            <input type="text" class="form-control defined" name="email" value=""> &nbsp;&nbsp; * 用于密码找回及登录
+          </div>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">手机号</span>
+            <input type="text" class="form-control defined" name="mobile" value=""> &nbsp;&nbsp; * 用于密码找回及登录
+          </div>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">密码</span>
+            <input type="password" class="form-control defined" name="password" value=""> &nbsp;&nbsp; * 英文字母或数字组成
+          </div>
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">确认密码</span>
+            <input type="password" class="form-control defined" name="repassword" value=""> &nbsp;&nbsp; * 请再次确认密码
+          </div>
+        </div>
+        <div class="foot"><input type="radio" /><span class="agree">我已经仔细阅读并接受</span><a href="">《服务协议》</a></div>
+        <!-- <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#myModal">立即注册</button> -->
+        <input type="hidden" class="form-control defined" name="state" value="1">
+        <button type="submit" class="btn btn-warning">立即注册</button>
+    </form>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+          </div>
+          <div class="modal-body">
+            <div>您的认证信息已受理!</div>
+            <div>我平台将于1-2个工作日内完成审核,</div>
+            <div>审核结果将发送到您的邮箱,</div>
+            <div>请注意查收!</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">确定
+        </button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/re/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/re/bootstrap/css/bootstrap-theme.css" />
+<script type="text/javascript" src="__PUBLIC__/Home/re/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/re/bootstrap/js/bootstrap.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Home/re/css/test.css" />
+<body>
+      <div class="body">
+      <div class="title">
+      </div>
+      <div class="content">
+        <div class="login">
+          <ul id="ul1">
+            <li class="li1"><span>个人</span></li>
+            <li style="background: #ddd;margin-left:0px;"><span>政府</span></li>
+            <li style="background: #999;margin-left:0px;"><span>企业</span></li>
+          </ul>
+        </div>
+        <form action="{:U('User/login')}" method="post">
+        <div id="bottom">
+          <div class="name" style="display: block;">
+            <label class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <input type="text" class="form-control" placeholder="用户名/手机号">
+            </label><label class="input-group pwd">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+              <input type="password" class="form-control"/>
+            </label>
+            <button type="button" class="btn btn-primary login_button">登陆</button>
+            <label class="a_pwd"><a>忘记密码</a>
+            <a href="Register.html">免费注册</a></label>
+          </div>
+          <div class="name">
+            <label class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <input type="text" class="form-control" placeholder="用户名/手机号">
+            </label><label class="input-group pwd">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+              <input type="password" class="form-control"/>
+            </label>
+            <button type="button" class="btn btn-success login_button">登陆</button>
+            <label class="a_pwd"><a>忘记密码</a>
+            <a href="Register.html">免费注册</a></label>
+          </div>
+          <div class="name">
+            <label class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <input type="text" class="form-control" placeholder="用户名/手机号">
+            </label><label class="input-group pwd">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+              <input type="password" class="form-control"/>
+            </label>
+            <button type="submit" class="btn btn-info login_button">登陆</button>
+            <label class="a_pwd"><a>忘记密码</a>
+            <a href="Register.html">免费注册</a></label>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+</body>
+</html>
+<script>
+$(function() {
+  $("#ul1 li").click(function() {
+    $(this).addClass("li1").siblings().removeClass("li1");
+    $("#bottom div").eq($(this).index()).show().siblings().hide();
+
+    
+    // 获取当前LI顺序，新增input。不同选项对应不同的URl
+    // var button="<input type='hidden' value='' name=''/>"; 
+    // $("#div").append(button);
+  })
+})
+</script>

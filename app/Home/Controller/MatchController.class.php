@@ -58,9 +58,53 @@ class MatchController extends CommonController{
 
         $type=M('Type')->where(array('pid'=>1283))->select();
 
+
+        $match=M('Match')->where(array('type'=>$row['type']))->select();
+
         $this->row=$row;
         $this->type=$type;
+        $this->match=$match;
         $this->display();
+    }
+
+    //添加
+    public function ajax_add(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['uid']=$user['id'];
+            $data['time']=time();
+
+            $id = M('Baoming')->add($data);
+            if($id){
+                $row= D('Baoming')->relation(true)->find($id);
+
+                $row['time']=date('Y-m-d H:i',$row['time']);
+
+                if($row){
+                    $data=array();
+                    $data['code']=0;
+                    $data['msg']='success';
+                    $data['data']=$row;
+                }else{
+                    $data=array();
+                    $data['code']=1;
+                    $data['msg']='error';
+                }
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
     }
 
 
