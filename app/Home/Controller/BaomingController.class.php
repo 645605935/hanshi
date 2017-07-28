@@ -3,7 +3,7 @@
 namespace Home\Controller;
 use Think\CommonController;
 
-class MatchController extends CommonController{
+class BaomingController extends CommonController{
     public function _initialize(){
         parent::_initialize();
 
@@ -15,14 +15,14 @@ class MatchController extends CommonController{
     public function index(){
         global $user;
         $where=array();
-        if($type=$_GET['type']){
-            $where['type']=$type;
+        if(I('type')){
+            $where['type']=I('type');
         }
 
-        $count      = M('Match')->where($where)->count();
+        $count      = M('Baoming')->where($where)->count();
         $Page       = new \Common\Extend\Page($count,6);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
-        $list=M('Match')->page($nowPage.','.$Page->listRows)->where($where)->select();
+        $list=M('Baoming')->page($nowPage.','.$Page->listRows)->where($where)->select();
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
             if($value['type']){
@@ -42,8 +42,8 @@ class MatchController extends CommonController{
     public function rule(){
         global $user;
 
-        $id=$_GET['id'];
-        $row=M('Match')->find($id);
+        $id=I('id');
+        $row=M('Baoming')->find($id);
 
         $this->row=$row;
         $this->display();
@@ -53,13 +53,10 @@ class MatchController extends CommonController{
     public function baoming(){
         global $user;
 
-        $id=$_GET['id'];
-        $row=M('Match')->find($id);
-
-        $type=M('Type')->where(array('pid'=>1283))->select();
-
+        $id=I('id');
+        $row=M('Baoming')->find($id);
+        
         $this->row=$row;
-        $this->type=$type;
         $this->display();
     }
 

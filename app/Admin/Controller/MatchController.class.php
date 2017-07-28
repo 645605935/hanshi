@@ -150,14 +150,17 @@ class MatchController extends AuthController {
         $data=$_POST;
         if($data){
             $data['time']=time();
+            $data['start_time']=strtotime($data['start_time']);
+            $data['end_time']=strtotime($data['end_time']);
 
             $res = M('Match')->save($data);
             if($res){
                 $id=$data['id'];
                 $row= D('Match')->relation(true)->find($id);
 
-                $row['time']=date('Y-m-d H:i',$value['time']);
-                $row['end_time']=date('Y-m-d H:i',$value['end_time']);
+                $row['time']=date('Y-m-d H:i',$row['time']);
+                $row['start_time']=date('Y-m-d H:i',$row['start_time']);
+                $row['end_time']=date('Y-m-d H:i',$row['end_time']);
 
                 if($row){
                     $data=array();

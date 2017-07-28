@@ -210,14 +210,12 @@ class IndexController extends CommonController{
     }
 
     
-   
-
-
-    // 上传文件
-    public function lay_upload_file(){
-        if($_FILES['file']['size']>0){
+    //前端所有上传文件都用这个
+    // 上传图片
+    public function lay_upload_img(){
+        if($_FILES['img']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
-            $upload->maxSize   =     31457280 ;// 设置附件上传大小
+            $upload->maxSize   =     3145728000 ;// 设置附件上传大小
             $upload->exts      =     array('zip', 'rar', 'xls','xlsx', 'doc','docx','ppt','pptx','pdf','jpg','png','jpeg','gif');// 设置附件上传类型
             $upload->uploadReplace  = false;// 存在同名文件是否覆盖
             $upload->autoSub   =     false;//是否启用子目录保存
@@ -228,16 +226,59 @@ class IndexController extends CommonController{
             // 上传文件 
             $info   =   $upload->upload();
 
+
             if(!$info) {
                 $data=array();
                 $data['code']=0;
                 $data['msg']=$upload->getError();
             }else{
-                $img=$info['file']['savename'];
+                $img=$info['img']['savename'];
+                $img_url='/Uploads/layui/'.$img;
+
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]='/Uploads/layui/'.$img;
+                $data['data']["src"]=$img_url;
+
+                //上传到阿里云OSS
+                oss_upload( './Uploads/layui/'.$img );
+            }
+
+            echo json_encode($data);
+        }
+    }
+
+    //上传文件
+    public function lay_upload_file(){
+        if($_FILES['file']['size']>0){
+            $upload = new \Think\Upload();// 实例化上传类
+            $upload->maxSize   =     314572800000 ;// 设置附件上传大小
+            $upload->exts      =     array('zip', 'rar', 'xls','xlsx', 'doc','docx','ppt','pptx','pdf','jpg','png','jpeg','gif','mp4');// 设置附件上传类型
+            $upload->uploadReplace  = false;// 存在同名文件是否覆盖
+            $upload->autoSub   =     false;//是否启用子目录保存
+            $upload->rootPath  =     './Uploads/'; // 设置附件上传根目录
+            $upload->savePath  =     'layui/'; // 设置附件上传（子）目录
+            $upload->saveRule  =     ''; // 设置附件上传（子）目录
+             
+            // 上传文件 
+            $info   =   $upload->upload();
+
+
+            if(!$info) {
+                $data=array();
+                $data['code']=0;
+                $data['msg']=$upload->getError();
+            }else{
+                $file=$info['file']['savename'];
+                $file_url='/Uploads/layui/'.$file;
+
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+                $data['data']["src"]=$file_url;
+
+                //上传到阿里云OSS
+                oss_upload( './Uploads/layui/'.$file );
             }
 
             echo json_encode($data);
