@@ -1,15 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="renderer" content="webkit">
-<title>活动中心</title>
+<title>报名</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
-<link rel="stylesheet" href="__PUBLIC__/Home/css/huodong.css">
 </head>
 <body>
 <!-- 头部引用 -->
@@ -17,81 +16,89 @@
 
 
 <div class="baoming-ban"></div>
-<div class="container">
+<div class="container p20">
     <div class="con">
-        <div class="hezuo news">
-            <div class="bgfff comContent clear">
-                <div class="comLeft">
-                    <div class="swpierr mb20 clearfix">
-                        <ul>
-                            <li><a href="#2"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <div class="area2 marok">
-                        <img src="__PUBLIC__/Home/images/contact.png">
-                        <div class="table pad010 mt20">
-                            <div class="tablec vermid left"><span class="icon-ii"></span></div>
-                            <div class="tablec vermid right">客服电话：022-24330300</div>
-                        </div>
-                        <div class="table pad010">
-                            <div class="tablec vermid left"><span class="icon-ii"></span></div>
-                            <div class="tablec vermid right">
-                                <a href="#4">企业QQ：1150325483</a>
-                            </div>
-                        </div>
-                        <div class="table pad010">
-                            <div class="tablec vermid left"><span class="icon-ii"></span></div>
-                            <div class="tablec vermid right">电子邮箱：hr@jkr-china.com</div>
-                        </div>
-                        <div class="table pad010">
-                            <div class="tablec vermid left"><span class="icon-ii"></span></div>
-                            <div class="tablec vermid right">地址：天津市河东区华昌大街裕阳大厦1-1701</div>
-                        </div>
-                    </div>
+        <div class="slideBox">
+            <div class="hd">
+                <div class="bred"><span>参赛报名</span>><span class="now">全部</span></div>
+                <div class="sousuo fl"><input type="text" class="ss-in" placeholder="作者/比赛项目/编号"><a href="javascript:;" class="ss-txt">搜索</a></div>
+                <div class="right-btn fr">
+                    <a href="{:U('Home/Baoming/baoming',array('type'=>$type))}"><i class="icon-bm"></i>报名参赛</a>
                 </div>
-                <div class="comRight">
-                    <div class="content r-c">
-                        <div class="bred">  
-                            <span>赛事活动</span>
-                            <span>></span>
-                            <span class="now">全部</span>
-                        </div>  
-                        <div class="sousuo fl"><input type="text" class="ss-in" placeholder="作者/比赛项目/编号"><a href="javascript:;" class="ss-txt">搜索</a></div>
-                        <div class="clear"></div>
-                        <div class="neirong">
-                            <ul class="activityList overhid">
-                            <foreach name="list" item='v'>
-                                <li>
-                                    <a href="#cansaineirong.html">
-                                        <div class="imgP"><img src="{$v.img}"></div>
-                                        <div class="timeCir">
-                                            <p class="date b">{$v.start_time_m-d}</p>
-                                            <p class="year">{$v.start_time_y}</p>
-                                        </div>
-                                        <h3 class="moreline2">{$v.title}</h3>
-                                    </a>
-                                    <a href="{:U('Home/Match/rule',array('id'=>$v['id']))}" class="bsgz">比赛规则</a>
-                                </li>
-                            </foreach>
-                            </ul>
-                        </div>
-                        <div class="page">
-                            {$page}
-                        </div>
-                    </div>
+            </div>
+            <div class="clear"></div>
+            <div class="bd">
+                <div class="shot">
+                    <ul class="clearfix">
+                        <foreach name="list" item="v">
+                            <li>
+                                <a href="{:U('Home/Baoming/detail',array('id'=>$v['id']))}">
+                                    <img style="width:238px;height:238px;" class="img1" src="{$v.img}" alt="">
+                                    <div class="info-top first">
+                                        <h2>{$v.title}</h2>
+                                        <p><strong>作品编号：</strong>{$v.id}</p>
+                                        <p><strong>作者：</strong>{$v.author}</p>
+                                        <p><strong>参赛项目：</strong>{$v.match}</p>
+                                        <p><strong>参赛宣言：</strong>{$v.desc}</p>
+                                    </div>
+                                </a>
+                                <div class="info-btn">
+                                    <a href="javascript:;" data-id="{$v.id}" class="btn vote_btn">立即投票</a>
+                                    <span class="btn1"><i></i>{$v.vote}</span>
+                                </div>
+                            </li>
+                        </foreach>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="clear"></div>
+
 
 <!-- 头部引用 -->
 <include file="Common/footer" />
-
 
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
 <script src="__PUBLIC__/Home/js/index.js"></script>
 </body>
 </html>
+
+
+<script type="text/javascript">
+    $(function(){
+        $('.vote_btn').click(function(){
+            var id=$(this).attr('data-id');
+            _ajax_vote(id);
+        });
+    });
+</script>
+
+<script>
+    function _ajax_vote(id){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'get',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/Baoming/ajax_vote')}",
+             data: {
+                id:id
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     alert(json.msg);
+                     window.location.reload();
+                 }else{
+                     alert(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+</script>

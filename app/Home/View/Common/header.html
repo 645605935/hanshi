@@ -1,3 +1,8 @@
+<?php
+    $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select();
+?>
+
+
 <div class="top-add"><a href="#4"><img src="__PUBLIC__/Home/images/img3.jpg" alt=""></a></div>
 <div class="head w1000">
     <div class="header fl">
@@ -60,23 +65,51 @@
         <li>
             <a href="{:U('Home/Match/index')}" class="li-a">赛事活动</a>
             <ul>
-                <li><a href="saishihuodong-quanbu.html">全部</a></li>
-                <li><a href="saishihuodong-yinpin.html"><span class="color1">音频类</span></a></li>
-                <li><a href="saishihuodong-shipin.html">视频类</a></li>
-                <li><a href="saishihuodong-tupian.html">图片类</a></li>
-                <li><a href="saishihuodong-shufa.html">书法类</a></li>
-                <li><a href="saishihuodong-qita.html">其他</a></li>
+                <li>
+                    <a href="{:U('Home/Match/index')}">
+                        <if condition="!$_GET['type']">
+                            <span class="color1">全部</span>
+                        <else/>
+                            全部
+                        </if>
+                    </a>
+                </li>
+                <foreach name="top_nav_saishihuodong" item="v">
+                    <li>
+                        <a href="{:U('Home/Match/index',array('type'=>$v['id']))}">
+                            <if condition="$v['id'] eq $_GET['type']">
+                                <span class="color1">{$v.title}</span>
+                            <else/>
+                                {$v.title}
+                            </if>
+                        </a>
+                    </li>
+                </foreach>
             </ul>
         </li>
         <li>
-            <a href="{:U('Home/Match/baoming')}" class="li-a">参赛报名</a>
+            <a href="{:U('Home/Baoming/index')}" class="li-a">参赛报名</a>
             <ul>
-                <li><a href="bisaibaoming-quanbu.html"><span class="color1">全部</span></a></li>
-                <li><a href="bisaibaoming-yinpin.html">音频类</a></li>
-                <li><a href="bisaibaoming-shipin.html">视频类</a></li>
-                <li><a href="bisaibaoming-tupian.html">图片类</a></li>
-                <li><a href="bisaibaoming-shufa.html">书法类</a></li>
-                <li><a href="bisaibaoming-qita.html">其他</a></li>
+                <li>
+                    <a href="{:U('Home/Baoming/index')}">
+                        <if condition="!$_GET['type']">
+                            <span class="color1">全部</span>
+                        <else/>
+                            全部
+                        </if>
+                    </a>
+                </li>
+                <foreach name="top_nav_saishihuodong" item="v">
+                    <li>
+                        <a href="{:U('Home/Baoming/index',array('type'=>$v['id']))}">
+                            <if condition="$v['id'] eq $_GET['type']">
+                                <span class="color1">{$v.title}</span>
+                            <else/>
+                                {$v.title}
+                            </if>
+                        </a>
+                    </li>
+                </foreach>
             </ul>
         </li>
         <li>

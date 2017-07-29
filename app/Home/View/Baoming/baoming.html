@@ -9,104 +9,319 @@
 <meta name="keywords" content="">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui-v1.0.4/layui/css/layui.css"  media="all">
+
+<style type="text/css">
+    .image_box a{display: block;width: 25%;box-sizing: border-box;padding: 5px;overflow: hidden;float: left;}
+    .image_box a img{width: 100%;height: 100%;}
+</style>
+
 </head>
 <body>
 <!-- 头部引用 -->
 <include file="Common/header" />
 
-
-<div class="baoming-ban"></div>
 <div class="container p20">
     <div class="con">
-        <div class="slideBox">
-            <div class="hd">
-                <div class="bred"><span>参赛报名</span>><span class="now">全部</span></div>
-                <div class="sousuo fl"><input type="text" class="ss-in" placeholder="作者/比赛项目/编号"><a href="javascript:;" class="ss-txt">搜索</a></div>
-                <div class="right-btn fr">
-                    <a href="baoming-quanbu.html"><i class="icon-bm"></i>报名参赛</a>
-                </div>
-            </div>
-            <div class="clear"></div>
-            <div class="bd">
-                <div class="shot">
-                    <ul class="clearfix">
-                        <li>
-                            <a href="cansaineirong.html">
-                                <img class="img1" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                <div class="info-top first">
-                                    <h2>阳光运动，快乐成长</h2>
-                                    <p><strong>作品编号：</strong>0001</p>
-                                    <p><strong>作者：</strong>作者1</p>
-                                    <p><strong>参赛项目：</strong>xxx</p>
-                                    <p><strong>参赛宣言：</strong>xxx</p>
-                                </div>
-                            </a>
-                            <div class="info-btn">
-                                <a href="javascript:;" class="btn">立即投票</a>
-                                <span class="btn1"><i></i>100</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="cansaineirong.html">
-                                <img class="img1" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                <div class="info-top second">
-                                    <h2>阳光运动，快乐成长</h2>
-                                    <p><strong>作品编号：</strong>0001</p>
-                                    <p><strong>作者：</strong>作者1</p>
-                                    <p><strong>参赛项目：</strong>xxx</p>
-                                    <p><strong>参赛宣言：</strong>xxx</p>
-                                </div>
-                            </a>
-                            <div class="info-btn">
-                                <a href="javascript:;" class="btn">立即投票</a>
-                                <span class="btn1"><i></i>100</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="cansaineirong.html">
-                                <img class="img1" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                <div class="info-top third">
-                                    <h2>阳光运动，快乐成长</h2>
-                                    <p><strong>作品编号：</strong>0001</p>
-                                    <p><strong>作者：</strong>作者1</p>
-                                    <p><strong>参赛项目：</strong>xxx</p>
-                                    <p><strong>参赛宣言：</strong>xxx</p>
-                                </div>
-                            </a>
-                            <div class="info-btn">
-                                <a href="javascript:;" class="btn">立即投票</a>
-                                <span class="btn1"><i></i>100</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="cansaineirong.html">
-                                <img class="img1" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                <div class="info-top">
-                                    <h2>阳光运动，快乐成长</h2>
-                                    <p><strong>作品编号：</strong>0001</p>
-                                    <p><strong>作者：</strong>作者1</p>
-                                    <p><strong>参赛项目：</strong>xxx</p>
-                                    <p><strong>参赛宣言：</strong>xxx</p>
-                                </div>
-                            </a>
-                            <div class="info-btn">
-                                <a href="javascript:;" class="btn btn-gray">您已投票</a>
-                                <span class="btn1"><i></i>100</span>
-                            </div>
-                        </li>
+        <div class="bm-con">
+            <div class="head-tit mb20"><img src="__PUBLIC__/Home/images/img2.png" alt=""></div>
+            <div class="slideBox">
+                <div class="hd">
+                    <ul>
+                        <foreach name="type" item="v">
+                            <li <if condition="$v['id'] eq $row['type']">class="on"</if>><a href="fenlei-yanchu.html">{$v.title}</a></li>
+                        </foreach>
                     </ul>
+                </div>
+                <div class="bd">
+                    <div class="bm-form">
+                        <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
+                           <table class="layui-table">
+                             <colgroup>
+                               <col width="300">
+                               <col>
+                             </colgroup>
+                             <tbody>
+                               <tr>
+                                 <td colspan="2">
+                                    <div class="row image_box"></div>
+                                 </td>
+                               </tr>
+                               <tr>
+                                 <td>
+                                   <input type="file" id="add_upload_img" name="img" class="layui-upload-file"><br>
+                                   <div class="layui-elem-quote" style="margin-top: 20px;border-left: 0px solid red;color: red;">
+                                     注：由于服务器资源有限，所以此处每次给你返回的是同一张图片
+                                   </div>
+                                 </td>
+
+                                 <td>
+                                   <div class="layui-inline">
+                                     <div class="layui-form-item">
+                                       <label class="layui-form-label">报名单位</label>
+                                       <div class="layui-input-inline">
+                                          <input type="radio" name="unit" class="unit" value="1" title="个人" checked="">
+                                          <input type="radio" name="unit" class="unit" value="2" title="团体">
+                                       </div>
+                                     </div>
+                                   </div>
+
+                                   <div class="layui-inline">
+                                     <div class="layui-form-item">
+                                       <label class="layui-form-label">作者/单位</label>
+                                       <div class="layui-input-inline">
+                                         <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
+                                       </div>
+                                     </div>
+                                   </div>
+
+                                   <div class="layui-inline">
+                                     <div class="layui-form-item">
+                                       <label class="layui-form-label">联系电话</label>
+                                       <div class="layui-input-inline">
+                                         <input type="text" name="phone" lay-verify="required" placeholder="" class="layui-input phone">
+                                       </div>
+                                     </div>
+                                   </div>
+
+                                   <div class="layui-inline">
+                                     <div class="layui-form-item">
+                                       <label class="layui-form-label">作品主题</label>
+                                       <div class="layui-input-inline">
+                                         <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                                       </div>
+                                     </div>
+                                   </div>
+
+                                   <div class="layui-inline">
+                                     <div class="layui-form-item">
+                                       <label class="layui-form-label">参赛项目</label>
+                                       <div class="layui-input-inline">
+                                           <select name="mid" class="mid" lay-verify="required">
+                                             <option value="">请选择</option>
+                                             <foreach name="match" item='v'>
+                                                <option value="{$v.id}">{$v.title}</option>
+                                             </foreach>
+                                           </select>
+                                       </div>
+                                     </div>
+                                   </div>
+
+                                   <div class="layui-inline">
+                                     <div class="layui-form-item">
+                                       <label class="layui-form-label">参赛宣言</label>
+                                       <div class="layui-input-inline">
+                                         <input type="text" name="desc" lay-verify="required" placeholder="" class="layui-input title">
+                                       </div>
+                                     </div>
+                                   </div>
+                                 </td>
+                               </tr>
+
+                               <tr>
+                                 <td colspan="2">
+                                    <div class="layui-elem-quote" style="margin-top: 0px;margin-bottom: 0px;">
+                                      <p>注：由于服务器资源有限，所以此处每次给你返回的是同一张图片</p>
+                                    </div>
+                                 </td>
+                               </tr>
+
+                               <tr>
+                                 <td colspan="2">
+                                   <div class="layui-inline">
+                                     <div class="layui-form-item">
+                                       <label class="layui-form-label">上传文件</label>
+                                       <div class="layui-input-inline">
+                                         <input type="file" id="add_upload_file" name="file" lay-type="video" class="layui-upload-file">
+                                       </div>
+                                       <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
+                                         预览
+                                       </a>
+                                     </div>
+                                   </div>
+                                 </td>
+                               </tr>
+
+                               <tr>
+                                 <td class="center" colspan="2">
+                                   <div class="layui-form-item layui-form-text">
+                                       <label class="layui-form-label" style="width: 100%!important;text-align: left;">文字说明</label>
+                                       <div class="layui-input-block">
+                                           <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_add"></textarea>
+                                       </div>
+                                   </div>
+                                 </td>
+                               </tr>
+                             </tbody>
+                             <tfoot>
+                               <tr>
+                                 <td colspan="2" style="text-align:right;">
+                                   <input type="hidden" name="type" lay-verify="required" class="layui-input type" value="{$row.type}" readonly>
+                                   <input type="hidden" name="file_url" lay-verify="required" class="layui-input file_url" readonly>
+                                   <input type="hidden" name="images" lay-verify="required" class="layui-input images" readonly>
+                                   <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>
+                                 </td>
+                               </tr>
+                             </tfoot>
+                           </table>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="clear"></div>
-
-
-<!-- 头部引用 -->
-<include file="Common/footer" />
+<div id="bot">
+    <div class="bot1">
+        <div class="w1000 clear">
+            <div class="fl colorMain clear left">
+                <span class="icon-yqlj mr5 mt5 fl"></span><b class="fl">友情链接：</b>       
+            </div>
+            <div class="right">
+                <ul>
+                    <li><a href="#">足球协会</a></li>
+                    <li><a href="#">篮球协会</a></li>
+                    <li><a href="#">天津市体育局</a></li>
+                    <li><a href="#">国家体育总局</a></li>
+                    <li><a href="#">全运组委会</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="bot2">
+        <div class="w1000 marok">
+            <div class="sinak">
+                <span class="jt"></span>
+                <img src="__PUBLIC__/Home/images/erweima.jpg" class="ma">
+            </div>
+            <div class="wxk">
+                <span class="jt"></span>
+                <img src="__PUBLIC__/Home/images/erweima.jpg" class="ma">
+            </div>
+            <a href="javascript:;" class="bgsinaRed"><img src="__PUBLIC__/Home/images/xing.png" alt=""></a>
+            <a href="javascript:;" class="bgwxGreen"><img src="__PUBLIC__/Home/images/xing.png" alt=""></a>
+            <a href="index.html" class="botlogo"><img src="__PUBLIC__/Home/images/logoo.png"></a>
+        </div>
+    </div>
+    <div class="bot3">
+        <div class="w1000">
+            Tian Jin Bei Li Jian Sports Consulting Co., Ltd. ©2017 All Rights Reserved 津ICP备00000000号
+        </div>
+    </div>
+</div>
 
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
-<script src="__PUBLIC__/Home/js/index.js"></script>
+<script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
+
+
+
+<script>
+    //添加
+    function _ajax_add(_data){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/Match/ajax_add')}",
+             data: _data,
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     alert(json.msg);
+                     window.location.reload();
+                 }else{
+                     alert(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
+      var form = layui.form()
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+
+
+      //上传文件
+      layui.upload({
+         url: "{:U('Home/Index/lay_upload_file')}" //上传接口
+         ,elem: '#add_upload_file' //指定原始元素，默认直接查找class="layui-upload-file"
+         ,ext : 'mp4'
+         ,method: 'post' //上传接口的http类型
+         ,success: function(res){ //上传成功后的回调
+           if(res.code==0){
+              $('#add_form .file_url').val(res.data.src);
+              $('#add_form .show_file_btn').show().attr('href', res.data.src);
+           }
+         }
+      });
+
+
+      //上传图片
+      layui.upload({
+         url: "{:U('Home/Index/lay_upload_img')}" //上传接口
+         ,elem: '#add_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
+         ,success: function(res){ //上传成功后的回调
+           if(res.code==0){
+              var str='';
+                 str+='<a href="#">'+
+                        '<img src="'+res.data.src+'">'+
+                      '</a>';
+
+              $('#add_form .image_box').append(str);
+
+
+              var arr=[];
+              $.each($('#add_form .image_box img'), function(name, value){
+                  console.log($(value).attr('src'));
+                  arr.push($(value).attr('src'));
+              });
+              var arr2str=arr.join('#');
+              console.log(arr2str);
+              $('#add_form .images').val(arr2str);
+           }
+         }
+      });
+
+      
+      
+      //上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
+      layedit.set({
+          uploadImage: {
+              url: "{:U('Home/Index/lay_upload_file')}", //接口url
+              type: 'post', //默认post
+          }
+      });
+
+      //创建一个编辑器
+      var editIndex = layedit.build('editer_add');
+
+      //自定义验证规则
+      form.verify({
+        title: function(value){
+          if(value.length < 5){
+            return '标题至少得5个字符啊';
+          }
+        }
+        ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+        ,content: function(value){
+          layedit.sync(editIndex);
+        }
+      });
+
+      //监听提交
+      form.on('submit(demo1_add)', function(data){
+        var _json=_ajax_add(data.field);
+        return false;
+      });
+    });
+</script>
 </body>
 </html>
