@@ -79,7 +79,7 @@ class BaomingController extends CommonController{
     }
 
     public function ajax_vote(){
-        echo get_client_ip();die;
+        // echo get_client_ip();die;
         global $user;
 
         $id=$_GET['id'];
