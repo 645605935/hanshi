@@ -94,7 +94,6 @@
 #bottom div {
 	width: 100%;
 	height: 400px;
-	display: none;
 }
 
 label {
@@ -272,7 +271,9 @@ a:hover {
 }
 
 .information {
-	padding: 100px 50px 50px 400px;
+	width: 1000px;
+	margin: 50px auto;
+	box-sizing:border-box;
 }
 
 .defined {

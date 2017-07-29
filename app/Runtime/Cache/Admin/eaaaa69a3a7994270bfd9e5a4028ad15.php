@@ -441,6 +441,23 @@
       </ul>
     </li>
 
+    <li <?php if($cur_c == 'Baoming'): ?>class="active open"<?php endif; ?>>
+      <a href="#" class="dropdown-toggle">
+        <i class="icon-film"></i>
+        <span class="menu-text"> 报名管理 </span>
+        <b class="arrow icon-angle-down"></b>
+      </a>
+
+      <ul class="submenu">
+        <li <?php if($cur_v == 'Baoming-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Baoming/index');?>" page="Admin/Baoming/index" title="index" data-title="报名管理">
+            <i class="icon-double-angle-right"></i>
+            报名管理
+          </a>
+        </li>
+      </ul>
+    </li>
+
     <li <?php if($cur_c == 'Introduction'): ?>class="active open"<?php endif; ?>>
       <a href="#" class="dropdown-toggle">
         <i class="icon-film"></i>
