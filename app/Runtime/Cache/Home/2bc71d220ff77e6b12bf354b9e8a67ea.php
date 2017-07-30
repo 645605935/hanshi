@@ -13,7 +13,11 @@
 </head>
 <body>
     <!-- 头部引用 -->
-    <div class="top-add"><a href="#4"><img src="/Public/Home/images/img3.jpg" alt=""></a></div>
+    <?php
+ $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select(); ?>
+
+
+<div class="top-add"><a href="#4"><img src="/Public/Home/images/img3.jpg" alt=""></a></div>
 <div class="head w1000">
     <div class="header fl">
         <div class="logo fl"><a href="#"><img src="/Public/Home/images/logo.jpg" alt=""></a></div>
@@ -75,23 +79,39 @@
         <li>
             <a href="<?php echo U('Home/Match/index');?>" class="li-a">赛事活动</a>
             <ul>
-                <li><a href="saishihuodong-quanbu.html">全部</a></li>
-                <li><a href="saishihuodong-yinpin.html"><span class="color1">音频类</span></a></li>
-                <li><a href="saishihuodong-shipin.html">视频类</a></li>
-                <li><a href="saishihuodong-tupian.html">图片类</a></li>
-                <li><a href="saishihuodong-shufa.html">书法类</a></li>
-                <li><a href="saishihuodong-qita.html">其他</a></li>
+                <li>
+                    <a href="<?php echo U('Home/Match/index');?>">
+                        <?php if(!$_GET['type']): ?><span class="color1">全部</span>
+                        <?php else: ?>
+                            全部<?php endif; ?>
+                    </a>
+                </li>
+                <?php if(is_array($top_nav_saishihuodong)): foreach($top_nav_saishihuodong as $key=>$v): ?><li>
+                        <a href="<?php echo U('Home/Match/index',array('type'=>$v['id']));?>">
+                            <?php if($v['id'] == $_GET['type']): ?><span class="color1"><?php echo ($v["title"]); ?></span>
+                            <?php else: ?>
+                                <?php echo ($v["title"]); endif; ?>
+                        </a>
+                    </li><?php endforeach; endif; ?>
             </ul>
         </li>
         <li>
-            <a href="<?php echo U('Home/Match/baoming');?>" class="li-a">参赛报名</a>
+            <a href="<?php echo U('Home/Baoming/index');?>" class="li-a">参赛报名</a>
             <ul>
-                <li><a href="bisaibaoming-quanbu.html"><span class="color1">全部</span></a></li>
-                <li><a href="bisaibaoming-yinpin.html">音频类</a></li>
-                <li><a href="bisaibaoming-shipin.html">视频类</a></li>
-                <li><a href="bisaibaoming-tupian.html">图片类</a></li>
-                <li><a href="bisaibaoming-shufa.html">书法类</a></li>
-                <li><a href="bisaibaoming-qita.html">其他</a></li>
+                <li>
+                    <a href="<?php echo U('Home/Baoming/index');?>">
+                        <?php if(!$_GET['type']): ?><span class="color1">全部</span>
+                        <?php else: ?>
+                            全部<?php endif; ?>
+                    </a>
+                </li>
+                <?php if(is_array($top_nav_saishihuodong)): foreach($top_nav_saishihuodong as $key=>$v): ?><li>
+                        <a href="<?php echo U('Home/Baoming/index',array('type'=>$v['id']));?>">
+                            <?php if($v['id'] == $_GET['type']): ?><span class="color1"><?php echo ($v["title"]); ?></span>
+                            <?php else: ?>
+                                <?php echo ($v["title"]); endif; ?>
+                        </a>
+                    </li><?php endforeach; endif; ?>
             </ul>
         </li>
         <li>
