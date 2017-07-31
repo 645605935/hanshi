@@ -1,3 +1,6 @@
+<?php
+    $_page_=$_SERVER['PATH_INFO'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,11 +30,11 @@
             </div>
             <div class="nav">
                 <ul>
-                    <li><a href="tongcheng-qiye.html">网站首页</a></li>
-                    <li class="cur"><a href="tongcheng-jianjie.html">简介</a></li>
-                    <li><a href="tongcheng-xinwen.html">新闻中心</a></li>
-                    <li><a href="tongcheng-chanpin.html">产品中心</a></li>
-                    <li><a href="tongcheng-yanchu.html">精彩演出</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/qiye')}" class="<if condition="$_page_ eq 'Tongchengjieyue/qiye'">cur</if>">网站首页</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/jianjie')}" class="<if condition="$_page_ eq 'Tongchengjieyue/jianjie'">简介</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/xinwen')}" class="<if condition="$_page_ eq 'Tongchengjieyue/xinwen'">新闻中心</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/chanpin')}" class="<if condition="$_page_ eq 'Tongchengjieyue/chanpin'">产品中心</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/yanchu')}" class="<if condition="$_page_ eq 'Tongchengjieyue/yanchu'">精彩演出</a></li>
                 </ul>
             </div>
             <div class="banner">
