@@ -43,14 +43,22 @@
             </ul>
         </li>
         <li>
-            <a href="{:U('Home/Tongchengjieyue/index')}" class="li-a">分类清单</a>
-            <ul <if condition="$_page_ eq 'Tongchengjieyue/index'">style="display:block;"</if>>
-                <li><a href="{:U('Home/Tongchengjieyue/index')}">同城借阅</a></li>
-                <li><a href="fenlei-zhiyuanzhe.html"><span class="color1">志愿者活动</span></a></li>
+            <a href="{:U('Home/Tongchengjieyue/index')}" class="li-a <if condition="stripos($_page_,'Tongchengjieyue/index') nheq false">cur</if>">分类清单</a>
+            <ul <if condition="stripos($_page_,'Tongchengjieyue/index') nheq false">style="display:block;"</if>>
+                <li>
+                    <a href="{:U('Home/Tongchengjieyue/index')}">
+                        <if condition="!$_GET['type']">
+                            <span class="color1">同城借阅</span>
+                        <else/>
+                            同城借阅
+                        </if>
+                    </a>
+                </li>
+                <li><a href="fenlei-zhiyuanzhe.html">志愿者活动</a></li>
                 <li><a href="fenlei-remen.html">热门活动</a></li>
                 <li><a href="fenlei-chuantong.html">传统文化</a></li>
                 <li><a href="fenlei-yanchu.html">精彩演出</a></li>
-                <li><a href="fenlei-remen.html">热卖产品</a></li>
+                <li><a href="{:U('Home/Tongchengjieyue/chanpin')}">热卖产品</a></li>
                 <li><a href="#2">创客空间</a></li>
                 <li><a href="fenlei-kecheng.html">精品课程</a></li>
             </ul>
@@ -64,9 +72,9 @@
                 <li><a href="#2">培训课程</a></li>
             </ul>
         </li>
-        <li>
-            <a href="{:U('Home/Match/index')}" class="li-a">赛事活动</a>
-            <ul <if condition="$_page_ eq 'Match/index'">style="display:block;"</if>>
+        <li>         
+            <a href="{:U('Home/Match/index')}" class="li-a <if condition="stripos($_page_,'Match/index') nheq false">cur</if>">赛事活动</a>
+            <ul <if condition="stripos($_page_,'Match/index') nheq false">style="display:block;"</if>>
                 <li>
                     <a href="{:U('Home/Match/index')}">
                         <if condition="!$_GET['type']">
@@ -90,8 +98,8 @@
             </ul>
         </li>
         <li>
-            <a href="{:U('Home/Baoming/index')}" class="li-a">参赛报名</a>
-            <ul <if condition="$_page_ eq 'Baoming/index'">style="display:block;"</if>>
+            <a href="{:U('Home/Baoming/index')}" class="li-a <if condition="stripos($_page_,'Baoming/index') nheq false">cur</if>">参赛报名</a>
+            <ul <if condition="stripos($_page_,'Baoming/index') nheq false">style="display:block;"</if>>
                 <li>
                     <a href="{:U('Home/Baoming/index')}">
                         <if condition="!$_GET['type']">

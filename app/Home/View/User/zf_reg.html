@@ -192,7 +192,7 @@
 		              <tr>
 		                <td colspan="2" style="text-align:right;">
 		                  <input type="hidden" name="gid" lay-verify="required" value="{$gid}" autocomplete="off" placeholder="" class="layui-input gid">
-		                  <input type="hidden" name="gf_img" lay-verify="required" autocomplete="off" placeholder="" class="layui-input gf_img">
+		                  <input type="hidden" name="zf_img" lay-verify="required" autocomplete="off" placeholder="" class="layui-input zf_img">
 		                  <button class="layui-btn" lay-submit="" lay-filter="demo1_add">立即注册</button>
 		                </td>
 		              </tr>
@@ -263,7 +263,7 @@
                       '</a>';
 
               $('#add_form .img_box').html(str);
-              $('#add_form .gf_img').val(res.data.src);
+              $('#add_form .zf_img').val(res.data.src);
            }
          }
       });
