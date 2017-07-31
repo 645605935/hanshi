@@ -13,7 +13,11 @@ $(function(){
 		winHeight=document.body.clientHeight;
 		}
 
-	$('.nav ul li .li-a').hover(function(){
+	$('.nav ul li .li-a').click(function(){
+		$(this).parents('li').siblings('li').find('ul').hide();
+		$(this).parents('li').find('ul').show();
+	});
+	$('.nav ul li:nth-child(2) .li-a').hover(function(){
 		$(this).parents('li').siblings('li').find('ul').hide();
 		$(this).parents('li').find('ul').show();
 	});

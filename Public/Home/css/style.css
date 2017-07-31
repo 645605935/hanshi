@@ -298,6 +298,8 @@
 
 /*同城借阅*/
 .read-city {padding: 20px;}
+.read-city1 {padding: 0;padding-left: 15%;margin-left: 20px;}
+.left-nav1 {margin-right: -15%;}
 .readd-tit {margin: 20px 0;}
 .readd-top {width: 100%;}
 .readd-top ul {float: left;width: 100%;font-size: 0;}
