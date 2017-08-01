@@ -14,6 +14,8 @@ class IntroductionController extends AuthController {
         if($_POST){
             $this->_POST=$_POST;
         }
+
+        
     }
 
     public function index(){
@@ -33,19 +35,22 @@ class IntroductionController extends AuthController {
         $this->page_buttons=$page_buttons;
         $this->page=$page;
 
+        $config=M('Config')->field('logo')->find(1);
+        $this->logo=$config['logo'];
         $this->display();
     }
 
     //获取单条信息
     public function ajax_get_row_info(){
-        $id=I('id');
+        $id=$_GET['id'];
 
         $field=array(
             'id',
             'company_address',
             'company_content',
             'company_logo',
-            'company_phone'
+            'company_zuoji',
+            'company_desc'
         );
 
         if($id){

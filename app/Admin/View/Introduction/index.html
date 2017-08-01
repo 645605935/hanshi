@@ -143,15 +143,7 @@
                               </div>
                             </td>
                             <td>
-                              <div class="layui-inline" style="display:none;">
-                                <div class="layui-form-item">
-                                  <label class="layui-form-label">LOGO</label>
-                                  <div class="layui-input-inline">
-                                    <input type="text" name="company_logo" lay-verify="required" class="layui-input company_logo" readonly>
-                                  </div>
-                                </div>
-                              </div>
-                              <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
+                              <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="__UPLOAD__/{$logo}" data-holder-rendered="true" style="width: 140px; height: 140px;">
                             </td>
                           </tr>
                           
@@ -161,6 +153,17 @@
                                   <label class="layui-form-label" style="width: 100%!important;text-align: left;">简介内容</label>
                                   <div class="layui-input-block">
                                       <textarea class="layui-textarea layui-hide company_content" name="company_content" lay-verify="content" id="editer_edit"></textarea>
+                                  </div>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td class="center" colspan="2">
+                              <div class="layui-form-item layui-form-text">
+                                  <label class="layui-form-label" style="width: 100%!important;text-align: left;">口号</label>
+                                  <div class="layui-input-block">
+                                      <input type="text" name="company_desc" style="width:628px;" lay-verify="required" placeholder="" class="layui-input company_desc">
                                   </div>
                               </div>
                             </td>
@@ -184,7 +187,7 @@
                                 <div class="layui-form-item">
                                   <label class="layui-form-label">单位电话</label>
                                   <div class="layui-input-inline">
-                                    <input type="text" name="company_phone" lay-verify="required" autocomplete="off" class="layui-input company_phone">
+                                    <input type="text" name="company_zuoji" lay-verify="required" autocomplete="off" class="layui-input company_zuoji">
                                   </div>
                                 </div>
                               </div>
@@ -196,8 +199,9 @@
                         </tbody>
                         <tfoot>
                           <tr>
-                            <td colspan="2" style="text-align:right;">
-                              <input type="hidden" name="id" class="layui-input id">
+                            <td colspan="2">
+                              <input type="hidden" name="id" value="" lay-verify="required" autocomplete="off" class="layui-input id">
+                              <input type="hidden" name="company_logo" lay-verify="required" class="layui-input company_logo" readonly>
                               <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确认</button>
                               <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
                             </td>
@@ -478,15 +482,15 @@
               success  : function(json) {  
                   if(json.code == 0){
                       var data=json.data;
-
                       $('#edit_form .id').val(data.id);
                       $('#edit_form .company_logo').val(data.company_logo);
                       if(data.company_logo){
                           $('#edit_form .show_img').attr('src', data.company_logo);
                       }
+                      $('#edit_form .company_desc').val(data.company_desc);
                       $('#edit_form .company_content').val(data.company_content);
                       $('#edit_form .company_address').val(data.company_address);
-                      $('#edit_form .company_phone').val(data.company_phone);
+                      $('#edit_form .company_zuoji').val(data.company_zuoji);
 
                       _json=json;
                   }else{

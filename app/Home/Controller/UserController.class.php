@@ -47,7 +47,10 @@ class UserController extends CommonController{
     }
 
     public function qy_reg(){
+        $company_type=M('Type')->where(array('pid'=>1290))->select();
+
         $this->gid=22;
+        $this->company_type=$company_type;
         $this->display();
     }
 

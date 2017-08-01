@@ -120,7 +120,7 @@
 		                      <div class="layui-form-item">
 		                        <label class="layui-form-label left_label">机构名称</label>
 		                        <div class="layui-input-inline">
-		                           <input type="text" name="zf_name" lay-verify="required" autocomplete="off" placeholder="" class="layui-input zf_name">
+		                           <input type="text" name="company_name" lay-verify="required" autocomplete="off" placeholder="" class="layui-input company_name">
 		                        </div>
 		                      </div>
 		                  </div>
@@ -133,7 +133,7 @@
 		                      <div class="layui-form-item">
 		                        <label class="layui-form-label left_label">机构座机</label>
 		                        <div class="layui-input-inline">
-		                           <input type="text" name="zf_zuoji" lay-verify="required" autocomplete="off" placeholder="" class="layui-input zf_zuoji">
+		                           <input type="text" name="company_zuoji" lay-verify="required" autocomplete="off" placeholder="" class="layui-input company_zuoji">
 		                        </div>
 		                      </div>
 		                  </div>
@@ -146,7 +146,7 @@
 		                      <div class="layui-form-item">
 		                        <label class="layui-form-label left_label">机构简称</label>
 		                        <div class="layui-input-inline">
-		                           <input type="text" name="zf_short_name" lay-verify="required" autocomplete="off" placeholder="" class="layui-input zf_short_name">
+		                           <input type="text" name="company_short_name" lay-verify="required" autocomplete="off" placeholder="" class="layui-input company_short_name">
 		                        </div>
 		                      </div>
 		                  </div>
@@ -190,9 +190,9 @@
 		            </tbody>
 		            <tfoot>
 		              <tr>
-		                <td colspan="2" style="text-align:right;">
+		                <td colspan="2" style="text-align:center;">
 		                  <input type="hidden" name="gid" lay-verify="required" value="{$gid}" autocomplete="off" placeholder="" class="layui-input gid">
-		                  <input type="hidden" name="zf_img" lay-verify="required" autocomplete="off" placeholder="" class="layui-input zf_img">
+		                  <input type="hidden" name="company_img" lay-verify="required" autocomplete="off" placeholder="" class="layui-input company_img">
 		                  <button class="layui-btn" lay-submit="" lay-filter="demo1_add">立即注册</button>
 		                </td>
 		              </tr>
@@ -263,7 +263,7 @@
                       '</a>';
 
               $('#add_form .img_box').html(str);
-              $('#add_form .zf_img').val(res.data.src);
+              $('#add_form .company_img').val(res.data.src);
            }
          }
       });

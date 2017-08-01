@@ -14,7 +14,7 @@
 <body>
     <!-- 头部引用 -->
     <?php
- $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select(); ?>
+ $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select(); $_page_=$_SERVER['PATH_INFO']; ?>
 
 
 <div class="top-add"><a href="#4"><img src="/Public/Home/images/img3.jpg" alt=""></a></div>
@@ -55,14 +55,20 @@
             </ul>
         </li>
         <li>
-            <a href="<?php echo U('Home/Tongchengjieyue/index');?>" class="li-a">分类清单</a>
-            <ul>
-                <li><a href="<?php echo U('Home/Tongchengjieyue/index');?>">同城借阅</a></li>
-                <li><a href="fenlei-zhiyuanzhe.html"><span class="color1">志愿者活动</span></a></li>
+            <a href="<?php echo U('Home/Tongchengjieyue/index');?>" class="li-a <?php if(stripos($_page_,'Tongchengjieyue/index') !== false): ?>cur<?php endif; ?>">分类清单</a>
+            <ul <?php if(stripos($_page_,'Tongchengjieyue/index') !== false): ?>style="display:block;"<?php endif; ?>>
+                <li>
+                    <a href="<?php echo U('Home/Tongchengjieyue/index');?>">
+                        <?php if(!$_GET['type']): ?><span class="color1">同城借阅</span>
+                        <?php else: ?>
+                            同城借阅<?php endif; ?>
+                    </a>
+                </li>
+                <li><a href="fenlei-zhiyuanzhe.html">志愿者活动</a></li>
                 <li><a href="fenlei-remen.html">热门活动</a></li>
                 <li><a href="fenlei-chuantong.html">传统文化</a></li>
                 <li><a href="fenlei-yanchu.html">精彩演出</a></li>
-                <li><a href="fenlei-remen.html">热卖产品</a></li>
+                <li><a href="<?php echo U('Home/Tongchengjieyue/chanpin');?>">热卖产品</a></li>
                 <li><a href="#2">创客空间</a></li>
                 <li><a href="fenlei-kecheng.html">精品课程</a></li>
             </ul>
@@ -76,9 +82,9 @@
                 <li><a href="#2">培训课程</a></li>
             </ul>
         </li>
-        <li>
-            <a href="<?php echo U('Home/Match/index');?>" class="li-a">赛事活动</a>
-            <ul>
+        <li>         
+            <a href="<?php echo U('Home/Match/index');?>" class="li-a <?php if(stripos($_page_,'Match/index') !== false): ?>cur<?php endif; ?>">赛事活动</a>
+            <ul <?php if(stripos($_page_,'Match/index') !== false): ?>style="display:block;"<?php endif; ?>>
                 <li>
                     <a href="<?php echo U('Home/Match/index');?>">
                         <?php if(!$_GET['type']): ?><span class="color1">全部</span>
@@ -96,8 +102,8 @@
             </ul>
         </li>
         <li>
-            <a href="<?php echo U('Home/Baoming/index');?>" class="li-a">参赛报名</a>
-            <ul>
+            <a href="<?php echo U('Home/Baoming/index');?>" class="li-a <?php if(stripos($_page_,'Baoming/index') !== false): ?>cur<?php endif; ?>">参赛报名</a>
+            <ul <?php if(stripos($_page_,'Baoming/index') !== false): ?>style="display:block;"<?php endif; ?>>
                 <li>
                     <a href="<?php echo U('Home/Baoming/index');?>">
                         <?php if(!$_GET['type']): ?><span class="color1">全部</span>
