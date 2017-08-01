@@ -28,7 +28,7 @@
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
-
+		<script src="__PUBLIC__/Admin/assets/js/jQuery1.7.2for_live.min.js"></script>
 		<script src="__PUBLIC__/Admin/assets/js/ace-extra.min.js"></script>
 
 
@@ -70,11 +70,7 @@
 						</script>
 
 						<ul class="breadcrumb">
-							<li>
-								<i class="icon-home home-icon"></i>
-								{$cur_controller_name}
-							</li>
-							<li class="active">{$cur_action_name}</li>
+							<include file="Public/_breadcrumb"/>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -186,11 +182,14 @@
 			</a>
 		</div><!-- /.main-container -->
 
+		<!-- 底栏版本说明 -->
+		<include file="Public/footer"/>
+
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
 
-		<script src="__PUBLIC__/Admin/assets/js/jQuery1.7.2for_live.min.js"></script>
+		
 
 		<!-- <![endif]-->
 

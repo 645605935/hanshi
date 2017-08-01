@@ -127,8 +127,11 @@ class IntroductionController extends AuthController {
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$img;
+                $data['data']["src"]='/Uploads/layui/'.$img;
             }
+
+            //上传到阿里云OSS
+            oss_upload( '/Uploads/layui/'.$img );
 
             echo json_encode($data);
         }

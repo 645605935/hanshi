@@ -1104,7 +1104,7 @@
               if(_json.code==0){
                   var _user=_json.data;
 
-                  $('#LAY_demo_upload_edit').attr('src','/Uploads'+_user.img);
+                  $('#LAY_demo_upload_edit').attr('src',_user.img);
                   $('#edit_form_block input[name=truename]').val(_user.truename);
                   $('#edit_form_block input[name=username]').val(_user.username);
                   $('#edit_id').val(_user.id);
@@ -1348,7 +1348,7 @@
                        operate += "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' data-id='"+_row.id+"'>编辑</button>";
                        operate += "<button class='btn btn-danger btn-xs id-btn-dialog2_del' data-id='"+_row.id+"'>删除</button>";
 
-                       $("#grid-table").addRowData("1", {"id":_row.id,"truename":_row.truename,"_auth_group_title":_row._auth_group_title,"username":_row.username,"time":_row.time,"img":"./Uploads"+_row.img,"operates":_row.operate}, "first");  
+                       $("#grid-table").addRowData("1", {"id":_row.id,"truename":_row.truename,"_auth_group_title":_row._auth_group_title,"username":_row.username,"time":_row.time,"img":_row.img,"operates":_row.operate}, "first");  
 
                    }else{
                        layer.msg(json.msg);
@@ -1465,7 +1465,7 @@
             var _data=_json.data;
             var selectID=$("#grid-table").getGridParam("selrow");
 
-            $("#grid-table").setRowData(selectID,{"truename":_data.truename,"_auth_group_title":_data._auth_group_title, "username":_data.username, "img":"./Uploads"+_data.img});
+            $("#grid-table").setRowData(selectID,{"truename":_data.truename,"_auth_group_title":_data._auth_group_title, "username":_data.username, "img":_data.img});
 
             if(_json.code==0){
                 $("div[aria-describedby='dialog-confirm_edit'] .ui-dialog-titlebar-close").trigger("click");
@@ -1493,8 +1493,8 @@
              ,success: function(res){ //上传成功后的回调
                console.log(res);
                if(res.code==0){
-                  $('#LAY_demo_upload_edit').attr('src','/Uploads'+res.data);
-                  $('#edit_img').val(res.data);
+                  $('#LAY_demo_upload_edit').attr('src',res.data.src);
+                  $('#edit_img').val(res.data.src);
                }
              }
            });
@@ -1506,45 +1506,11 @@
              ,success: function(res){ //上传成功后的回调
                console.log(res);
                if(res.code==0){
-                  $('#LAY_demo_upload_add').attr('src','/Uploads'+res.data);
-                  $('#add_img').val(res.data);
+                  $('#LAY_demo_upload_add').attr('src',res.data.src);
+                  $('#add_img').val(res.data.src);
                }
              }
            });
-        });
-    </script>
-
-    <script>
-        layui.use('layedit', function(){
-          var layedit = layui.layedit
-          ,$ = layui.jquery;
-          
-          //构建一个默认的编辑器
-          var index = layedit.build('LAY_demo1');
-          
-          //编辑器外部操作
-          var active = {
-            content: function(){
-              alert(layedit.getContent(index)); //获取编辑器内容
-            }
-            ,text: function(){
-              alert(layedit.getText(index)); //获取编辑器纯文本内容
-            }
-            ,selection: function(){
-              alert(layedit.getSelection(index));
-            }
-          };
-          
-          $('.site-demo-layedit').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-          });
-          
-          //自定义工具栏
-          layedit.build('LAY_demo2', {
-            tool: ['face', 'link', 'unlink', '|', 'left', 'center', 'right']
-            ,height: 100
-          })
         });
     </script>
   </body>

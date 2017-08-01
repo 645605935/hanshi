@@ -24,8 +24,17 @@ class TongchengjieyueController extends CommonController{
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
 
+        $config=M('Config')->find(1);
+        $_oss_url_='http://'.$config['oss_url'].'/';
+        $_oss_style_48x48_=$config['oss_style_48x48'];
+        
+
 
         $block1=M('User')->limit(8)->select();
+        foreach ($block1 as $key => $value) {
+            $block1[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_48x48_;
+        }
+
         $block2=M('User')->limit(3)->select();
         $block2_big=M('User')->find(1);
         $block3=M('User')->limit(9)->select();

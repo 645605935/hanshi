@@ -96,7 +96,7 @@ return array(
         'KEY_ID'             => 'LTAIXRc7hr6QkgCM', // 阿里云oss key_id
         'KEY_SECRET'         => 'Mmt3QK2Kp005IpWGduA00ejN0bEeOD', // 阿里云oss key_secret
         'END_POINT'          => 'oss-cn-beijing.aliyuncs.com', // 阿里云oss endpoint
-        'BUCKET'             => 'zhangtengrui'  // bucken 名称
+        'BUCKET'             => 'zhangtr-com-hanshi'  // bucken 名称
     ),
 
 

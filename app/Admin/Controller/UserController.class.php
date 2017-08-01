@@ -76,7 +76,6 @@ class UserController extends AuthController {
         $page_buttons=M('PageButtons')->where(array('page'=>$page))->select();
         $this->page_buttons=$page_buttons;
         $this->page=$page;
-
         
         $this->display();
     }
@@ -96,10 +95,16 @@ class UserController extends AuthController {
         $d = D('User');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
 
+
+            
+        $config=M('Config')->find(1);
+        $_oss_url_='http://'.$config['oss_url'].'/';
+        $_oss_style_48x48_=$config['oss_style_48x48'];
         foreach ($list as $key => $value) {
             $list[$key]['register_time']=date('Y-m-d',$value['register_time']);
-            $list[$key]['img']="./Uploads".$value['img'];
+            $list[$key]['img']=$_oss_url_ . $value['img']. "?x-oss-process=" . $_oss_style_48x48_;
         }
+
 
         if($list){
             $data=array();
@@ -113,6 +118,7 @@ class UserController extends AuthController {
         }
         echo json_encode($data);
     }
+
 
     //排序
     public function ajax_sortable(){
@@ -969,40 +975,11 @@ class UserController extends AuthController {
                   $data=array();
                   $data['code']=0;
                   $data['msg']='success';
-                  $data['data']='/layui/'.$img;
+                  $data['data']["src"]='/Uploads/layui/'.$img;
               }
 
-              echo json_encode($data);
-          }
-      }
-
-      // 上传图片--不对图进行任何处理
-      public function upload_img_editer(){
-          if($_FILES['img']['size']>0){
-              $upload = new \Think\Upload();// 实例化上传类
-              $upload->maxSize   =     31457280 ;// 设置附件上传大小
-              $upload->exts      =     array('zip', 'rar', 'xls','xlsx', 'doc','docx','ppt','pptx','pdf','jpg','png','jpeg','gif');// 设置附件上传类型
-              $upload->uploadReplace  = false;// 存在同名文件是否覆盖
-              $upload->autoSub   =     false;//是否启用子目录保存
-              $upload->rootPath  =     './Uploads/'; // 设置附件上传根目录
-              $upload->savePath  =     'layui/'; // 设置附件上传（子）目录
-              $upload->saveRule  =     ''; // 设置附件上传（子）目录
-               
-              // 上传文件 
-              $info   =   $upload->upload();
-
-              if(!$info) {
-                  $data=array();
-                  $data['code']=0;
-                  $data['msg']=$upload->getError();
-              }else{
-                  $img=$info['img']['savename'];
-                  $data=array();
-                  $data['code']=0;
-                  $data['msg']='success';
-                  $data['data']['src']='/layui/'.$img;
-                  $data['data']['title']='11111';
-              }
+              //上传到阿里云OSS
+              oss_upload( '/Uploads/layui/'.$img );
 
               echo json_encode($data);
           }
