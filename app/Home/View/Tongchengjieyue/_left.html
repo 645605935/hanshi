@@ -1,0 +1,52 @@
+<div class="side_head">
+    <div><span class="fr"><a href="#2"><img src="__PUBLIC__/Home/images/more.gif" title="更多"></a></span><strong>新闻中心</strong></div>
+</div>
+<div class="side_body">
+    <ul>
+    	<foreach name="activity_types" item="v">
+    		<li><a href="{:U('Home/Tongchengjieyue/xinwen',array('cid'=>$_GET['cid'],'type'=>$v['id']))}">{$v.title}</a></li>
+    	</foreach>
+    </ul>
+</div>
+<div class="side_head">
+    <div><span class="fr"><a href="#2"><img src="__PUBLIC__/Home/images/more.gif" title="更多"></a></span><strong>产品分类</strong></div>
+</div>
+<div class="side_body">
+    <ul>
+        <foreach name="product_types" item="v">
+    		<li><a href="{:U('Home/Tongchengjieyue/chanpin',array('cid'=>$_GET['cid'],'type_3'=>$v['id']))}">{$v.title}</a></li>
+    	</foreach>
+    </ul>
+</div>
+
+<div class="side_head">
+    <div><span class="fr"><a href="#2"><img src="__PUBLIC__/Home/images/more.gif" title="更多"></a></span><strong>精彩演出</strong></div>
+</div>
+<div class="side_body">
+    <ul>
+        <foreach name="video_types" item="v">
+    		<li><a href="{:U('Home/Tongchengjieyue/yanchu',array('cid'=>$_GET['cid'],'type'=>$v['id']))}">{$v.title}</a></li>
+    	</foreach>
+    </ul>
+</div>
+
+<div class="side_head">
+    <div><span class="fr"><a href="#2"><img src="__PUBLIC__/Home/images/more.gif" title="更多"></a></span><strong>站内搜索</strong></div>
+</div>
+<div class="side_body">
+    <div class="side_body">
+        <form action="#2">
+            <input type="text" value="" size="25" class="inp" placeholder="输入关键词">
+            <div style="padding:10px 0 0 0;">
+                <select name="file">
+                    <option value="news">新闻中心</option>
+                    <option value="credit">荣誉资质</option>
+                    <option value="job">人才招聘</option>
+                    <option value="info">招商代理</option>
+                    <option value="mall">产品库</option>
+                </select>
+                <input type="submit" value=" 搜 索 " class="sbm">
+            </div>
+        </form>
+    </div>
+</div>

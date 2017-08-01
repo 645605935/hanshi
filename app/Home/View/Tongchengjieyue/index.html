@@ -25,7 +25,7 @@
                         <ul>
                             <foreach name="block1" item="v">
                                 <li>
-                                    <a href="zhubo.html">
+                                    <a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$v['id']))}">
                                         <img src="{$v.company_logo}" alt="">
                                         <div class="dhide">
                                             <img src="{$v.company_logo}" alt="">
@@ -41,571 +41,101 @@
                     </div>
                     <div class="readd-p2 fl">
                         <ul class="ul-special">
-                            <li><a href="#4"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a></li>
+                            <li><a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$block2_big['id']))}"><img src="{$block2_big.company_logo}" alt=""></a></li>
                         </ul>
                         <ul>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
+                            <foreach name="block2" item="v">
+                                <li>
+                                    <a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$v['id']))}">
+                                        <img src="{$v.company_logo}" alt="">
+                                        <div class="dhide">
+                                            <img src="{$v.company_logo}" alt="">
+                                            <div class="dhide-con">
+                                                <h3>{$v.company_name}</h3>
+                                                <p>{$v.company_desc}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            </foreach>
                         </ul>
                     </div>
                     <div class="readd-p3 fl">
                         <ul>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
+                            <foreach name="block3" item="v">
+                                <li>
+                                    <a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$v['id']))}">
+                                        <img src="{$v.company_logo}" alt="">
+                                        <div class="dhide">
+                                            <img src="{$v.company_logo}" alt="">
+                                            <div class="dhide-con">
+                                                <h3>{$v.company_name}</h3>
+                                                <p>{$v.company_desc}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            </foreach>
                         </ul>
                     </div>
                     <div class="readd-p4 fl">
                         <ul>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
+                            <foreach name="block4" item="v">
+                                <li>
+                                    <a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$v['id']))}">
+                                        <img src="{$v.company_logo}" alt="">
+                                        <div class="dhide">
+                                            <img src="{$v.company_logo}" alt="">
+                                            <div class="dhide-con">
+                                                <h3>{$v.company_name}</h3>
+                                                <p>{$v.company_desc}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            </foreach>
                         </ul>
                         <ul class="ul-special">
-                            <li><a href="#4"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a></li>
+                            <li><a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$block4_big['id']))}"><img src="{$block4_big.company_logo}" alt=""></a></li>
                         </ul>
                     </div>
                     <div class="readd-p5 fl">
                         <ul>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
+                            <foreach name="block5" item="v">
+                                <li>
+                                    <a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$v['id']))}">
+                                        <img src="{$v.company_logo}" alt="">
+                                        <div class="dhide">
+                                            <img src="{$v.company_logo}" alt="">
+                                            <div class="dhide-con">
+                                                <h3>{$v.company_name}</h3>
+                                                <p>{$v.company_desc}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            </foreach>
                         </ul>
                     </div>
                     <div class="readd-p2 fl">
                         <ul class="ul-special">
-                            <li><a href="#4"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a></li>
+                            <li><a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$block6_big['id']))}"><img src="{$block6_big.company_logo}" alt=""></a></li>
                         </ul>
                         <ul>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
+                            <foreach name="block6" item="v">
+                                <li>
+                                    <a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$v['id']))}">
+                                        <img src="{$v.company_logo}" alt="">
+                                        <div class="dhide">
+                                            <img src="{$v.company_logo}" alt="">
+                                            <div class="dhide-con">
+                                                <h3>{$v.company_name}</h3>
+                                                <p>{$v.company_desc}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="zhubo.html">
-                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                    <div class="dhide">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <div class="dhide-con">
-                                            <h3>sdfsdf</h3>
-                                            <p>sdlfjsldk</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            </foreach>
                         </ul>
                     </div>
                 </div>
@@ -615,7 +145,7 @@
                             <ul>
                                 <foreach name="list" item="v">
                                     <li>
-                                        <a href="zhubo.html">
+                                        <a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$v['id']))}">
                                             <span class="readd-bimg fl"><img src="{$v.company_logo}" alt=""></span>
                                             <div class="readd-rcon">
                                                 <h4>{$v.company_name}</h4>
@@ -628,22 +158,12 @@
                         </div>
                     </div>
                     <div class="readd-right fr">
-                        <a href="zhubo.html"><img src="__PUBLIC__/Home/images/tu02.jpg" alt=""></a>
+                        <a href="{:U('Home/Tongchengjieyue/qiye')}"><img src="__PUBLIC__/Home/images/tu02.jpg" alt=""></a>
                     </div>
                 </div>
                 <div class="clear"></div>
                 <div class="page-con mt20">
-                    <div class="page-group clearfix">
-                        <em>共25条</em>
-                        <a href="#3" class="a1 a1f">上一页</a>
-                        <span>1</span>
-                        <a href="#3">2</a>
-                        <a href="#3">3</a>
-                        <i>...</i>
-                        <a href="#3">8</a>
-                        <a href="#3">9</a>
-                        <a href="#3" class="a1">下一页</a>
-                    </div>
+                    {$page}
                 </div>
             </div>
         </div>

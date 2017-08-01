@@ -4,46 +4,8 @@
 
         <div class="content mt20">
             <div class="left-part left-part1">
-                <div class="side_head">
-                    <div><span class="fr"><a href="#2"><img src="__PUBLIC__/Home/images/more.gif" title="更多"></a></span><strong>新闻中心</strong></div>
-                </div>
-                <div class="side_body">
-                    <ul>
-                        <li><a href="#2">新闻新闻</a></li>
-                        <li><a href="#2">新闻新闻</a></li>
-                        <li><a href="#2">新闻新闻</a></li>
-                    </ul>
-                </div>
-                <div class="side_head">
-                    <div><span class="fr"><a href="#2"><img src="__PUBLIC__/Home/images/more.gif" title="更多"></a></span><strong>产品分类</strong></div>
-                </div>
-                <div class="side_body">
-                    <ul>
-                        <li><a href="#2">新闻新闻</a></li>
-                        <li><a href="#2">新闻新闻</a></li>
-                        <li><a href="#2">新闻新闻</a></li>
-                    </ul>
-                </div>
-                <div class="side_head">
-                    <div><span class="fr"><a href="#2"><img src="__PUBLIC__/Home/images/more.gif" title="更多"></a></span><strong>站内搜索</strong></div>
-                </div>
-                <div class="side_body">
-                    <div class="side_body">
-                        <form action="#2"">
-                            <input type="text" value="" size="25" class="inp" placeholder="输入关键词">
-                            <div style="padding:10px 0 0 0;">
-                                <select name="file">
-                                    <option value="news">新闻中心</option>
-                                    <option value="credit">荣誉资质</option>
-                                    <option value="job">人才招聘</option>
-                                    <option value="info">招商代理</option>
-                                    <option value="mall">产品库</option>
-                                </select>
-                                <input type="submit" value=" 搜 索 " class="sbm">
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <!-- 引用 -->
+                <include file="_left" />
             </div>
             <div class="right-part right-part1 ml20 fl">
                 <div class="right-con">
@@ -51,22 +13,19 @@
                         <div><span class="fr"><a href="#2"><img src="__PUBLIC__/Home/images/more.gif" title="更多" alt="更多"></a></span><strong>新闻中心</strong></div>
                     </div>
                     <div class="main_body xinwen-ul">
+
+
                         <ul>
-                            <li><a href="#2">新闻新闻新闻新闻新闻新闻新闻新闻</a><span class="fr xw-time">2017-02-5</span></li>
-                            <li><a href="#2">新闻新闻新闻新闻新闻新闻新闻新闻</a><span class="fr xw-time">2017-02-5</span></li>
-                            <li><a href="#2">新闻新闻新闻新闻新闻新闻新闻新闻</a><span class="fr xw-time">2017-02-5</span></li>
-                            <li><a href="#2">新闻新闻新闻新闻新闻新闻新闻新闻</a><span class="fr xw-time">2017-02-5</span></li>
-                            <li><a href="#2">新闻新闻新闻新闻新闻新闻新闻新闻</a><span class="fr xw-time">2017-02-5</span></li>
+                            <foreach name="list" item="v">
+                                <li><a href="{:U('Home/Tongchengjieyue/product',array('cid'=>$_GET['cid'],'aid'=>$v['id']))}">{$v.title}</a><span class="fr xw-time">{$v.time}</span></li>
+                            </foreach>
                         </ul>
                         <div class="clear"></div>
                         <div class="pages">
-                            <label title="共0条">第<em>1</em>页/共<span>11</span>页</label>&nbsp;&nbsp;<a href="#2">&nbsp;首页&nbsp;</a> 
-                            <a href="#1">&nbsp;上一页&nbsp;</a> 
-                            <a href="#3">&nbsp;下一页&nbsp;</a>
-                            <a href="#2">&nbsp;尾页&nbsp;</a> 
-                            <input type="text" class="pages_inp" value="1"> 
-                            <input type="button" class="pages_btn" value="GO">
+                            {$page}
                         </div>
+
+
                     </div>
                 </div>
             </div>

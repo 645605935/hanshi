@@ -25,16 +25,16 @@
             </div>
             <div class="clear"></div>
             <div class="copy-name">
-                <h2>{$user.qy_name}</h2>
-                <p>{$user.qy_desc}</p>
+                <h2>{$user.company_name}</h2>
+                <p>{$user.company_desc}</p>
             </div>
             <div class="nav">
                 <ul>
-                    <li><a href="{:U('Home/Tongchengjieyue/qiye')}" class="<if condition="$_page_ eq 'Tongchengjieyue/qiye'">cur</if>">网站首页</a></li>
-                    <li><a href="{:U('Home/Tongchengjieyue/jianjie')}" class="<if condition="$_page_ eq 'Tongchengjieyue/jianjie'">简介</a></li>
-                    <li><a href="{:U('Home/Tongchengjieyue/xinwen')}" class="<if condition="$_page_ eq 'Tongchengjieyue/xinwen'">新闻中心</a></li>
-                    <li><a href="{:U('Home/Tongchengjieyue/chanpin')}" class="<if condition="$_page_ eq 'Tongchengjieyue/chanpin'">产品中心</a></li>
-                    <li><a href="{:U('Home/Tongchengjieyue/yanchu')}" class="<if condition="$_page_ eq 'Tongchengjieyue/yanchu'">精彩演出</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/qiye',array('cid'=>$_GET['cid']))}" class="<if condition="$_page_ eq 'Tongchengjieyue/qiye'">cur</if>">网站首页</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/jianjie',array('cid'=>$_GET['cid']))}" class="<if condition="$_page_ eq 'Tongchengjieyue/jianjie'">cur</if>">简介</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/xinwen',array('cid'=>$_GET['cid']))}" class="<if condition="$_page_ eq 'Tongchengjieyue/xinwen'">cur</if>">新闻中心</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/chanpin',array('cid'=>$_GET['cid']))}" class="<if condition="$_page_ eq 'Tongchengjieyue/chanpin'">cur</if>">产品中心</a></li>
+                    <li><a href="{:U('Home/Tongchengjieyue/yanchu',array('cid'=>$_GET['cid']))}" class="<if condition="$_page_ eq 'Tongchengjieyue/yanchu'">cur</if>">精彩演出</a></li>
                 </ul>
             </div>
             <div class="banner">

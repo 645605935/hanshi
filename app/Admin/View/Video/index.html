@@ -323,7 +323,39 @@
     <!-- inline scripts related to this page -->
 
 
+    <!-- 确认弹框 start-->
+    <div id="dialog-confirm_add_special" class="hide">
+       <div class="row">
+           <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
+            
+              <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">专辑名称</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td style="text-align:right;">
+                      <button class="layui-btn" lay-submit="" lay-filter="demo1_add_special">确认</button>
+                      <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
 
+           </form>
+        </div>
+    </div><!-- #dialog-confirm -->
     
  
     <!-- 确认弹框 start-->
@@ -356,7 +388,7 @@
                                </foreach>
                             </select>
                           </div>
-                          <label class="layui-form-label new_special_btn" style="width:89px!important;">
+                          <label class="layui-form-label new_special_btn id-btn-dialog2_add_special" style="width:89px!important;">
                             新建专辑
                           </label>
                         </div>
@@ -525,7 +557,7 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动主题</label>
+                          <label class="layui-form-label">剧目名称</label>
                           <div class="layui-input-inline">
                             <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
                           </div>
@@ -535,15 +567,18 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动类型</label>
+                          <label class="layui-form-label">选择专辑</label>
                           <div class="layui-input-inline">
-                            <select name="type" class="type">
+                            <select name="special" class="special">
                                <option value="请选择">请选择</option>
-                               <foreach name="type" item="v">
-                                  <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
+                               <foreach name="special" item="v">
+                                  <option value="{$v.id}" alt="{$v.id}">{$v.title}</option>
                                </foreach>
                             </select>
                           </div>
+                          <label class="layui-form-label new_special_btn id-btn-dialog2_add_special" style="width:89px!important;">
+                            新建专辑
+                          </label>
                         </div>
                       </div>
                     </td>
@@ -554,7 +589,7 @@
 
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动时间</label>
+                          <label class="layui-form-label">热播时间</label>
                           <div class="layui-input-inline">
                             <input class="layui-input start_time LAY_demorange_s" name="start_time" placeholder="开始日">
                           </div>
@@ -568,11 +603,13 @@
                     </td>
                   </tr>
 
+
+
                   <tr>
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动图片</label>
+                          <label class="layui-form-label">上传封面</label>
                           <div class="layui-input-inline">
                             <input type="file" id="edit_upload_img" name="file" class="layui-upload-file">
                           </div>
@@ -582,7 +619,7 @@
                     <td>
                       <div class="layui-inline" style="display:none;">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">LOGO</label>
+                          <label class="layui-form-label">图片</label>
                           <div class="layui-input-inline">
                             <input type="text" name="img" lay-verify="required" class="layui-input img" readonly>
                           </div>
@@ -592,11 +629,12 @@
                     </td>
                   </tr>
 
+
                   <tr>
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动视频</label>
+                          <label class="layui-form-label">上传视频</label>
                           <div class="layui-input-inline">
                             <input type="file" id="edit_upload_video" name="file_video" lay-type="video" class="layui-upload-file">
                           </div>
@@ -617,11 +655,11 @@
                       </div>
                     </td>
                   </tr>
-                  
+
                   <tr>
                     <td class="center" colspan="2">
                       <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">活动内容</label>
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">介绍</label>
                           <div class="layui-input-block">
                               <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_edit"></textarea>
                           </div>
@@ -630,34 +668,50 @@
                   </tr>
                   
                   <tr>
-                    <td colspan="2">
+                    <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">开通报名通道</label>
-                          <div class="layui-input-inline open_box">
-                            
+                          <label class="layui-form-label">导演/指导</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="director" lay-verify="required" placeholder="" class="layui-input director">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">表演团队</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="team" lay-verify="required" placeholder="" autocomplete="off" class="layui-input team">
                           </div>
                         </div>
                       </div>
                     </td>
                   </tr>
+
                   <tr>
-                    <td>
+                    <td colspan="2">
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动联络人</label>
+                          <label class="layui-form-label">表演类型</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="contact_people" lay-verify="required" placeholder="" autocomplete="off" class="layui-input contact_people">
+                            <select name="type_1" lay-verify="required" class="type_1" lay-filter="edit_type_1">
+                              <option value="">请选择</option>
+                              <foreach name="type_1" item="v">
+                                  <option value="{$v.id}">{$v.title}</option>
+                              </foreach>
+                            </select>
                           </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">联系方式</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="contact_phone" lay-verify="required" placeholder="" class="layui-input contact_phone">
+                            <select name="type_2" lay-verify="required" class="type_2" lay-filter="edit_type_2">
+                              <option value="">请选择</option>
+                            </select>
+                          </div>
+                          <div class="layui-input-inline">
+                            <select name="type_3" lay-verify="required" class="type_3" lay-filter="edit_type_3">
+                              <option value="">请选择</option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -667,13 +721,14 @@
                 <tfoot>
                   <tr>
                     <td colspan="2" style="text-align:right;">
-                      <input type="hidden" name="id" class="layui-input id">
+                      <input type="hidden" name="id" lay-verify="required" placeholder="" autocomplete="off" class="layui-input id">
                       <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确认</button>
                       <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
                     </td>
                   </tr>
                 </tfoot>
               </table>
+
 
            </form>
        
@@ -761,7 +816,19 @@
       jQuery(function($) {
           init_page();
 
-          
+          //添加
+          $( "body" ).on('click','.id-btn-dialog2_add_special', function(e) {
+            e.preventDefault();
+
+            $( "#dialog-confirm_add_special" ).removeClass('hide').dialog({
+              resizable: false,
+              modal: true,
+              title: "",
+              title_html: true,
+            });
+
+            $("div[aria-describedby='dialog-confirm_add_special'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 新建专辑：</h4></div>");
+          });
 
           //添加
           $( "body" ).on('click','.id-btn-dialog2_add', function(e) {
@@ -773,7 +840,7 @@
               resizable: false,
               modal: true,
               title: "",
-              width:850,
+              width:1000,
               title_html: true,
             });
 
@@ -794,7 +861,7 @@
                       resizable: false,
                       modal: true,
                       title: "",
-                      width:800,
+                      width:1000,
                       title_html: true,
                     });
 
@@ -910,13 +977,8 @@
                           $('#edit_form .show_video_btn').attr('href', '').hide();
                       }
                       
-                      
-                      if(data.type){
-
-                      }
-
-                      $.each($("#edit_form .type option"), function(name, value){
-                          if($(value).attr('alt')==data.type){
+                      $.each($("#edit_form .special option"), function(name, value){
+                          if($(value).attr('alt')==data.special){
                               $(value).attr('selected','selected');
                           }else{
                               $(value).removeAttr('selected');
@@ -927,20 +989,17 @@
                       $('#edit_form .content').val(data.content);
 
 
-                      var str='';
-                      if(1==data.open){
-                          str+='<input type="radio" name="open" class="open" value="1" title="开" checked="checked">';
-                          str+='<input type="radio" name="open" class="open" value="0" title="关">';
-                      }else{
-                          str+='<input type="radio" name="open" class="open" value="1" title="开">';
-                          str+='<input type="radio" name="open" class="open" value="0" title="关" checked="checked">';
-                      }
-                      $("#edit_form .open_box").html(str);
+
+
+                      $('#edit_form .director').val(data.director);
+                      $('#edit_form .team').val(data.team);
                       
-
-
-                      $('#edit_form .contact_people').val(data.contact_people);
-                      $('#edit_form .contact_phone').val(data.contact_phone);
+                      var type_1=data.type_1;
+                      var type_2=data.type_2;
+                      var type_3=data.type_3;
+                      if(type_1, type_2, type_3){
+                          render_type(type_1, type_2, type_3);
+                      }
 
 
                       _json=json;
@@ -1139,6 +1198,147 @@
           return _json;
       }
 
+      //
+      function render_type(type_1, type_2, type_3){
+          render_type_1(type_1);
+          render_type_2(type_1, type_2);
+          render_type_3(type_2, type_3);
+      }
+
+      function render_type_1(type_1){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Video/ajax_get_type_1')}",
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_1').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_1').html(doT_Str);
+
+                      $("#edit_form .type_1").find("option[value='"+type_1+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      function render_type_2(type_1, type_2){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Video/ajax_get_type_2')}",
+              data:{
+                id:type_1
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_2').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_2').html(doT_Str);
+
+                      $("#edit_form .type_2").find("option[value='"+type_2+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      function render_type_3(type_2, type_3){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Video/ajax_get_type_3')}",
+              data:{
+                id:type_2
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_3').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_3').html(doT_Str);
+
+                      $("#edit_form .type_3").find("option[value='"+type_3+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //添加
+      function _ajax_add_special(_data){
+           var _json;
+           $.ajax({  
+               async:false,
+               type:'post',  
+               contentType:"application/x-www-form-urlencoded",
+               url : "{:U('Admin/Special/ajax_add')}",
+               data: _data,
+               dataType : 'json',
+               success  : function(json) {
+                   if(json.code==0){
+                       var data=json.data;
+                       $('#add_form .special').append('<option value="'+data.id+'" alt="{$v.title}">'+data.title+'</option>');
+
+                       alert(json.msg);
+                       $("div[aria-describedby='dialog-confirm_add_special'] .ui-dialog-titlebar-close").trigger("click");
+                       layui.form().render();
+                   }else{
+                       alert(json.msg);
+                   }
+               },
+               error  : function() {  
+                   alert('error');
+               }  
+           }); 
+           return _json;
+      }
+
       //添加
       function _ajax_add(_data){
            var _json;
@@ -1222,15 +1422,6 @@
       }
 
 
-      function imgFormatter(cellvalue, options, rowdata){ 
-          if (cellvalue){
-              return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
-          }else{
-              return "暂无";
-          }
-
-      }
-
       function statusFormatter(cellvalue, options, rowdata){ 
           if (cellvalue == "1"){
               return '<span class="label label-success" alt="'+cellvalue+'">通过</span>';
@@ -1245,14 +1436,13 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '主题名称','活动图片','审核状态','活动类型','开始日期','结束日期','点击量','操作'],
+              colNames:['id', '剧目名称','专辑名称','审核状态','开始日期','结束日期','点击量','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
                 {name:'title',index:'title', align : "center"},
-                {name:'img',index:'img', align : "center", formatter: imgFormatter},
+                {name:'special',index:'special', align : "center"},
                 {name:'status',index:'status', align : "center", formatter: statusFormatter},
-                {name:'type',index:'type', align : "center"},
                 {name:'start_time',index:'start_time', align : "center"},
                 {name:'end_time',index:'end_time', align : "center"},
                 {name:'eye',index:'eye', align : "center"},
@@ -1352,6 +1542,7 @@
 
               var arr=edit_type.split('_');
               var form_type=arr[1];
+
 
               //上传视频
               layui.upload({
@@ -1455,9 +1646,16 @@
                   _ajax_get_type_3(form, type_2);
                   console.log(data);
               });
+
+              //监听提交
+              form.on('submit(demo1_add_special)', function(data){
+                var _json=_ajax_add_special(data.field);
+                return false;
+              });
             });
         }
     </script>
+
   </body>
 </html>
 

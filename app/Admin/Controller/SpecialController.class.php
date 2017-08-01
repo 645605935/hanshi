@@ -2,14 +2,14 @@
 namespace Admin\Controller;
 use Common\Controller\AuthController;
 
-class VideoController extends AuthController {
+class SpecialController extends AuthController {
     
     public function _initialize() {
         parent::_initialize();
         global $user;
         $user=session('auth');
         $this->user=$user;
-        $this->cur_c='Video';
+        $this->cur_c='Special';
 
         if($_POST){
             $this->_POST=$_POST;
@@ -26,18 +26,13 @@ class VideoController extends AuthController {
         $this->group=$group;
 
 
-        $this->cur_v='Video-index';
+        $this->cur_v='Special-index';
 
-        $page="Video/index";
+        $page="Special/index";
         $page_buttons=M('PageButtons')->where(array('page'=>$page))->select();
         $this->page_buttons=$page_buttons;
         $this->page=$page;
-
-        //三级分类
-        $this->special=M('Special')->where(array('uid'=>$user['uid']))->select();
-
-        //三级分类
-        $this->type_1=M('Type')->where(array('pid'=>1238))->select();
+       
         $this->display();
     }
 
@@ -48,15 +43,7 @@ class VideoController extends AuthController {
             $map['title']=array('like','%'.$_GET['title'].'%');
         }
 
-        $d = D('Video');
-        $list = $d->where($map)->order('id desc')->relation(true)->select();
-
-        foreach ($list as $key => $value) {
-            $list[$key]['time']=date('Y-m-d H:i',$value['time']);
-            $list[$key]['start_time']=date('Y-m-d H:i',$value['start_time']);
-            $list[$key]['end_time']=date('Y-m-d H:i',$value['end_time']);
-        }
-
+        $list = D('Special')->where($map)->order('id desc')->relation(true)->select();
 
         if($list){
             $data=array();
@@ -72,68 +59,12 @@ class VideoController extends AuthController {
         echo json_encode($data);
     }
 
-    public function ajax_get_type_1(){
-        $type_1 = M('Type')->where(array('pid'=>1238))->select();
-                
-
-        if($type_1){
-            $data=array();
-            $data['code']=0;
-            $data['msg']='success';
-            $data['data']=$type_1;
-        }else{
-            $data=array();
-            $data['code']=1;
-            $data['msg']='未搜索到数据';
-            $data['data']=array();
-        }
-        echo json_encode($data);
-    }
-
-    public function ajax_get_type_2(){
-        $type_1=I('id');
-
-        $type_2 = M('Type')->where(array('pid'=>$type_1))->select();
-
-        if($type_2){
-            $data=array();
-            $data['code']=0;
-            $data['msg']='success';
-            $data['data']=$type_2;
-        }else{
-            $data=array();
-            $data['code']=1;
-            $data['msg']='未搜索到数据';
-            $data['data']=array();
-        }
-        echo json_encode($data);
-    }
-
-    public function ajax_get_type_3(){
-        $type_2=I('id');
-
-        $type_3 = M('Type')->where(array('pid'=>$type_2))->select();
-
-        if($type_3){
-            $data=array();
-            $data['code']=0;
-            $data['msg']='success';
-            $data['data']=$type_3;
-        }else{
-            $data=array();
-            $data['code']=1;
-            $data['msg']='未搜索到数据';
-            $data['data']=array();
-        }
-        echo json_encode($data);
-    }
-
     //获取单条信息
     public function ajax_get_row_info(){
         $id=I('id');
 
         if($id){
-            $row = D('Video')->relation(true)->find($id);
+            $row = D('Special')->relation(true)->find($id);
 
             $row['time']=date('Y-m-d H:i',$row['time']);
             $row['start_time']=date('Y-m-d H:i',$row['start_time']);
@@ -167,17 +98,10 @@ class VideoController extends AuthController {
         $data=$_POST;
         if($data){
             $data['uid']=$user['uid'];
-            $data['time']=time();
-            $data['start_time']=strtotime($data['start_time']);
-            $data['end_time']=strtotime($data['end_time']);
 
-            $id = M('Video')->add($data);
+            $id = M('Special')->add($data);
             if($id){
-                $row= D('Video')->relation(true)->find($id);
-
-                $row['time']=date('Y-m-d H:i',$row['time']);
-                $row['start_time']=date('Y-m-d H:i',$row['start_time']);
-                $row['end_time']=date('Y-m-d H:i',$row['end_time']);
+                $row= D('Special')->relation(true)->find($id);
 
                 if($row){
                     $data=array();
@@ -211,16 +135,11 @@ class VideoController extends AuthController {
         $data=$_POST;
         if($data){
             $data['time']=time();
-            $data['start_time']=strtotime($data['start_time']);
-            $data['end_time']=strtotime($data['end_time']);
 
-            $res = M('Video')->save($data);
+            $res = M('Special')->save($data);
             if($res){
                 $id=$data['id'];
-                $row= D('Video')->relation(true)->find($id);
-
-                $row['time']=date('Y-m-d H:i',$value['time']);
-                $row['end_time']=date('Y-m-d H:i',$value['end_time']);
+                $row= D('Special')->relation(true)->find($id);
 
                 if($row){
                     $data=array();
@@ -251,7 +170,7 @@ class VideoController extends AuthController {
         $id=I('id'); 
 
         if($id){
-            $res=M('Video')->where(array('id'=>$id))->delete();
+            $res=M('Special')->where(array('id'=>$id))->delete();
 
             if($res){
                 $data=array();
@@ -296,11 +215,8 @@ class VideoController extends AuthController {
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]='/Uploads/layui/'.$img;
+                $data['data']["src"]='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$img;
             }
-
-            //上传到阿里云OSS
-            oss_upload( '/Uploads/layui/'.$img );
 
             echo json_encode($data);
         }
@@ -308,8 +224,8 @@ class VideoController extends AuthController {
 
 
     // 上传视频
-    public function lay_upload_file_video(){
-        if($_FILES['file_video']['size']>0){
+    public function lay_upload_file_Special(){
+        if($_FILES['file_Special']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
             $upload->maxSize   =     31457280 ;// 设置附件上传大小
             $upload->exts      =     array('mp4');// 设置附件上传类型
@@ -327,17 +243,17 @@ class VideoController extends AuthController {
                 $data['code']=0;
                 $data['msg']=$upload->getError();
             }else{
-                $video=$info['file_video']['savename'];
-                $video_url='/Uploads/layui/'.$video;
+                $Special=$info['file_Special']['savename'];
+                $Special_url='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$Special;
 
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]=$video_url;
+                $data['data']["src"]=$Special_url;
             }
 
             //上传到阿里云OSS
-            oss_upload( '/Uploads/layui/'.$video );
+            oss_upload( './Uploads/layui/'.$Special );
 
             echo json_encode($data);
         }

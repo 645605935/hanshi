@@ -816,7 +816,7 @@
           });
 
 
-          //添加套系
+          //套系
           $('#add_form .add_tx').click(function(){
               var attr_1=$('#add_form .attr_1').val();
               var attr_2=$('#add_form .attr_2').val();
@@ -834,7 +834,7 @@
 
                   $('#add_form .attr_list_box').append(str); 
 
-                  render_attr();
+                  render_attr('add');
 
                   $('#add_form .attr_1').val('');
                   $('#add_form .attr_2').val('');
@@ -847,7 +847,7 @@
               render_attr();
           })  
 
-          //添加套系
+          //套系
           $('#edit_form .add_tx').click(function(){
               var attr_1=$('#edit_form .attr_1').val();
               var attr_2=$('#edit_form .attr_2').val();
@@ -865,7 +865,7 @@
 
                   $('#edit_form .attr_list_box').append(str); 
 
-                  render_attr();
+                  render_attr('edit');
 
                   $('#edit_form .attr_1').val('');
                   $('#edit_form .attr_2').val('');
@@ -883,10 +883,10 @@
     </script>
 
     <script type="text/javascript">
-      function render_attr(){
+      function render_attr(form_type){
           var attr_str='';
           var attr_arr=[];
-          $.each($('#edit_form .attr_list_box tr'), function(name, value){
+          $.each($('#'+form_type+'_form .attr_list_box tr'), function(name, value){
               var attr_1=$(value).attr('attr_1');
               var attr_2=$(value).attr('attr_2');
               var attr_3=$(value).attr('attr_3'); 
@@ -894,7 +894,7 @@
               attr_arr.push(attr_1+'#'+attr_2+'#'+attr_3);
           });
           attr_str=attr_arr.join('||');
-          $('#edit_form .tx_attr').val(attr_str);
+          $('#'+form_type+'_form .tx_attr').val(attr_str);
       }
 
 

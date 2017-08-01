@@ -1,19 +1,13 @@
 <?php
 namespace Common\Model;
 use Think\Model\RelationModel;
-class VideoModel extends RelationModel{
+class SpecialModel extends RelationModel{
 	protected $_link=array(
 		'_user'=>array(
 			'mapping_type'=>self::BELONGS_TO,
 			'class_name'=>'User',
 			'foreign_key'=>'uid',
 			'as_fields' => 'truename:truename',
-		),
-		'_special'=>array(
-			'mapping_type'=>self::BELONGS_TO,
-			'class_name'=>'Special',
-			'foreign_key'=>'special',
-			'as_fields' => 'title:special',
 		)
 	);
 }

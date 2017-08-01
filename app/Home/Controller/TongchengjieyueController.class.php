@@ -10,10 +10,35 @@ class TongchengjieyueController extends CommonController{
         global $user;
         $user=session('userinfo');
         $this->user=$user;
+
+        $company_id=$_GET['cid'];
+        if($company_id){
+            $types_1=M('Product')->where(array('uid'=>$company_id))->distinct(true)->field('type_3')->select();
+            $product_type_ids=array();
+            foreach ($types_1 as $key => $value) {
+                $product_type_ids[]=$value['type_3'];
+            }
+            $this->product_types=M('Type')->where(array('id'=>array('in', $product_type_ids)))->select();
+
+            $types_2=M('Video')->where(array('uid'=>$company_id))->distinct(true)->field('type_3')->select();
+            $video_type_ids=array();
+            foreach ($types_2 as $key => $value) {
+                $video_type_ids[]=$value['type_3'];
+            }
+            $this->video_types=M('Type')->where(array('id'=>array('in', $video_type_ids)))->select();
+        }
+        $this->activity_types=M('Type')->where(array('pid'=>1239))->select();
     }
 
     public function index(){
         global $user;
+        $config=M('Config')->find(1);
+        $_oss_url_='http://'.$config['oss_url'].'/';
+        $_oss_style_50x50_=$config['oss_style_50x50'];
+        $_oss_style_150x150_=$config['oss_style_150x150'];
+
+
+
         $where=array();
 
         $count      = M('User')->where($where)->count();
@@ -22,33 +47,49 @@ class TongchengjieyueController extends CommonController{
         $list=M('User')->page($nowPage.','.$Page->listRows)->where($where)->select();
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
+            $list[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
 
-        $config=M('Config')->find(1);
-        $_oss_url_='http://'.$config['oss_url'].'/';
-        $_oss_style_48x48_=$config['oss_style_48x48'];
-        
+        $this->page=$Page->show();
+        $this->list=$list;
 
 
         $block1=M('User')->limit(8)->select();
         foreach ($block1 as $key => $value) {
-            $block1[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_48x48_;
+            $block1[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
 
         $block2=M('User')->limit(3)->select();
+        foreach ($block2 as $key => $value) {
+            $block2[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
+        }
         $block2_big=M('User')->find(1);
+        $block2_big['company_logo']=$_oss_url_ . $block2_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
+
         $block3=M('User')->limit(9)->select();
+        foreach ($block3 as $key => $value) {
+            $block3[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
+        }
         $block4=M('User')->limit(3)->select();
+        foreach ($block4 as $key => $value) {
+            $block4[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
+        }
         $block4_big=M('User')->find(1);
+        $block4_big['company_logo']=$_oss_url_ . $block4_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
         $block5=M('User')->limit(24)->select();
+        foreach ($block5 as $key => $value) {
+            $block5[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
+        }
         $block6=M('User')->limit(3)->select();
+        foreach ($block6 as $key => $value) {
+            $block6[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
+        }
         $block6_big=M('User')->find(1);
+        $block6_big['company_logo']=$_oss_url_ . $block6_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
 
-
-        $this->page=$Page->show();
-        $this->list=$list;
         $this->block1=$block1;
         $this->block2=$block2;
+
         $this->block2_big=$block2_big;
         $this->block3=$block3;
         $this->block4=$block4;
@@ -56,7 +97,6 @@ class TongchengjieyueController extends CommonController{
         $this->block5=$block5;
         $this->block6=$block6;
         $this->block6_big=$block6_big;
-        $this->list=$list;
         $this->display();
     }
 
@@ -75,11 +115,37 @@ class TongchengjieyueController extends CommonController{
     public function xinwen(){
         global $user;
 
+        $where=array();
+
+        $count      = M('Activity')->where($where)->count();
+        $Page       = new \Common\Extend\Page($count,6);
+        $nowPage = isset($_GET['p'])?$_GET['p']:1;
+        $list=M('Activity')->page($nowPage.','.$Page->listRows)->where($where)->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['time']=date('Y-m-d',$value['time']);
+        }
+
+        $this->page=$Page->show();
+        $this->list=$list;
+
         $this->display();
     }
 
     public function yanchu(){
         global $user;
+
+        $where=array();
+
+        $count      = M('Video')->where($where)->count();
+        $Page       = new \Common\Extend\Page($count,2);
+        $nowPage = isset($_GET['p'])?$_GET['p']:1;
+        $list=M('Video')->page($nowPage.','.$Page->listRows)->where($where)->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['time']=date('Y-m-d',$value['time']);
+        }
+
+        $this->page=$Page->show();
+        $this->list=$list;
 
         $this->display();
     }
@@ -87,6 +153,19 @@ class TongchengjieyueController extends CommonController{
     public function chanpin(){
         global $user;
         
+        $where=array();
+
+        $count      = M('Product')->where($where)->count();
+        $Page       = new \Common\Extend\Page($count,2);
+        $nowPage = isset($_GET['p'])?$_GET['p']:1;
+        $list=M('Product')->page($nowPage.','.$Page->listRows)->where($where)->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['time']=date('Y-m-d',$value['time']);
+        }
+
+        $this->page=$Page->show();
+        $this->list=$list;
+
         $this->display();
     }
 
