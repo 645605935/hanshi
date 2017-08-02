@@ -33,11 +33,11 @@ class VideoController extends AuthController {
         $this->page_buttons=$page_buttons;
         $this->page=$page;
 
-        //三级分类
+        //专辑
         $this->special=M('Special')->where(array('uid'=>$user['uid']))->select();
 
-        //三级分类
-        $this->type_1=M('Type')->where(array('pid'=>1238))->select();
+        //分类
+        $this->type=M('Type')->where(array('pid'=>1293))->select();
         $this->display();
     }
 
@@ -72,53 +72,15 @@ class VideoController extends AuthController {
         echo json_encode($data);
     }
 
-    public function ajax_get_type_1(){
-        $type_1 = M('Type')->where(array('pid'=>1238))->select();
+    public function ajax_get_type(){
+        $type = M('Type')->where(array('pid'=>1238))->select();
                 
 
         if($type_1){
             $data=array();
             $data['code']=0;
             $data['msg']='success';
-            $data['data']=$type_1;
-        }else{
-            $data=array();
-            $data['code']=1;
-            $data['msg']='未搜索到数据';
-            $data['data']=array();
-        }
-        echo json_encode($data);
-    }
-
-    public function ajax_get_type_2(){
-        $type_1=I('id');
-
-        $type_2 = M('Type')->where(array('pid'=>$type_1))->select();
-
-        if($type_2){
-            $data=array();
-            $data['code']=0;
-            $data['msg']='success';
-            $data['data']=$type_2;
-        }else{
-            $data=array();
-            $data['code']=1;
-            $data['msg']='未搜索到数据';
-            $data['data']=array();
-        }
-        echo json_encode($data);
-    }
-
-    public function ajax_get_type_3(){
-        $type_2=I('id');
-
-        $type_3 = M('Type')->where(array('pid'=>$type_2))->select();
-
-        if($type_3){
-            $data=array();
-            $data['code']=0;
-            $data['msg']='success';
-            $data['data']=$type_3;
+            $data['data']=$type;
         }else{
             $data=array();
             $data['code']=1;
@@ -130,10 +92,8 @@ class VideoController extends AuthController {
 
     //获取单条信息
     public function ajax_get_row_info(){
-        $id=I('id');
-
-        if($id){
-            $row = D('Video')->relation(true)->find($id);
+        if($id=$_GET['id']){
+            $row = D('Video')->find($id);
 
             $row['time']=date('Y-m-d H:i',$row['time']);
             $row['start_time']=date('Y-m-d H:i',$row['start_time']);

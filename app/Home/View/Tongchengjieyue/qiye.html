@@ -31,41 +31,15 @@
                     <div class="main_body">
                         <div class="main-ul">
                             <ul>
-                                <li>
-                                    <a href="qiye1.html">
-                                        <span class="shi-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <p class="m-p">历史课京东方</p>
-                                        <p class="shi-pri">￥1.22</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="qiye1.html">
-                                        <span class="shi-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <p class="m-p">历史课京东方</p>
-                                        <p class="shi-pri">￥1.22</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="qiye1.html">
-                                        <span class="shi-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <p class="m-p">历史课京东方</p>
-                                        <p class="shi-pri">￥1.22</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="qiye1.html">
-                                        <span class="shi-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <p class="m-p">历史课京东方</p>
-                                        <p class="shi-pri">￥1.22</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="qiye1.html">
-                                        <span class="shi-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <p class="m-p">历史课京东方</p>
-                                        <p class="shi-pri">￥1.22</p>
-                                    </a>
-                                </li>
+                                <foreach name="hot_product" item="v">
+                                    <li>
+                                        <a href="qiye1.html">
+                                            <span class="shi-img"><img src="{$v.images}" alt=""></span>
+                                            <p class="m-p">{$v.title}</p>
+                                            <p class="shi-pri">￥{$v.price}</p>
+                                        </a>
+                                    </li>
+                                </foreach>
                             </ul>
                         </div>
                     </div>

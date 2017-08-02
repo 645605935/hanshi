@@ -13,6 +13,7 @@ class TongchengjieyueController extends CommonController{
 
         $company_id=$_GET['cid'];
         if($company_id){
+            //产品分类
             $types_1=M('Product')->where(array('uid'=>$company_id))->distinct(true)->field('type_3')->select();
             $product_type_ids=array();
             foreach ($types_1 as $key => $value) {
@@ -20,13 +21,16 @@ class TongchengjieyueController extends CommonController{
             }
             $this->product_types=M('Type')->where(array('id'=>array('in', $product_type_ids)))->select();
 
-            $types_2=M('Video')->where(array('uid'=>$company_id))->distinct(true)->field('type_3')->select();
+            //精彩演出
+            $types_2=M('Video')->where(array('uid'=>$company_id))->distinct(true)->field('type')->select();
             $video_type_ids=array();
             foreach ($types_2 as $key => $value) {
-                $video_type_ids[]=$value['type_3'];
+                $video_type_ids[]=$value['type'];
             }
             $this->video_types=M('Type')->where(array('id'=>array('in', $video_type_ids)))->select();
         }
+
+        //活动分类
         $this->activity_types=M('Type')->where(array('pid'=>1239))->select();
     }
 
@@ -87,9 +91,11 @@ class TongchengjieyueController extends CommonController{
         $block6_big=M('User')->find(1);
         $block6_big['company_logo']=$_oss_url_ . $block6_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
 
+
+
+
         $this->block1=$block1;
         $this->block2=$block2;
-
         $this->block2_big=$block2_big;
         $this->block3=$block3;
         $this->block4=$block4;
@@ -102,6 +108,9 @@ class TongchengjieyueController extends CommonController{
 
     public function qiye(){
         global $user;
+
+        //热门产品推荐
+        $this->hot_product=M('Product')->limit(5)->select();
 
         $this->display();
     }

@@ -563,9 +563,26 @@
 
       <ul class="submenu">
         <li <?php if($cur_v == 'Video-index'): ?>class="active"<?php endif; ?>>
-          <a href="<?php echo U('Admin/Video/index');?>" page="Admin/Video/index" title="setting" data-title="视频管理">
+          <a href="<?php echo U('Admin/Video/index');?>" page="Admin/Video/index" title="index" data-title="视频管理">
             <i class="icon-double-angle-right"></i>
             视频管理
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li <?php if($cur_c == 'Special'): ?>class="active open"<?php endif; ?>>
+      <a href="#" class="dropdown-toggle">
+        <i class="icon-film"></i>
+        <span class="menu-text"> 专辑管理 </span>
+        <b class="arrow icon-angle-down"></b>
+      </a>
+
+      <ul class="submenu">
+        <li <?php if($cur_v == 'Special-index'): ?>class="active"<?php endif; ?>>
+          <a href="<?php echo U('Admin/Special/index');?>" page="Admin/Special/index" title="index" data-title="专辑管理">
+            <i class="icon-double-angle-right"></i>
+            专辑管理
           </a>
         </li>
       </ul>

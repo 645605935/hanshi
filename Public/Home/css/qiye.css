@@ -76,9 +76,9 @@
 .main_head {color:#FFFFFF;background:url('../images/main_head.gif') no-repeat;}
 .main_head strong{color:#333333;padding-left:25px;}
 .main_head div {padding:0 10px 0 10px;font-size:14px;height:28px;line-height:30px;overflow:hidden;letter-spacing:1px;}
-.main_body {background:#FFFFFF;padding:10px;margin:0 0 10px;}
+.main_body {background:#FFFFFF;padding:10px;margin:0 0 10px;width: 100%;}
 
-.main-ul ul {float: left;margin-left: 5px;}
+.main-ul ul {float: left;margin-left: 5px;width: 100%;}
 .main-ul ul li a {float: left;padding: 6px 0;box-sizing: border-box;border:1px solid #fff;}
 .main-ul ul li a:hover {border: #99C4D5 1px dotted;background: #F1F1F1;}
 .main-ul ul li {float: left;text-align: center;height: auto;width: 20%;margin-left: 0;}

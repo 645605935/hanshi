@@ -14,6 +14,12 @@ class VideoModel extends RelationModel{
 			'class_name'=>'Special',
 			'foreign_key'=>'special',
 			'as_fields' => 'title:special',
+		),
+		'_type'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'type',
+			'as_fields' => 'title:type',
 		)
 	);
 }

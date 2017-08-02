@@ -297,7 +297,7 @@ class ProductController extends AuthController {
                 $data['msg']=$upload->getError();
             }else{
                 $img=$info['file']['savename'];
-                $img_url='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$img;
+                $img_url='/Uploads/layui/'.$img;
 
                 $data=array();
                 $data['code']=0;
@@ -305,7 +305,7 @@ class ProductController extends AuthController {
                 $data['data']["src"]=$img_url;
 
                 //上传到阿里云OSS
-                oss_upload( './Uploads/layui/'.$img );
+                oss_upload( '/Uploads/layui/'.$img );
             }
 
             echo json_encode($data);

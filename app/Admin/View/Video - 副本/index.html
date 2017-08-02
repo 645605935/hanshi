@@ -141,7 +141,7 @@
                               <td>
                                 <div class="layui-inline" style="margin-top: 5px;">
                                   <div class="layui-form-item">
-                                    <label class="layui-form-label">产品名称</label>
+                                    <label class="layui-form-label">任务名称</label>
                                     <div class="layui-input-inline">
                                       <input type="text" name="title" placeholder="" value="{$_POST['title']}" autocomplete="off" class="layui-input title">
                                     </div>
@@ -152,10 +152,10 @@
                                   <div class="layui-form-item">
                                     <label class="layui-form-label">时间范围</label>
                                     <div class="layui-input-inline">
-                                      <input class="layui-input Date1" name="Date1" value="{$_POST['Date1']}" placeholder="开始日" id="LAY_demorange_s">
+                                      <input class="layui-input start_time LAY_demorange_s" name="start_time" value="{$_POST['start_time']}" placeholder="开始日">
                                     </div>
                                     <div class="layui-input-inline">
-                                      <input class="layui-input Date2" name="Date2" value="{$_POST['Date2']}" placeholder="截止日" id="LAY_demorange_e">
+                                      <input class="layui-input end_time LAY_demorange_e" name="end_time" value="{$_POST['end_time']}" placeholder="截止日">
                                     </div>
                                   </div>
                                 </div> 
@@ -323,7 +323,39 @@
     <!-- inline scripts related to this page -->
 
 
+    <!-- 确认弹框 start-->
+    <div id="dialog-confirm_add_special" class="hide">
+       <div class="row">
+           <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
+            
+              <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">专辑名称</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td style="text-align:right;">
+                      <button class="layui-btn" lay-submit="" lay-filter="demo1_add_special">确认</button>
+                      <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
 
+           </form>
+        </div>
+    </div><!-- #dialog-confirm -->
     
  
     <!-- 确认弹框 start-->
@@ -337,7 +369,7 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">产品名称</label>
+                          <label class="layui-form-label">剧目名称</label>
                           <div class="layui-input-inline">
                             <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
                           </div>
@@ -345,42 +377,127 @@
                       </div>
                     </td>
                     <td>
-                      
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">选择专辑</label>
+                          <div class="layui-input-inline">
+                            <select name="special" class="special">
+                               <option value="请选择">请选择</option>
+                               <foreach name="special" item="v">
+                                  <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
+                               </foreach>
+                            </select>
+                          </div>
+                          <label class="layui-form-label new_special_btn id-btn-dialog2_add_special" style="width:89px!important;">
+                            新建专辑
+                          </label>
+                        </div>
+                      </div>
                     </td>
                   </tr>
+
+                  <tr>
+                    <td colspan="2">
+
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">热播时间</label>
+                          <div class="layui-input-inline">
+                            <input class="layui-input start_time LAY_demorange_s" name="start_time" placeholder="开始日">
+                          </div>
+                          <div class="layui-form-mid">-</div>
+                          <div class="layui-input-inline">
+                            <input class="layui-input end_time LAY_demorange_e" name="end_time" placeholder="截止日">
+                          </div>
+                        </div>
+                      </div> 
+
+                    </td>
+                  </tr>
+
+
 
                   <tr>
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">产品样图</label>
+                          <label class="layui-form-label">上传封面</label>
                           <div class="layui-input-inline">
-                            <input type="file" id="add_upload_img" name="file" lay-type="file" class="layui-upload-file">
+                            <input type="file" id="add_upload_img" name="file" class="layui-upload-file">
                           </div>
                         </div>
                       </div>
                     </td>
                     <td>
-                        <div class="row image_box" style="width: 400px;"></div>
-                        
-                        <div class="layui-inline" style="display: none;">
-                          <div class="layui-form-item">
-                            <div class="layui-input-inline">
-                              <input type="text" name="images" lay-verify="required" class="layui-input images" readonly>
-                            </div>
+                      <div class="layui-inline" style="display:none;">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">图片</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="img" lay-verify="required" class="layui-input img" readonly>
                           </div>
                         </div>
+                      </div>
+                      <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
                     </td>
                   </tr>
-                  
-                  
+
+
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">上传视频</label>
+                          <div class="layui-input-inline">
+                            <input type="file" id="add_upload_video" name="file_video" lay-type="video" class="layui-upload-file">
+                          </div>
+                          <a target="_blank" class="layui-form-label show_video_btn" style="width:61px!important;display: none;">
+                            预览
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline" style="display:none;">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">视频</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="video" lay-verify="required" class="layui-input video" readonly>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
                   <tr>
                     <td class="center" colspan="2">
                       <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">产品介绍</label>
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">介绍</label>
                           <div class="layui-input-block">
                               <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_add"></textarea>
                           </div>
+                      </div>
+                    </td>
+                  </tr>
+                  
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">导演/指导</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="director" lay-verify="required" placeholder="" class="layui-input director">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">表演团队</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="team" lay-verify="required" placeholder="" autocomplete="off" class="layui-input team">
+                          </div>
+                        </div>
                       </div>
                     </td>
                   </tr>
@@ -389,7 +506,7 @@
                     <td colspan="2">
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">产品分类</label>
+                          <label class="layui-form-label">表演类型</label>
                           <div class="layui-input-inline">
                             <select name="type_1" lay-verify="required" class="type_1" lay-filter="add_type_1">
                               <option value="">请选择</option>
@@ -410,81 +527,6 @@
                           </div>
                         </div>
                       </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">产品价格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="price" lay-verify="required" placeholder="" class="layui-input price">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">优惠价格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="sale_price" lay-verify="required" placeholder="" class="layui-input sale_price">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                      <div class="layui-form-item">
-                        <div class="layui-inline">
-                          <label class="layui-form-label">套系</label>
-                          <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" placeholder="规格" autocomplete="off" class="layui-input attr_1">
-                          </div>
-                          <div class="layui-form-mid">-</div>
-                          <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" placeholder="价格" autocomplete="off" class="layui-input attr_2">
-                          </div>
-                          <div class="layui-form-mid">-</div>
-                          <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" placeholder="库存" autocomplete="off" class="layui-input attr_3">
-                          </div>
-                          <label class="layui-form-label btn-danger add_tx">添加</label>
-                        </div>
-                      </div>
-
-                      <div class="layui-inline" style="display: none;">
-                          <div class="layui-form-item">
-                            <div class="layui-input-inline">
-                              <input type="text" name="tx_attr" lay-verify="required" class="layui-input tx_attr" readonly>
-                            </div>
-                          </div>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                        <table class="layui-table" lay-even="" lay-skin="row">
-                          <colgroup>
-                            <col width="150">
-                            <col width="150">
-                            <col width="200">
-                            <col>
-                          </colgroup>
-                          <thead>
-                            <tr>
-                              <th>序号</th>
-                              <th>规格</th>
-                              <th>价格</th>
-                              <th>库存</th>
-                            </tr> 
-                          </thead>
-                          <tbody class="attr_list_box">
-                            
-                          </tbody>
-                        </table>  
                     </td>
                   </tr>
                 </tbody>
@@ -515,7 +557,7 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">产品名称</label>
+                          <label class="layui-form-label">剧目名称</label>
                           <div class="layui-input-inline">
                             <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
                           </div>
@@ -523,51 +565,136 @@
                       </div>
                     </td>
                     <td>
-                      
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">选择专辑</label>
+                          <div class="layui-input-inline">
+                            <select name="special" class="special">
+                               <option value="请选择">请选择</option>
+                               <foreach name="special" item="v">
+                                  <option value="{$v.id}" alt="{$v.id}">{$v.title}</option>
+                               </foreach>
+                            </select>
+                          </div>
+                          <label class="layui-form-label new_special_btn id-btn-dialog2_add_special" style="width:89px!important;">
+                            新建专辑
+                          </label>
+                        </div>
+                      </div>
                     </td>
                   </tr>
+
+                  <tr>
+                    <td colspan="2">
+
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">热播时间</label>
+                          <div class="layui-input-inline">
+                            <input class="layui-input start_time LAY_demorange_s" name="start_time" placeholder="开始日">
+                          </div>
+                          <div class="layui-form-mid">-</div>
+                          <div class="layui-input-inline">
+                            <input class="layui-input end_time LAY_demorange_e" name="end_time" placeholder="截止日">
+                          </div>
+                        </div>
+                      </div> 
+
+                    </td>
+                  </tr>
+
+
 
                   <tr>
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">产品样图</label>
+                          <label class="layui-form-label">上传封面</label>
                           <div class="layui-input-inline">
-                            <input type="file" id="edit_upload_img" name="file" lay-type="file" class="layui-upload-file">
+                            <input type="file" id="edit_upload_img" name="file" class="layui-upload-file">
                           </div>
                         </div>
                       </div>
                     </td>
                     <td>
-                        <div class="row image_box" style="width: 400px;"></div>
-                        
-                        <div class="layui-inline" style="display: none;">
-                          <div class="layui-form-item">
-                            <div class="layui-input-inline">
-                              <input type="text" name="images" lay-verify="required" class="layui-input images" readonly>
-                            </div>
+                      <div class="layui-inline" style="display:none;">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">图片</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="img" lay-verify="required" class="layui-input img" readonly>
                           </div>
                         </div>
+                      </div>
+                      <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
                     </td>
                   </tr>
-                  
-                  
+
+
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">上传视频</label>
+                          <div class="layui-input-inline">
+                            <input type="file" id="edit_upload_video" name="file_video" lay-type="video" class="layui-upload-file">
+                          </div>
+                          <a target="_blank" class="layui-form-label show_video_btn" style="width:61px!important;display: none;">
+                            预览
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline" style="display:none;">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">视频</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="video" lay-verify="required" class="layui-input video" readonly>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
                   <tr>
                     <td class="center" colspan="2">
                       <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">产品介绍</label>
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">介绍</label>
                           <div class="layui-input-block">
                               <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_edit"></textarea>
                           </div>
                       </div>
                     </td>
                   </tr>
-                 
+                  
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">导演/指导</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="director" lay-verify="required" placeholder="" class="layui-input director">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">表演团队</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="team" lay-verify="required" placeholder="" autocomplete="off" class="layui-input team">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
                   <tr>
                     <td colspan="2">
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">产品分类</label>
+                          <label class="layui-form-label">表演类型</label>
                           <div class="layui-input-inline">
                             <select name="type_1" lay-verify="required" class="type_1" lay-filter="edit_type_1">
                               <option value="">请选择</option>
@@ -590,86 +717,18 @@
                       </div>
                     </td>
                   </tr>
-
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">产品价格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="price" lay-verify="required" placeholder="" class="layui-input price">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">优惠价格</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="sale_price" lay-verify="required" placeholder="" class="layui-input sale_price">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td colspan="2">
-                      <div class="layui-form-item">
-                        <div class="layui-inline">
-                          <label class="layui-form-label">套系</label>
-                          <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" placeholder="规格" autocomplete="off" class="layui-input attr_1">
-                          </div>
-                          <div class="layui-form-mid">-</div>
-                          <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" placeholder="价格" autocomplete="off" class="layui-input attr_2">
-                          </div>
-                          <div class="layui-form-mid">-</div>
-                          <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" placeholder="库存" autocomplete="off" class="layui-input attr_3">
-                          </div>
-                          <label class="layui-form-label btn-danger add_tx">添加</label>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                        <table class="layui-table" lay-even="" lay-skin="row">
-                          <colgroup>
-                            <col width="150">
-                            <col width="150">
-                            <col width="200">
-                            <col>
-                          </colgroup>
-                          <thead>
-                            <tr>
-                              <th>序号</th>
-                              <th>规格</th>
-                              <th>价格</th>
-                              <th>库存</th>
-                            </tr> 
-                          </thead>
-                          <tbody class="attr_list_box">
-                            
-                          </tbody>
-                        </table>  
-                    </td>
-                  </tr>
                 </tbody>
                 <tfoot>
                   <tr>
                     <td colspan="2" style="text-align:right;">
-                      <input type="hidden" name="tx_attr" lay-verify="required" class="layui-input tx_attr" readonly>
-                      <input type="hidden" name="id" class="layui-input id">
+                      <input type="hidden" name="id" lay-verify="required" placeholder="" autocomplete="off" class="layui-input id">
                       <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确认</button>
                       <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
                     </td>
                   </tr>
                 </tfoot>
               </table>
+
 
            </form>
        
@@ -757,7 +816,19 @@
       jQuery(function($) {
           init_page();
 
-          
+          //添加
+          $( "body" ).on('click','.id-btn-dialog2_add_special', function(e) {
+            e.preventDefault();
+
+            $( "#dialog-confirm_add_special" ).removeClass('hide').dialog({
+              resizable: false,
+              modal: true,
+              title: "",
+              title_html: true,
+            });
+
+            $("div[aria-describedby='dialog-confirm_add_special'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 新建专辑：</h4></div>");
+          });
 
           //添加
           $( "body" ).on('click','.id-btn-dialog2_add', function(e) {
@@ -769,11 +840,11 @@
               resizable: false,
               modal: true,
               title: "",
-              width:800,
+              width:1000,
               title_html: true,
             });
 
-            $("div[aria-describedby='dialog-confirm_add'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 添加：</h4></div>");
+            $("div[aria-describedby='dialog-confirm_add'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 新建视频：</h4></div>");
           });
 
           //编辑
@@ -790,7 +861,7 @@
                       resizable: false,
                       modal: true,
                       title: "",
-                      width:800,
+                      width:1000,
                       title_html: true,
                     });
 
@@ -809,88 +880,25 @@
           });
 
 
-          //套系
-          $('#add_form .add_tx').click(function(){
-              var attr_1=$('#add_form .attr_1').val();
-              var attr_2=$('#add_form .attr_2').val();
-              var attr_3=$('#add_form .attr_3').val();
-
-              if(attr_1&&attr_2&&attr_3){
-                  var str='';
-                  var len=++$('#add_form .attr_list_box tr').length;
-                        str+= '<tr attr_1="'+attr_1+'" attr_2="'+attr_2+'" attr_3="'+attr_3+'">'+
-                                '<td>'+len+'</td>'+
-                                '<td>'+attr_1+'</td>'+
-                                '<td>'+attr_2+'</td>'+
-                                '<td>'+attr_3+'</td>'+
-                              '</tr>';
-
-                  $('#add_form .attr_list_box').append(str); 
-
-                  render_attr('add');
-
-                  $('#add_form .attr_1').val('');
-                  $('#add_form .attr_2').val('');
-                  $('#add_form .attr_3').val('');
+          $('#add_form .show_video_btn').click(function(){
+              var video_url=$('#add_form .video').val();
+              if(video_url){
+                  $('#add_form .show_video').attr('src', video_url).show();
               }
           });
 
-          $('body').on('dblclick','#add_form .attr_list_box tr',function(){
-              $(this).remove();
-              render_attr();
-          })  
-
-          //套系
-          $('#edit_form .add_tx').click(function(){
-              var attr_1=$('#edit_form .attr_1').val();
-              var attr_2=$('#edit_form .attr_2').val();
-              var attr_3=$('#edit_form .attr_3').val();
-
-              if(attr_1&&attr_2&&attr_3){
-                  var str='';
-                  var len=++$('#edit_form .attr_list_box tr').length;
-                        str+= '<tr attr_1="'+attr_1+'" attr_2="'+attr_2+'" attr_3="'+attr_3+'">'+
-                                '<td>'+len+'</td>'+
-                                '<td>'+attr_1+'</td>'+
-                                '<td>'+attr_2+'</td>'+
-                                '<td>'+attr_3+'</td>'+
-                              '</tr>';
-
-                  $('#edit_form .attr_list_box').append(str); 
-
-                  render_attr('edit');
-
-                  $('#edit_form .attr_1').val('');
-                  $('#edit_form .attr_2').val('');
-                  $('#edit_form .attr_3').val('');
+          $('#edit_form .show_video_btn').click(function(){
+              var video_url=$('#edit_form .video').val();
+              if(video_url){
+                  $('#edit_form .show_video').attr('src', video_url).show();
               }
           });
-
-          $('body').on('dblclick','#add_form .attr_list_box tr',function(){
-              $(this).remove();
-              render_attr();
-          })  
         
         
       });
     </script>
 
     <script type="text/javascript">
-      function render_attr(form_type){
-          var attr_str='';
-          var attr_arr=[];
-          $.each($('#'+form_type+'_form .attr_list_box tr'), function(name, value){
-              var attr_1=$(value).attr('attr_1');
-              var attr_2=$(value).attr('attr_2');
-              var attr_3=$(value).attr('attr_3'); 
-
-              attr_arr.push(attr_1+'#'+attr_2+'#'+attr_3);
-          });
-          attr_str=attr_arr.join('||');
-          $('#'+form_type+'_form .tx_attr').val(attr_str);
-      }
-
-
       function init_page(){
           var title=$('#search_table .title').val();
           var Date1=$('#search_table .Date1').val();
@@ -904,8 +912,6 @@
           _init_button_operate(page);
       }
 
-      
-
       //获取列表
       function _ajax_get_list(title, Date1, Date2){
           var _data;
@@ -913,7 +919,7 @@
               async:false,
               type:'get',  
               contentType:"application/x-www-form-urlencoded",
-              url : "{:U('Admin/Product/ajax_get_list')}",
+              url : "{:U('Admin/Video/ajax_get_list')}",
               data: {
                 'title':title, 
                 'Date1':Date1, 
@@ -942,7 +948,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Product/ajax_get_row_info')}",
+              url : "{:U('Admin/Video/ajax_get_row_info')}",
               data:{
                 id:id
               },
@@ -953,13 +959,40 @@
 
                       $('#edit_form .id').val(data.id);
                       $('#edit_form .title').val(data.title);
-                      $('#edit_form .images').val(data.images);
-
-                      var images=data.images;
-                      if(images){
-                          render_images(images);
+                      $('#edit_form .start_time').val(data.start_time);
+                      $('#edit_form .end_time').val(data.end_time);
+                      
+                      if(data.img){
+                          $('#edit_form .img').val(data.img);
+                          $('#edit_form .show_img').attr('src', data.img).show();
+                      }else{
+                          $('#edit_form .img').val('');
+                          $('#edit_form .show_img').attr('src', '').hide();
                       }
 
+                      if(data.video){
+                          $('#edit_form .video').val(data.video);
+                          $('#edit_form .show_video_btn').attr('href', data.video).show();
+                      }else{
+                          $('#edit_form .show_video_btn').attr('href', '').hide();
+                      }
+                      
+                      $.each($("#edit_form .special option"), function(name, value){
+                          if($(value).attr('alt')==data.special){
+                              $(value).attr('selected','selected');
+                          }else{
+                              $(value).removeAttr('selected');
+                          }
+                      });
+
+
+                      $('#edit_form .content').val(data.content);
+
+
+
+
+                      $('#edit_form .director').val(data.director);
+                      $('#edit_form .team').val(data.team);
                       
                       var type_1=data.type_1;
                       var type_2=data.type_2;
@@ -968,16 +1001,10 @@
                           render_type(type_1, type_2, type_3);
                       }
 
-                      var tx_attr=data.tx_attr;
-
-                      render_tx_attr(tx_attr);
-
-                      $('#edit_form .price').val(data.price);
-                      $('#edit_form .sale_price').val(data.sale_price);
-                      $('#edit_form .content').val(data.content);
-                      $('#edit_form .tx_attr').val(tx_attr);
 
                       _json=json;
+
+                      layui.form().render();
                   }else{
                       layer.msg(json.msg);
                   }
@@ -987,48 +1014,6 @@
               }  
           }); 
           return _json;
-      }
-
-      function render_images(images){
-          var arr_image=images.split('#');
-
-          var str='';
-          $.each(arr_image, function(name, value){
-              str+=''+
-                  '<div class="col-xs-6 col-md-3">'+
-                    '<a href="#" class="thumbnail">'+
-                      '<img src="'+value+'">'+
-                    '</a>'+
-                  '</div>'+
-                '';
-          });
-
-          $('#edit_form .image_box').html(str);
-          $('#edit_form .images').val(images);
-      }
-      
-      function render_tx_attr(tx_attr){
-          var arr_tx_attr=tx_attr.split('||');
-
-          var str='';
-          $.each(arr_tx_attr, function(key, value){
-              var arr_row=value.split('#');
-
-              str+= '<tr attr_1="'+arr_row[0]+'" attr_2="'+arr_row[1]+'" attr_3="'+arr_row[2]+'">'+
-                      '<td>'+key+'</td>'+
-                      '<td>'+arr_row[0]+'</td>'+
-                      '<td>'+arr_row[1]+'</td>'+
-                      '<td>'+arr_row[2]+'</td>'+
-                    '</tr>';
-              
-          });
-
-          $('#edit_form .attr_list_box').html(str); 
-          render_attr();
-
-          $('#edit_form .attr_1').val('');
-          $('#edit_form .attr_2').val('');
-          $('#edit_form .attr_3').val('');
       }
 
       //
@@ -1043,7 +1028,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Product/ajax_get_type_1')}",
+              url : "{:U('Admin/Video/ajax_get_type_1')}",
               dataType : 'json',
               success  : function(json) { 
 
@@ -1076,7 +1061,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Product/ajax_get_type_2')}",
+              url : "{:U('Admin/Video/ajax_get_type_2')}",
               data:{
                 id:type_1
               },
@@ -1112,7 +1097,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Product/ajax_get_type_3')}",
+              url : "{:U('Admin/Video/ajax_get_type_3')}",
               data:{
                 id:type_2
               },
@@ -1149,7 +1134,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Product/ajax_get_type_2')}",
+              url : "{:U('Admin/Video/ajax_get_type_2')}",
               data:{
                   id: type_1
               },
@@ -1184,7 +1169,7 @@
           $.ajax({  
               async:false,
               type:'get',  
-              url : "{:U('Admin/Product/ajax_get_type_3')}",
+              url : "{:U('Admin/Video/ajax_get_type_3')}",
               data:{
                   id: type_2
               },
@@ -1213,7 +1198,146 @@
           return _json;
       }
 
-      
+      //
+      function render_type(type_1, type_2, type_3){
+          render_type_1(type_1);
+          render_type_2(type_1, type_2);
+          render_type_3(type_2, type_3);
+      }
+
+      function render_type_1(type_1){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Video/ajax_get_type_1')}",
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_1').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_1').html(doT_Str);
+
+                      $("#edit_form .type_1").find("option[value='"+type_1+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      function render_type_2(type_1, type_2){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Video/ajax_get_type_2')}",
+              data:{
+                id:type_1
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_2').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_2').html(doT_Str);
+
+                      $("#edit_form .type_2").find("option[value='"+type_2+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      function render_type_3(type_2, type_3){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Video/ajax_get_type_3')}",
+              data:{
+                id:type_2
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_3').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .type_3').html(doT_Str);
+
+                      $("#edit_form .type_3").find("option[value='"+type_3+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //添加
+      function _ajax_add_special(_data){
+           var _json;
+           $.ajax({  
+               async:false,
+               type:'post',  
+               contentType:"application/x-www-form-urlencoded",
+               url : "{:U('Admin/Special/ajax_add')}",
+               data: _data,
+               dataType : 'json',
+               success  : function(json) {
+                   if(json.code==0){
+                       var data=json.data;
+                       $('#add_form .special').append('<option value="'+data.id+'" alt="{$v.title}">'+data.title+'</option>');
+
+                       alert(json.msg);
+                       $("div[aria-describedby='dialog-confirm_add_special'] .ui-dialog-titlebar-close").trigger("click");
+                       layui.form().render();
+                   }else{
+                       alert(json.msg);
+                   }
+               },
+               error  : function() {  
+                   alert('error');
+               }  
+           }); 
+           return _json;
+      }
 
       //添加
       function _ajax_add(_data){
@@ -1222,7 +1346,7 @@
                async:false,
                type:'post',  
                contentType:"application/x-www-form-urlencoded",
-               url : "{:U('Admin/Product/ajax_add')}",
+               url : "{:U('Admin/Video/ajax_add')}",
                data: _data,
                dataType : 'json',
                success  : function(json) {
@@ -1249,7 +1373,7 @@
               async:false,
               type:'post',  
               contentType:"application/x-www-form-urlencoded",
-              url : "{:U('Admin/Product/ajax_edit')}",
+              url : "{:U('Admin/Video/ajax_edit')}",
               data: _data,
               dataType : 'json',
               success  : function(json) {  
@@ -1274,7 +1398,7 @@
           var _json;
           $.ajax({  
               type:'get',  
-              url : "{:U('Admin/Product/ajax_del')}",
+              url : "{:U('Admin/Video/ajax_del')}",
               data:{ 
                 id:ids 
               },
@@ -1298,47 +1422,6 @@
       }
 
 
-      function imgFormatter(cellvalue, options, rowdata){ 
-          if (cellvalue){
-              return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
-          }else{
-              return "暂无";
-          }
-
-      }
-
-      function tx_attrFormatter(cellvalue, options, rowdata){ 
-          if (cellvalue){
-              var arr_tx_attr=cellvalue.split('||');
-
-              var str= '<table class="table table-bordered">'+
-                        '<thead style="display:none;">'+
-                          '<tr>'+
-                            '<th>First Name</th>'+
-                            '<th>Last Name</th>'+
-                            '<th>Username</th>'+
-                          '</tr>'+
-                        '</thead>'+
-                        '<tbody>';
-              $.each(arr_tx_attr, function(key, value){
-                  var arr_row=value.split('#');
-                          
-                          str+='<tr>'+
-                                '<td><span class="label label-default">'+arr_row[0]+'</span></td>'+
-                                '<td>'+arr_row[1]+'元</td>'+
-                                '<td>'+arr_row[2]+'个</td>'+
-                              '</tr>';
-                  
-              });
-                str+='</tbody>'+
-                    '</table>';
-
-              return str;
-          }else{
-              return "暂无";
-          }
-      }
-
       function statusFormatter(cellvalue, options, rowdata){ 
           if (cellvalue == "1"){
               return '<span class="label label-success" alt="'+cellvalue+'">通过</span>';
@@ -1353,15 +1436,16 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '产品名称','产品图片','规格|价格|库存','时间','状态','操作'],
+              colNames:['id', '剧目名称','专辑名称','审核状态','开始日期','结束日期','点击量','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
                 {name:'title',index:'title', align : "center"},
-                {name:'images',index:'images', align : "center", formatter: imgFormatter},
-                {name:'tx_attr',index:'tx_attr', align : "center", formatter: tx_attrFormatter},
-                {name:'time',index:'time', align : "center"},
+                {name:'special',index:'special', align : "center"},
                 {name:'status',index:'status', align : "center", formatter: statusFormatter},
+                {name:'start_time',index:'start_time', align : "center"},
+                {name:'end_time',index:'end_time', align : "center"},
+                {name:'eye',index:'eye', align : "center"},
 
                 {name:'options',index:'options',align:'center',width:200}
               ], 
@@ -1434,15 +1518,15 @@
               }
             };
 
-            document.getElementById('LAY_demorange_s').onclick = function(){
-              start.elem = this;
-              laydate(start);
-            }
+            $('.LAY_demorange_s').click(function(){
+                start.elem = this;
+                laydate(start);
+            });
 
-            document.getElementById('LAY_demorange_e').onclick = function(){
-              end.elem = this
-              laydate(end);
-            }
+            $('.LAY_demorange_e').click(function(){
+                end.elem = this;
+                laydate(end);
+            });
         });
 
     </script>
@@ -1459,41 +1543,40 @@
               var arr=edit_type.split('_');
               var form_type=arr[1];
 
-              //上传文件
+
+              //上传视频
               layui.upload({
-                 url: "{:U('Admin/Product/lay_upload_file')}" //上传接口
+                 url: "{:U('Admin/Video/lay_upload_file_video')}" //上传接口
+                 ,elem: '#'+form_type+'_upload_video' //指定原始元素，默认直接查找class="layui-upload-file"
+                 ,ext : 'mp4'
+                 ,method: 'post' //上传接口的http类型
+                 ,success: function(res){ //上传成功后的回调
+                   if(res.code==0){
+                      $('#'+form_type+'_form .video').val(res.data.src);
+                      $('#'+form_type+'_form .show_video_btn').show().attr('href', res.data.src);
+                   }
+                 }
+              });
+
+
+              //上传图片
+              layui.upload({
+                 url: "{:U('Admin/Video/lay_upload_file')}" //上传接口
                  ,elem: '#'+form_type+'_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
                  ,success: function(res){ //上传成功后的回调
                    if(res.code==0){
-                      var str='';
-                         str+=''+
-                                '<div class="col-xs-6 col-md-3">'+
-                                  '<a href="#" class="thumbnail">'+
-                                    '<img src="'+res.data.src+'">'+
-                                  '</a>'+
-                                '</div>'+
-                              '';
-
-                      $('#'+form_type+'_form .image_box').append(str);
-
-
-                      var arr=[];
-                      $.each($('#'+form_type+'_form .image_box img'), function(name, value){
-                          console.log($(value).attr('src'));
-                          arr.push($(value).attr('src'));
-                      });
-                      var arr2str=arr.join('#');
-                      console.log(arr2str);
-                      $('#'+form_type+'_form .images').val(arr2str);
+                      $('#'+form_type+'_form .img').val(res.data.src);
+                      $('#'+form_type+'_form .show_img').attr('src', res.data.src);
                    }
                  }
               });
 
               
+              
               //上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
               layedit.set({
                   uploadImage: {
-                      url: "{:U('Admin/Product/lay_upload_file')}", //接口url
+                      url: "{:U('Admin/Video/lay_upload_file')}", //接口url
                       type: 'post', //默认post
                   }
               });
@@ -1564,9 +1647,15 @@
                   console.log(data);
               });
 
+              //监听提交
+              form.on('submit(demo1_add_special)', function(data){
+                var _json=_ajax_add_special(data.field);
+                return false;
+              });
             });
         }
     </script>
+
   </body>
 </html>
 
