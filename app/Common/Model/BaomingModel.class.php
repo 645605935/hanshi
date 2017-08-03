@@ -7,7 +7,7 @@ class BaomingModel extends RelationModel{
 			'mapping_type'=>self::BELONGS_TO,
 			'class_name'=>'User',
 			'foreign_key'=>'uid',
-			'as_fields' => 'truename:truename',
+			'as_fields' => 'username:username',
 		),
 		'_type'=>array(
 			'mapping_type'=>self::BELONGS_TO,

@@ -166,7 +166,7 @@
                           <tfoot>
                             <tr>
                               <td>
-                                <!-- <button style="float:left;" class="layui-btn id-btn-dialog2_add" title="id-btn-dialog2_add"> 添加 </button> -->
+                                <button style="float:left;" class="layui-btn id-btn-dialog2_add" title="id-btn-dialog2_add"> 批量添加票数 </button>
                                 <button style="float:right;" class="layui-btn search_btn" lay-submit="" title="search_btn">搜索</button>
                               </td>
                             </tr> 
@@ -186,7 +186,7 @@
                       <div class="col-xs-12">
                           <div class="panel panel-default">
                             <div class="panel-heading">列表</div>
-                            <div class="panel-body">
+                            <div class="panel-body" id="home">
                               <table id="grid-table"></table>
                               <div id="grid-pager"></div>
                             </div>
@@ -337,82 +337,11 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">比赛名称</label>
+                          <label class="layui-form-label">数量</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                            <input type="text" name="num" lay-verify="required" placeholder="" class="layui-input num">
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">比赛类型</label>
-                          <div class="layui-input-inline">
-                            <select name="type" class="type">
-                               <option value="请选择">请选择</option>
-                               <foreach name="type" item="v">
-                                  <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
-                               </foreach>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td colspan="2">
-
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">比赛时间</label>
-                          <div class="layui-input-inline">
-                            <input class="layui-input start_time LAY_demorange_s" name="start_time" placeholder="开始日">
-                          </div>
-                          <div class="layui-form-mid">-</div>
-                          <div class="layui-input-inline">
-                            <input class="layui-input end_time LAY_demorange_e" name="end_time" placeholder="截止日">
-                          </div>
-                        </div>
-                      </div> 
-
-                    </td>
-                  </tr>
-
-
-
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">比赛图片</label>
-                          <div class="layui-input-inline">
-                            <input type="file" id="add_upload_img" name="file" class="layui-upload-file">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline" style="display:none;">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">图片</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="img" lay-verify="required" class="layui-input img" readonly>
-                          </div>
-                        </div>
-                      </div>
-                      <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td class="center" colspan="2">
-                      <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">比赛规则</label>
-                          <div class="layui-input-block">
-                              <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_add"></textarea>
-                          </div>
                       </div>
                     </td>
                   </tr>
@@ -444,89 +373,18 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">比赛名称</label>
+                          <label class="layui-form-label">票数</label>
                           <div class="layui-input-inline">
-                            <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">比赛类型</label>
-                          <div class="layui-input-inline">
-                            <select name="type" class="type">
-                               <option value="请选择">请选择</option>
-                               <foreach name="type" item="v">
-                                  <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
-                               </foreach>
-                            </select>
+                            <input type="text" name="vote" lay-verify="required" placeholder="" class="layui-input vote">
                           </div>
                         </div>
                       </div>
                     </td>
                   </tr>
-
-                  <tr>
-                    <td colspan="2">
-
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">比赛时间</label>
-                          <div class="layui-input-inline">
-                            <input class="layui-input start_time LAY_demorange_s" name="start_time" placeholder="开始日">
-                          </div>
-                          <div class="layui-form-mid">-</div>
-                          <div class="layui-input-inline">
-                            <input class="layui-input end_time LAY_demorange_e" name="end_time" placeholder="截止日">
-                          </div>
-                        </div>
-                      </div> 
-
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">比赛图片</label>
-                          <div class="layui-input-inline">
-                            <input type="file" id="edit_upload_img" name="file" class="layui-upload-file">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline" style="display:none;">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">LOGO</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="img" lay-verify="required" class="layui-input img" readonly>
-                          </div>
-                        </div>
-                      </div>
-                      <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
-                    </td>
-                  </tr>
-
-                 
-                  <tr>
-                    <td class="center" colspan="2">
-                      <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">比赛规则</label>
-                          <div class="layui-input-block">
-                              <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_edit"></textarea>
-                          </div>
-                      </div>
-                    </td>
-                  </tr>
-                  
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colspan="2" style="text-align:right;">
+                    <td style="text-align:right;">
                       <input type="hidden" name="id" class="layui-input id">
                       <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确认</button>
                       <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
@@ -646,12 +504,8 @@
           var Date1=$('#search_table .Date1').val();
           var Date2=$('#search_table .Date2').val();
 
-          var _json_=_ajax_get_list(title, Date1, Date2);
-          init_grid_table(_json_.data);
-
-          //初使化按钮操作权限
-          var page="{$page}";
-          _init_button_operate(page);
+          var json=_ajax_get_list(title, Date1, Date2);
+          init_grid_table(json.data);
       }
 
       //获取列表
@@ -700,28 +554,7 @@
                       var data=json.data;
 
                       $('#edit_form .id').val(data.id);
-                      $('#edit_form .title').val(data.title);
-                      $('#edit_form .start_time').val(data.start_time);
-                      $('#edit_form .end_time').val(data.end_time);
-                      
-                      if(data.img){
-                          $('#edit_form .img').val(data.img);
-                          $('#edit_form .show_img').attr('src', data.img).show();
-                      }else{
-                          $('#edit_form .img').val('');
-                          $('#edit_form .show_img').attr('src', '').hide();
-                      }
-
-                      $.each($("#edit_form .type option"), function(name, value){
-                          if($(value).attr('alt')==data.type){
-                              $(value).attr('selected','selected');
-                          }else{
-                              $(value).removeAttr('selected');
-                          }
-                      });
-
-
-                      $('#edit_form .content').val(data.content);
+                      $('#edit_form .vote').val(data.vote);
 
                       _json=json;
 
@@ -744,14 +577,13 @@
                async:false,
                type:'post',  
                contentType:"application/x-www-form-urlencoded",
-               url : "{:U('Admin/Baoming/ajax_add')}",
+               url : "{:U('Admin/Baoming/ajax_add_num')}",
                data: _data,
                dataType : 'json',
                success  : function(json) {
                    if(json.code==0){
-                       layer.msg(json.msg);
-                       $("#grid-table").addRowData(1, json.data, "first");
-                       $("#add_form .reset").trigger('click');
+                       layer.msg('批量添加票数成功');
+                       init_page();
                        $("div[aria-describedby='dialog-confirm_add'] .ui-dialog-titlebar-close").trigger("click");
                    }else{
                        layer.msg(json.msg);
@@ -837,12 +669,14 @@
 
 
       function init_grid_table(grid_data){
+          $('#home').html('<table id="grid-table"></table><div id="grid-pager"></div>');
+
           $(grid_selector).jqGrid({
               caption: "列表",
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '用户名','图片','报名单位','作者/单位','联系电话','作品主题','参赛项目','时间','操作'],
+              colNames:['id', '用户名','图片','报名单位','作者/单位','联系电话','作品主题','参赛项目','票数','时间','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
@@ -853,6 +687,7 @@
                 {name:'type',index:'type', align : "center"},
                 {name:'title',index:'title', align : "center"},
                 {name:'match',index:'match', align : "center"},
+                {name:'vote',index:'vote', align : "center"},
                 {name:'time',index:'time', align : "center"},
 
                 {name:'options',index:'options',align:'center',width:200}
@@ -883,7 +718,7 @@
                       var _rowData = $(grid_selector).jqGrid('getRowData',id);
 
                       var options="";
-                          options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.id+"'><i class='icon-edit bigger-110'></i>修改</button>";
+                          options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.id+"'><i class='icon-edit bigger-110'></i>票数</button>";
                           options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del' title='id-btn-dialog2_del' data-id='"+_rowData.id+"'><i class='icon-trash bigger-110'></i>删除</button>";  
                       jQuery(grid_selector).jqGrid('setRowData', ids[i], { options: options });
                   }

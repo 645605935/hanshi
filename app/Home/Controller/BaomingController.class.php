@@ -25,7 +25,7 @@ class BaomingController extends CommonController{
         }
 
         $count      = M('Baoming')->where($where)->count();
-        $Page       = new \Common\Extend\Page($count,6);
+        $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->select();
         foreach ($list as $key => $value) {
@@ -102,10 +102,12 @@ class BaomingController extends CommonController{
 
                 $res = M('Baoming')->where($where)->setInc('vote');
                 if($res){
+                    $num=$this->getReward();
+
                     $data=array();
                     $data['code']=0;
                     $data['msg']='success';
-                    $data['data']=$row;
+                    $data['num']=$num;
                 }else{
                     $data=array();
                     $data['code']=1;
@@ -120,6 +122,53 @@ class BaomingController extends CommonController{
 
         echo json_encode($data);
     }
+
+    /**
+     * 抽奖
+     * @param int $total
+     */
+    public function getReward($total=1000){
+         $win1 = floor((12 * $total) / 100);
+         $win2 = floor((30 * $total) / 100);
+         $win3 = floor((52 * $total) / 100);
+         $other = $total - $win1 - $win2 - $win3;
+         $return = array();
+         for ($i = 0;$i < $win1;$i++) {
+             $return[] = 1;
+         }
+         for ($j = 0;$j < $win2;$j++) {
+             $return[] = 2;
+         }
+         for ($m = 0;$m < $win3;$m++) {
+             $return[] = 3;
+         }
+         for ($n = 0;$n < $other;$n++) {
+             $return[] = '谢谢惠顾';
+         }
+         shuffle($return);
+         return $return[array_rand($return) ];
+    }
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -95,6 +95,36 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
+    //添加票数
+    public function ajax_add_num(){
+        global $user;
+
+        if($num=$_POST['num']){
+            $list=M('Baoming')->select();
+
+            $res=0;
+            foreach ($list as $key => $value) {
+                M('Baoming')->where(array('id'=>$value['id']))->setInc('vote',$num);
+                $res++;
+            }
+
+            if($res==count($list)){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
 
     //添加
     public function ajax_add(){

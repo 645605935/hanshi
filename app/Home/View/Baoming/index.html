@@ -33,7 +33,7 @@
                         <foreach name="list" item="v">
                             <li>
                                 <a href="{:U('Home/Baoming/detail',array('id'=>$v['id']))}">
-                                    <img style="width:238px;height:238px;" class="img1" src="{$v.img}" alt="">
+                                    <img style="width:238px;height:238px;" class="img1" src="{$v.images}" alt="">
                                     <div class="info-top first">
                                         <h2>{$v.title}</h2>
                                         <p><strong>作品编号：</strong>{$v.id}</p>
@@ -43,12 +43,16 @@
                                     </div>
                                 </a>
                                 <div class="info-btn">
-                                    <a href="javascript:;" data-id="{$v.id}" class="btn vote_btn">立即投票</a>
-                                    <span class="btn1"><i></i>{$v.vote}</span>
+                                    <a href="javascript:;" data-id="{$v.id}" data-uid="{$user.id}" class="btn vote_btn">立即投票</a>
+                                    <span class="btn1"><i></i><em>{$v.vote}</em></span>
                                 </div>
                             </li>
                         </foreach>
                     </ul>
+                </div>
+
+                <div class="pages">
+                    {$page}
                 </div>
             </div>
         </div>
@@ -62,6 +66,22 @@
 
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
 <script src="__PUBLIC__/Home/js/index.js"></script>
+<script src="__PUBLIC__/layer/layer.js"></script>
+
+<div class="around_images" style="display:none;">
+    <style type="text/css">
+        .layui-layer-page .layui-layer-content{overflow: hidden;}
+    </style>
+    <div id="tong_1">
+        <img style="width:100%;height:100%;overflow:hidden;" src="__PUBLIC__/Home/images/first.jpg">
+    </div>
+    <div id="tong_2">
+        <img style="width:100%;height:100%;overflow:hidden;" src="__PUBLIC__/Home/images/second.jpg">
+    </div>
+    <div id="tong_3">
+        <img style="width:100%;height:100%;overflow:hidden;" src="__PUBLIC__/Home/images/third.jpg">
+    </div>
+</div>
 </body>
 </html>
 
@@ -69,8 +89,18 @@
 <script type="text/javascript">
     $(function(){
         $('.vote_btn').click(function(){
-            var id=$(this).attr('data-id');
-            _ajax_vote(id);
+            var cur_num=$(this).next().find('em').html();
+            var uid=$(this).attr('data-uid');
+            if(!uid){
+                window.location.href="{:U('Home/User/login')}";
+                return false;
+            }else{
+                var id=$(this).attr('data-id');
+                var _json=_ajax_vote(id);
+                if(_json.code==0){
+                    $(this).next().find('em').html(++cur_num);
+                }
+            }
         });
     });
 </script>
@@ -89,10 +119,22 @@
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
-                     alert(json.msg);
-                     window.location.reload();
+                     var num=json.num;
+                     if(num>0){
+                        layer.open({
+                          type: 1,
+                          title: false,
+                          closeBtn: 0,
+                          shadeClose: true,
+                          skin: 'yourclass',
+                          content: $('#tong_'+num).html()
+                        });
+                     }else{
+                        layer.msg(json.msg);
+                     }
+                     _json=json;
                  }else{
-                     alert(json.msg);
+                     layer.msg(json.msg);
                  }
              },
              error  : function() {  
