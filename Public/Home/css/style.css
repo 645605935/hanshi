@@ -402,3 +402,13 @@
 .page-group a:hover {border: 1px solid #FF6000;color: #fff;background: #FF6000}
 .page-group a.a1f {color: #999;background: #f2f2f2;border: 1px solid #f2f2f2;cursor: default}
 .page-group a.a1f:hover {color: #999;background: #f2f2f2;border: 1px solid #eee}
+
+.pages {padding:10px 0 10px 0;text-align:center;font-size:12px;margin-top: 20px;}
+.pages a:link,.pages a:visited,.pages a:active  {background:#FFFFFF;border:#E6E6E6 1px solid;padding:1px;text-decoration:none;}
+.pages a:hover  {background:#FFFFFF;border:#CCCCCC 1px solid;color:#FF6600;padding:1px;text-decoration:none;}
+.pages strong {background:#2E6AB1;padding:1px;border:#CCCCCC 1px solid;color:#FFFFFF;}
+.pages_inp {border:#CCCCCC 1px solid;padding:1px;width:30px;text-align:center;color:#666666;}
+.pages_btn {width:26px;background:#F6F6F6;border:#CCCCCC 1px solid;font-weight:bold;font-size:11px;}
+.pages label {background:#FFFFFF;border:#CCCCCC 1px solid;padding:1px 5px 1px 5px;}
+.pages label em {color:red;font-weight:bold;font-style:normal;}
+.pages label span {font-weight:bold;}
