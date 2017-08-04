@@ -178,5 +178,17 @@ class TongchengjieyueController extends CommonController{
         $this->display();
     }
 
+    public function chanpin_detail(){
+        global $user;
+        
+        $id=$_GET['id'];
+        $row=M('Product')->where($where)->find($id);
+        $row['images']=explode('#', $row['images']);
+        $row['time']=date('Y-m-d',$value['time']);
+
+        $this->row=$row;
+        $this->display();
+    }
+
   
 }

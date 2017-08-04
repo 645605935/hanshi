@@ -168,53 +168,5 @@ $(function(){
 		$('.wxk').show();
 	},function(){
 		$('.wxk').hide();
-	});
-	$(".nav-hov-btn").hover(function(){
-        $(this).find(".nav-all-con").show();
-    },function(){
-        $(this).find(".nav-all-con").hide();
-    })
-    $(".nav-list").hover(function(){
-        $(this).find(".nav-list-con2").show();
-        $(this).css("background","#f94a14");
-    },function(){
-        $(this).find(".nav-list-con2").hide();
-        $(this).css("background","#FF6537");
-    });
-    $('.center-by ul li').click(function(){
-    	$('.center-by ul li').removeClass('cur');
-    	$(this).addClass('cur');
-    });
-    $('.cent-color li').click(function(){
-    	$('.cent-color li').removeClass('cur');
-    	$(this).addClass('cur');
-    });
-    var num = $('.center-input').val();
-    $('.center-jian').click(function(){
-    	if(num==2){
-			num --;
-			$('.center-input').val(num);
-			$('.center-jian').addClass('center-jian1');
-		}else if(num>2){
-			num --;
-    		$('.center-input').val(num);
-    		$('.center-jian').removeClass('center-jian1');
-		}
-    	else{
-    		$('.center-minus').addClass('center-jian1');
-    		return false;
-    	}
-    });
-    $('.center-jia').click(function(){
-    	if(num>=1){
-    		num ++;
-    		$('.center-input').val(num);
-    		$('.center-jian').removeClass('center-jian1');
-    		$('.center-jia').removeClass('center-jia1');
-    	}else{
-    		$('.center-jian').addClass('center-jian');
-    		$('.center-jia').addClass('center-jia');
-    		return false;
-    	}
-    });
+	})
 })  
