@@ -38,8 +38,11 @@
 .book-sj i {width: 20px;height: 20px;display: inline-block;position: relative;background: url(../images/shujia.png) no-repeat;background-size: 100%;vertical-align: middle;margin-top: -2px}
 .mid-part {width: 65%;box-sizing: border-box;float: left}
 .book-img {width: 200px;height: 280px;position: relative;float: left}
+.book-imgg {width: 200px;height: 280px;position: relative;float: left}
 .book-img img {width: 100%;height: 100%}
+.book-imgg img {width: 100%;height: 100%}
 .book-img span {position: absolute;background: #8FC320;color: #fff;top:10px;right: -15px;padding: 5px 15px;font-size: 16px;border-radius: 8px}
+.book-imgg span {position: absolute;background: #8FC320;color: #fff;top:10px;right: -15px;padding: 5px 15px;font-size: 16px;border-radius: 8px}
 .book-det div,.book-det h2 {display: inline-block}
 .det-pd {margin-top: 8px;margin-left: 15px}
 .det-xing span {width: 15px;height: 15px;display: inline-block;position: relative;background: url(../images/xing.png) no-repeat;background-size: 100%}
@@ -103,7 +106,9 @@
 .r-zp .r-num {color: #f00}
 .join-qz {display: inline-block;width: 100px;height: 25px;line-height: 25px;background: #59C2D7;color: #fff;border-radius: 5px;text-align: center}
 .join-qz:hover {color: #fff;}
-.r-lx ul li a {width: 30%;float: left;text-align: center;height: 25px;line-height: 25px;color: #fff;border-radius: 5px;margin: 10px 3% 10px 0}
+.r-lx ul {float: left;margin-bottom: 10px;}
+.r-lx ul li {float: left;}
+.r-lx ul li a {float: left;text-align: center;height: 25px;line-height: 25px;color: #fff;border-radius: 5px;margin: 10px 3px 0px 0;width: auto;padding: 0 12px;}
 .r-lx ul li.lx1 a {background: #7E7CBB}
 .r-lx ul li.lx2 a {background: #A8D4A3}
 .r-lx ul li.lx3 a {background: #E9DB82}
@@ -161,8 +166,9 @@
 .read-right a:before {content: '';display: block;width: 20px;height: 20px;vertical-align: middle;margin: 0 auto;margin-bottom: 2px;}
 .read-right a.goTop {padding-top: 20px;display: none;}
 .read-right a.goTop:before {background: url(../images/goTop.png) no-repeat;background-size: 200%;}
-.read-right a.pinglun {border-top: 1px solid #DFDBD2;}
 .read-right a.pinglun:before {background: url(../images/plun.png) no-repeat;background-size: 200%;}
+.read-right a.dashang {border-top: 1px solid #DFDBD2;}
+.read-right a.dashang:before {background: url(../images/dashang.png) no-repeat;background-size: 200%;}
 .read-right a:hover:before {background-position:-20px 0;}
 .read-mid {margin-left: 70px;background: #F5F1E6;padding: 60px;border:1px solid #D8D8D8;box-sizing: border-box;min-height: 600px;}
 .read-mid h1 {color: #333;}
@@ -394,3 +400,6 @@ body.w1280 .content {width: 1500px;margin: 0 auto;}
 .rightt-spann .i-yiwen {display: inline-block;width: 20px;height: 20px;background: url(../images/yiwen.png) no-repeat;background-size: 100%;vertical-align: middle;margin-top: -2px;margin-left: 5px;cursor: pointer;}
 .yiwen-tip {position: absolute;background: #404040;color: #fff;width: 130px;line-height: 1.2;padding: 10px;text-align: center;border-radius: 3px;box-shadow: 0 3px 10px rgba(0,0,0,.3);top: -47px;right: -40px;display: none;}
 .yiwen-tip:after {position: absolute;content: '';border-top:6px solid #404040;border-left: 8px solid transparent;border-right: 8px solid transparent;bottom:-5px;left: 50%;margin-left: -4px;}
+.left-all11 {margin-right: 0;}
+.mid-part11 {width: 618px;margin-bottom: 20px;}
+.right-pp11 {width: 100%;padding: 0;}

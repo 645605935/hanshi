@@ -24,7 +24,19 @@ $(function(){
 	$('.close-panel').click(function(){
 		$(this).parents('.panel-wrap').hide();
 		$('.read-left ul li').removeClass('cur');
-	})
+	});
+	$('.cataBth').click(function(){
+		if($('.catalog').css('display')=='none'){
+			$('.panel-wrap').hide();
+			$('.catalog').show();
+			$('.read-left ul li').removeClass('cur');
+			$(this).parents('li').addClass('cur');
+		}else{
+			$('.catalog').hide();
+			$('.panel-wrap').hide();
+			$(this).parents('li').removeClass('cur');
+		}
+	});
 	$('.settingBtn').click(function(){
 		if($('.setting').css('display')=='none'){
 			$('.panel-wrap').hide();
@@ -217,4 +229,69 @@ $(function(){
     		return false;
     	}
     });
-})  
+    $('.main-nav-wrap .main-nav li.first').hover(function(){
+    	$('.classify-list').show();
+    });
+    $('.classify-list').hover(function(){
+    	$('.classify-list').show();
+    },function(){
+    	$('.classify-list').hide();
+    });
+    $('.step2 li .accredit').hover(function(){
+    	$('.accreditTip').show();
+    },function(){
+    	$('.accreditTip').hide();
+    });
+    $('.tagFilter a').click(function(){
+    	$(this).addClass('act');
+    	$(this).siblings().removeClass('act');
+    });
+    $('.filterTagBox').click(function(){
+    	$('.mask,.maskUI1').show();
+    });
+    $('.new-fj').click(function(){
+    	$('.mask,.maskUI2').show();
+    });
+    $('.workStateWrap .fmBox .fm span').click(function(){
+    	$('.mask,.maskUI3').show();
+    });
+    $('.close-btn').click(function(){
+    	$('.mask,.maskUI3').hide();
+    });
+    $('.closePopup,.confirmBtn a').click(function(){
+    	$('.mask,.maskUI').hide();
+    });
+    $('.volume').click(function(){
+    	if($(this).hasClass('act')){
+    		$(this).removeClass('act');
+    		$(this).parents('.act-aa').find('.sectionWrap').hide();
+    	}else{
+    		$(this).addClass('act');
+    		$(this).parents('.act-aa').find('.sectionWrap').show();
+    	}
+    });
+    $('.sectionList li').click(function(){
+    	$(this).addClass('act');
+    	$(this).siblings().removeClass('act');
+    });
+    $('.workSetList .dib-wrap .button').click(function(){
+    	if($('.workStateWrap .modify').hasClass('hidden')){
+    		$('.workStateWrap .modify').show();
+    		$('.workStateWrap .saved').hide();
+    	}
+    });
+    $('.confirm a').click(function(){
+    	if($('.workStateWrap .modify').css('display')=='block'){
+    		$('.workStateWrap .modify').hide();
+    		$('.workStateWrap .saved').show();
+    	}
+    });
+    $('.j-attest').click(function(){
+    	$('.mask').show();
+    	$('.identy-pop').show();
+    });
+    $('.button1 a.pre').click(function(){
+    	$('.mask').hide();
+    	$('.identy-pop').hide();
+    });
+});  
