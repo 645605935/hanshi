@@ -1,4 +1,11 @@
 ﻿
+.tl {
+    text-align: left
+}
+
+.tr {
+    text-align: right
+}
 .hidden {
     display: none
 }
@@ -2622,6 +2629,10 @@ span.paging-num:hover {
     opacity: 0;
     filter: alpha(opacity=0)
 }
+.maskUI1 {
+    left: 50%;
+    margin-left: -290px;
+}
 
 .maskUI3 {
     left: 50%;
@@ -2691,4 +2702,199 @@ span.paging-num:hover {
 
 .button1 a:hover {
   text-decoration: none;
+}
+.step-imgs {
+  position: relative;
+}
+.step-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 158px;
+  opacity: 0;
+  filter: alpha(opacity=0)
+}
+.worklist-table,.select-table {
+    text-align: center;
+    table-layout: fixed;
+}
+
+.worklist-table td, .select-table td {
+    border-bottom: 1px solid #E6E6E6;
+    height: 48px;
+    padding: 5px 0;
+    font: 14px/1.5 "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";
+    color: #575757
+}
+
+.worklist-table td .zw-icon, .select-table td .zw-icon {
+    width: 15px;
+    height: 17px;
+    background-position: -34px -340px
+}
+
+.worklist-table td .work-photo img, .select-table td .work-photo img {
+    display: block;
+    border: 5px solid #FFF
+}
+
+.worklist-table td .work-name, .select-table td .work-name {
+    display: table-cell;
+    vertical-align: middle
+}
+
+.worklist-table td .work-name a, .select-table td .work-name a {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.worklist-table td.tl p, .select-table td.tl p {
+    padding-right: 20px
+}
+
+.worklist-table td a, .select-table td a {
+    word-break: break-all;
+    color: #575757
+}
+
+.worklist-table td a.blue, .select-table td a.blue {
+    color: #419AD9
+}
+
+.worklist-table td a:hover, .select-table td a:hover {
+    color: #4EA8FF
+}
+
+.worklist-table td .qq-group, .select-table td .qq-group {
+    display: none;
+    color: #999
+}
+
+.worklist-table td .time, .select-table td .time {
+    display: none;
+    color: #999
+}
+
+.worklist-table td .work-photo, .select-table td .work-photo {
+    display: none;
+    float: left;
+    margin-right: 10px;
+    padding: 4px 0
+}
+
+.worklist-table th, .select-table th {
+    border-bottom: 1px solid #E6E6E6;
+    height: 44px;
+    font: 14px/44px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";
+    background: #F9F9F9
+}
+
+.worklist-table tr.active, .select-table tr.active {
+    background: #F6FBFF
+}
+
+.worklist-table tr.active td, .select-table tr.active td {
+    height: auto;
+    padding: 10px 0 5px
+}
+
+.worklist-table tr.active .work-photo, .worklist-table tr.active .time, .worklist-table tr.active .qq-group, .select-table tr.active .work-photo, .select-table tr.active .time, .select-table tr.active .qq-group {
+    display: block
+}
+
+.worklist-table tr.active .work-name, .select-table tr.active .work-name {
+    width: 130px;
+    height: 118px
+}
+
+.worklist-table tr.active .dib-wrap i, .select-table tr.active .dib-wrap i {
+    display: block
+}
+
+.worklist-table tr.active .dib-wrap .button, .select-table tr.active .dib-wrap .button {
+    width: 66px;
+    height: 66px;
+    text-indent: 0
+}
+
+.worklist-table tr.active .dib-wrap .button.zw-btn, .select-table tr.active .dib-wrap .button.zw-btn {
+    display: inline-block;
+    width: 88px;
+    height: 30px
+}
+
+.worklist-table tr.active .dib-wrap .button span, .select-table tr.active .dib-wrap .button span {
+    margin: 10px auto
+}
+
+.worklist-table tr.active .dib-wrap .white span, .select-table tr.active .dib-wrap .white span {
+    margin: 12px auto
+}
+
+.worklist-table .dib-wrap i, .select-table .dib-wrap i {
+    display: none
+}
+
+.worklist-table .dib-wrap .button, .select-table .dib-wrap .button {
+    border: 1px solid #50A8FF;
+    border-radius: 3px;
+    width: 28px;
+    height: 28px;
+    font: 12px/1 "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";
+    transition: none;
+    text-decoration: none;
+    color: #AAA
+}
+
+.worklist-table .dib-wrap .button.blue, .select-table .dib-wrap .button.blue {
+    margin-right: 10px;
+    color: #FFF
+}
+
+.worklist-table .dib-wrap .button.zw-btn, .select-table .dib-wrap .button.zw-btn {
+    display: none;
+    width: 88px;
+    height: 30px;
+    font: 14px/30px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";
+    color: #FFF
+}
+
+.worklist-table .dib-wrap a span, .select-table .dib-wrap a span {
+    display: block
+}
+
+.worklist-table .dib-wrap .blue span, .select-table .dib-wrap .blue span {
+    width: 20px;
+    height: 24px;
+    margin: 3px auto;
+    background-position: -195px -146px
+}
+
+.worklist-table .dib-wrap .white, .select-table .dib-wrap .white {
+    border: 1px solid #DDD
+}
+
+.worklist-table .dib-wrap .white span, .select-table .dib-wrap .white span {
+    width: 18px;
+    height: 21px;
+    margin: 4px auto;
+    background-position: -195px -171px
+}
+.null {
+    width: 380px;
+    margin: 140px auto;
+    font-size: 18px;
+    text-align: center
+}
+
+.null img {
+    margin-bottom: 50px
+}
+
+.null .button {
+    display: inline-block;
+    width: 178px;
+    height: 34px;
+    font: 14px/34px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif"
 }
