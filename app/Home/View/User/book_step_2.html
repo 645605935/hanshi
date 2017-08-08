@@ -250,6 +250,7 @@
                             <tr>
                               <td colspan="2" style="text-align:center;">
                                 <input type="hidden" name="img" lay-verify="required" class="layui-input img">
+                                <input type="hidden" name="target" value="{$_POST['target']}" lay-verify="required" class="layui-input target">
                                 <button class="layui-btn" lay-submit="" lay-filter="demo1_add">创建作品</button>
                                 <a class="layui-btn">返回上一步</a>
                               </td>
@@ -311,14 +312,14 @@
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
-                     alert(json.msg);
-                     window.location.reload();
+                     layer.msg(json.msg);
+                     window.location.href="{:U('Home/User/book_step_3')}";
                  }else{
-                     alert(json.msg);
+                     layer.msg(json.msg);
                  }
              },
              error  : function() {  
-                 alert('error');
+                 layer.msg('error');
              }  
          }); 
          return _json;
@@ -388,7 +389,20 @@
 
       //监听提交
       form.on('submit(demo1_add)', function(data){
-        var _json=_ajax_add_book(data.field);
+        var _data=data.field;
+
+        var str = '';
+        var arr = [];
+        $.each(_data, function(name, value){
+            if(name.indexOf("tags") >=0 ){
+                var id=parseInt(name.replace(/[^0-9]/ig,""));
+                arr.push(id);
+            }
+        });
+        str=arr.join('_');
+        _data.tags=str;
+
+        var _json=_ajax_add_book(_data);
         return false;
       });
 

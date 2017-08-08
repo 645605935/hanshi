@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="/Public/Home/css/index.css">
 </head>
 <body>
-    <!-- 头部引用 -->
-    <?php
+<!-- 引用 -->
+<?php
  $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select(); $_page_=$_SERVER['PATH_INFO']; ?>
 
 
@@ -46,7 +46,7 @@
             </ul>
         </li>
         <li>
-            <a href="shucheng-zhuye1.html" class="li-a">书城</a>
+            <a href="<?php echo U('Home/Book/index');?>" class="li-a">书城</a>
             <ul>
                 <li><a href="tongchengjieyue.html"><span class="color1">在线借阅</span></a></li>
                 <li><a href="shucheng-zhuye1.html">图书购买</a></li>
@@ -748,7 +748,7 @@
 </div>
 <div class="clear"></div>
 
-<!-- 头部引用 -->
+<!-- 引用 -->
 <div id="bot" class="mt20">
     <div class="bot1">
         <div class="w1000 clear">
