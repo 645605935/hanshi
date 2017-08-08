@@ -261,6 +261,17 @@ $(function(){
     $('.closePopup,.confirmBtn a').click(function(){
     	$('.mask,.maskUI').hide();
     });
+    $('.fj-del').click(function(){
+    	$('.mask,.maskUI4').show();
+    });
+    $('.xg-an').click(function(){
+    	$('.editVolumeBox').show();
+    	$('.editWrap').hide();
+    });
+    $('.editVolumeBox .save').click(function(){
+    	$('.editVolumeBox').hide();
+    	$('.editWrap').show();
+    });
     $('.volume').click(function(){
     	if($(this).hasClass('act')){
     		$(this).removeClass('act');

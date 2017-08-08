@@ -146,7 +146,7 @@ class TongchengjieyueController extends CommonController{
         $where=array();
 
         $count      = M('Video')->where($where)->count();
-        $Page       = new \Common\Extend\Page($count,2);
+        $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         $list=M('Video')->page($nowPage.','.$Page->listRows)->where($where)->select();
         foreach ($list as $key => $value) {
@@ -178,17 +178,7 @@ class TongchengjieyueController extends CommonController{
         $this->display();
     }
 
-    public function chanpin_detail(){
-        global $user;
-        
-        $id=$_GET['id'];
-        $row=M('Product')->where($where)->find($id);
-        $row['images']=explode('#', $row['images']);
-        $row['time']=date('Y-m-d',$value['time']);
-
-        $this->row=$row;
-        $this->display();
-    }
+    
 
   
 }

@@ -150,19 +150,25 @@
         <div class="content mt20 clearfix bg3 index-con">
             <div class="bg2 clearfix pt20 pl10 pr10">
                 <div class="left-nav">
-                    <ul>
-                    <li><a><i class="stx"></i>主题市场</a></li>
-                    <li><a href="tongchengjieyue.html">同城借阅</a></li>
-                    <li><a href="huodong.html">活动视频</a></li>
-                    <li><a href="fenlei-chuantong.html">传统曲艺</a></li>
-                    <li><a href="fenlei-yanchu.html">舞台/话剧</a></li>
-                    <li><a href="fenlei-yanchu.html">专题/动画</a></li>
-                    <li><a href="shucheng-zhuye1.html">有声文学</a></li>
-                    <li><a href="shucheng-zhuye1.html">文学阅读</a></li>
-                    <li><a href="#4">创客空间</a></li>
-                    <li><a href="#4">瞰世学院</a></li>
-                    <li><a href="index.html">瞰世商城</a></li>
-                </ul>
+                    <!-- 引用 -->
+                    <?php  $left_video_types=M('Type')->where(array('pid'=>1293))->select(); ?>
+
+<ul>
+    <li><a><i class="stx"></i>主题市场</a></li>
+    <li><a href="<?php echo U('Home/Tongchengjieyue/index');?>">同城借阅</a></li>
+    <li><a href="huodong.html">活动视频</a></li>
+	
+
+	<?php if(is_array($left_video_types)): foreach($left_video_types as $key=>$v): ?><li <?php if($_GET['type'] == $v['id']): ?>class="cur"<?php endif; ?>><a href="<?php echo U('Home/Index/yanchu',array('type'=>$v['id']));?>"><?php echo ($v['title']); ?></a></li><?php endforeach; endif; ?>
+
+
+
+    <li><a href="shucheng-zhuye1.html">有声文学</a></li>
+    <li><a href="shucheng-zhuye1.html">文学阅读</a></li>
+    <li><a href="#4">创客空间</a></li>
+    <li><a href="#4">瞰世学院</a></li>
+    <li><a href="<?php echo U('Home/Index/shop');?>">瞰世商城</a></li>
+</ul>
                 </div>
                 <div class="mid-swiper">
                     <div class="pl20">

@@ -20,7 +20,7 @@ class UserController extends CommonController{
         $where['uid']=$user['id'];
 
         $count      = D('Book')->where($where)->count();
-        $Page       = new \Common\Extend\Page($count,1);
+        $Page       = new \Common\Extend\Page($count,5);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         $list=D('Book')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->select();
         foreach ($list as $key => $value) {

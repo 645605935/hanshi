@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<title>分类清单</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+</head>
+<body>
+<!-- 引用 -->
+<include file="Common/header" />
+
+
+<div class="container">
+    <div class="con">
+        <div class="content mt20">
+            <div class="left-nav">
+                
+                <!-- 引用 -->
+                <include file="Common/left" />
+
+            </div>
+            <div class="right-con">
+                <div class="right-bottom">
+                    <div class="yanchu">
+                        <ul>
+                            <foreach name="list" item="v">
+                                <li>
+                                    <img class="videoo fl" src="{$v.img}" alt="">
+                                    <!-- <video controls="controls" class="videoo">
+                                       <source src="shipin.mp4" type="video/mp4">
+                                    </video> -->
+                                    <div class="yanchu-r fl">
+                                        <p>
+                                            剧目名称：<span>{$v.title}</span>
+                                            表演类型：<span>{$v.type}</span>
+                                            导演/指导：<span>{$v.director}</span>
+                                            表演团队：<span>{$v.team}</span>
+                                        </p>
+                                        <p>
+                                            <em class="fs16">介绍</em>：{$v.desc}
+                                        </p>
+                                        <div class="y-time">
+                                            <em class="fs16">热播时间</em>：{$v.start_time}
+                                            <div class="fr sc-btn">
+                                                <a href="javascript:;" class="sc"></a>
+                                                <a href="{:U('Home/Index/yanchu_detail',array('id'=>$v['id'],'type'=>$v['type']))}" class="buy-btn">
+                                                    <i></i>在线购票
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </foreach>
+                        </ul>
+                    </div>
+
+                    <div class="pages">
+                        <table style="width:100%;">
+                            <tr>
+                                <td align="center">{$page}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+
+<!-- 引用 -->
+<include file="Common/footer" />
+
+
+
+<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Home/js/index.js"></script>
+</body>
+</html>

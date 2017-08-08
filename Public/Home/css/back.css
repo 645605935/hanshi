@@ -590,7 +590,7 @@
     text-align: center;
     vertical-align: middle;
     color: #BFDEAB;
-    background-image: url(https://img1.write.qq.com/writer/p1/contentv2/step_sprite.png);
+    background-image: url(../images/step_sprite.png);
     background-position: -37px -34px
 }
 
@@ -612,7 +612,7 @@
 .stepTitle i {
     margin: 0 30px;
     vertical-align: middle;
-    background-image: url(https://img1.write.qq.com/writer/p1/contentv2/step_sprite.png)
+    background-image: url(../images/step_sprite.png)
 }
 
 .stepTitle em {
@@ -2524,7 +2524,7 @@ span.paging-num:hover {
     display: inline-block;
     width: 11px;
     height: 11px;
-    background-image: url(https://img1.write.qq.com/writer/p1/contentv2/sprite.png);
+    background-image: url(../images/sprite.png);
     background-position: -68px -12px
 }
 
@@ -2540,7 +2540,7 @@ span.paging-num:hover {
     height: 158px;
     padding: 1px;
     border: 1px solid #DDD;
-    background: #F1F1F1 url(https://img1.write.qq.com/writer/p1/contentv2/photo_add.png) no-repeat
+    background: #F1F1F1 url(../images/photo_add.png) no-repeat
 }
 
 .update-add-box img {
@@ -2897,4 +2897,78 @@ span.paging-num:hover {
     width: 178px;
     height: 34px;
     font: 14px/34px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif"
+}
+.maskUI4 {
+    left: 50%;
+    margin-left: -190px;
+}
+
+.centerTip {
+    margin-bottom: 0;
+    padding: 50px 0;
+    text-align: center
+}
+
+.centerTip p {
+    color: #575757
+}
+.centerTip p {
+    text-align: center;
+    line-height: 1.8
+}
+.newVolume {
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-top: 24px;
+}
+
+.newVolume h3 {
+    border-bottom: 1px solid #E6E6E6;
+    padding-bottom: 20px;
+    font: 16px/1 "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif"
+}
+.newVolume h3 span {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #999
+}
+.volumeForm {
+    width: 576px;
+    padding: 30px 0 0 5px
+}
+
+.volumeForm li {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 100px;
+    line-height: 30px
+}
+
+.volumeForm li em {
+    position: absolute;
+    left: 0;
+    width: 80px;
+    font: 14px/30px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";
+    text-align: right;
+    color: #858585
+}
+
+.volumeForm li input.midInput {
+    border: 1px solid #DDD;
+    width: 373px;
+    height: 28px;
+    padding-left: 5px;
+    font: 14px/28px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif"
+}
+
+.volumeForm li textarea {
+    border: 1px solid #DDD;
+    width: 373px;
+    height: 88px;
+    padding-left: 5px
+}
+
+.volumeForm li p {
+    height: 30px;
+    font: 14px/30px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei","sans-serif"
 }

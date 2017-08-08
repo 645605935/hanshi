@@ -16,6 +16,75 @@ class IndexController extends CommonController{
         $this->display();
     }
 
+    public function shop(){
+        global $user;
+
+        $where=array();
+
+        $count      = M('Video')->where($where)->count();
+        $Page       = new \Common\Extend\Page($count,8);
+        $nowPage = isset($_GET['p'])?$_GET['p']:1;
+        $list=M('Video')->page($nowPage.','.$Page->listRows)->where($where)->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['time']=date('Y-m-d',$value['time']);
+        }
+
+        $this->page=$Page->show();
+        $this->list=$list;
+
+        $this->display();
+    }
+
+    public function yanchu(){
+        global $user;
+
+        $where=array();
+
+        $count      = M('Video')->where($where)->count();
+        $Page       = new \Common\Extend\Page($count,8);
+        $nowPage = isset($_GET['p'])?$_GET['p']:1;
+        $list=M('Video')->page($nowPage.','.$Page->listRows)->where($where)->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['time']=date('Y-m-d',$value['time']);
+        }
+
+        $this->page=$Page->show();
+        $this->list=$list;
+
+        $this->display();
+    }
+
+    public function yanchu_detail(){
+        global $user;
+        
+        $id=$_GET['id'];
+        $row=M('Product')->where($where)->find($id);
+        $row['images']=explode('#', $row['images']);
+        $row['time']=date('Y-m-d',$value['time']);
+
+        $this->row=$row;
+        $this->display();
+    }
+
+    public function chanpin_detail(){
+        global $user;
+        
+        $id=$_GET['id'];
+        $row=M('Product')->where($where)->find($id);
+        $row['images']=explode('#', $row['images']);
+        $row['time']=date('Y-m-d',$value['time']);
+
+        $this->row=$row;
+        $this->display();
+    }
+
+
+
+
+
+
+
+
     public function ajax_get_city_list(){
         $map=array();
         if($provinceid=$_GET['provinceid']){

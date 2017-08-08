@@ -32,7 +32,7 @@
                             <ul>
                                 <foreach name="list" item="v">
                                     <li>
-                                        <a href="{:U('Home/Tongchengjieyue/chanpin_detail',array('cid'=>$_GET['cid'],'id'=>$v['id']))}">
+                                        <a href="{:U('Home/Index/chanpin_detail',array('cid'=>$_GET['cid'],'id'=>$v['id']))}">
                                             <span class="shi-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
                                             <p class="m-p">{$v.title}</p>
                                             <p class="shi-pri">￥{$v.price}</p>

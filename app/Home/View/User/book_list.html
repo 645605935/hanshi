@@ -68,53 +68,8 @@
         </div>
         <div class="back-stage txt-mid2 mgtb-20">
             <div class="aside2">
-              <div class="nav-1">
-                <div class="menu-title"></div>
-                <ul m-name="menu">
-                  <li class="item active sub-l">
-                    <a class="aside_title" href="#2">
-                      <i class="iconfont icon-ic_home"></i>首页
-                    </a>
-                  </li>
-                  <li class="item sub-l">
-                    <a class="aside_title">
-                      <i class="iconfont icon-ic_radio"></i>作品
-                    </a>
-                    <ul class="sub-m">
-                      <li class="item">
-                        <a href="#2">上传作品</a>
-                      </li>
-                      <li class="item">
-                        <a href="#2">我的作品</a>
-                      </li>
-                    </ul>
-                  </li>
-                    <li class="item gt-40 sub-l">
-                      <a class="aside_title">
-                        <i class="iconfont icon-ic_fans"></i>社群
-                      </a>
-                      <ul class="sub-m">
-                        <li class="item">
-                          <a href="#2">评论</a>
-                        </li>
-                        <li class="item">
-                          <a href="#2">收到的赞</a>
-                        </li>
-                      </ul>
-                    </li>
-                  <li class="item sub-l">
-                    <a class="aside_title">
-                      <i class="iconfont icon-ic_setting"></i>设置
-                    </a>
-                    <ul class="sub-m">
-                      <li class="item ">
-                        <a href="#2">账号设置</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="menu-bottom"></div>
-              </div>
+                <!-- 引用 -->
+                <include file="_left" />
             </div>
             <div class="fl">
                 <div class="main2 fl">
@@ -156,12 +111,12 @@
                                             <tr class="active">
                                                 <td></td>
                                                 <td class="tl">
-                                                    <div class="work-photo"><a href="#2" target="_blank"><img src="__PUBLIC__/Home/images/img1.jpg" width="83" height="108" alt=""></a></div>
-                                                    <p class="work-name"><a href="#2" target="_blank">khkjhkjh</a></p>
+                                                    <div class="work-photo"><a href="#2" target="_blank"><img src="{$v.img}" width="83" height="108" alt=""></a></div>
+                                                    <p class="work-name"><a href="#2" target="_blank">{$v.title}</a></p>
                                                 </td>
                                                 <td class="tl"><a href="javascript:">无最新章节</a></td>
                                                 <td><em>灵异编辑组</em></td>
-                                                <td><em class="Num">0</em></td>
+                                                <td><em class="Num">10</em></td>
                                                 <td>新建</td>
                                                 <td>
                                                     <div class="dib-wrap">
