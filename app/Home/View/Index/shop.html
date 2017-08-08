@@ -7,8 +7,8 @@
 <title>商城首页</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
 </head>
 <body>
 <!-- 引用 -->
@@ -18,333 +18,75 @@
 <div class="container mt20">
     <div class="con">
         <div class="nav-all-con">
-            <div class="nav-list">
-                <h3><i class="icon-sort"></i><a href="#3">首饰/首饰</a><i class="icon-hot"></i><i class="icon-jt fr"></i></h3>
-                <div class="nav-list-con2">
-                    <div class="nav-list-con2-list">
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰1</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                            </div>
+            <foreach name="shop_types" item="v1">
+                <div class="nav-list">
+                    <h3><i class="icon-sort"></i><a href="#3">{$v1.title}</a><i class="icon-hot"></i><i class="icon-jt fr"></i></h3>
+                    <div class="nav-list-con2">
+                        <div class="nav-list-con2-list">
+                            <foreach name="v1['_child']" item="v2">
+                                <div class="nav-fl">
+                                    <h4><img src="__PUBLIC__/Home/images/img1.jpg" alt=""><a href="#3">{$v2.title}</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
+                                    <div class="nav-list-con2-con">
+                                        <foreach name="v2['_child']" item="v3">
+                                            <a href="#3">{$v3.title}</a>
+                                        </foreach>
+                                    </div>
+                                </div>
+                            </foreach>
                         </div>
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰1</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
+                        <div class="nav-list-r">
+                            <h3><i class="icon-hx"></i>猜你喜欢</h3>
+                            <div class="desc">实时推荐最适合你的宝贝</div>
+                            <div class="nav-goods">
+                                <a href="#2">
+                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
+                                    <p>skfjlsdfj</p>
+                                </a>
+                                <a href="#2">
+                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
+                                    <p>skfjlsdfj</p>
+                                </a>
+                                <a href="#2">
+                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
+                                    <p>skfjlsdfj</p>
+                                </a>
+                                <a href="#2">
+                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
+                                    <p>skfjlsdfj</p>
+                                </a>
+                                <a href="#2">
+                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
+                                    <p>skfjlsdfj</p>
+                                </a>
                             </div>
-                        </div>
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰1</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nav-list-r">
-                        <h3><i class="icon-hx"></i>猜你喜欢</h3>
-                        <div class="desc">实时推荐最适合你的宝贝</div>
-                        <div class="nav-goods">
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="nav-list">
-                <h3><i class="icon-sort"></i><a href="#3">首饰/首饰</a><i class="icon-hot"></i><i class="icon-jt fr"></i></h3>
-                <div class="nav-list-con2">
-                    <div class="nav-list-con2-list">
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰222222222</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                            </div>
-                        </div>
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰1</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                            </div>
-                        </div>
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰1</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nav-list-r">
-                        <h3><i class="icon-hx"></i>猜你喜欢</h3>
-                        <div class="desc">实时推荐最适合你的宝贝</div>
-                        <div class="nav-goods">
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="nav-list">
-                <h3><i class="icon-sort"></i><a href="#3">首饰/首饰</a><i class="icon-hot"></i><i class="icon-jt fr"></i></h3>
-                <div class="nav-list-con2">
-                    <div class="nav-list-con2-list">
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰3333333</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                            </div>
-                        </div>
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰1</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                            </div>
-                        </div>
-                        <div class="nav-fl">
-                            <h4><img src="images/img1.jpg" alt=""><a href="#3">首饰1</a><a href="#2" class="nav-more fr">更多&gt;</a></h4>
-                            <div class="nav-list-con2-con">
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                                <a href="#3">是的发生的</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nav-list-r">
-                        <h3><i class="icon-hx"></i>猜你喜欢</h3>
-                        <div class="desc">实时推荐最适合你的宝贝</div>
-                        <div class="nav-goods">
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                            <a href="#2">
-                                <img src="images/img1.jpg" alt="">
-                                <p>skfjlsdfj</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </foreach>
         </div>
         <div class="right-godsc">
             <ul>
-                <li>
-                    <a href="shangchengxiangqing.html"><img src="images/img1.jpg" alt=""></a>
-                    <div class="right-g-i">
-                        <div class="right-g-p">￥11.11<span class="fr right-g-y">邮费:20.0</span></div>
-                        <div class="right-g-n"><a href="shangchengxiangqing.html">卡萨 减肥了</a></div>
-                        <div class="right-g-s">已售5件</div>
-                        <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                        <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="shangchengxiangqing.html"><img src="images/img1.jpg" alt=""></a>
-                    <div class="right-g-i">
-                        <div class="right-g-p">￥11.11<span class="fr right-g-y">邮费:20.0</span></div>
-                        <div class="right-g-n"><a href="shangchengxiangqing.html">卡萨减肥了</a></div>
-                        <div class="right-g-s">已售5件</div>
-                        <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                        <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="shangchengxiangqing.html"><img src="images/img1.jpg" alt=""></a>
-                    <div class="right-g-i">
-                        <div class="right-g-p">￥11.11<span class="fr right-g-y">邮费:20.0</span></div>
-                        <div class="right-g-n"><a href="shangchengxiangqing.html">卡萨减肥了</a></div>
-                        <div class="right-g-s">已售5件</div>
-                        <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                        <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="shangchengxiangqing.html"><img src="images/img1.jpg" alt=""></a>
-                    <div class="right-g-i">
-                        <div class="right-g-p">￥11.11<span class="fr right-g-y">邮费:20.0</span></div>
-                        <div class="right-g-n"><a href="shangchengxiangqing.html">卡萨减肥了</a></div>
-                        <div class="right-g-s">已售5件</div>
-                        <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                        <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="shangchengxiangqing.html"><img src="images/img1.jpg" alt=""></a>
-                    <div class="right-g-i">
-                        <div class="right-g-p">￥11.11<span class="fr right-g-y">邮费:20.0</span></div>
-                        <div class="right-g-n"><a href="shangchengxiangqing.html">卡萨减肥了</a></div>
-                        <div class="right-g-s">已售5件</div>
-                        <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                        <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="shangchengxiangqing.html"><img src="images/img1.jpg" alt=""></a>
-                    <div class="right-g-i">
-                        <div class="right-g-p">￥11.11<span class="fr right-g-y">邮费:20.0</span></div>
-                        <div class="right-g-n"><a href="shangchengxiangqing.html">卡萨减肥了</a></div>
-                        <div class="right-g-s">已售5件</div>
-                        <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                        <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="shangchengxiangqing.html"><img src="images/img1.jpg" alt=""></a>
-                    <div class="right-g-i">
-                        <div class="right-g-p">￥11.11<span class="fr right-g-y">邮费:20.0</span></div>
-                        <div class="right-g-n"><a href="shangchengxiangqing.html">卡萨减肥了</a></div>
-                        <div class="right-g-s">已售5件</div>
-                        <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                        <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="shangchengxiangqing.html"><img src="images/img1.jpg" alt=""></a>
-                    <div class="right-g-i">
-                        <div class="right-g-p">￥11.11<span class="fr right-g-y">邮费:20.0</span></div>
-                        <div class="right-g-n"><a href="shangchengxiangqing.html">卡萨减肥了</a></div>
-                        <div class="right-g-s">已售5件</div>
-                        <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                        <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
-                    </div>
-                </li>
+                <foreach name="list" item="v">
+                    <li>
+                        <a href="shangchengxiangqing.html"><img src="{$v.img}" alt=""></a>
+                        <div class="right-g-i">
+                            <div class="right-g-p">￥{$v.price}<span class="fr right-g-y">邮费:{$v.price}</span></div>
+                            <div class="right-g-n"><a href="shangchengxiangqing.html">{$v.title}</a></div>
+                            <div class="right-g-s">已售5件</div>
+                            <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
+                            <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
+                        </div>
+                    </li>
+                </foreach>
             </ul>
+            <div class="clear"></div>
+            <div class="pages">
+                <table style="width:100%;">
+                    <tr>
+                        <td align="center">{$page}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -353,7 +95,7 @@
 <!-- 引用 -->
 <include file="Common/footer" />
 
-<script src="js/jquery.min.js"></script>
-<script src="js/index.js"></script>
+<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Home/js/index.js"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@ class IndexController extends CommonController{
         $where=array();
 
         $count      = M('Video')->where($where)->count();
-        $Page       = new \Common\Extend\Page($count,8);
+        $Page       = new \Common\Extend\Page($count,10);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         $list=M('Video')->page($nowPage.','.$Page->listRows)->where($where)->select();
         foreach ($list as $key => $value) {
@@ -32,6 +32,17 @@ class IndexController extends CommonController{
         $this->page=$Page->show();
         $this->list=$list;
 
+
+        $shop_types=M('Type')->where(array('pid'=>1238))->select();
+        foreach ($shop_types as $k1 => $v1) {
+            $temp=M('Type')->where(array('pid'=>$v1['id']))->select();
+            foreach ($temp as $k2 => $v2) {
+                $temp[$k2]['_child']=M('Type')->where(array('pid'=>$v2['id']))->select();
+            }
+            $shop_types[$k1]['_child']=$temp;
+        }
+
+        $this->shop_types=$shop_types;
         $this->display();
     }
 
