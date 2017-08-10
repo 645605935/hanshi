@@ -123,7 +123,7 @@
                         <div class="msgBoxTitle">
                             <a class="button white new-fj" href="javascript:;">新建分卷</a>
                             <a class="create button" href="#2"><em class="icon"></em>新建章节</a>
-                            <div class="tabSwitch cf" style="display: none;">
+                            <div class="tabSwitch cf">
                                 <span><a href="#2">作品设置</a></span>
                                 <span><a href="#2">草稿箱</a></span>
                                 <span class="act"><a href="#2">已发布章节</a></span>
@@ -138,94 +138,134 @@
                                     </div>
                                     <div class="sectionManage">
                                         <div class="sectionList">
-                                            <ul>
+
+                                            <foreach name="juan_list" item="vo" key="ko">
                                                 <div class="act-aa">
-                                                    <div class="volume act">
+                                                    <div class="volume <if condition='$ko eq 0'> act </if>">
                                                         <div class="volumeBox">
-                                                            <p><cite></cite>第一卷<span>共1章</span></p>
-                                                            <p class="f12">风光很多风格和</p>
+                                                            <p><cite></cite>第一卷<span>共2章</span></p>
+                                                            <p class="f12">{$vo.title}</p>
                                                         </div>
                                                     </div>
                                                     <div class="sectionWrap">
-                                                        <li class="act">
-                                                            <div class="sectionBox">
-                                                                <p><em>无标题</em></p>
-                                                                <p class="f12"><i>11-11 11:58</i>共1字</p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="sectionBox">
-                                                                <p><em>无标题</em></p>
-                                                                <p class="f12"><i>11-11 11:58</i>共1字</p>
-                                                            </div>
-                                                        </li>
+                                                        <ul>
+                                                            <foreach name="vo['_child']" item="v" key="k">
+                                                                <li class="<if condition='$k eq 0'> act </if>">
+                                                                    <div class="sectionBox" data-id="{$v.id}">
+                                                                        <p><em>{$v.title}</em></p>
+                                                                        <p class="f12"><i>{$v.time}</i>共{$v.num}字</p>
+                                                                    </div>
+                                                                </li>
+                                                            </foreach>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="act-aa">
-                                                    <div class="volume act">
-                                                        <div class="volumeBox">
-                                                            <p><cite></cite>第一卷<span>共1章</span></p>
-                                                            <p class="f12">风光很多风格和</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="sectionWrap">
-                                                        <li class="act">
-                                                            <div class="sectionBox">
-                                                                <p><em>无标题</em></p>
-                                                                <p class="f12"><i>11-11 11:58</i>共1字</p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="sectionBox">
-                                                                <p><em>无标题</em></p>
-                                                                <p class="f12"><i>11-11 11:58</i>共1字</p>
-                                                            </div>
-                                                        </li>
-                                                    </div>
-                                                </div>
-                                            </ul>
+                                            </foreach>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mRightContent fl">
-                                <div class="midWrap editWrap">
+
+
+
+                            <!-- 查看/编辑分卷 -->
+                            <div class="mRightContent fl hidden volumeCon">
+                                <div class="midWrap viewWrap">
                                     <form name="formDraft" method="post" action="#2">
                                         <div class="sectionViewWrap">
                                             <div>
                                             <div class="sectionBtnBox cf">
                                                 <div class="titleBtn fr">
-                                                    <a class="button white" href="javascript:">删除</a>
-                                                    <!-- <a class="button white font" href="javascript:">字数统计</a> -->
-                                                    <a class="button white" href="javascript:">保存</a>
-                                                    <a class="button green" href="javascript:"><span class="icon "></span>发布</a>
-                                                </div>
-                                                <em class="c999">发布至：</em>
-                                                <div class="select-wrap mid">
-                                                    <select>
-                                                        <option>第一卷</option>
-                                                        <option>作品相关</option>
-                                                    </select>
-                                                </div>
-                                                <em class="c999">章节类型：</em>
-                                                <div class="select-wrap min">
-                                                    <select>
-                                                       <option>公众章节</option>
-                                                       <option>公众章节</option>
-                                                    </select>
+                                                    <a class="button white fj-del" href="javascript:">删除</a>
+                                                    <a class="button modify xg-an" href="javascript:">修改</a>
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="zwText">
-                                                <input type="text" placeholder="此处输入章节号与章节名。示例：“第十章 天降奇缘”">
-                                                <textarea placeholder="请输入正文"></textarea>
+                                            <div class="newVolume">
+                                                <h3><b>第一卷</b><span>本卷章节 <em class="num">2</em> 章</span></h3>
                                             </div>
-                                            <div class="say-area">
-                                                <p>
-                                                    <textarea value="" placeholder="作者的话（此段不计入字数）"></textarea>
-                                                </p>
+                                            <div class="volumeForm">
+                                                <ul>
+                                                    <li>
+                                                        <em>分卷名称</em>
+                                                        <p class="title">第一卷sadfsdf</p>
+                                                    </li>
+                                                    <li>
+                                                        <em>分卷介绍</em>
+                                                        <p class="content">第一卷介绍</p>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
+                                    </form>
+                                </div>
+                                <div class="midWrap editWrap hidden">
+                                    <div class="sectionBtnBox cf">
+                                        <div class="titleBtn fr">
+                                            <a class="button save save_juan" href="javascript:"><span class="icon"></span>保存</a>
+                                        </div>
+                                    </div>
+                                    <div class="newVolume">
+                                        <h3><b>第一卷</b><span>本卷章节 <em class="num">2</em> 章</span></h3>
+                                    </div>
+                                    <div class="volumeForm">
+                                        <ul>
+                                            <li>
+                                                <em>分卷名称</em>
+                                                <input class="midInput title" type="text" value="第一卷sadfsdf">
+                                            </li>
+                                            <li>
+                                                <em>分卷介绍</em>
+                                                <textarea class="content">第一卷介绍</textarea>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 查看/编辑章节 -->
+                            <div class="mRightContent fl chapterCon">
+                                <div class="midWrap viewWrap">
+                                    <div class="sectionViewWrap">
+                                        <div class="sectionBtnBox cf">
+                                            <div class="titleBtn fr">
+                                                <a class="button white cg-del" href="javascript:">删除</a>
+                                                <a class="button modify zj-xg" href="javascript:">修改</a>
+                                            </div>
+                                            <em class="c999">章节类型：</em>
+                                            <b>公众章节</b>
+                                        </div>
+                                        <div class="zwText">
+                                            <h3 class="title">【显示】前倾前屈群群群群</h3>
+                                            <div class="content">【显示】前倾前屈群群群群群</div>
+                                        </div>
+                                        <div class="authorSay">
+                                             <p>sklajflaskdjf</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="midWrap editWrap hidden">
+                                    <div class="sectionViewWrap ">
+                                        <div class="sectionBtnBox cf">
+                                            <div class="titleBtn fr">
+                                                <a class="button white zs-btn" href="javascript:">统计字数</a>
+                                                <a class="button save_zhang" href="javascript:"><span class="icon"></span>保存</a>
+                                            </div>
+                                            <em class="c999">章节类型：</em>
+                                            <b>公众章节</b>
+                                        </div>
+                                        <form id="" name="" method="post" action="">
+                                            <div class="zwText">
+                                                <div class="sectionEdit">
+                                                    <input type="text" class="title" value="【编辑】前倾前屈群群群群">
+                                                    <textarea class="content">【编辑】前倾前屈群群群群群</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="say-area">
+                                                <p><textarea>sklajflaskdjf</textarea></p>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -240,6 +280,7 @@
 <div class="clear"></div>
 <!-- 引用 -->
 <include file="Common/footer" />
+
 
 <style type="text/css">
     .confirmBtn_ztr{width: 100%;height: 30px;line-height: 30px;text-align: center;}
@@ -260,7 +301,50 @@
             <div class="confirmBtn_ztr">
                 <input type="hidden" class="longInput bid" value="1">
                 <a class="button full" id="create_juan" href="javascript:">确定</a>
-            <div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="maskUI maskUI4">
+    <div class="popupWrap w380">
+        <a class="icon closePopup" href="javascript:" title="关闭"></a>
+        <h3>消息提示</h3>
+        <div class="popupBody p30">
+            <div class="popupContent centerTip">
+                <p>确定要删除该卷吗？</p>
+            </div>
+            <center class="confirmBtn">
+                <a href="javascript:;" class="button">确定</a>
+                <a href="javascript:;" class="button white">取消</a>
+            </center>
+        </div>
+    </div>
+</div>
+<div class="maskUI maskUI5">
+    <div class="popupWrap w380">
+        <a class="icon closePopup" href="javascript:" title="关闭"></a>
+        <h3>消息提示</h3>
+        <div class="popupBody p30">
+            <div class="popupContent centerTip">
+                <p>删除成功，回收站内可找回</p>
+            </div>
+            <center class="confirmBtn">
+                <a href="javascript:;" class="button">确定</a>
+            </center>
+        </div>
+    </div>
+</div>
+<div class="maskUI maskUI6">
+    <div class="popupWrap w380">
+        <a class="icon closePopup" href="javascript:" title="关闭"></a>
+        <h3>消息提示</h3>
+        <div class="popupBody p30">
+            <div class="popupContent centerTip">
+                <p>字数为：9</p>
+            </div>
+            <center class="confirmBtn">
+                <a href="javascript:;" class="button">确定</a>
+            </center>
         </div>
     </div>
 </div>
@@ -283,10 +367,116 @@
                 _ajax_add_juan(bid, title, desc);
             }
         });
+
+        //点击章节
+        $('.sectionBox').click(function(){
+            $('.chapterCon .viewWrap').show();
+            $('.chapterCon .editWrap ').hide();
+            var zid=$(this).attr('data-id');
+            _ajax_render_zhang_info(zid);
+        });
+
+        //点击卷
+        $('.volume').click(function(){
+            $('.volumeCon .viewWrap').show();
+            $('.volumeCon .editWrap ').hide();
+            var jid=$(this).attr('data-id');
+            _ajax_render_juan_info(jid);
+        });
+
+        //保存卷
+        $('.save_juan').click(function(){
+            var jid=$(this).attr('data-id');
+            var title=$('.volumeCon .editWrap .title').val();
+            var content=$('.volumeCon .editWrap .content').val();
+
+            _ajax_edit_juan(jid, title, content);
+        });
+
+        //保存卷
+        $('.save_zhang').click(function(){
+            var zid=$(this).attr('data-id');
+            var title=$('.chapterCon .editWrap .title').val();
+            var content=$('.chapterCon .editWrap .content').val();
+
+            _ajax_edit_zhang(zid, title, content);
+        });
     });
 </script>
 <script type="text/javascript">
-    //添加
+    //异步渲染章节内容
+    function _ajax_render_zhang_info(zid){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'get',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/User/ajax_render_zhang_info')}",
+             data: {
+                'zid':zid
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     var data=json.data;
+
+                     $('.chapterCon .viewWrap .zwText .title').html(data.title);
+                     $('.chapterCon .viewWrap .zwText .content').html(data.content);
+
+                     $('.chapterCon .editWrap .zwText .title').val(data.title);
+                     $('.chapterCon .editWrap .zwText .content').val(data.content);
+                     $('.chapterCon .editWrap .save_zhang').attr('data-id', data.id);
+
+                     layer.msg(json.msg);
+                 }else{
+                     layer.msg(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    //异步渲染卷内容
+    function _ajax_render_juan_info(jid){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'get',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/User/ajax_render_juan_info')}",
+             data: {
+                'jid':jid
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     var data=json.data;
+
+                     $('.volumeCon .viewWrap .num').html(data.num);
+                     $('.volumeCon .viewWrap .title').html(data.title);
+                     $('.volumeCon .viewWrap .content').html(data.content);
+
+                     $('.volumeCon .editWrap .num').html(data.num);
+                     $('.volumeCon .editWrap .title').val(data.title);
+                     $('.volumeCon .editWrap .content').val(data.content);
+                     $('.volumeCon .editWrap .save_juan').attr('data-id', data.id);
+
+                     layer.msg(json.msg);
+                 }else{
+                     layer.msg(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    //添加卷
     function _ajax_add_juan(bid, title, desc){
          var _json;
          $.ajax({  
@@ -304,6 +494,62 @@
                  if(json.code==0){
                      layer.msg(json.msg);
                      window.location.reload();
+                 }else{
+                     layer.msg(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    //编辑卷
+    function _ajax_edit_juan(jid, title, content){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/User/ajax_edit_juan')}",
+             data: {
+                'id':jid,
+                'title':title,
+                'content':content
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     layer.msg(json.msg);
+                 }else{
+                     layer.msg(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    //编辑卷
+    function _ajax_edit_zhang(zid, title, content){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/User/ajax_edit_zhang')}",
+             data: {
+                'id':zid,
+                'title':title,
+                'content':content
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     layer.msg(json.msg);
                  }else{
                      layer.msg(json.msg);
                  }

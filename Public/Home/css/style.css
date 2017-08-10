@@ -80,7 +80,7 @@
 .color1 {color: #f00}
 
 
-.left-nav {width: 15%;float: left;box-sizing: border-box}
+.left-nav {width: 15%;float: left;box-sizing: border-box;position: relative;z-index: 666;}
 .left-nav ul li {float: l eft ;line-height: 32px;border-bottom: 1px solid #ddd; padding-left: 15px;position: relative}
 .left-nav ul li:before {content: '';position: absolute;left: 5px;top:15px;width: 4px;height: 4px;border-radius: 50%;background:#ddd}
 .left-nav ul li:first-child {font-size: 16px;padding-left: 0}

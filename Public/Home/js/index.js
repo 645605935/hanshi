@@ -264,26 +264,47 @@ $(function(){
     $('.fj-del').click(function(){
     	$('.mask,.maskUI4').show();
     });
-    $('.xg-an').click(function(){
-    	$('.editVolumeBox').show();
-    	$('.editWrap').hide();
+    $('.cg-del').click(function(){
+    	$('.mask,.maskUI5').show();
     });
-    $('.editVolumeBox .save').click(function(){
-    	$('.editVolumeBox').hide();
-    	$('.editWrap').show();
+    $('.zs-btn').click(function(){
+    	$('.mask,.maskUI6').show();
+    });
+    $('.cd-del').click(function(){
+    	$('.mask,.maskUI7').show();
+    });
+    $('.hf-cg').click(function(){
+    	$('.mask,.maskUI8').show();
     });
     $('.volume').click(function(){
-    	if($(this).hasClass('act')){
-    		$(this).removeClass('act');
-    		$(this).parents('.act-aa').find('.sectionWrap').hide();
+    	if($('.volumeCon').css('display')=='none'){
+    		$('.volumeCon').show();
+    		$('.chapterCon').hide();
     	}else{
-    		$(this).addClass('act');
-    		$(this).parents('.act-aa').find('.sectionWrap').show();
+    		if($(this).hasClass('act')){
+	    		$(this).removeClass('act');
+	    		$(this).parents('.act-aa').find('.sectionWrap').slideUp();
+	    	}else{
+	    		$(this).addClass('act');
+	    		$(this).parents('.act-aa').find('.sectionWrap').slideDown();
+	    		$(this).parents('.act-aa').siblings().find('.sectionWrap').slideUp();
+	    		$(this).parents('.act-aa').siblings().find('.volume').removeClass('act');
+	    	}
     	}
     });
-    $('.sectionList li').click(function(){
-    	$(this).addClass('act');
-    	$(this).siblings().removeClass('act');
+    $('.modify').click(function(){
+    	$(this).parents('.mRightContent').find('.editWrap').show();
+    	$(this).parents('.mRightContent').find('.viewWrap').hide();
+    });
+    $('.editWrap .save').click(function(){
+    	$(this).parents('.mRightContent').find('.editWrap').hide();
+    	$(this).parents('.mRightContent').find('.viewWrap').show();
+    });
+    $('.sectionWrap .sectionBox').click(function(){
+    	$(this).parent().addClass('act');
+    	$(this).parent().siblings().removeClass('act');
+    	$('.volumeCon').hide();
+    	$('.chapterCon').show();
     });
     $('.workSetList .dib-wrap .button').click(function(){
     	if($('.workStateWrap .modify').hasClass('hidden')){

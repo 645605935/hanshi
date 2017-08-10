@@ -2898,7 +2898,7 @@ span.paging-num:hover {
     height: 34px;
     font: 14px/34px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif"
 }
-.maskUI4 {
+.maskUI4,.maskUI5,.maskUI6,.maskUI7,.maskUI8 {
     left: 50%;
     margin-left: -190px;
 }

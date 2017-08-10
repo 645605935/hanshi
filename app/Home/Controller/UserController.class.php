@@ -33,6 +33,18 @@ class UserController extends CommonController{
     }
 
     public function book_create(){
+        global $user;
+
+        $where=array();
+        $where['uid']=$user['id'];
+        $where['bid']=$_GET['id'];
+
+        $juan_list=M('BookJuan')->where($where)->select();
+        foreach ($juan_list as $key => $value) {
+            $juan_list[$key]['_child']=M('BookZhang')->where(array('bjid'=>$value['id']))->select();
+        }
+
+        $this->juan_list=$juan_list;
         $this->display();
     }
 
@@ -130,6 +142,102 @@ class UserController extends CommonController{
             $data=array();
             $data['code']=1;
             $data['msg']='您还有作品未审核！';
+        }
+
+        echo json_encode($data);
+    }
+
+    //异步渲染章节信息
+    public function ajax_render_zhang_info(){
+        global $user;
+
+        $zid=$_GET['zid'];
+        $row = M('BookZhang')->find($zid);
+        if($row){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$row;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //异步渲染卷信息
+    public function ajax_render_juan_info(){
+        global $user;
+
+        $jid=$_GET['jid'];
+        $row = M('BookJuan')->find($jid);
+        if($row){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$row;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //编辑卷
+    public function ajax_edit_juan(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+
+            $res = M('BookJuan')->save($data);
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //编辑章
+    public function ajax_edit_zhang(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+
+            $res = M('BookZhang')->save($data);
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
         }
 
         echo json_encode($data);
