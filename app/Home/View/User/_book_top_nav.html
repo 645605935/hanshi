@@ -2,7 +2,9 @@
     $_page_=$_SERVER['PATH_INFO'];
 ?>
 
-<a class="button white new-fj" href="javascript:;">新建分卷</a>
+<if condition="stripos($_page_,'User/book_create') nheq false">
+	<a class="button white new-fj" href="javascript:;">新建分卷</a>
+</if>
 <a class="create button" href="{:U('Home/User/book_create',array('id'=>$_GET['id']))}"><em class="icon"></em>新建章节</a>
 <div class="tabSwitch cf">
     <span <if condition="stripos($_page_,'User/book_set') nheq false">class="act"</if>><a href="{:U('Home/User/book_set',array('id'=>$_GET['id']))}">作品设置</a></span>

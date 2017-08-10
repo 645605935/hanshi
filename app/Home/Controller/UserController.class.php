@@ -44,7 +44,7 @@ class UserController extends CommonController{
         $juan_list=M('BookJuan')->where($where)->select();
         foreach ($juan_list as $key => $value) {
             $juan_list[$key]['num']=M('BookZhang')->where(array('bjid'=>$value['id']))->count();
-            $juan_list[$key]['_child']=M('BookZhang')->where(array('bjid'=>$value['id']))->select();
+            $juan_list[$key]['_child']=M('BookZhang')->where(array('bjid'=>$value['id'], 'status'=>1))->select();
         }
 
         $this->juan_list=$juan_list;
