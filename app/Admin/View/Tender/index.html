@@ -802,11 +802,9 @@
                       $('#edit_form .end_time').val(data.end_time);
                       $('#edit_form .file_name').val(data.file_name);
 
-                      if(data.type){
-                          var form_type="edit_form";
-                          var types=data.type;
-                          render_type(form_type, types);
-                      }
+                      var form_type="edit_form";
+                      var types=data.type;
+                      render_type(form_type, types);
 
 
                       $('#edit_form .desc').val(data.desc);
