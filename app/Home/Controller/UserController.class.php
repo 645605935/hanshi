@@ -307,7 +307,7 @@ class UserController extends CommonController{
         echo json_encode($data);
     }
 
-    //删除
+    //删除章
     public function ajax_cg_del_zhang(){
         $zid=I('zid'); 
 
@@ -335,6 +335,33 @@ class UserController extends CommonController{
 
         echo json_encode($data);
     }
+
+    //删除卷
+    public function ajax_fj_del_juan(){
+        $jid=I('jid'); 
+
+        if($jid){
+            $res=M('BookJuan')->delete($jid);
+
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    
 
     //彻底删除
     public function ajax_cd_del_zhang(){

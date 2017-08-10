@@ -121,14 +121,10 @@
                     <div class="header2"><span class="intro j-pageTitle">作家工作台</span></div>
                     <div class="mainRight pb0 fl">
                         <div class="msgBoxTitle">
-                            <a class="button white new-fj" href="javascript:;">新建分卷</a>
-                            <a class="create button" href="#2"><em class="icon"></em>新建章节</a>
-                            <div class="tabSwitch cf">
-                                <span><a href="#2">作品设置</a></span>
-                                <span><a href="#2">草稿箱</a></span>
-                                <span class="act"><a href="#2">已发布章节</a></span>
-                                <span><a href="#2">回收站</a></span>            
-                            </div>
+
+                            <!-- 引用 -->
+                            <include file="_book_top_nav" />
+
                         </div>
                         <div class="managerWrap cf">
                             <div class="mLeftList fl">
@@ -372,7 +368,10 @@
         $('.sectionBox').click(function(){
             $('.chapterCon .viewWrap').show();
             $('.chapterCon .editWrap ').hide();
+
             var zid=$(this).attr('data-id');
+            $('.cg-del').attr('data-id', zid);
+
             _ajax_render_zhang_info(zid);
         });
 
@@ -380,7 +379,10 @@
         $('.volume').click(function(){
             $('.volumeCon .viewWrap').show();
             $('.volumeCon .editWrap ').hide();
+
             var jid=$(this).attr('data-id');
+            $('.fj-del').attr('data-id', jid);
+
             _ajax_render_juan_info(jid);
         });
 
@@ -393,13 +395,43 @@
             _ajax_edit_juan(jid, title, content);
         });
 
-        //保存卷
+        //保存章
         $('.save_zhang').click(function(){
             var zid=$(this).attr('data-id');
             var title=$('.chapterCon .editWrap .title').val();
             var content=$('.chapterCon .editWrap .content').val();
 
             _ajax_edit_zhang(zid, title, content);
+        });
+
+        //删除章
+        $('.cg-del').click(function(){
+            var zid=$(this).attr('data-id');
+
+            layer.confirm('删除成功，回收站内可找回', {
+                btn: ['确定','取消'] 
+            }, function(){
+                if(zid){
+                    _ajax_cg_del_zhang(zid);
+                }
+            }, function(){
+                //取消
+            });
+        });
+
+        //删除卷
+        $('.fj-del').click(function(){
+            var jid=$(this).attr('data-id');
+
+            layer.confirm('确定要删除该卷吗？', {
+                btn: ['确定','取消'] 
+            }, function(){
+                if(jid){
+                    _ajax_fj_del_juan(jid);
+                }
+            }, function(){
+                //取消
+            });
         });
 
         $('.act_first .sectionBox').trigger('click');
@@ -559,49 +591,21 @@
          return _json;
     }
 
-     //编辑
-    function _ajax_edit(_data){
-        var _json;
-        $.ajax({  
-            async:false,
-            type:'post',  
-            contentType:"application/x-www-form-urlencoded",
-            url : "{:U('Admin/Baoming/ajax_edit')}",
-            data: _data,
-            dataType : 'json',
-            success  : function(json) {  
-                if(json.code == 0){
-                    layer.msg(json.msg);
-                    var selectID=$("#grid-table").getGridParam("selrow");
-                    $("#grid-table").setRowData(selectID, json.data);
-                    $("div[aria-describedby='dialog-confirm_edit'] .ui-dialog-titlebar-close").trigger("click");
-                }else{
-                    layer.msg(json.msg);
-                }
-            },
-            error  : function() {  
-                layer.msg('error');
-            }  
-        }); 
-        return _json;  
-    }
-
     //异步删除
-    function _ajax_del(ids){
+    function _ajax_cg_del_zhang(zid){
         var _json;
         $.ajax({  
             type:'get',  
-            url : "{:U('Admin/Baoming/ajax_del')}",
+            url : "{:U('Home/User/ajax_cg_del_zhang')}",
             data:{ 
-              id:ids 
+              zid:zid 
             },
             dataType : 'json',
             success  : function(json) {  
                 if(json.code == 0){
                     _json=json;
                     layer.msg(json.msg);
-                    var selectRow = $("#grid-table").jqGrid('getGridParam','selrow');
-                    $("#grid-table").delRowData(selectRow);
+                    window.location.reload();
                 }else{
                     layer.msg(json.msg);
                     _json=json;
@@ -613,4 +617,34 @@
         }); 
         return _json;
     }
+
+    //异步删除
+    function _ajax_fj_del_juan(jid){
+        var _json;
+        $.ajax({  
+            type:'get',  
+            url : "{:U('Home/User/ajax_fj_del_juan')}",
+            data:{ 
+              jid:jid 
+            },
+            dataType : 'json',
+            success  : function(json) {  
+                if(json.code == 0){
+                    _json=json;
+                    layer.msg(json.msg);
+                    window.location.reload();
+                }else{
+                    layer.msg(json.msg);
+                    _json=json;
+                }
+            },
+            error  : function() {  
+                layer.msg('error');
+            }  
+        }); 
+        return _json;
+    }
+
+    
+
 </script>
