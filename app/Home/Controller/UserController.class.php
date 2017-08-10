@@ -32,6 +32,8 @@ class UserController extends CommonController{
         $this->display();
     }
 
+
+    //已发布章节
     public function book_create(){
         global $user;
 
@@ -41,10 +43,42 @@ class UserController extends CommonController{
 
         $juan_list=M('BookJuan')->where($where)->select();
         foreach ($juan_list as $key => $value) {
+            $juan_list[$key]['num']=M('BookZhang')->where(array('bjid'=>$value['id']))->count();
             $juan_list[$key]['_child']=M('BookZhang')->where(array('bjid'=>$value['id']))->select();
         }
 
         $this->juan_list=$juan_list;
+        $this->display();
+    }
+
+    //回收站
+    public function book_recycle(){
+        global $user;
+
+        $where=array();
+        $where['uid']=$user['id'];
+        $where['status'] = -1;
+
+        $list=M('BookZhang')->where($where)->select();
+
+        $this->list=$list;
+        $this->display();
+    }
+
+    //草稿箱
+    public function book_draft(){
+        global $user;
+
+        $juan_list=M('BookJuan')->where(array('uid'=>$user['id']))->select();
+
+        $where=array();
+        $where['uid']=$user['id'];
+        $where['status'] = 0;
+
+        $list=M('BookZhang')->where($where)->select();
+
+        $this->juan_list=$juan_list;
+        $this->list=$list;
         $this->display();
     }
 
@@ -104,6 +138,7 @@ class UserController extends CommonController{
         $data=array();
         $data=$_POST;
         if($data){
+            $data['uid']=$user['id'];
             $data['time']=time();
 
             $id = M('BookJuan')->add($data);
@@ -243,38 +278,21 @@ class UserController extends CommonController{
         echo json_encode($data);
     }
 
-    
+    //恢复为草稿
+    public function ajax_restore_zhang(){
+        $zid=I('zid'); 
 
-    //编辑
-    public function ajax_edit(){
-        global $user;
-
-        $data=array();
-        $data=$_POST;
-        if($data){
+        if($zid){
+            $data=array();
+            $data['id']=$zid;
+            $data['status']=0;
             $data['time']=time();
-            $data['start_time']=strtotime($data['start_time']);
-            $data['end_time']=strtotime($data['end_time']);
+            $res=M('BookZhang')->save($data);
 
-            $res = M('Match')->save($data);
             if($res){
-                $id=$data['id'];
-                $row= D('Match')->relation(true)->find($id);
-
-                $row['time']=date('Y-m-d H:i',$row['time']);
-                $row['start_time']=date('Y-m-d H:i',$row['start_time']);
-                $row['end_time']=date('Y-m-d H:i',$row['end_time']);
-
-                if($row){
-                    $data=array();
-                    $data['code']=0;
-                    $data['msg']='success';
-                    $data['data']=$row;
-                }else{
-                    $data=array();
-                    $data['code']=1;
-                    $data['msg']='error';
-                }
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
             }else{
                 $data=array();
                 $data['code']=1;
@@ -290,11 +308,40 @@ class UserController extends CommonController{
     }
 
     //删除
-    public function ajax_del(){
-        $id=I('id'); 
+    public function ajax_cg_del_zhang(){
+        $zid=I('zid'); 
 
-        if($id){
-            $res=M('Match')->where(array('id'=>$id))->delete();
+        if($zid){
+            $data=array();
+            $data['id']=$zid;
+            $data['status']=-1;
+            $data['time']=time();
+            $res=M('BookZhang')->save($data);
+
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //彻底删除
+    public function ajax_cd_del_zhang(){
+        $zid=I('zid'); 
+
+        if($zid){
+            $res=M('BookZhang')->delete($zid);
 
             if($res){
                 $data=array();
@@ -332,6 +379,24 @@ class UserController extends CommonController{
         }
         echo json_encode($data);
     }
+
+
+    public function ajax_font_count(){
+        if($content=$_POST['content']){
+            $num=ccStrLen($content);
+
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=intval($num);
+            
+            echo json_encode($data);
+        }
+    }
+
+
+
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

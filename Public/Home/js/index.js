@@ -306,6 +306,10 @@ $(function(){
     	$('.volumeCon').hide();
     	$('.chapterCon').show();
     });
+    $('.sectionList .sectionBox').click(function(){
+    	$(this).parent().addClass('act');
+    	$(this).parent().siblings().removeClass('act');
+    });
     $('.workSetList .dib-wrap .button').click(function(){
     	if($('.workStateWrap .modify').hasClass('hidden')){
     		$('.workStateWrap .modify').show();

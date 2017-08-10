@@ -2159,6 +2159,14 @@ function xCopy($source, $destination, $child){
     return 1;
 }
 
+
+function ccStrLen($str) {
+    $str = preg_replace('/[\x80-\xff]{1,3}/', ' ', $str, -1);   
+    $num = strlen($str);  
+    return $num;
+}
+
+
 require './app/Common/Common/cache.php';
 require './app/Common/Common/oss.php';
 ?>

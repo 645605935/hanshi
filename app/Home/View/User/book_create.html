@@ -141,16 +141,16 @@
 
                                             <foreach name="juan_list" item="vo" key="ko">
                                                 <div class="act-aa">
-                                                    <div class="volume <if condition='$ko eq 0'> act </if>">
+                                                    <div class="volume <if condition='$ko eq 0'> act </if>" data-id="{$vo.id}">
                                                         <div class="volumeBox">
-                                                            <p><cite></cite>第一卷<span>共2章</span></p>
+                                                            <p><cite></cite>第一卷<span>共{$vo.num}章</span></p>
                                                             <p class="f12">{$vo.title}</p>
                                                         </div>
                                                     </div>
                                                     <div class="sectionWrap">
                                                         <ul>
                                                             <foreach name="vo['_child']" item="v" key="k">
-                                                                <li class="<if condition='$k eq 0'> act </if>">
+                                                                <li class="<if condition='$k eq 0'> act act_first </if>">
                                                                     <div class="sectionBox" data-id="{$v.id}">
                                                                         <p><em>{$v.title}</em></p>
                                                                         <p class="f12"><i>{$v.time}</i>共{$v.num}字</p>
@@ -203,7 +203,7 @@
                                 <div class="midWrap editWrap hidden">
                                     <div class="sectionBtnBox cf">
                                         <div class="titleBtn fr">
-                                            <a class="button save save_juan" href="javascript:"><span class="icon"></span>保存</a>
+                                            <a class="button save_juan" href="javascript:"><span class="icon"></span>保存</a>
                                         </div>
                                     </div>
                                     <div class="newVolume">
@@ -296,7 +296,7 @@
                 <p>分卷名称</p>
                 <p class="mb20"><input class="longInput title" type="text" value=""></p>
                 <p>分卷介绍</p>
-                <textarea class="desc"></textarea>
+                <textarea class="content"></textarea>
             </div>
             <div class="confirmBtn_ztr">
                 <input type="hidden" class="longInput bid" value="1">
@@ -361,10 +361,10 @@
         $('#create_juan').click(function(){
             var bid=$('.book_juan .bid').val();
             var title=$('.book_juan .title').val();
-            var desc=$('.book_juan .desc').val();
+            var content=$('.book_juan .content').val();
 
-            if(title&&desc){
-                _ajax_add_juan(bid, title, desc);
+            if(title&&content){
+                _ajax_add_juan(bid, title, content);
             }
         });
 
@@ -401,6 +401,8 @@
 
             _ajax_edit_zhang(zid, title, content);
         });
+
+        $('.act_first .sectionBox').trigger('click');
     });
 </script>
 <script type="text/javascript">
@@ -426,8 +428,6 @@
                      $('.chapterCon .editWrap .zwText .title').val(data.title);
                      $('.chapterCon .editWrap .zwText .content').val(data.content);
                      $('.chapterCon .editWrap .save_zhang').attr('data-id', data.id);
-
-                     layer.msg(json.msg);
                  }else{
                      layer.msg(json.msg);
                  }
@@ -463,8 +463,6 @@
                      $('.volumeCon .editWrap .title').val(data.title);
                      $('.volumeCon .editWrap .content').val(data.content);
                      $('.volumeCon .editWrap .save_juan').attr('data-id', data.id);
-
-                     layer.msg(json.msg);
                  }else{
                      layer.msg(json.msg);
                  }
@@ -477,7 +475,7 @@
     }
 
     //添加卷
-    function _ajax_add_juan(bid, title, desc){
+    function _ajax_add_juan(bid, title, content){
          var _json;
          $.ajax({  
              async:false,
@@ -487,7 +485,7 @@
              data: {
                 'bid':bid,
                 'title':title,
-                'desc':desc
+                'content':content
              },
              dataType : 'json',
              success  : function(json) {
