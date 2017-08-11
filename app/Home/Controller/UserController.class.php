@@ -32,6 +32,23 @@ class UserController extends CommonController{
         $this->display();
     }
 
+    //设置图书基本信息
+    public function book_set(){
+        global $user;
+
+        $where=array();
+        $where['uid']=$user['id'];
+        $where['bid']=$_GET['id'];
+
+        $juan_list=M('BookJuan')->where($where)->select();
+        foreach ($juan_list as $key => $value) {
+            $juan_list[$key]['num']=M('BookZhang')->where(array('bjid'=>$value['id']))->count();
+            $juan_list[$key]['_child']=M('BookZhang')->where(array('bjid'=>$value['id'], 'status'=>1))->select();
+        }
+
+        $this->juan_list=$juan_list;
+        $this->display();
+    }
 
     //已发布章节
     public function book_create(){
