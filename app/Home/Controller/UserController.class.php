@@ -38,15 +38,48 @@ class UserController extends CommonController{
 
         $where=array();
         $where['uid']=$user['id'];
-        $where['bid']=$_GET['id'];
+        $where['id']=$_GET['id'];
 
-        $juan_list=M('BookJuan')->where($where)->select();
-        foreach ($juan_list as $key => $value) {
-            $juan_list[$key]['num']=M('BookZhang')->where(array('bjid'=>$value['id']))->count();
-            $juan_list[$key]['_child']=M('BookZhang')->where(array('bjid'=>$value['id'], 'status'=>1))->select();
+        $row=M('Book')->where($where)->find();
+        $tags_arr=explode('_', $row['tags']);
+
+        $_tags_arr=array();
+        $_tags_title='';
+        foreach ($tags_arr as $key => $value) {
+            $temp=M('Type')->find($value);
+            $_tags_arr[]=$temp['title'];
+        }
+        $_tags_title=implode(' ', $_tags_arr);
+        $row['tags_title']=$_tags_title;
+
+        
+        $tags_type=M('Type')->where(array('pid'=>1300))->select();
+
+        foreach ($tags_type as $key => $value) {
+
+            $temp=M('Type')->where(array('pid'=>$value['id']))->select();
+            foreach ($temp as $k => $v) {
+                if (in_array($v['id'], $tags_arr)) {
+                    $temp[$k]['selected']=' act ';
+                } else {
+                    $temp[$k]['selected']='';
+                }
+            }
+
+            $tags_type[$key]['_child']=$temp;
         }
 
-        $this->juan_list=$juan_list;
+
+        $type=M('Type')->where(array('pid'=>1309))->select();
+        $type_1=M('Type')->where(array('pid'=>1299))->select();
+        $type_2=M('Type')->where(array('pid'=>$row['type_1']))->select();
+
+        $this->type_count=count($tags_type);
+        $this->tags_type=$tags_type;
+        $this->row=$row;
+        $this->type=$type;
+        $this->type_1=$type_1;
+        $this->type_2=$type_2;
         $this->display();
     }
 
@@ -130,6 +163,34 @@ class UserController extends CommonController{
             $data['time']=time();
 
             $id = M('Book')->add($data);
+            if($id){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //编辑书
+    public function ajax_save_book(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+
+            $id = M('Book')->save($data);
             if($id){
                 $data=array();
                 $data['code']=0;

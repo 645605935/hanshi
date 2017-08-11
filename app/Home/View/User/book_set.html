@@ -69,53 +69,10 @@
         </div>
         <div class="back-stage txt-mid2 mgtb-20">
             <div class="aside2">
-              <div class="nav-1">
-                <div class="menu-title"></div>
-                <ul m-name="menu">
-                  <li class="item active sub-l">
-                    <a class="aside_title" href="#2">
-                      <i class="iconfont icon-ic_home"></i>首页
-                    </a>
-                  </li>
-                  <li class="item sub-l">
-                    <a class="aside_title">
-                      <i class="iconfont icon-ic_radio"></i>作品
-                    </a>
-                    <ul class="sub-m">
-                      <li class="item">
-                        <a href="#2">上传作品</a>
-                      </li>
-                      <li class="item">
-                        <a href="#2">我的作品</a>
-                      </li>
-                    </ul>
-                  </li>
-                    <li class="item gt-40 sub-l">
-                      <a class="aside_title">
-                        <i class="iconfont icon-ic_fans"></i>社群
-                      </a>
-                      <ul class="sub-m">
-                        <li class="item">
-                          <a href="#2">评论</a>
-                        </li>
-                        <li class="item">
-                          <a href="#2">收到的赞</a>
-                        </li>
-                      </ul>
-                    </li>
-                  <li class="item sub-l">
-                    <a class="aside_title">
-                      <i class="iconfont icon-ic_setting"></i>设置
-                    </a>
-                    <ul class="sub-m">
-                      <li class="item ">
-                        <a href="#2">账号设置</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-                <div class="menu-bottom"></div>
-              </div>
+
+                <!-- 引用 -->
+                <include file="_book_left" />
+
             </div>
             <div class="fl">
                 <div class="main2 fl">
@@ -126,17 +83,34 @@
 							<form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
 							   <table class="layui-table">
 							     <colgroup>
-							       <col width="200">
+							       <col width="350">
 							       <col>
 							     </colgroup>
 							     <tbody>
 							       <tr>
 							         <td>
-							           <img src="__PUBLIC__/Home/images/img1.jpg" class="img_box" width="114" height="152">
+                                        <if condition="$row['img']">
+                                            <img src="{$row.img}" class="img_box" width="114" height="152">
+                                        <else/>
+                                            <img src="__PUBLIC__/Home/images/img1.jpg" class="img_box" width="114" height="152">
+                                        </if>
+							           
 							           <input type="file" id="add_upload_img" name="img" class="layui-upload-file"><br>
-							           <div class="layui-elem-quote" style="margin-top: 20px;border-left: 0px solid red;color: red;">
-							             站点logo下载
+							           <div class="layui-elem-quote" style="margin-top: 3px;border-left: 0px solid red;color: red;padding: 3px;">
+							             1.上传600X800像素、不超过5M的JPG图片；
 							           </div>
+                                       <div class="layui-elem-quote" style="margin-top: 3px;border-left: 0px solid red;color: red;padding: 3px;">
+                                         2.图片应显示书名、笔名和站点；
+                                       </div>
+                                       <div class="layui-elem-quote" style="margin-top: 3px;border-left: 0px solid red;color: red;padding: 3px;">
+                                         3.建议使用原创图片、不得使用真人照片及他人有版权的图片，以免引起纠纷；
+                                       </div>
+                                       <div class="layui-elem-quote" style="margin-top: 3px;border-left: 0px solid red;color: red;padding: 3px;">
+                                         4.严禁上传色情、暴力、广告宣传或不适合公众观赏的图片，一经发现即做禁书处理；
+                                       </div>
+                                       <div class="layui-elem-quote" style="margin-top: 3px;border-left: 0px solid red;color: red;padding: 3px;">
+                                         5.封面上传后，管理员将在2个工作日内审核。
+                                       </div>
 							         </td>
 
 							         <td>
@@ -144,7 +118,7 @@
 							             <div class="layui-form-item">
 							               <label class="layui-form-label">作品名称</label>
 							               <div class="layui-input-inline">
-							                  <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
+							                  <input type="text" name="title" value="{$row.title}" lay-verify="required" placeholder="" class="layui-input title">
 							               </div>
 							             </div>
 							           </div>
@@ -153,30 +127,30 @@
 							             <div class="layui-form-item">
 							               <label class="layui-form-label">书号</label>
 							               <div class="layui-input-inline">
-							                 <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
+							                 <input type="text" readonly="" value="{$row.no}" lay-verify="required" placeholder="" class="layui-input no">
 							               </div>
 							             </div>
 							           </div>
 
 							           <div class="layui-inline">
 							             <div class="layui-form-item">
-							               <label class="layui-form-label">作品类型</label>
-							               <div class="layui-input-inline">
-							                   <select name="mid" class="mid" lay-verify="required">
-							                     <option value="">请选择</option>
-							                     <foreach name="match" item='v'>
-							                        <option value="{$v.id}">{$v.title}</option>
-							                     </foreach>
-							                   </select>
-							               </div>
-							               <div class="layui-input-inline">
-							                   <select name="mid" class="mid" lay-verify="required">
-							                     <option value="">请选择</option>
-							                     <foreach name="match" item='v'>
-							                        <option value="{$v.id}">{$v.title}</option>
-							                     </foreach>
-							                   </select>
-							               </div>
+							                <label class="layui-form-label">作品类型</label>
+							                <div class="layui-input-inline" style="width: 100px;">
+                                              <select name="type_1" class="type_1" lay-filter="type_1" lay-verify="required">
+                                                <option value="">请选择</option>
+                                                <foreach name="type_1" item="v">
+                                                    <option value="{$v.id}" <if condition="$row['type_1'] eq $v['id']">selected</if>>{$v.title}</option>
+                                                </foreach>
+                                              </select>
+                                            </div>
+                                            <div class="layui-input-inline" style="width: 100px;">
+                                              <select name="type_2" class="type_2" lay-verify="required">
+                                                <option value="">请选择</option>
+                                                <foreach name="type_2" item="v">
+                                                    <option value="{$v.id}" <if condition="$row['type_2'] eq $v['id']">selected</if>>{$v.title}</option>
+                                                </foreach>
+                                              </select>
+                                            </div>
 							             </div>
 							           </div>
 
@@ -184,21 +158,12 @@
 							             <div class="layui-form-item">
 							               <label class="layui-form-label">授权级别</label>
 							               <div class="layui-input-inline">
-							                   <select name="mid" class="mid" lay-verify="required">
-							                     <option value="">请选择</option>
-							                     <foreach name="match" item='v'>
-							                        <option value="{$v.id}">{$v.title}</option>
+							                   <select name="type" class="type" lay-verify="required">
+                                                 <option value="">请选择</option>
+							                     <foreach name="type" item='v'>
+							                        <option value="{$v.id}" <if condition="$row['type'] eq $v['id']">selected</if>>{$v.title}</option>
 							                     </foreach>
 							                   </select>
-							               </div>
-							             </div>
-							           </div>
-
-							           <div class="layui-inline">
-							             <div class="layui-form-item">
-							               <label class="layui-form-label">编辑分组</label>
-							               <div class="layui-input-inline">
-							                 <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
 							               </div>
 							             </div>
 							           </div>
@@ -207,7 +172,7 @@
 							             <div class="layui-form-item">
 							               <label class="layui-form-label">字数</label>
 							               <div class="layui-input-inline">
-							                 <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
+							                 <input type="text" readonly="" value="{$row.num}" placeholder="" class="layui-input num">
 							               </div>
 							             </div>
 							           </div>
@@ -216,25 +181,26 @@
 							             <div class="layui-form-item">
 							               <label class="layui-form-label">收藏</label>
 							               <div class="layui-input-inline">
-							                 <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
+							                 <input type="text" readonly="" value="{$row.collect}" placeholder="" class="layui-input collect">
 							               </div>
 							             </div>
 							           </div>
 
-							           <div class="layui-inline">
-							             <div class="layui-form-item">
-							               <label class="layui-form-label">作品状态</label>
-							               <div class="layui-input-inline">
-							                 <input type="text" name="desc" lay-verify="required" placeholder="" class="layui-input title">
-							               </div>
-							             </div>
-							           </div>
+                                       <div class="layui-inline">
+                                         <div class="layui-form-item">
+                                           <label class="layui-form-label">作品状态</label>
+                                           <div class="layui-input-inline">
+                                              <input type="radio" name="finish" class="finish" value="0" title="连载" <if condition="$row['finish'] eq 0">checked=""</if>>
+                                              <input type="radio" name="finish" class="finish" value="1" title="完结" <if condition="$row['finish'] eq 1">checked=""</if>>
+                                           </div>
+                                         </div>
+                                       </div>
 
 							           <div class="layui-inline">
 							             <div class="layui-form-item">
 							               <label class="layui-form-label">作品标签</label>
 							               <div class="layui-input-inline">
-							                 <input type="text" name="desc" lay-verify="required" placeholder="" class="layui-input title">
+							                 <input type="text" value="{$row.tags_title}" lay-verify="required" placeholder="" class="layui-input filterTagBox">
 							               </div>
 							             </div>
 							           </div>
@@ -246,7 +212,7 @@
 							           <div class="layui-form-item layui-form-text">
 							               <label class="layui-form-label" style="width: 100%!important;text-align: left;">作品介绍</label>
 							               <div class="layui-input-block">
-							                   <textarea placeholder="请输入内容" class="layui-textarea desc"></textarea>
+							                   <textarea name="desc" placeholder="请输入内容" class="layui-textarea desc">{$row.desc}</textarea>
 							               </div>
 							           </div>
 							         </td>
@@ -255,115 +221,16 @@
 							     <tfoot>
 							       <tr>
 							         <td colspan="2" style="text-align:right;">
-							           <input type="hidden" name="type" lay-verify="required" class="layui-input type" value="{$row.type}" readonly>
-							           <input type="hidden" name="file_url" lay-verify="required" class="layui-input file_url" readonly>
-							           <input type="hidden" name="images" lay-verify="required" class="layui-input images" readonly>
-							           <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>
+                                        <input type="hidden" name="id" lay-verify="required" class="layui-input id" value="{$row.id}">
+							            <input type="hidden" name="tags" lay-verify="required" class="layui-input tags" value="{$row.tags}">
+							            <input type="hidden" name="img" lay-verify="required" class="layui-input img"  value="{$row.img}">
+							            <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>
 							         </td>
 							       </tr>
 							     </tfoot>
 							   </table>
 							</form>
 
-
-
-
-                            <form method="post" action="">
-                                <div class="fmBox fl">
-                                   <div class="fm">
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" width="114" height="152">
-                                        <span class="modify hidden">上传新封面</span>
-                                        <a class="blue" href="#2">站点logo下载</a> 
-                                    </div>
-                                </div>
-                                <div class="workSetList fl mb20">
-                                    <ul>
-                                        <li>
-                                            <em>作品名称：</em>
-                                            <p class="saved">似的发射点</p>
-                                            <div class="modify hidden cf">
-                                                 <input name="bookname" autocomplete="off" class="midInput recTagInput" value="似的发射点" type="text">
-                                                <p><cite class="icon ok"></cite><span class="f12 c999" data-node="text"></span></p>
-                                                <p class="error">书名不能为空</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <!-- <em>首发站点：</em>
-                                            <b>
-                                                <select class="modify hidden showselect select-site">
-                                                    <option value="1">创世中文网</option>
-                                                    <option value="2">云起书院</option>
-                                                    <option value="3">起点女生网</option>
-                                                    <option value="5">起点中文网</option>  
-                                                </select>
-                                                <span class="saved">创世中文网</span>
-                                            </b> -->
-                                            <em>书号：</em><b>8187870203749903</b>
-                                        </li>
-                                        <li>
-                                            <em>作品类型：</em>
-                                            <b class="select-category">
-                                                <span class="saved">奇幻 - 剑与魔法</span>
-                                                <select class="modify hidden showselect novelssort">
-                                                    <option>玄幻</option>
-                                                    <option>奇幻</option>
-                                                </select>
-                                                <select class="modify hidden showselect novelssort">
-                                                    <option>剑与魔法</option>
-                                                    <option>史诗奇幻</option>
-                                                </select>
-                                            </b>
-                                            <cite>授权级别：</cite>
-                                            <b class="select-level">
-                                                <span class="saved">驻站作品</span>
-                                                <select class="modify hidden showselect">
-                                                    <option value="1">独家首发</option>
-                                                    <option value="5">驻站作品</option>
-                                                </select>
-                                            </b>
-                                        </li>
-                                        <li>
-                                            <em>编辑分组：</em>
-                                            <p>奇幻编辑组</p>
-                                        </li>
-                                        <li>
-                                            <em>字数：</em>
-                                            <p>32</p>
-                                        </li>
-                                        <li>
-                                            <em>收藏：</em>
-                                            <p>0</p>
-                                        </li>
-                                        <li>
-                                            <em>作品状态：</em>
-                                            <p class="saved">新建</p>
-                                            <p class="modify hidden cf">新建</p>
-                                        </li>
-                                        <li><em>作品标签：</em>
-                                            <p class="saved">豆腐干地方</p>
-                                            <div class="filterTagBox modify hidden no"></div>
-                                            <p class="tip modify hidden">作品审核通过后，1个自然月内仅允许修改一次</p>
-                                        </li>
-                                        <li><em>作品介绍：</em>
-                                            <div class="modify hidden">
-                                                <textarea id="introInput" name="intro">sdfssssssssssssdfsdfsdg</textarea>
-                                                <cite class="icon ok"></cite>
-                                                </p>
-                                                <p data-node="tip" class="f12 c999">20~300个字，修改后1个工作日内审核完毕，审核完毕后7天内不得再次修改</p>
-                                                <p data-node="error" class="error"></p>
-                                            </div>
-                                            <p class="saved intro">sdfssssssssssssdfsdfsdg</p>
-                                        </li>
-                                    </ul>
-                                    <p class="dib-wrap saved modify-btn">
-                                        <a class="button" href="javascript:">修改作品设置</a>
-                                    </p>
-                                    <p class="dib-wrap confirm modify hidden">
-                                        <a class="button" href="javascript:">保存</a>
-                                        <a class="button white" href="javascript:">取消</a>
-                                    </p>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -383,22 +250,23 @@
     <a class="icon closePopup" href="javascript:" title="关闭"></a>
         <h3>作品标签</h3>
         <div class="tagFilterList">
-            <p>请选择最多4个作为您的作品标签，每类中限选一个：</p>
+            <p>请选择最多{$type_count}个作为您的作品标签，每类中限选一个：</p>
             <div class="slimScrollDiv">
                 <ul>
-                    <li> <span>风格</span>
-                        <div class="tagFilter">
-                            <a title="勇猛" href="javascript:">勇猛</a>
-                            <a title="勇猛" href="javascript:">勇猛</a>
-                            <a title="勇猛" href="javascript:">勇猛</a>
-                            <a title="勇猛" href="javascript:">勇猛</a>
-                        </div>
-                    </li>          
+                    <foreach name="tags_type" item="vo">
+                        <li> <span>{$vo.title}</span>
+                            <div class="tagFilter">
+                                <foreach name="vo['_child']" item="v">
+                                    <a class="tag_a {$v.selected}" data-id="{$v.id}" href="javascript:">{$v.title}</a>
+                                </foreach>
+                            </div>
+                        </li>      
+                    </foreach>
                 </ul>
             </div>
         </div>
         <center class="confirmBtn">
-            <a class="button" href="javascript:">确定</a>
+            <a class="button tags_select_btn" href="javascript:;">确定</a>
         </center>
     </div>
 </div>
@@ -433,34 +301,105 @@
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
 <script src="__PUBLIC__/Home/js/index.js"></script>
 <script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
+<script src="__PUBLIC__/Admin/doT-master/doT.js"></script>
+
+<script id="j-tmpl_type_2" type="text/template">
+    {{ if(it.code==0){ }}
+
+            {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+
+                  <option value="{{=it.data[i].id}}">{{=it.data[i].title}}</option>
+
+            {{ } }}
+
+    {{ }else{ }}
+
+            
+
+    {{ } }}
+</script>
 </body>
 </html>
+<script type="text/javascript">
+    $(function(){
+        $('.tags_select_btn').click(function(){
 
+            var id_str='';
+            var id_arr=[];
+
+            var title_str='';
+            var title_arr=[];
+
+            $.each($('.tagFilterList .tag_a'), function(name, value){
+                if($(value).hasClass("act")){
+                    var id_temp=$(value).attr('data-id');
+                    var title_temp=$(value).html();
+
+                    id_arr.push(id_temp);
+                    title_arr.push(title_temp);
+                }
+            });
+            id_str=id_arr.join('_');
+            title_str=title_arr.join(' ');
+            $('#add_form .filterTagBox').val(title_str);
+            $('#add_form .tags').val(id_str);
+        });
+    });
+</script>
 
 <script>
     //添加
-    function _ajax_add(_data){
+    function _ajax_save_book(_data){
          var _json;
          $.ajax({  
              async:false,
              type:'post',  
              contentType:"application/x-www-form-urlencoded",
-             url : "{:U('Home/Match/ajax_add')}",
+             url : "{:U('Home/User/ajax_save_book')}",
              data: _data,
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
-                     alert(json.msg);
-                     window.location.reload();
+                     layer.msg(json.msg);
                  }else{
-                     alert(json.msg);
+                     layer.msg(json.msg);
                  }
              },
              error  : function() {  
-                 alert('error');
+                 layer.msg('error');
              }  
          }); 
          return _json;
+    }
+
+    //获取分类二
+    function _ajax_get_type_2(type_1){
+        $.ajax({  
+            async:false,
+            type:'get',  
+            url : "{:U('Home/User/ajax_get_type_2')}",
+            data:{
+                id: type_1
+            },
+            dataType : 'json',
+            success  : function(json) { 
+                if(json.code == 0){
+                    var str='<option value="">请选择</option>';
+
+                    var tmpl = document.getElementById('j-tmpl_type_2').innerHTML;
+                    var doTtmpl = doT.template(tmpl);
+                    var doT_Str=str+doTtmpl(json);
+                    $('#add_form .type_2').html(doT_Str);
+
+                    layui.form().render();
+                }else{
+                    layer.msg(json.msg);
+                }
+            },
+            error  : function() {  
+                layer.msg('error');
+            }  
+        }); 
     }
 
     layui.use(['form', 'upload'], function(){
@@ -494,8 +433,16 @@
 
       //监听提交
       form.on('submit(demo1_add)', function(data){
-        var _json=_ajax_add(data.field);
+        var _json=_ajax_save_book(data.field);
         return false;
       });
+
+      form.on('select(type_1)', function(data){
+          $('#add_form .type_2').html('<option value="">请选择</option>');
+
+          var type_1=data.value;
+          _ajax_get_type_2(type_1);
+      });
+
     });
 </script>

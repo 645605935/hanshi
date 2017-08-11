@@ -141,7 +141,14 @@
     </ul>
     <div class="ul-con mt10">
         <div class="lon w1000">
-            <div class="fr"><a href="{:U('Home/User/gr_reg')}">注册</a><span>|</span><a href="{:U('Home/User/login')}">登录</a></div>
+            <div class="fr">
+                <if condition="$user">
+                    <a href="{:U('Home/User/book_list')}">{$user.username}</a>
+                <else/>
+                    <a href="{:U('Home/User/gr_reg')}">注册</a><span>|</span>
+                    <a href="{:U('Home/User/login')}">登录</a>
+                </if>
+            </div>
         </div>
     </div>
 </div>
