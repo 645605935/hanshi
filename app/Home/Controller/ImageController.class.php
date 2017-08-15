@@ -60,6 +60,25 @@ class ImageController extends CommonController{
         echo json_encode($data);
     }
          
+    public function get_image_list(){
+        $base_url="http://zhangtengrui.oss-cn-beijing.aliyuncs.com/";
+
+        $where=array();
+        // if($_GET['city']){
+        //     $where['city']=$_GET['city'];
+        // }
+        // if($_GET['type']){
+        //     $where['type']=$_GET['type'];
+        // }
+        
+        $list = M('Auiimage')->where($where)->order('id desc')->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['url']=$base_url.$value['url'];
+        }
+
+        echo json_encode($list);
+    }
+
 
 
 
