@@ -3,7 +3,7 @@
 namespace Home\Controller;
 use Think\CommonController;
 
-class ImageController extends CommonController{
+class ApiController extends CommonController{
     public function _initialize(){
         parent::_initialize();
     }
@@ -47,6 +47,37 @@ class ImageController extends CommonController{
         $data['time']=time();
 
         $id = M('Auivideo')->add($data);
+        if($id){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    public function ajax_add_svideo(){
+        $_json=file_get_contents('php://input');
+        $_arr=json_decode($_json,true);
+
+        $uid=$_arr['uid'];
+        $image=$_arr['image'];
+        $video=$_arr['video'];
+        $remark=$_arr['remark'];
+        
+
+        $data=array();
+        $data['uid']=$uid;
+        $data['image']=$image;
+        $data['video']=$video;
+        $data['remark']=$remark;
+        $data['time']=time();
+
+        $id = M('Auisvideo')->add($data);
         if($id){
             $data=array();
             $data['code']=0;
