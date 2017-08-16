@@ -111,6 +111,70 @@ class ApiController extends CommonController{
     }
 
 
+    // 查找用户-登录
+    public function find_user_by_wx_id(){
+        // echo json_encode($_GET);die;
+
+        $_json=file_get_contents('php://input');
+        $_arr=json_decode($_json,true);
+
+        $wx_id=$_arr['wx_id'];
+
+        $where=array();
+        $where['wx_id']=$wx_id;
+
+        $row = M('user')->where($where)->find();
+
+        if($row){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['user_info']=$row;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    // wx注册用户
+    public function wx_register(){
+        $_json=file_get_contents('php://input');
+        $_arr=json_decode($_json,true);
+        // echo json_encode($_arr);die;
+
+        $password=$_arr['password'];
+        $username=$_arr['username'];
+        $wx_id=$_arr['wx_id'];
+        $wx_user_info=$_arr['wx_user_info'];
+
+        $data=array();
+        $data['username']=$username;
+        $data['password']=$password;
+        $data['wx_id']=$wx_id;
+        $data['wx_user_info']=$wx_user_info;
+
+        $id=M('user')->add($data);
+        $row=M('user')->find($id);
+
+        if($row){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='注册成功';
+            $data['user_info']=$row;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='注册失败';
+            
+        }
+
+        echo json_encode($data);
+    }
+
+
 
 
 
