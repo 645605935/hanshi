@@ -93,6 +93,7 @@ class ApiController extends CommonController{
          
     public function get_image_list(){
         $base_url="http://zhangtengrui.oss-cn-beijing.aliyuncs.com/";
+        $_oss_style_150x150_='image/resize,m_fill,w_300,h_300,limit_0/auto-orient,0/quality,q_100';
 
         $where=array();
         // if($_GET['city']){
