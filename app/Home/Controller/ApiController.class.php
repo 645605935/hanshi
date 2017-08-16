@@ -108,7 +108,6 @@ class ApiController extends CommonController{
         
         $list = M('Auiimage')->where($where)->order('id desc')->select();
         foreach ($list as $key => $value) {
-            $list[$key]['url']=$base_url . $value['url'];
             $list[$key]['url']=$_oss_url_ . $value['url']. "?x-oss-process=" . $_oss_style_150x150_;
         }
 
