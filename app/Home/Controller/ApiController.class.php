@@ -92,6 +92,10 @@ class ApiController extends CommonController{
     }
          
     public function get_image_list(){
+        $config=M('Config')->find(1);
+        $_oss_url_='http://'.$config['oss_url'].'/';
+        $_oss_style_150x150_=$config['oss_style_150x150'];
+
         $base_url="http://zhangtengrui.oss-cn-beijing.aliyuncs.com/";
 
         $where=array();
@@ -104,7 +108,8 @@ class ApiController extends CommonController{
         
         $list = M('Auiimage')->where($where)->order('id desc')->select();
         foreach ($list as $key => $value) {
-            $list[$key]['url']=$base_url.$value['url'];
+            $list[$key]['url']=$base_url . $value['url'];
+            $list[$key]['url']=$_oss_url_ . $value['url']. "?x-oss-process=" . $_oss_style_150x150_;
         }
 
         echo json_encode($list);
