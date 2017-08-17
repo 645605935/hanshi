@@ -212,9 +212,9 @@ class IndexController extends CommonController{
     //上传文件
     public function lay_upload_file(){
         if($_FILES['file']['size']>0){
-            $upload = new \Think\Upload();// 实例化上传类
+            $upload = new \Think\Upload();// 实例化上传类               
             $upload->maxSize   =     314572800000 ;// 设置附件上传大小
-            $upload->exts      =     array('zip', 'rar', 'xls','xlsx', 'doc','docx','ppt','pptx','pdf','jpg','png','jpeg','gif','mp4');// 设置附件上传类型
+            $upload->exts      =     array('zip', 'rar', 'xls','xlsx', 'doc','docx','ppt','pptx','pdf','jpg','png','jpeg','gif','mp4','mp3','wav','wma');// 设置附件上传类型
             $upload->uploadReplace  = false;// 存在同名文件是否覆盖
             $upload->autoSub   =     false;//是否启用子目录保存
             $upload->rootPath  =     './Uploads/'; // 设置附件上传根目录

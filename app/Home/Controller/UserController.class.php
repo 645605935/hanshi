@@ -101,6 +101,15 @@ class UserController extends CommonController{
         $this->display();
     }
 
+    //上传声音
+    public function voice_create(){
+        global $user;
+
+        $type=M('Type')->where(array('pid'=>1299))->select();
+        $this->type=$type;
+        $this->display();
+    }
+
     //回收站
     public function book_recycle(){
         global $user;
@@ -160,6 +169,7 @@ class UserController extends CommonController{
         $data=array();
         $data=$_POST;
         if($data){
+            $data['uid']=$user['id'];
             $data['time']=time();
 
             $id = M('Book')->add($data);
@@ -180,6 +190,37 @@ class UserController extends CommonController{
 
         echo json_encode($data);
     }
+
+    //添加声音
+    public function ajax_add_voice(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['uid']=$user['id'];
+            $data['time']=time();
+
+            $id = M('Voice')->add($data);
+            if($id){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    
 
     //编辑书
     public function ajax_save_book(){
