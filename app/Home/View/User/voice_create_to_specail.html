@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<title>添加至专辑界面</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/back.css">
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui-v1.0.4/layui/css/layui.css"  media="all">
+
+<style type="text/css">
+    .image_box{width: 111px;height:150px;}
+    .image_box a{display: block;width: 100%;height:100%;box-sizing: border-box;padding: 5px;overflow: hidden;float: left;}
+    .image_box a img{width: 100%;height: 100%;}
+</style>
+</head>
+<body>
+<!-- 引用 -->
+<include file="Common/header" />
+
+
+<div class="container mt20">
+<div class="mainbox_wrapper">
+    <div class="personal-center">
+        <div class="ps-center rel">
+            <div class="bg-img-wrapper">
+                <img class="bg-img" src="__PUBLIC__/Home/images/mycenter_bg_2.jpg">
+                <div class="masker abs"></div>
+            </div>
+            <div class="inner tc">
+                <a class="pic mgtb-20" href="#2">
+                    <img src="__PUBLIC__/Home/images/img1.jpg">
+                </a>
+                <h2 class="txt-lg5">
+                    <span>昵称</span>
+                </h2>
+                <div class="elli mgtb-10">
+                     <span class="text" title="">现在就介绍一下自己最明显的特点，让人们记住我。</span>
+                </div>
+                <div class="mgtb-20">
+                    <a class="btn2 mgr-20" href="#2"><i class="icon4 icon4-person"></i> 粉丝 <span>0</span></a>
+                    <a class="btn2 mgr-20" href="#2"><i class="icon4 icon4-add"></i> 关注 <span>2</span></a>
+                    <a class="btn2 mgr-20" href="#2"><i class="icon4 icon4-heart"></i> 赞过 <span>0</span></a>
+                    <a class="btn2" href="#2"><i class="icon4 icon4-sound"></i> 声音 <span>0</span></a>
+                </div>
+            </div>
+            <div>
+                <div class="tab-1 hor-1 abs tc">
+                    <ul>
+                        <li class="item active">
+                            <a href="#2">
+                                <i class="icon4 icon4-house mgr-5"></i>
+                                <span class="inl-b">个人主页</span>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="#2">
+                                <i class="icon4 icon4-backstage mgr-5"></i>
+                                <span class="inl-b">主播工作台</span>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="#2">
+                                <i class="icon4 icon4-backstage mgr-5"></i>
+                                <span class="inl-b">作家工作台</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="back-stage txt-mid2 mgtb-20">
+            <div class="aside2">
+
+                <!-- 引用 -->
+                <include file="_voice_left" />
+
+            </div>
+            <div class="fl">
+                <div class="main2 fl">
+                    <div class="header2"><a class="intro j-pageTitle mr20 cur" href="#2">添加至专辑</a><a class="intro j-pageTitle ml20" href="#2">添加至书城</a></div>
+                    <div class="mainbox">
+                        <div class="mt20">
+                            <div class="personal_center_left fl">
+                                <div class="p-eidt-sound main mg-c">
+
+                                    <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
+                                       <table class="layui-table">
+                                         <colgroup>
+                                           <col width="300">
+                                           <col>
+                                         </colgroup>
+                                         <tbody>
+                                           <tr>
+                                             <td>
+                                               <div class="image_box">
+                                                   <a><img src="__PUBLIC__/Home/images/img1.jpg"></a>
+                                               </div>
+                                               <input type="file" id="add_upload_img" name="img" class="layui-upload-file"><br>
+                                               
+                                             </td>
+
+                                             <td>
+                                               <div class="layui-inline">
+                                                 <div class="layui-form-item">
+                                                   <label class="layui-form-label">声音名称</label>
+                                                   <div class="layui-input-inline">
+                                                     <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
+                                                   </div>
+                                                 </div>
+                                               </div>
+
+                                               <div class="layui-inline">
+                                                 <div class="layui-form-item">
+                                                   <label class="layui-form-label">添加到专辑</label>
+                                                   <div class="layui-input-inline">
+                                                       <select name="book" class="special" lay-verify="required" id="special_select">
+                                                         <option value="">请选择</option>
+                                                         <foreach name="special" item='v'>
+                                                            <option value="{$v.id}">{$v.title}</option>
+                                                         </foreach>
+                                                       </select>
+                                                   </div>
+                                                   <label class="layui-form-label gg-zj">新建专辑</label>
+                                                 </div>
+                                               </div>
+                                             </td>
+                                           </tr>
+
+                                           <tr>
+                                             <td colspan="2">
+                                               <div class="layui-inline">
+                                                 <div class="layui-form-item">
+                                                   <label class="layui-form-label">上传声音</label>
+                                                   <div class="layui-input-inline">
+                                                     <input type="file" id="add_upload_file" name="file" lay-type="audio" class="layui-upload-file">
+                                                   </div>
+                                                   <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
+                                                     预览
+                                                   </a>
+                                                   <div class="layui-elem-quote" style="border-left: 0px solid red;color: red;float: left;">
+                                                     支持MP3，AIFF，AIF, WAV, FLAC, OGG, MP2, AAC，AMR等文件格式，最大50MB
+                                                   </div>
+                                                 </div>
+                                               </div>
+                                             </td>
+                                           </tr>
+
+                                           <tr>
+                                             <td class="center" colspan="2">
+                                               <div class="layui-form-item layui-form-text">
+                                                   <label class="layui-form-label" style="width: 100%!important;text-align: left;">声音简介</label>
+                                                   <div class="layui-input-block">
+                                                       <textarea placeholder="请输入内容" name="content" class="layui-textarea content"></textarea>
+                                                   </div>
+                                               </div>
+                                             </td>
+                                           </tr>
+
+                                           <tr>
+                                             <td class="center" colspan="2">
+                                                <div class="layui-form-item" pane="">
+                                                    <div class="layui-input-block">
+                                                      <input type="checkbox" lay-skin="primary" title="我已阅读并同意【知识产权承诺】" checked="">
+                                                    </div>
+                                                </div>
+                                             </td>
+                                           </tr>
+
+                                         </tbody>
+                                         <tfoot>
+                                           <tr>
+                                             <td colspan="2" style="text-align:right;">
+                                               <input type="hidden" name="img" lay-verify="required" class="layui-input img" readonly>
+                                               <input type="hidden" name="voice" lay-verify="required" class="layui-input voice" readonly>
+                                               <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>
+                                             </td>
+                                           </tr>
+                                         </tfoot>
+                                       </table>
+                                    </form>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="clear"></div>
+<div id="bot" class="mt20">
+    <div class="bot1">
+        <div class="w1000 clear">
+            <div class="fl colorMain clear left">
+                <span class="icon-yqlj mr5 mt5 fl"></span><b class="fl">友情链接：</b>       
+            </div>
+            <div class="right">
+                <ul>
+                    <li><a href="#">足球协会</a></li>
+                    <li><a href="#">篮球协会</a></li>
+                    <li><a href="#">天津市体育局</a></li>
+                    <li><a href="#">国家体育总局</a></li>
+                    <li><a href="#">全运组委会</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="bot2">
+        <div class="w1000 marok">
+            <div class="sinak">
+                <span class="jt"></span>
+                <img src="__PUBLIC__/Home/images/erweima.jpg" class="ma">
+            </div>
+            <div class="wxk">
+                <span class="jt"></span>
+                <img src="__PUBLIC__/Home/images/erweima.jpg" class="ma">
+            </div>
+            <a href="javascript:;" class="bgsinaRed"><img src="__PUBLIC__/Home/images/xing.png" alt=""></a>
+            <a href="javascript:;" class="bgwxGreen"><img src="__PUBLIC__/Home/images/xing.png" alt=""></a>
+            <a href="index.html" class="botlogo"><img src="__PUBLIC__/Home/images/logoo.png"></a>
+        </div>
+    </div>
+    <div class="bot3">
+        <div class="w1000">
+            Tian Jin Bei Li Jian Sports Consulting Co., Ltd. ©2017 All Rights Reserved 津ICP备00000000号
+        </div>
+    </div>
+</div>
+<div class="mask"></div>
+
+<div class="maskers" id="add_sepical_box">
+  <div class="addTo-album rel">
+    <a class="iconfont icon-ic_x fr"></a>
+    <h4 class="add-alb-name tc txt-mid ">新建专辑</h4>
+    <div class="selecter selecterr">
+      <span class="mb10 inl-b">选择分类</span>
+      <select name="type" class="type">
+          <option value="">请选择</option>
+          <foreach name="type" item="v">
+              <option value="{$v.id}">{$v.title}</option>
+          </foreach>
+      </select>
+    </div>
+    <div class="edit-alb-change mgt-10 rel js-create-album">
+      <input type="text" name="title" placeholder="请输入专辑名称" class="edit-alb-input title">
+      <span></span>
+    </div>
+    <div class="button111">
+      <a class="inl-b mgr-20 disabled-white add_special_btn">确认</a>
+      <a class="pre inl-b js-btn-cancel-change">取消</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="identy-pop">
+    <h3>申请认证</h3>    
+    <p>亲，这个功能认证后才能使用哦~<br>
+     你这么有才~花一分钟认证下呗~ </p>    
+    <div class="button1">        
+        <a class="inl-b mgr-20 j-attSubmit" href="#2">去认证</a>
+        <a class="inl-b pre" href="javascript:;">取消</a>    
+    </div>
+</div>
+<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
+<script src="__PUBLIC__/Home/js/index.js"></script>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    $(function(){
+        $('.add_special_btn').click(function(){
+            var type=$('#add_sepical_box .type option:selected').val();
+            var title=$('#add_sepical_box .title').val();
+            $('#add_sepical_box .title').val('');
+
+            if(type&&title){
+                _ajax_add_special(type, title);
+            }
+        });
+    });
+</script>
+
+
+<script>
+    //添加专辑
+    function _ajax_add_special(type, title){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/User/ajax_add_special_voice')}",
+             data: {
+                type:type,
+                title:title
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     $('#add_sepical_box .js-btn-cancel-change').trigger('click');
+                     var special=json.data;
+
+                     var str='<option value="">请选择</option>';
+                     $.each(special, function(name, value){
+                         str+='<option value="'+value.id+'">'+value.title+'</option>';
+                     });
+                     $('#special_select').html(str);
+                     layui.form().render();
+                 }else{
+                     alert(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    //添加
+    function _ajax_add(_data){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/User/ajax_add_voice')}",
+             data: _data,
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     alert(json.msg);
+                     window.location.reload();
+                 }else{
+                     alert(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
+      var form = layui.form()
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+
+
+      //上传文件
+      layui.upload({
+         url: "{:U('Home/Index/lay_upload_file')}" //上传接口
+         ,elem: '#add_upload_file' //指定原始元素，默认直接查找class="layui-upload-file"
+         ,ext : 'mp4|mp3|wav|wma'
+         ,method: 'post' //上传接口的http类型
+         ,success: function(res){ //上传成功后的回调
+           if(res.code==0){
+              $('#add_form .file_url').val(res.data.src);
+              $('#add_form .show_file_btn').show().attr('href', res.data.src);
+           }
+         }
+      });
+
+
+      //上传图片
+      layui.upload({
+         url: "{:U('Home/Index/lay_upload_img')}" //上传接口
+         ,elem: '#add_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
+         ,success: function(res){ //上传成功后的回调
+           if(res.code==0){
+              var str='';
+                 str+='<a href="#">'+
+                        '<img src="'+res.data.src+'">'+
+                      '</a>';
+
+              $('#add_form .image_box').html(str);
+              $('#add_form .img').val(res.data.src);
+           }
+         }
+      });
+
+      
+      
+      //上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
+      layedit.set({
+          uploadImage: {
+              url: "{:U('Home/Index/lay_upload_file')}", //接口url
+              type: 'post', //默认post
+          }
+      });
+
+      //创建一个编辑器
+      var editIndex = layedit.build('editer_add');
+
+      //自定义验证规则
+      form.verify({
+        title: function(value){
+          if(value.length < 5){
+            return '标题至少得5个字符啊';
+          }
+        }
+        ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+        ,content: function(value){
+          layedit.sync(editIndex);
+        }
+      });
+
+      //监听提交
+      form.on('submit(demo1_add)', function(data){
+        var _json=_ajax_add(data.field);
+        return false;
+      });
+    });
+</script>

@@ -101,14 +101,99 @@ class UserController extends CommonController{
         $this->display();
     }
 
-    //上传声音
-    public function voice_create(){
+    //上传声音到专辑
+    public function voice_create_to_specail(){
         global $user;
 
+        $special=M('SpecialVoice')->where(array('uid'=>$user['id']))->select();
         $type=M('Type')->where(array('pid'=>1299))->select();
+
+        $this->special=$special;
         $this->type=$type;
         $this->display();
     }
+
+    //上传声音到书城
+    public function voice_create_to_book(){
+        global $user;
+
+        $book=M('Book')->select();
+
+        $this->book=$book;
+        $this->display();
+    }
+
+    //添加专辑
+    public function ajax_add_special_voice(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['uid']=$user['id'];
+            $data['time']=time();
+
+            $id = M('SpecialVoice')->add($data);
+            if($id){
+                $special=M('SpecialVoice')->where(array('uid'=>$user['id']))->select();
+
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+                $data['data']=$special;
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    public function ajax_get_book_juan(){
+        $book_id=$_GET['id'];
+
+        $list = M('BookJuan')->where(array('bid'=>$book_id))->select();
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
+    public function ajax_get_book_zhang(){
+        $book_juan_id=$_GET['id'];
+
+        $list = M('BookZhang')->where(array('bjid'=>$book_juan_id))->select();
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+    
+    
 
     //回收站
     public function book_recycle(){
