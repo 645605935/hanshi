@@ -186,15 +186,15 @@
 							             </div>
 							           </div>
 
-                                       <div class="layui-inline">
-                                         <div class="layui-form-item">
-                                           <label class="layui-form-label">作品状态</label>
-                                           <div class="layui-input-inline">
-                                              <input type="radio" name="finish" class="finish" value="0" title="连载" <if condition="$row['finish'] eq 0">checked=""</if>>
-                                              <input type="radio" name="finish" class="finish" value="1" title="完结" <if condition="$row['finish'] eq 1">checked=""</if>>
-                                           </div>
-                                         </div>
-                                       </div>
+                         <div class="layui-inline">
+                           <div class="layui-form-item">
+                             <label class="layui-form-label">作品状态</label>
+                             <div class="layui-input-inline">
+                                <input type="radio" name="finish" class="finish" value="0" title="连载" <if condition="$row['finish'] eq 0">checked=""</if>>
+                                <input type="radio" name="finish" class="finish" value="1" title="完结" <if condition="$row['finish'] eq 1">checked=""</if>>
+                             </div>
+                           </div>
+                         </div>
 
 							           <div class="layui-inline">
 							             <div class="layui-form-item">
@@ -221,7 +221,7 @@
 							     <tfoot>
 							       <tr>
 							         <td colspan="2" style="text-align:right;">
-                                        <input type="hidden" name="id" lay-verify="required" class="layui-input id" value="{$row.id}">
+                          <input type="hidden" name="id" lay-verify="required" class="layui-input id" value="{$row.id}">
 							            <input type="hidden" name="tags" lay-verify="required" class="layui-input tags" value="{$row.tags}">
 							            <input type="hidden" name="img" lay-verify="required" class="layui-input img"  value="{$row.img}">
 							            <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>

@@ -139,7 +139,12 @@
     </ul>
     <div class="ul-con mt10">
         <div class="lon w1000">
-            <div class="fr"><a href="<?php echo U('Home/User/gr_reg');?>">注册</a><span>|</span><a href="<?php echo U('Home/User/login');?>">登录</a></div>
+            <div class="fr">
+                <?php if($user): ?><a href="<?php echo U('Home/User/book_list');?>"><?php echo ($user["username"]); ?></a>
+                <?php else: ?>
+                    <a href="<?php echo U('Home/User/gr_reg');?>">注册</a><span>|</span>
+                    <a href="<?php echo U('Home/User/login');?>">登录</a><?php endif; ?>
+            </div>
         </div>
     </div>
 </div>
