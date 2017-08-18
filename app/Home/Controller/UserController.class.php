@@ -194,6 +194,19 @@ class UserController extends CommonController{
     }
     
     
+    //我的声音
+    public function voice_mine(){
+        global $user;
+
+        $where=array();
+        $where['uid']=$user['id'];
+        $where['status'] = -1;
+
+        $list=M('BookZhang')->where($where)->select();
+
+        $this->list=$list;
+        $this->display();
+    }
 
     //回收站
     public function book_recycle(){
