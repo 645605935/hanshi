@@ -165,7 +165,7 @@ class IndexController extends CommonController{
     // 上传图片
     public function lay_upload_img(){
         $get_file=$_FILES;
-        if($get_file['img']['size']>0||$get_file['img_1']['size']>0||$get_file['img_2']['size']>0){
+        if($get_file['img']['size']>0||$get_file['img_1']['size']>0||$get_file['img_2']['size']>0||$get_file['sfz_1']['size']>0||$get_file['sfz_2']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
             $upload->maxSize   =     3145728000 ;// 设置附件上传大小
             $upload->exts      =     array('zip', 'rar', 'xls','xlsx', 'doc','docx','ppt','pptx','pdf','jpg','png','jpeg','gif');// 设置附件上传类型
@@ -192,6 +192,12 @@ class IndexController extends CommonController{
                 }
                 if($get_file['img_2']['size']>0){
                     $img=$info['img_2']['savename'];
+                }
+                if($get_file['sfz_1']['size']>0){
+                    $img=$info['sfz_1']['savename'];
+                }
+                if($get_file['sfz_2']['size']>0){
+                    $img=$info['sfz_2']['savename'];
                 }
 
                 $img_url='/Uploads/layui/'.$img;

@@ -13,6 +13,97 @@ class UserController extends CommonController{
         $this->user=$user;
     }
 
+    //个人主页
+    public function index(){
+        global $user;
+
+        $this->display();
+    }
+
+    //个人认证
+    public function personal_authentication(){
+        global $user;
+
+        $this->row=M('User')->find($user['id']);
+        $this->display();
+    }
+
+    //任务库
+    public function task(){
+        global $user;
+
+        $this->display();
+    }
+
+    //上传样音
+    public function voice_create_demo(){
+        global $user;
+
+        $this->type=M('Type')->where(array('pid'=>1299))->select();
+        $this->type_1=M('Type')->where(array('pid'=>1332))->select();
+        $this->type_2=M('Type')->where(array('pid'=>1333))->select();
+        $this->display();
+    }
+
+    
+
+    //添加样音
+    public function ajax_add_voice_demo(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['uid']=$user['id'];
+            $data['time']=time();
+
+            $id = M('VoiceDemo')->add($data);
+            if($id){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //添加身份证
+    public function ajax_add_sfz(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+
+            $id = M('User')->save($data);
+            if($id){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
     public function book_list(){
         global $user;
 
@@ -193,6 +284,19 @@ class UserController extends CommonController{
         echo json_encode($data);
     }
     
+    //主播首页
+    public function voice_index(){
+        global $user;
+
+        $where=array();
+        $where['uid']=$user['id'];
+        $where['status'] = -1;
+
+        $list=M('BookZhang')->where($where)->select();
+
+        $this->list=$list;
+        $this->display();
+    }
     
     //我的声音
     public function voice_mine(){

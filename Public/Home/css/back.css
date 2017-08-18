@@ -5995,3 +5995,60 @@ button:focus {
   background-position: 0px -175px;
   text-decoration: none;
 }
+.icon-section {
+  width: 12px;
+  height: 13px;
+  background-position: -20px -134px;
+}
+.link-tag {
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 0 5px;
+  margin-right: 5px;
+}
+
+.xd-tag {
+  color: #fc5832;
+  border: 1px solid #fc5832;
+}
+
+.open-tag {
+  color: #4990E2;
+  border: 1px solid #4990E2;
+}
+
+.plus-tag {
+  color: #E5466B;
+  border: 1px solid #E5466B;
+}
+
+
+.rotate-tag {
+  color: #7ED321;
+  border: 1px solid #7ED321;
+}
+
+.private-tag {
+  color: #9012FE;
+  border: 1px solid #9012FE;
+}
+
+.whole-tag {
+  color: #6C933E;
+  border: 1px solid #6C933E;
+}
+
+.fine-tag {
+  color: #E7AF51;
+  border: 1px solid #E7AF51;
+}
+
+.pre-listen-tag {
+  color: #417505;
+  border: 1px solid #417505;
+}
+
+.pre-notice-tag {
+  color: #F6A623;
+  border: 1px solid #F6A623;
+}
