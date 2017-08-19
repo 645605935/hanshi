@@ -28,8 +28,8 @@
             <a href="javascript:;" class="li-a <if condition="stripos($_page_,'Index/index') nheq false">cur<elseif  condition="$_page_ eq ''"/>cur</if>">发现</a>
             <ul <if condition="stripos($_page_,'Index/index') nheq false">style="display:block"<elseif  condition="$_page_ eq ''"/>style="display:block"</if>>
                 <li><a href="{:U('Home/Index/index')}" <if condition="stripos($_page_,'Index/index') nheq false">class="color1"<elseif  condition="$_page_ eq ''"/>class="color1"</if>>热门推荐</a></li>
-                <li><a href="zuojiatuijian.html">人气主播</a></li>
-                <li><a href="zuojiatuijian.html">人气作家</a></li>
+                <li><a href="{:U('Home/User/book_list')}">人气主播</a></li>
+                <li><a href="{:U('Home/User/voice_index')}">人气作家</a></li>
                 <li><a href="#2">赚钱途径</a></li>
             </ul>
         </li>
