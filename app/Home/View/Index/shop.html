@@ -68,13 +68,13 @@
             <ul>
                 <foreach name="list" item="v">
                     <li>
-                        <a href="shangchengxiangqing.html"><img src="{$v.img}" alt=""></a>
+                        <a href="{:U('Home/Index/chanpin_detail',array('id'=>$v['id']))}"><img src="{$v.img}" alt=""></a>
                         <div class="right-g-i">
                             <div class="right-g-p">￥{$v.price}<span class="fr right-g-y">邮费:{$v.price}</span></div>
                             <div class="right-g-n"><a href="shangchengxiangqing.html">{$v.title}</a></div>
                             <div class="right-g-s">已售5件</div>
                             <div class="right-g-m"><a href="#2">卖家</a><span class="fr">地址</span></div>
-                            <div class="fr"><a href="#2"><i class="icon-lxmj"></i></a></div>
+                            <div class="fr"><a href="{:U('Home/Index/chanpin_detail',array('id'=>$v['id']))}"><i class="icon-lxmj"></i></a></div>
                         </div>
                     </li>
                 </foreach>
