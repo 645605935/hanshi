@@ -74,16 +74,17 @@
             </ul>
         </li>
         <li>
-            <a href="<?php echo U('Home/Index/shop');?>" class="li-a">瞰世商城</a>
+            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Index/shop') !== false): ?>cur<?php endif; ?>"></a>
             <ul>
-                <li><a href="#2"><span class="color1">在线配音</span></a></li>
+                <li><a href="<?php echo U('Home/Index/shop');?>"><span class="color1">商城首页</span></a></li>
+                <li><a href=""><span class="color1">在线配音</span></a></li>
                 <li><a href="#2">录音设备</a></li>
                 <li><a href="#2">出版图书</a></li>
                 <li><a href="#2">培训课程</a></li>
             </ul>
         </li>
         <li>         
-            <a href="<?php echo U('Home/Match/index');?>" class="li-a <?php if(stripos($_page_,'Match/index') !== false): ?>cur<?php endif; ?>">赛事活动</a>
+            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Match/index') !== false): ?>cur<?php endif; ?>">赛事活动</a>
             <ul <?php if(stripos($_page_,'Match/index') !== false): ?>style="display:block;"<?php endif; ?>>
                 <li>
                     <a href="<?php echo U('Home/Match/index');?>">
