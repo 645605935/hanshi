@@ -37,25 +37,25 @@
 <div class="nav clearfix">
     <ul>
         <li>
-            <a href="fenlei-remen.html" class="li-a">发现</a>
-            <ul>
-                <li><a href="fenlei-remen.html">热门推荐</a></li>
+            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Index/index') !== false): ?>cur<?php elseif($_page_ == ''): ?>cur<?php endif; ?>">发现</a>
+            <ul <?php if(stripos($_page_,'Index/index') !== false): ?>style="display:block"<?php elseif($_page_ == ''): ?>style="display:block"<?php endif; ?>>
+                <li><a href="<?php echo U('Home/Index/index');?>" <?php if(stripos($_page_,'Index/index') !== false): ?>class="color1"<?php elseif($_page_ == ''): ?>class="color1"<?php endif; ?>>热门推荐</a></li>
                 <li><a href="zuojiatuijian.html">人气主播</a></li>
                 <li><a href="zuojiatuijian.html">人气作家</a></li>
                 <li><a href="#2">赚钱途径</a></li>
             </ul>
         </li>
         <li>
-            <a href="<?php echo U('Home/Book/index');?>" class="li-a">书城</a>
+            <a href="javascript:;" class="li-a">书城</a>
             <ul>
-                <li><a href="tongchengjieyue.html"><span class="color1">在线借阅</span></a></li>
+                <li><a href="<?php echo U('Home/Book/index');?>"><span class="color1">在线借阅</span></a></li>
                 <li><a href="shucheng-zhuye1.html">图书购买</a></li>
                 <li><a href="shucheng-zhuye1.html">电子书</a></li>
                 <li><a href="shucheng-zhuye1.html">有声读物</a></li>
             </ul>
         </li>
         <li>
-            <a href="<?php echo U('Home/Tongchengjieyue/index');?>" class="li-a <?php if(stripos($_page_,'Tongchengjieyue/index') !== false): ?>cur<?php endif; ?>">分类清单</a>
+            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Tongchengjieyue/index') !== false): ?>cur<?php endif; ?>">分类清单</a>
             <ul <?php if(stripos($_page_,'Tongchengjieyue/index') !== false): ?>style="display:block;"<?php endif; ?>>
                 <li>
                     <a href="<?php echo U('Home/Tongchengjieyue/index');?>">
