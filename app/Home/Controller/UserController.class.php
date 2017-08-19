@@ -29,8 +29,29 @@ class UserController extends CommonController{
     }
 
     //任务库
-    public function task(){
+    public function voice_task(){
         global $user;
+
+        $this->display();
+    }
+
+    //我的样音
+    public function voice_demo_list(){
+        global $user;
+
+        $where=array();
+        $where['uid']=$user['id'];
+
+        $count      = D('VoiceDemo')->where($where)->count();
+        $Page       = new \Common\Extend\Page($count,5);
+        $nowPage = isset($_GET['p'])?$_GET['p']:1;
+        $list=D('VoiceDemo')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['time']=date('Y-m-d',$value['time']);
+        }
+
+        $this->page=$Page->show();
+        $this->list=$list;
 
         $this->display();
     }
@@ -45,7 +66,15 @@ class UserController extends CommonController{
         $this->display();
     }
 
-    
+    //修改样音
+    public function voice_demo_edit(){
+        global $user;
+
+        $this->row=M('VoiceDemo')->find($_GET['id']);
+        $this->type_1=M('Type')->where(array('pid'=>1332))->select();
+        $this->type_2=M('Type')->where(array('pid'=>1333))->select();
+        $this->display();
+    }
 
     //添加样音
     public function ajax_add_voice_demo(){
@@ -59,6 +88,34 @@ class UserController extends CommonController{
 
             $id = M('VoiceDemo')->add($data);
             if($id){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //编辑样音
+    public function ajax_edit_voice_demo(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+
+            $res = M('VoiceDemo')->save($data);
+            if($res){
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
