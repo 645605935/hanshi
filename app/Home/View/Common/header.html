@@ -64,16 +64,17 @@
             </ul>
         </li>
         <li>
-            <a href="{:U('Home/Index/shop')}" class="li-a">瞰世商城</a>
+            <a href="javascript:;" class="li-a <if condition="stripos($_page_,'Index/shop') nheq false">cur</if>"></a>
             <ul>
-                <li><a href="#2"><span class="color1">在线配音</span></a></li>
+                <li><a href="{:U('Home/Index/shop')}"><span class="color1">商城首页</span></a></li>
+                <li><a href=""><span class="color1">在线配音</span></a></li>
                 <li><a href="#2">录音设备</a></li>
                 <li><a href="#2">出版图书</a></li>
                 <li><a href="#2">培训课程</a></li>
             </ul>
         </li>
         <li>         
-            <a href="{:U('Home/Match/index')}" class="li-a <if condition="stripos($_page_,'Match/index') nheq false">cur</if>">赛事活动</a>
+            <a href="javascript:;" class="li-a <if condition="stripos($_page_,'Match/index') nheq false">cur</if>">赛事活动</a>
             <ul <if condition="stripos($_page_,'Match/index') nheq false">style="display:block;"</if>>
                 <li>
                     <a href="{:U('Home/Match/index')}">
