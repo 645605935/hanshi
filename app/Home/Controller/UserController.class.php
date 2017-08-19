@@ -13,6 +13,19 @@ class UserController extends CommonController{
         $this->user=$user;
     }
 
+    //帐号设置
+    public function setting(){
+        global $user;
+
+        $row=M('User')->find($user['id']);
+        $this->xingzuo=M('Type')->where(array('pid'=>1350))->select();
+        $this->province=M('Province')->select();
+        $this->city=M('City')->where(array('fatherid'=>$row['province']))->select();
+
+        $this->row=$row;
+        $this->display();
+    }
+
     //个人主页
     public function index(){
         global $user;
@@ -74,6 +87,55 @@ class UserController extends CommonController{
         $this->type_1=M('Type')->where(array('pid'=>1332))->select();
         $this->type_2=M('Type')->where(array('pid'=>1333))->select();
         $this->display();
+    }
+
+    public function ajax_get_city_list(){
+        $map=array();
+        if($provinceid=$_GET['provinceid']){
+            $map['fatherid']=$provinceid;
+        }
+            
+        $list = M('City')->where($map)->order('first_name desc')->select();
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='empty';
+        }
+        echo json_encode($data);
+    }
+
+    //保存设置
+    public function ajax_save_userinfo(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+
+            $res = M('User')->save($data);
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
     }
 
     //添加样音

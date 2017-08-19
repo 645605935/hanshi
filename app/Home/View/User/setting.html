@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<title>个人中心</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui-v1.0.4/layui/css/layui.css"  media="all">
+
+<style type="text/css">
+    .set_container .set_Inner{padding: 30px 8px;}
+</style>
+</head>
+<body>
+<!-- 引用 -->
+<include file="Common/header" />
+
+<div class="container">
+    <div class="con">
+        <div class="content mt20">
+            <div class="left-part">
+                
+                <!-- 引用 -->
+                <include file="_left" />
+
+            </div>
+            <div class="right-per-p set_container">
+                <div class="set_right">
+
+                  <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
+                     <div class="set_title">基本信息</div>
+                     <table class="layui-table">
+                       <tbody>
+
+                        <tr>
+                          <td class="center" colspan="2">
+                            <div class="set_Inner">
+                              <div class="personal_verify verify_mail ">
+                                <div class="personal_verify_title">邮箱验证</div>
+                                <div class="personal_verify_email">tly***342@163.com</div>
+                                <div class="personal_verify_status2">已验证</div>
+                                <div>
+                                  <a id="email_bind2" href="javascript:;">更改邮箱</a>
+                                </div>
+                              </div>
+                                <!-- 未验证时显示 -->
+                              <div class="personal_verify unverify_mail hidden ">
+                                <div class="personal_verify_title">邮箱验证</div>
+                                <div class="personal_verify_email">tly***342@163.com</div>
+                                <div class="personal_verify_status">未验证！</div>
+                                <div>
+                                  <a id="resendMail2" href="javascript:;" email="tly***342@163.com">验证</a>
+                                </div>
+                              </div>
+                              <div class="personal_verify verify_mobile ">
+                                <div class="personal_verify_title">绑定手机</div>
+                                <div class="personal_verify_mobile">138****8080</div>
+                                <div class="personal_verify_status2">已验证</div>
+                                <div><a id="phone_bind" href="javascript:;">修改手机</a></div>
+                              </div>
+                              <!-- 未绑定时显示 -->
+                              <div class="personal_verify unverify_mobile hidden ">
+                                <div class="personal_verify_title">绑定手机</div>
+                                <div class="personal_verify_mobile">138****8080</div>
+                                <div class="personal_verify_status">未绑定！</div>
+                                <div><a id="phone_bind2" href="javascript:;">绑定手机</a></div>
+                              </div>
+                              <div class="personal_verify verify_vip ">
+                                <div class="personal_verify_title">加V认证</div>
+                                <div class="personal_verify_status2">已认证</div>
+                              </div>
+                              <!-- 未认证时显示 -->
+                              <div class="personal_verify unverify_vip hidden">
+                                <div class="personal_verify_title">加V认证</div>
+                                <div class="personal_verify_status">未认证！</div>
+                                <div><a href="#2">认证</a></div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+
+                         <tr>
+                           <td class="center" colspan="2">
+                             <div class="layui-inline" style="width:100%;">
+                               <div class="layui-form-item">
+                                 <label class="layui-form-label">您的帐号</label>
+                                 <div class="layui-input-inline" style="width:315px;">
+                                      <input type="text" value="【{$row.email}】/【{$row.phone}】" class="layui-input" disabled>
+                                 </div>
+                                 <label class="layui-form-label"><a href="">修改密码</a></label>
+                                 <div class="set_personal_title is-vip" style="float:right;">加V认证&nbsp;&nbsp;
+                                   <a class="BVIcon"></a><!-- 未认证时加grey -->
+                                 </div>
+                               </div>
+                             </div>
+                           </td>
+                         </tr>
+
+                         <tr>
+                           <td class="center" colspan="2">
+                             <div class="layui-inline">
+                               <div class="layui-form-item">
+                                 <label class="layui-form-label">昵称</label>
+                                 <div class="layui-input-inline">
+                                      <input type="text" name="username" value="{$row.username}" autocomplete="off" class="layui-input username">
+                                 </div>
+                               </div>
+                             </div>
+                           </td>
+                         </tr>
+
+                         <tr>
+                           <td class="center" colspan="2">
+                             <div class="layui-inline">
+                               <div class="layui-form-item">
+                                 <label class="layui-form-label">所在地</label>
+                                 <div class="layui-input-inline">
+                                      <select name="province" class="province" lay-verify="required" lay-filter="province">
+                                            <option value="">请选择</option>
+                                            <foreach name="province" item='v'>
+                                               <option value="{$v.provinceid}" <if condition="$row['province'] eq $v['provinceid']">selected</if>>{$v.province}</option>
+                                            </foreach>
+                                      </select>
+                                 </div>
+                                 <div class="layui-input-inline">
+                                      <select name="city" class="city" lay-verify="required">
+                                            <option value="">请选择</option>
+                                            <foreach name="city" item='v'>
+                                               <option value="{$v.cityid}" <if condition="$row['city'] eq $v['cityid']">selected</if>>{$v.city}</option>
+                                            </foreach>
+                                      </select>
+                                 </div>
+                               </div>
+                             </div>
+                           </td>
+                         </tr>
+
+                         <tr>
+                           <td class="center" colspan="2">
+                             <div class="layui-inline">
+                               <div class="layui-form-item">
+                                 <label class="layui-form-label">真实姓名</label>
+                                 <div class="layui-input-inline">
+                                      <input type="text" name="truename" value="{$row.truename}" autocomplete="off" class="layui-input truename">
+                                 </div>
+                               </div>
+                             </div>
+                           </td>
+                         </tr>
+
+                         <tr>
+                           <td class="center" colspan="2">
+                             <div class="layui-inline">
+                               <div class="layui-form-item">
+                                 <label class="layui-form-label">生日</label>
+                                 <div class="layui-input-inline">
+                                      <input type="text" name="birthday" value="{$row.birthday}" id="date" lay-verify="date" placeholder="yyyy-mm-dd" autocomplete="off" class="layui-input birthday" onclick="layui.laydate({elem: this})">
+                                 </div>
+                               </div>
+                             </div>
+                           </td>
+                         </tr>
+
+                         <tr>
+                           <td class="center" colspan="2">
+                             <div class="layui-inline">
+                               <div class="layui-form-item">
+                                 <label class="layui-form-label">星座</label>
+                                 <div class="layui-input-inline">
+                                      <select name="xingzuo" class="xingzuo" lay-verify="required">
+                                            <option value="">请选择</option>
+                                            <foreach name="xingzuo" item='v'>
+                                               <option value="{$v.id}" <if condition="$row['xingzuo'] eq $v['id']">selected</if>>{$v.title}</option>
+                                            </foreach>
+                                      </select>
+                                 </div>
+                               </div>
+                             </div>
+                           </td>
+                         </tr>
+
+                         <tr>
+                           <td colspan="2">
+                             <div class="layui-inline" style="width:100%;">
+                               <div class="layui-form-item">
+                                 <label class="layui-form-label">性别</label>
+                                 <div class="layui-input-inline" style="width:75%;">
+                                      <input type="radio" name="sex" value="1" <if condition="$row['sex'] eq 1">checked</if> title="男">
+                                      <input type="radio" name="sex" value="2" <if condition="$row['sex'] eq 2">checked</if> title="女">
+                                      <input type="radio" name="sex" value="0" <if condition="$row['sex'] eq 0">checked</if> title="保密">
+                                 </div>
+                               </div>
+                             </div>
+                           </td>
+                         </tr>
+
+                         <tr>
+                           <td class="center" colspan="2">
+                             <div class="layui-form-item layui-form-text">
+                                 <label class="layui-form-label" style="width: 100%!important;text-align: left;">关于自己</label>
+                                 <div class="layui-input-block">
+                                     <textarea placeholder="请输入内容" name="remark" class="layui-textarea remark">{$row.remark}</textarea>
+                                 </div>
+                             </div>
+                           </td>
+                         </tr>
+                       </tbody>
+                       <tfoot>
+                         <tr>
+                           <td colspan="2" style="text-align:center;">
+                             <input type="hidden" name="id" lay-verify="required" value="{$row.id}" class="layui-input id" readonly>
+                             <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">保存设置</button>
+                           </td>
+                         </tr>
+                       </tfoot>
+                     </table>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+<!-- 引用 -->
+<include file="Common/footer" />
+
+<div class="popup-overlayer"></div>
+<div class="popup location fixed" id="dialog_city">
+  <div class="hd">选择您的所在地</div>
+  <div class="bd">
+    <div>
+      <a href="javascript:;" class="on">广东</a>
+      <a href="javascript:;">广东</a>
+      <a href="javascript:;">广东</a>
+    </div>
+    <div class="town content-expand">
+      <a href="javascript:;">广州</a>
+      <a href="javascript:;">深圳</a>
+      <a href="javascript:;">深圳</a>
+      <a href="javascript:;">深圳</a>
+    </div>
+  </div>
+  <div class="close3Btn"></div>
+</div>
+
+<div class="popup bindemail js-tabindex fixed">
+    <div class="hd">常用邮箱绑定</div>
+    <div class="bd">
+        <div>填写自己常用邮箱地址，方便大家联系你！</div>
+        <dl class="popup_dl">
+            <dt>邮箱地址</dt>
+            <dd>
+                <input type="text" value="">
+                <div class="error" tabindex="1">请输入正确的邮箱</div>
+            </dd>
+        </dl>
+        <div class="operate"><button class="confirmBtn" tabindex="2">立即绑定</button></div>
+    </div>
+    <div class="close3Btn"></div>
+</div>
+
+<div class="popup confirmemail fixed">
+    <div class="bd">
+        <div>我们已经发送一封验证邮件到您的账户<br><br>请访问您的邮箱：<em>aasdas@qq.com</em>，点击邮件中的链接就可以验证您的邮箱。</div>
+        <div class="confirmemailTxt">如果没有收到激活邮件：<br>· 也许邮件被您的邮箱误认为是垃圾邮件而放到垃圾箱中，请检查一下<br>· 或者，您可以<a class="js-resendEmail">点此重新发送验证邮件</a>
+        </div>
+    </div>
+    <a class="close3Btn"></a>
+</div>
+
+<div class="popup bindmobile js-tabindex fixed">
+  <div class="hd">绑定手机</div>
+  <div class="bd">
+    <div class="js-bindMobile-first">
+      <dl class="mobile">
+        <dt>手机号</dt>
+        <dd><input type="text" style="width:220px!important;" class="mobilenum " tabindex="2" value="" placeholder="请输入你的手机号码">
+        <div class="error">请输入正确的手机号码</div>
+        </dd>
+      </dl>
+      <dl class="verify" style="margin-bottom:20px;">
+        <dt>图片验证</dt>
+        <dd><input type="text" style="width:135px!important;" placeholder="请输入右边图片内容" class="verifycode" id="picverify" data-ok=""> <img width="97" height="30" style="vertical-align: middle;" alt="点击更换验证码" title="点击更换验证码" src="__PUBLIC__/Home/images/img1.jpg">
+        </dd>
+      </dl>
+      <dl class="verify">
+        <dt>短信验证</dt>
+        <dd><input type="text" style="width:135px!important;" placeholder="请输入6位数字验证码" class="verifycode" id="phoneverify"> 
+        <a class="verifycodeBtn mgl-10">获取验证码</a>
+        </dd>
+      </dl>
+      <div class="operate"><button class=" confirmBtn " tabindex="3">立即绑定</button></div>
+      </div>
+      <div class="close3Btn" dialog-role="close"></div>
+    </div>
+</div>
+<div class="popup bindmobile1 js-tabindex fixed">
+  <div class="hd">修改手机</div>
+  <div class="bd">
+    <div class="js-bindMobile-first">
+      <dl class="mobile">
+        <dt>手机号</dt>
+        <dd><input type="text" style="width:220px!important;" class="mobilenum " tabindex="2" value="" placeholder="请输入你的手机号码">
+        <div class="error">请输入正确的手机号码</div>
+        </dd>
+      </dl>
+      <dl class="verify" style="margin-bottom:20px;">
+        <dt>图片验证</dt>
+        <dd><input type="text" style="width:135px!important;" placeholder="请输入右边图片内容" class="verifycode" id="picverify" data-ok=""> <img width="97" height="30" style="vertical-align: middle;" alt="点击更换验证码" title="点击更换验证码" src="__PUBLIC__/Home/images/img1.jpg">
+        </dd>
+      </dl>
+      <dl class="verify">
+        <dt>短信验证</dt>
+        <dd><input type="text" style="width:135px!important;" placeholder="请输入6位数字验证码" class="verifycode" id="phoneverify"> 
+        <a class="verifycodeBtn mgl-10">获取验证码</a>
+        </dd>
+      </dl>
+      <div class="operate"><button class=" confirmBtn " tabindex="3">立即绑定</button></div></div>
+      <div class="close3Btn" dialog-role="close"></div>
+    </div>
+</div>
+
+<div class="popup bindemail1 js-tabindex fixed">
+  <div class="hd2"><a class="js-by-oldemail on">邮箱验证</a><a class="js-by-oldphone">手机验证</a></div>
+  <div class="bd">
+    <dl class="popup_dl js-oldemail">
+      <dt>原邮箱地址</dt>
+      <dd><input type="text" style="width:230px!important;" value="" tabindex="1">
+        <div class="error">请输入正确的邮箱</div>
+      </dd>
+    </dl>
+    <dl class="popup_dl js-oldphone hidden">
+      <dt style="text-indent: 2em;">手机号</dt>
+      <dd><input type="text" style="width:230px!important;" value="" tabindex="2"><div class="error">请输入正确的手机号码</div></dd>
+    </dl>
+    <dl class="popup_dl js-email">
+      <dt style="text-indent:1em;">邮箱地址</dt>
+      <dd><input type="text" style="width:230px!important;" value="" tabindex="3"><div class="error">请输入正确的邮箱</div></dd>
+    </dl>
+    <div class="operate"><button class="confirmBtn" tabindex="4">立即更改</button></div>
+  </div>
+
+  <div class="close3Btn" dialog-role="close"></div>
+</div>
+
+<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
+<script src="__PUBLIC__/Home/js/index.js"></script>
+</body>
+</html>
+
+
+<script>
+    //添加
+    function _ajax_add(_data){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/User/ajax_save_userinfo')}",
+             data: _data,
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     alert(json.msg);
+                     window.location.reload();
+                 }else{
+                     alert(json.msg);
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    function _ajax_get_city_select(provinceid){
+        $.ajax({  
+            async:false,
+            type:'get',  
+            contentType:"application/x-www-form-urlencoded",
+            url : "{:U('Home/User/ajax_get_city_list')}",
+            data:{
+              provinceid:provinceid
+            },
+            dataType : 'json',
+            success  : function(json) {  
+                if(json.code==0){
+                    var data=json.data;
+
+                    var str="<option value=''>请选择</option>";
+                    $.each(json.data, function(key, value) {
+                         str+="<option value='"+value.cityid+"'>"+value.city+"</option>";
+                    });
+                    $('#add_form .city').html(str);
+                    layui.form().render();
+
+                }else{
+                    layer.msg(json.msg);
+                }
+            },
+            error  : function(json) {  
+                layer.msg(json.msg);
+            }  
+        });
+    }   
+
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
+      var form = layui.form()
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+
+      //上传文件
+      layui.upload({
+         url: "{:U('Home/Index/lay_upload_file')}" //上传接口
+         ,elem: '#add_upload_file' //指定原始元素，默认直接查找class="layui-upload-file"
+         ,ext : 'mp4|mp3|wav|wma'
+         ,method: 'post' //上传接口的http类型
+         ,success: function(res){ //上传成功后的回调
+           if(res.code==0){
+              $('#add_form .voice').val(res.data.src);
+              $('#add_form .show_file_btn').show().attr('href', res.data.src);
+           }
+         }
+      });
+
+
+
+      //上传图片
+      layui.upload({
+         url: "{:U('Home/Index/lay_upload_img')}" //上传接口
+         ,elem: '#add_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
+         ,success: function(res){ //上传成功后的回调
+           if(res.code==0){
+              var str='';
+                 str+='<a href="#">'+
+                        '<img src="'+res.data.src+'">'+
+                      '</a>';
+
+              $('#add_form .image_box').html(str);
+              $('#add_form .img').val(res.data.src);
+           }
+         }
+      });
+
+      form.on('select(province)', function(data){
+          var provinceid=data.value;
+          if(provinceid){
+              _ajax_get_city_select(provinceid);
+          }
+          return false;
+      });
+
+      //监听提交
+      form.on('submit(demo1_add)', function(data){
+        var _json=_ajax_add(data.field);
+        return false;
+      });
+    });
+</script>

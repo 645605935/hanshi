@@ -425,4 +425,45 @@ $(function(){
         $(this).parents('.single-sort').find('.unedit').show();
         $(this).parents('.single-sort').find('.edit').hide();
     });
+    $('#changeNickname').click(function(){
+        $('#nickname_show,#changeNickname').hide();
+        $('#nickname').show();
+    });
+    $('#changeCity').click(function(){
+        $('.popup-overlayer,.location').show();
+    });
+    $('.close3Btn').click(function(){
+        $('.popup-overlayer,.location').hide();
+    });
+    $('#resendMail2').click(function(){
+        $('.popup-overlayer,.bindemail').show();
+    });
+    $('#email_bind2').click(function(){
+        $('.popup-overlayer,.bindemail1').show();
+    });
+    $('.close3Btn').click(function(){
+        $('.popup').hide();
+    });
+    $('.bindemail .confirmBtn').click(function(){
+        $('.popup-overlayer,.confirmemail').show();
+        $('.bindemail').hide();
+    });
+    $('#phone_bind2').click(function(){
+        $('.popup-overlayer,.bindmobile').show();
+    });
+    $('#phone_bind').click(function(){
+        $('.popup-overlayer,.bindmobile1').show();
+    });
+    $('.hd2 a').click(function(){
+        $(this).addClass('on');
+        $(this).siblings().removeClass('on');
+    });
+    $('.js-by-oldemail').click(function(){
+        $('.js-oldemail').show();
+        $('.js-oldphone').hide();
+    });
+    $('.js-by-oldphone').click(function(){
+        $('.js-oldemail').hide();
+        $('.js-oldphone').show();
+    })
 });  

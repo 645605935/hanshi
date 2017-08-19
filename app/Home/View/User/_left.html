@@ -1,0 +1,21 @@
+<?php
+    $_page_=$_SERVER['PATH_INFO'];
+?>
+
+<div class="left-top">
+    <div class="left-header"><img src="{$user.company_logo}" alt="" ></div>
+    <p class="left-name">{$user.company_name}</p>
+    <ul>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="{:U('Home/User/setting')}"><i class="icon1"></i>账号设置</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="{:U('Home/User/setting')}"><i class="icon1"></i>我的资料</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-wdbm.html"><i class="icon2"></i>我的报名</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-zptp.html"><i class="icon2"></i>作品投票</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-wdtp.html"><i class="icon2"></i>我的投票</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-wdzj.html"><i class="icon2"></i>我的足迹</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-wdpl.html"><i class="icon2"></i>我的评论</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-xgmm.html"><i class="icon2"></i>安全设置</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-xxsz.html"><i class="icon2"></i>消息设置</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-yssz.html"><i class="icon2"></i>隐私设置</a></li>
+        <li <if condition="stripos($_page_,'User/setting') nheq false">class="cur"</if>><a href="gerenzhongxin-tbsz.html"><i class="icon2"></i>同步设置</a></li>
+    </ul>
+</div>
