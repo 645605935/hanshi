@@ -74,7 +74,7 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Index/shop') !== false): ?>cur<?php endif; ?>"></a>
+            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Index/shop') !== false): ?>cur<?php endif; ?>">瞰世商城</a>
             <ul>
                 <li><a href="<?php echo U('Home/Index/shop');?>"><span class="color1">商城首页</span></a></li>
                 <li><a href=""><span class="color1">在线配音</span></a></li>
