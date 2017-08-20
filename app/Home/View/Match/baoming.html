@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<!-- 头部引用 -->
+<!-- 引用 -->
 <include file="Common/header" />
 
 <div class="container p20">
@@ -29,7 +29,7 @@
                 <div class="hd">
                     <ul>
                         <foreach name="type" item="v">
-                            <li <if condition="$v['id'] eq $row['type']">class="on"</if>><a href="fenlei-yanchu.html">{$v.title}</a></li>
+                            <li <if condition="$v['id'] eq $row['type']">class="on"</if>><a href="javascript:;">{$v.title}</a></li>
                         </foreach>
                     </ul>
                 </div>
@@ -155,7 +155,7 @@
                              </tbody>
                              <tfoot>
                                <tr>
-                                 <td colspan="2" style="text-align:right;">
+                                 <td colspan="2" style="text-align:center;">
                                    <input type="hidden" name="type" lay-verify="required" class="layui-input type" value="{$row.type}" readonly>
                                    <input type="hidden" name="file_url" lay-verify="required" class="layui-input file_url" readonly>
                                    <input type="hidden" name="images" lay-verify="required" class="layui-input images" readonly>
@@ -172,44 +172,8 @@
     </div>
 </div>
 <div class="clear"></div>
-<div id="bot">
-    <div class="bot1">
-        <div class="w1000 clear">
-            <div class="fl colorMain clear left">
-                <span class="icon-yqlj mr5 mt5 fl"></span><b class="fl">友情链接：</b>       
-            </div>
-            <div class="right">
-                <ul>
-                    <li><a href="#">足球协会</a></li>
-                    <li><a href="#">篮球协会</a></li>
-                    <li><a href="#">天津市体育局</a></li>
-                    <li><a href="#">国家体育总局</a></li>
-                    <li><a href="#">全运组委会</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="bot2">
-        <div class="w1000 marok">
-            <div class="sinak">
-                <span class="jt"></span>
-                <img src="__PUBLIC__/Home/images/erweima.jpg" class="ma">
-            </div>
-            <div class="wxk">
-                <span class="jt"></span>
-                <img src="__PUBLIC__/Home/images/erweima.jpg" class="ma">
-            </div>
-            <a href="javascript:;" class="bgsinaRed"><img src="__PUBLIC__/Home/images/xing.png" alt=""></a>
-            <a href="javascript:;" class="bgwxGreen"><img src="__PUBLIC__/Home/images/xing.png" alt=""></a>
-            <a href="index.html" class="botlogo"><img src="__PUBLIC__/Home/images/logoo.png"></a>
-        </div>
-    </div>
-    <div class="bot3">
-        <div class="w1000">
-            Tian Jin Bei Li Jian Sports Consulting Co., Ltd. ©2017 All Rights Reserved 津ICP备00000000号
-        </div>
-    </div>
-</div>
+<!-- 引用 -->
+<include file="Common/footer" />
 
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
 <script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>

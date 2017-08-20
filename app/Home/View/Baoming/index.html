@@ -20,7 +20,13 @@
     <div class="con">
         <div class="slideBox">
             <div class="hd">
-                <div class="bred"><span>参赛报名</span>><span class="now">全部</span></div>
+                <div class="bred">
+                    <span>参赛报名</span>
+                    <span>></span>
+                    <span class="now">
+                        <if condition="$_GET['type']">{$top_nav_type_info.title}<else/>全部</if>
+                    </span>
+                </div>
                 <div class="sousuo fl"><input type="text" class="ss-in" placeholder="作者/比赛项目/编号"><a href="javascript:;" class="ss-txt">搜索</a></div>
                 <div class="right-btn fr">
                     <a href="{:U('Home/Baoming/baoming',array('type'=>$type))}"><i class="icon-bm"></i>报名参赛</a>
@@ -32,7 +38,7 @@
                     <ul class="clearfix">
                         <foreach name="list" item="v">
                             <li>
-                                <a href="{:U('Home/Baoming/detail',array('id'=>$v['id']))}">
+                                <a href="{:U('Home/Baoming/detail',array('type'=>$_GET['type'], 'id'=>$v['id']))}">
                                     <img style="width:238px;height:238px;" class="img1" src="{$v.images}" alt="">
                                     <div class="info-top first">
                                         <h2>{$v.title}</h2>
@@ -52,7 +58,11 @@
                 </div>
 
                 <div class="pages">
-                    {$page}
+                    <table style="width:100%;">
+                        <tr>
+                            <td align="center">{$page}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

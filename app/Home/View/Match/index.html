@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="__PUBLIC__/Home/css/huodong.css">
 </head>
 <body>
-<!-- 头部引用 -->
+<!-- 引用 -->
 <include file="Common/header" />
 
 
@@ -54,7 +54,9 @@
                         <div class="bred">  
                             <span>赛事活动</span>
                             <span>></span>
-                            <span class="now">全部</span>
+                            <span class="now">
+                                <if condition="$_GET['type']">{$top_nav_type_info.title}<else/>全部</if>
+                            </span>
                         </div>  
                         <div class="sousuo fl"><input type="text" class="ss-in" placeholder="作者/比赛项目/编号"><a href="javascript:;" class="ss-txt">搜索</a></div>
                         <div class="clear"></div>
@@ -62,7 +64,7 @@
                             <ul class="activityList overhid">
                             <foreach name="list" item='v'>
                                 <li>
-                                    <a href="{:U('Home/Match/rule',array('id'=>$v['id']))}">
+                                    <a href="{:U('Home/Match/rule',array('type'=>$v['type'], 'id'=>$v['id']))}">
                                         <div class="imgP"><img src="{$v.img}"></div>
                                         <div class="timeCir">
                                             <p class="date b">{$v.start_time_m-d}</p>
@@ -75,8 +77,12 @@
                             </foreach>
                             </ul>
                         </div>
-                        <div class="page">
-                            {$page}
+                        <div class="pages">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td align="center">{$page}</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -87,7 +93,7 @@
 
 <div class="clear"></div>
 
-<!-- 头部引用 -->
+<!-- 引用 -->
 <include file="Common/footer" />
 
 

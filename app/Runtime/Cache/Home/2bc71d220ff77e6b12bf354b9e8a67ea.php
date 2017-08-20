@@ -14,7 +14,7 @@
 <body>
 <!-- 引用 -->
 <?php
- $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select(); $_page_=$_SERVER['PATH_INFO']; ?>
+ $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select(); $top_nav_type_info=M('Type')->find($_GET['type']); $_page_=$_SERVER['PATH_INFO']; ?>
 
 
 <div class="top-add"><a href="#4"><img src="/Public/Home/images/img3.jpg" alt=""></a></div>
@@ -95,16 +95,30 @@
         </li>
         <li>         
             <a href="<?php echo U('Home/Match/index');?>" class="li-a 
-                <?php if(stripos($_page_,'Match/') !== false): ?>cur<?php endif; ?>
+                <?php if(stripos($_page_,'Match/index') !== false): ?>cur
+                    <?php elseif(stripos($_page_,'Match/rule') !== false): ?>cur
+                    <?php elseif(stripos($_page_,'Match/baoming') !== false): ?>cur<?php endif; ?>
                     ">赛事活动</a>
-            <ul <?php if(stripos($_page_,'Match/index') !== false): ?>style="display:block;"<?php endif; ?>>
+            <ul 
+                <?php if(stripos($_page_,'Match/index') !== false): ?>style="display:block;"
+                    <?php elseif(stripos($_page_,'Match/rule') !== false): ?>style="display:block;"
+                    <?php elseif(stripos($_page_,'Match/baoming') !== false): ?>style="display:block;"<?php endif; ?>
+                >
                 <li>
-                    <a href="<?php echo U('Home/Match/index');?>" <?php if((stripos($_page_,'Match/index') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>>
+                    <a href="<?php echo U('Home/Match/index');?>" 
+                        <?php if((stripos($_page_,'Match/index') !== false) and (!$_GET['type'])): ?>class="color1"
+                            <?php elseif((stripos($_page_,'Match/rule') !== false) and (!$_GET['type'])): ?>class="color1"
+                            <?php elseif((stripos($_page_,'Match/baoming') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>
+                        >
                         全部
                     </a>
                 </li>
                 <?php if(is_array($top_nav_saishihuodong)): foreach($top_nav_saishihuodong as $key=>$v): ?><li>
-                        <a href="<?php echo U('Home/Match/index');?>" <?php if((stripos($_page_,'Match/index') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"<?php endif; ?>>
+                        <a href="<?php echo U('Home/Match/index',array('type'=>$v['id']));?>" 
+                            <?php if((stripos($_page_,'Match/index') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"
+                                <?php elseif((stripos($_page_,'Match/rule') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"
+                                <?php elseif((stripos($_page_,'Match/baoming') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"<?php endif; ?>
+                            >
                             <?php echo ($v["title"]); ?>
                         </a>
                     </li><?php endforeach; endif; ?>
@@ -112,16 +126,30 @@
         </li>
         <li>
             <a href="<?php echo U('Home/Baoming/index');?>" class="li-a 
-                <?php if(stripos($_page_,'Baoming/') !== false): ?>cur<?php endif; ?>
+                <?php if(stripos($_page_,'Baoming/index') !== false): ?>cur
+                    <?php elseif(stripos($_page_,'Baoming/detail') !== false): ?>cur
+                    <?php elseif(stripos($_page_,'Baoming/baoming') !== false): ?>cur<?php endif; ?>
                     ">参赛报名</a>
-            <ul <?php if(stripos($_page_,'Baoming/index') !== false): ?>style="display:block;"<?php endif; ?>>
+            <ul 
+                <?php if(stripos($_page_,'Baoming/index') !== false): ?>style="display:block;"
+                    <?php elseif(stripos($_page_,'Baoming/detail') !== false): ?>style="display:block;"
+                    <?php elseif(stripos($_page_,'Baoming/baoming') !== false): ?>style="display:block;"<?php endif; ?>
+                >
                 <li>
-                    <a href="<?php echo U('Home/Baoming/index');?>" <?php if((stripos($_page_,'Baoming/index') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>>
+                    <a href="<?php echo U('Home/Baoming/index');?>" 
+                        <?php if((stripos($_page_,'Baoming/index') !== false) and (!$_GET['type'])): ?>class="color1"
+                            <?php elseif((stripos($_page_,'Baoming/detail') !== false) and (!$_GET['type'])): ?>class="color1"
+                            <?php elseif((stripos($_page_,'Baoming/baoming') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>
+                        >
                         全部
                     </a>
                 </li>
                 <?php if(is_array($top_nav_saishihuodong)): foreach($top_nav_saishihuodong as $key=>$v): ?><li>
-                        <a href="<?php echo U('Home/Baoming/index');?>" <?php if((stripos($_page_,'Baoming/index') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"<?php endif; ?>>
+                        <a href="<?php echo U('Home/Baoming/index',array('type'=>$v['id']));?>" 
+                            <?php if((stripos($_page_,'Baoming/index') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"
+                                <?php elseif((stripos($_page_,'Baoming/detail') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"
+                                <?php elseif((stripos($_page_,'Baoming/baoming') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"<?php endif; ?>
+                            >
                             <?php echo ($v["title"]); ?>
                         </a>
                     </li><?php endforeach; endif; ?>
@@ -136,11 +164,11 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" class="li-a">认证</a>
+            <a href="<?php echo U('Home/User/personal_authentication');?>" class="li-a">认证</a>
             <ul>
-                <li><a href="#2"><span class="color1">个人身份认证</span></a></li>
-                <li><a href="#2">作家认证</a></li>
-                <li><a href="#2">主播认证</a></li>
+                <li><a href="<?php echo U('Home/User/personal_authentication');?>"><span class="color1">个人身份认证</span></a></li>
+                <li><a href="<?php echo U('Home/User/personal_authentication');?>">作家认证</a></li>
+                <li><a href="<?php echo U('Home/User/personal_authentication');?>">主播认证</a></li>
             </ul>
         </li>
     </ul>
@@ -148,6 +176,7 @@
         <div class="lon w1000">
             <div class="fr">
                 <?php if($user): ?><a href="<?php echo U('Home/User/book_list');?>"><?php echo ($user["username"]); ?></a>
+                    <a href="<?php echo U('Home/User/logout');?>">退出</a>
                 <?php else: ?>
                     <a href="<?php echo U('Home/User/gr_reg');?>">注册</a><span>|</span>
                     <a href="<?php echo U('Home/User/login');?>">登录</a><?php endif; ?>

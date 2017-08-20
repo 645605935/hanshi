@@ -1,5 +1,6 @@
 <?php
     $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select();
+    $top_nav_type_info=M('Type')->find($_GET['type']);
 
     $_page_=$_SERVER['PATH_INFO'];
 ?>
@@ -86,18 +87,35 @@
         </li>
         <li>         
             <a href="{:U('Home/Match/index')}" class="li-a 
-                <if condition="stripos($_page_,'Match/') nheq false">cur
+                <if condition="stripos($_page_,'Match/index') nheq false">cur
+                    <elseif  condition="stripos($_page_,'Match/rule') nheq false"/>cur
+                    <elseif  condition="stripos($_page_,'Match/baoming') nheq false"/>cur
                 </if>
                     ">赛事活动</a>
-            <ul <if condition="stripos($_page_,'Match/index') nheq false">style="display:block;"</if>>
+            <ul 
+                <if condition="stripos($_page_,'Match/index') nheq false">style="display:block;"
+                    <elseif  condition="stripos($_page_,'Match/rule') nheq false"/>style="display:block;"
+                    <elseif  condition="stripos($_page_,'Match/baoming') nheq false"/>style="display:block;"
+                </if>
+                >
                 <li>
-                    <a href="{:U('Home/Match/index')}" <if condition="(stripos($_page_,'Match/index') nheq false) and (!$_GET['type'])">class="color1"</if>>
+                    <a href="{:U('Home/Match/index')}" 
+                        <if condition="(stripos($_page_,'Match/index') nheq false) and (!$_GET['type'])">class="color1"
+                            <elseif  condition="(stripos($_page_,'Match/rule') nheq false) and (!$_GET['type'])"/>class="color1"
+                            <elseif  condition="(stripos($_page_,'Match/baoming') nheq false) and (!$_GET['type'])"/>class="color1"
+                        </if>
+                        >
                         全部
                     </a>
                 </li>
                 <foreach name="top_nav_saishihuodong" item="v">
                     <li>
-                        <a href="{:U('Home/Match/index')}" <if condition="(stripos($_page_,'Match/index') nheq false) and ($v['id'] eq $_GET['type'])">class="color1"</if>>
+                        <a href="{:U('Home/Match/index',array('type'=>$v['id']))}" 
+                            <if condition="(stripos($_page_,'Match/index') nheq false) and ($v['id'] eq $_GET['type'])">class="color1"
+                                <elseif  condition="(stripos($_page_,'Match/rule') nheq false) and ($v['id'] eq $_GET['type'])"/>class="color1"
+                                <elseif  condition="(stripos($_page_,'Match/baoming') nheq false) and ($v['id'] eq $_GET['type'])"/>class="color1"
+                            </if>
+                            >
                             {$v.title}
                         </a>
                     </li>
@@ -106,18 +124,35 @@
         </li>
         <li>
             <a href="{:U('Home/Baoming/index')}" class="li-a 
-                <if condition="stripos($_page_,'Baoming/') nheq false">cur
+                <if condition="stripos($_page_,'Baoming/index') nheq false">cur
+                    <elseif  condition="stripos($_page_,'Baoming/detail') nheq false"/>cur
+                    <elseif  condition="stripos($_page_,'Baoming/baoming') nheq false"/>cur
                 </if>
                     ">参赛报名</a>
-            <ul <if condition="stripos($_page_,'Baoming/index') nheq false">style="display:block;"</if>>
+            <ul 
+                <if condition="stripos($_page_,'Baoming/index') nheq false">style="display:block;"
+                    <elseif  condition="stripos($_page_,'Baoming/detail') nheq false"/>style="display:block;"
+                    <elseif  condition="stripos($_page_,'Baoming/baoming') nheq false"/>style="display:block;"
+                </if>
+                >
                 <li>
-                    <a href="{:U('Home/Baoming/index')}" <if condition="(stripos($_page_,'Baoming/index') nheq false) and (!$_GET['type'])">class="color1"</if>>
+                    <a href="{:U('Home/Baoming/index')}" 
+                        <if condition="(stripos($_page_,'Baoming/index') nheq false) and (!$_GET['type'])">class="color1"
+                            <elseif  condition="(stripos($_page_,'Baoming/detail') nheq false) and (!$_GET['type'])"/>class="color1"
+                            <elseif  condition="(stripos($_page_,'Baoming/baoming') nheq false) and (!$_GET['type'])"/>class="color1"
+                        </if>
+                        >
                         全部
                     </a>
                 </li>
                 <foreach name="top_nav_saishihuodong" item="v">
                     <li>
-                        <a href="{:U('Home/Baoming/index')}" <if condition="(stripos($_page_,'Baoming/index') nheq false) and ($v['id'] eq $_GET['type'])">class="color1"</if>>
+                        <a href="{:U('Home/Baoming/index',array('type'=>$v['id']))}" 
+                            <if condition="(stripos($_page_,'Baoming/index') nheq false) and ($v['id'] eq $_GET['type'])">class="color1"
+                                <elseif  condition="(stripos($_page_,'Baoming/detail') nheq false) and ($v['id'] eq $_GET['type'])"/>class="color1"
+                                <elseif  condition="(stripos($_page_,'Baoming/baoming') nheq false) and ($v['id'] eq $_GET['type'])"/>class="color1"
+                            </if>
+                            >
                             {$v.title}
                         </a>
                     </li>
@@ -133,11 +168,11 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" class="li-a">认证</a>
+            <a href="{:U('Home/User/personal_authentication')}" class="li-a">认证</a>
             <ul>
-                <li><a href="#2"><span class="color1">个人身份认证</span></a></li>
-                <li><a href="#2">作家认证</a></li>
-                <li><a href="#2">主播认证</a></li>
+                <li><a href="{:U('Home/User/personal_authentication')}"><span class="color1">个人身份认证</span></a></li>
+                <li><a href="{:U('Home/User/personal_authentication')}">作家认证</a></li>
+                <li><a href="{:U('Home/User/personal_authentication')}">主播认证</a></li>
             </ul>
         </li>
     </ul>
@@ -146,6 +181,7 @@
             <div class="fr">
                 <if condition="$user">
                     <a href="{:U('Home/User/book_list')}">{$user.username}</a>
+                    <a href="{:U('Home/User/logout')}">退出</a>
                 <else/>
                     <a href="{:U('Home/User/gr_reg')}">注册</a><span>|</span>
                     <a href="{:U('Home/User/login')}">登录</a>
