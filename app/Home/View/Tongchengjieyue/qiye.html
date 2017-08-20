@@ -33,7 +33,7 @@
                             <ul>
                                 <foreach name="hot_product" item="v">
                                     <li>
-                                        <a href="qiye1.html">
+                                        <a href="{:U('Home/Index/chanpin_detail',array('id'=>$v['id']))}">
                                             <span class="shi-img"><img src="{$v.images}" alt=""></span>
                                             <p class="m-p">{$v.title}</p>
                                             <p class="shi-pri">￥{$v.price}</p>

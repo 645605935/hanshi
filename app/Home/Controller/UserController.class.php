@@ -946,6 +946,6 @@ class UserController extends CommonController{
     // 用户登出
     public function logout() {
         session('userinfo',null);
-        $this->success('退出成功','HOme/Index/index');
+        $this->redirect('Home/Index/index');
     }   
 }
