@@ -37,11 +37,21 @@
 <div class="nav clearfix">
     <ul>
         <li>
-            <a href="<?php echo U('Home/Index/index');?>" class="li-a <?php if(stripos($_page_,'Index/index') !== false): ?>cur<?php elseif($_page_ == ''): ?>cur<?php endif; ?>">发现</a>
-            <ul <?php if(stripos($_page_,'Index/index') !== false): ?>style="display:block"<?php elseif($_page_ == ''): ?>style="display:block"<?php endif; ?>>
-                <li><a href="<?php echo U('Home/Index/index');?>" <?php if(stripos($_page_,'Index/index') !== false): ?>class="color1"<?php elseif($_page_ == ''): ?>class="color1"<?php endif; ?>>热门推荐</a></li>
-                <li><a href="<?php echo U('Home/User/voice_index');?>">人气主播</a></li>
-                <li><a href="<?php echo U('Home/User/book_list');?>">人气作家</a></li>
+            <a href="<?php echo U('Home/Index/index');?>" class="li-a 
+                <?php if(stripos($_page_,'Index/index') !== false): ?>cur
+                    <?php elseif(stripos($_page_,'User/voice_') !== false): ?>cur
+                    <?php elseif(stripos($_page_,'User/book_') !== false): ?>cur
+                    <?php elseif($_page_ == ''): ?>cur<?php endif; ?>
+                    ">发现</a>
+            <ul 
+                <?php if(stripos($_page_,'Index/index') !== false): ?>style="display:block"
+                    <?php elseif($_page_ == ''): ?>style="display:block"
+                    <?php elseif($_page_ !== 'User/voice_'): ?>style="display:block"
+                    <?php elseif($_page_ !== 'User/book_'): ?>style="display:block"<?php endif; ?>
+                >
+                <li><a <?php if(stripos($_page_,'Index/index') !== false): ?>class="color1"<?php elseif($_page_ == ''): ?>class="color1"<?php endif; ?>href="<?php echo U('Home/Index/index');?>">热门推荐</a></li>
+                <li><a <?php if(stripos($_page_,'User/voice_') !== false): ?>class="color1"<?php endif; ?> href="<?php echo U('Home/User/voice_index');?>">人气主播</a></li>
+                <li><a <?php if(stripos($_page_,'User/book_') !== false): ?>class="color1"<?php endif; ?> href="<?php echo U('Home/User/book_list');?>">人气作家</a></li>
                 <li><a href="javascript:alert('正在开发');">赚钱途径</a></li>
             </ul>
         </li>
@@ -55,22 +65,22 @@
             </ul> -->
         </li>
         <li>
-            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Tongchengjieyue/index') !== false): ?>cur<?php endif; ?>">分类清单</a>
+            <a href="<?php echo U('Home/Tongchengjieyue/index');?>" class="li-a 
+                <?php if(stripos($_page_,'Tongchengjieyue/index') !== false): ?>cur<?php endif; ?>
+                    ">分类清单</a>
             <ul <?php if(stripos($_page_,'Tongchengjieyue/index') !== false): ?>style="display:block;"<?php endif; ?>>
                 <li>
-                    <a href="<?php echo U('Home/Tongchengjieyue/index');?>">
-                        <?php if(!$_GET['type']): ?><span class="color1">同城借阅</span>
-                        <?php else: ?>
-                            同城借阅<?php endif; ?>
+                    <a href="<?php echo U('Home/Tongchengjieyue/index');?>" <?php if((stripos($_page_,'Tongchengjieyue/index') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>>
+                        同城借阅
                     </a>
                 </li>
                 <li><a href="fenlei-zhiyuanzhe.html">志愿者活动</a></li>
                 <li><a href="fenlei-remen.html">热门活动</a></li>
                 <li><a href="fenlei-chuantong.html">传统文化</a></li>
-                <li><a href="fenlei-yanchu.html">精彩演出</a></li>
+                <li><a href="<?php echo U('Home/Tongchengjieyue/yanchu');?>">精彩演出</a></li>
                 <li><a href="<?php echo U('Home/Tongchengjieyue/chanpin');?>">热卖产品</a></li>
-                <li><a href="#2">创客空间</a></li>
-                <li><a href="fenlei-kecheng.html">精品课程</a></li>
+                <li><a href="javascript:;">创客空间</a></li>
+                <li><a href="javascript:;">精品课程</a></li>
             </ul>
         </li>
         <li>
@@ -84,39 +94,33 @@
             </ul> -->
         </li>
         <li>         
-            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Match/index') !== false): ?>cur<?php endif; ?>">赛事活动</a>
+            <a href="<?php echo U('Home/Match/index');?>" class="li-a 
+                <?php if(stripos($_page_,'Match/') !== false): ?>cur<?php endif; ?>
+                    ">赛事活动</a>
             <ul <?php if(stripos($_page_,'Match/index') !== false): ?>style="display:block;"<?php endif; ?>>
                 <li>
-                    <a href="<?php echo U('Home/Match/index');?>">
-                        <?php if(!$_GET['type']): ?><span class="color1">全部</span>
-                        <?php else: ?>
-                            全部<?php endif; ?>
+                    <a href="<?php echo U('Home/Match/index');?>" <?php if((stripos($_page_,'Match/index') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>>
+                        全部
                     </a>
                 </li>
                 <?php if(is_array($top_nav_saishihuodong)): foreach($top_nav_saishihuodong as $key=>$v): ?><li>
-                        <a href="<?php echo U('Home/Match/index',array('type'=>$v['id']));?>">
-                            <?php if($v['id'] == $_GET['type']): ?><span class="color1"><?php echo ($v["title"]); ?></span>
-                            <?php else: ?>
-                                <?php echo ($v["title"]); endif; ?>
+                        <a href="<?php echo U('Home/Match/index');?>" <?php if((stripos($_page_,'Match/index') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"<?php endif; ?>>
+                            <?php echo ($v["title"]); ?>
                         </a>
                     </li><?php endforeach; endif; ?>
             </ul>
         </li>
         <li>
-            <a href="javascript:;" class="li-a <?php if(stripos($_page_,'Baoming/index') !== false): ?>cur<?php endif; ?>">参赛报名</a>
+            <a href="<?php echo U('Home/Baoming/index');?>" class="li-a <?php if(stripos($_page_,'Baoming/index') !== false): ?>cur<?php endif; ?>">参赛报名</a>
             <ul <?php if(stripos($_page_,'Baoming/index') !== false): ?>style="display:block;"<?php endif; ?>>
                 <li>
-                    <a href="<?php echo U('Home/Baoming/index');?>">
-                        <?php if(!$_GET['type']): ?><span class="color1">全部</span>
-                        <?php else: ?>
-                            全部<?php endif; ?>
+                    <a href="<?php echo U('Home/Baoming/index');?>" <?php if((stripos($_page_,'Match/index') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>>
+                        全部
                     </a>
                 </li>
                 <?php if(is_array($top_nav_saishihuodong)): foreach($top_nav_saishihuodong as $key=>$v): ?><li>
-                        <a href="<?php echo U('Home/Baoming/index',array('type'=>$v['id']));?>">
-                            <?php if($v['id'] == $_GET['type']): ?><span class="color1"><?php echo ($v["title"]); ?></span>
-                            <?php else: ?>
-                                <?php echo ($v["title"]); endif; ?>
+                        <a href="<?php echo U('Home/Baoming/index');?>" <?php if((stripos($_page_,'Baoming/index') !== false) and ($v['id'] == $_GET['type'])): ?>class="color1"<?php endif; ?>>
+                            <?php echo ($v["title"]); ?>
                         </a>
                     </li><?php endforeach; endif; ?>
             </ul>

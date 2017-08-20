@@ -1,3 +1,7 @@
+<?php
+    $_page_=$_SERVER['PATH_INFO'];
+?>
+
 <div class="bg-img-wrapper">
     <img class="bg-img" src="__PUBLIC__/Home/images/mycenter_bg_2.jpg">
     <div class="masker abs"></div>
@@ -22,19 +26,19 @@
 <div>
     <div class="tab-1 hor-1 abs tc">
         <ul>
-            <li class="item active">
+            <li class="item <if condition="stripos($_page_,'User/index') nheq false">active</if>">
                 <a href="{:U('Home/User/index')}">
                     <i class="icon4 icon4-house mgr-5"></i>
                     <span class="inl-b">个人主页</span>
                 </a>
             </li>
-            <li class="item">
+            <li class="item <if condition="stripos($_page_,'User/voice_') nheq false">active</if>">
                 <a href="{:U('Home/User/voice_index')}">
                     <i class="icon4 icon4-backstage mgr-5"></i>
                     <span class="inl-b">主播工作台</span>
                 </a>
             </li>
-            <li class="item">
+            <li class="item <if condition="stripos($_page_,'User/book_') nheq false">active</if>">
                 <a href="{:U('Home/User/book_index')}">
                     <i class="icon4 icon4-backstage mgr-5"></i>
                     <span class="inl-b">作家工作台</span>

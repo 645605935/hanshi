@@ -25,11 +25,23 @@
 <div class="nav clearfix">
     <ul>
         <li>
-            <a href="{:U('Home/Index/index')}" class="li-a <if condition="stripos($_page_,'Index/index') nheq false">cur<elseif  condition="$_page_ eq ''"/>cur</if>">发现</a>
-            <ul <if condition="stripos($_page_,'Index/index') nheq false">style="display:block"<elseif  condition="$_page_ eq ''"/>style="display:block"</if>>
-                <li><a href="{:U('Home/Index/index')}" <if condition="stripos($_page_,'Index/index') nheq false">class="color1"<elseif  condition="$_page_ eq ''"/>class="color1"</if>>热门推荐</a></li>
-                <li><a href="{:U('Home/User/voice_index')}">人气主播</a></li>
-                <li><a href="{:U('Home/User/book_list')}">人气作家</a></li>
+            <a href="{:U('Home/Index/index')}" class="li-a 
+                <if condition="stripos($_page_,'Index/index') nheq false">cur
+                    <elseif  condition="stripos($_page_,'User/voice_') nheq false"/>cur
+                    <elseif  condition="stripos($_page_,'User/book_') nheq false"/>cur
+                    <elseif  condition="$_page_ eq ''"/>cur
+                </if>
+                    ">发现</a>
+            <ul 
+                <if condition="stripos($_page_,'Index/index') nheq false">style="display:block"
+                    <elseif  condition="stripos($_page_,'User/voice_') nheq false"/>style="display:block"
+                    <elseif  condition="stripos($_page_,'User/book_') nheq false"/>style="display:block"
+                    <elseif  condition="$_page_ eq ''"/>style="display:block"
+                </if>
+                >
+                <li><a <if condition="stripos($_page_,'Index/index') nheq false">class="color1"<elseif  condition="$_page_ eq ''"/>class="color1"</if>href="{:U('Home/Index/index')}">热门推荐</a></li>
+                <li><a <if condition="stripos($_page_,'User/voice_') nheq false">class="color1"</if> href="{:U('Home/User/voice_index')}">人气主播</a></li>
+                <li><a <if condition="stripos($_page_,'User/book_') nheq false">class="color1"</if> href="{:U('Home/User/book_list')}">人气作家</a></li>
                 <li><a href="javascript:alert('正在开发');">赚钱途径</a></li>
             </ul>
         </li>
@@ -43,24 +55,23 @@
             </ul> -->
         </li>
         <li>
-            <a href="javascript:;" class="li-a <if condition="stripos($_page_,'Tongchengjieyue/index') nheq false">cur</if>">分类清单</a>
+            <a href="{:U('Home/Tongchengjieyue/index')}" class="li-a 
+                <if condition="stripos($_page_,'Tongchengjieyue/index') nheq false">cur
+                </if>
+                    ">分类清单</a>
             <ul <if condition="stripos($_page_,'Tongchengjieyue/index') nheq false">style="display:block;"</if>>
                 <li>
-                    <a href="{:U('Home/Tongchengjieyue/index')}">
-                        <if condition="!$_GET['type']">
-                            <span class="color1">同城借阅</span>
-                        <else/>
-                            同城借阅
-                        </if>
+                    <a href="{:U('Home/Tongchengjieyue/index')}" <if condition="(stripos($_page_,'Tongchengjieyue/index') nheq false) and (!$_GET['type'])">class="color1"</if>>
+                        同城借阅
                     </a>
                 </li>
                 <li><a href="fenlei-zhiyuanzhe.html">志愿者活动</a></li>
                 <li><a href="fenlei-remen.html">热门活动</a></li>
                 <li><a href="fenlei-chuantong.html">传统文化</a></li>
-                <li><a href="fenlei-yanchu.html">精彩演出</a></li>
+                <li><a href="{:U('Home/Tongchengjieyue/yanchu')}">精彩演出</a></li>
                 <li><a href="{:U('Home/Tongchengjieyue/chanpin')}">热卖产品</a></li>
-                <li><a href="#2">创客空间</a></li>
-                <li><a href="fenlei-kecheng.html">精品课程</a></li>
+                <li><a href="javascript:;">创客空间</a></li>
+                <li><a href="javascript:;">精品课程</a></li>
             </ul>
         </li>
         <li>
@@ -74,50 +85,40 @@
             </ul> -->
         </li>
         <li>         
-            <a href="javascript:;" class="li-a <if condition="stripos($_page_,'Match/index') nheq false">cur</if>">赛事活动</a>
+            <a href="{:U('Home/Match/index')}" class="li-a 
+                <if condition="stripos($_page_,'Match/') nheq false">cur
+                </if>
+                    ">赛事活动</a>
             <ul <if condition="stripos($_page_,'Match/index') nheq false">style="display:block;"</if>>
                 <li>
-                    <a href="{:U('Home/Match/index')}">
-                        <if condition="!$_GET['type']">
-                            <span class="color1">全部</span>
-                        <else/>
-                            全部
-                        </if>
+                    <a href="{:U('Home/Match/index')}" <if condition="(stripos($_page_,'Match/index') nheq false) and (!$_GET['type'])">class="color1"</if>>
+                        全部
                     </a>
                 </li>
                 <foreach name="top_nav_saishihuodong" item="v">
                     <li>
-                        <a href="{:U('Home/Match/index',array('type'=>$v['id']))}">
-                            <if condition="$v['id'] eq $_GET['type']">
-                                <span class="color1">{$v.title}</span>
-                            <else/>
-                                {$v.title}
-                            </if>
+                        <a href="{:U('Home/Match/index')}" <if condition="(stripos($_page_,'Match/index') nheq false) and ($v['id'] eq $_GET['type'])">class="color1"</if>>
+                            {$v.title}
                         </a>
                     </li>
                 </foreach>
             </ul>
         </li>
         <li>
-            <a href="javascript:;" class="li-a <if condition="stripos($_page_,'Baoming/index') nheq false">cur</if>">参赛报名</a>
+            <a href="{:U('Home/Baoming/index')}" class="li-a 
+                <if condition="stripos($_page_,'Baoming/') nheq false">cur
+                </if>
+                    ">参赛报名</a>
             <ul <if condition="stripos($_page_,'Baoming/index') nheq false">style="display:block;"</if>>
                 <li>
-                    <a href="{:U('Home/Baoming/index')}">
-                        <if condition="!$_GET['type']">
-                            <span class="color1">全部</span>
-                        <else/>
-                            全部
-                        </if>
+                    <a href="{:U('Home/Baoming/index')}" <if condition="(stripos($_page_,'Baoming/index') nheq false) and (!$_GET['type'])">class="color1"</if>>
+                        全部
                     </a>
                 </li>
                 <foreach name="top_nav_saishihuodong" item="v">
                     <li>
-                        <a href="{:U('Home/Baoming/index',array('type'=>$v['id']))}">
-                            <if condition="$v['id'] eq $_GET['type']">
-                                <span class="color1">{$v.title}</span>
-                            <else/>
-                                {$v.title}
-                            </if>
+                        <a href="{:U('Home/Baoming/index')}" <if condition="(stripos($_page_,'Baoming/index') nheq false) and ($v['id'] eq $_GET['type'])">class="color1"</if>>
+                            {$v.title}
                         </a>
                     </li>
                 </foreach>
