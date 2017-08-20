@@ -45,9 +45,9 @@
                     ">发现</a>
             <ul 
                 <?php if(stripos($_page_,'Index/index') !== false): ?>style="display:block"
-                    <?php elseif($_page_ == ''): ?>style="display:block"
-                    <?php elseif($_page_ !== 'User/voice_'): ?>style="display:block"
-                    <?php elseif($_page_ !== 'User/book_'): ?>style="display:block"<?php endif; ?>
+                    <?php elseif(stripos($_page_,'User/voice_') !== false): ?>style="display:block"
+                    <?php elseif(stripos($_page_,'User/book_') !== false): ?>style="display:block"
+                    <?php elseif($_page_ == ''): ?>style="display:block"<?php endif; ?>
                 >
                 <li><a <?php if(stripos($_page_,'Index/index') !== false): ?>class="color1"<?php elseif($_page_ == ''): ?>class="color1"<?php endif; ?>href="<?php echo U('Home/Index/index');?>">热门推荐</a></li>
                 <li><a <?php if(stripos($_page_,'User/voice_') !== false): ?>class="color1"<?php endif; ?> href="<?php echo U('Home/User/voice_index');?>">人气主播</a></li>
@@ -111,10 +111,12 @@
             </ul>
         </li>
         <li>
-            <a href="<?php echo U('Home/Baoming/index');?>" class="li-a <?php if(stripos($_page_,'Baoming/index') !== false): ?>cur<?php endif; ?>">参赛报名</a>
+            <a href="<?php echo U('Home/Baoming/index');?>" class="li-a 
+                <?php if(stripos($_page_,'Baoming/') !== false): ?>cur<?php endif; ?>
+                    ">参赛报名</a>
             <ul <?php if(stripos($_page_,'Baoming/index') !== false): ?>style="display:block;"<?php endif; ?>>
                 <li>
-                    <a href="<?php echo U('Home/Baoming/index');?>" <?php if((stripos($_page_,'Match/index') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>>
+                    <a href="<?php echo U('Home/Baoming/index');?>" <?php if((stripos($_page_,'Baoming/index') !== false) and (!$_GET['type'])): ?>class="color1"<?php endif; ?>>
                         全部
                     </a>
                 </li>
