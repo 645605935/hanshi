@@ -22,7 +22,7 @@
                             <span><a href="{:U('Home/User/login',array('qy'=>1))}">企业</a></span></li>
                     </ul>
                 </div>
-                <form action="{:U('Home/User/login')}" method="post">
+                <form action="{:U('Admin/Login/index')}" method="post">
                     <div id="bottom">
                        
                         <div class="name">
@@ -30,23 +30,23 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </span>
-                                <input type="text" class="form-control username" placeholder="用户名/手机号"></label>
+                                <input type="text" name="username" class="form-control username" placeholder="用户名/手机号"></label>
                                 
                             <label class="input-group pwd">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock"></span>
                                 </span>
-                                <input type="password" class="form-control password" /></label>
+                                <input type="password" name="password" class="form-control password" /></label>
                                 
                                 <if condition="$_GET['gr'] eq 1">
                                     <input type="hidden" name="gid" class="form-control gid" value="44" />
                                     <button type="button" class="btn btn-info login_button">【个人】登陆</button>
                                 <elseif condition="$_GET['zf'] eq 1" />
                                     <input type="hidden" name="gid" class="form-control gid" value="33" />
-                                    <button type="button" class="btn btn-info login_button">【政府】登陆</button>
+                                    <button type="submit" class="btn btn-info">【政府】登陆</button>
                                 <elseif condition="$_GET['qy'] eq 1" />
                                     <input type="hidden" name="gid" class="form-control gid" value="22" />
-                                    <button type="button" class="btn btn-info login_button">【企业】登陆</button>
+                                    <button type="submit" class="btn btn-info">【企业】登陆</button>
                                 </if>
                             
                                 <label class="a_pwd">

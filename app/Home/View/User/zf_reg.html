@@ -231,7 +231,7 @@
              success  : function(json) {
                  if(json.code==0){
                      layer.msg('用户名已存在');
-                     $('.username').val('');
+                     $('.username').focus();
                  }
              },
              error  : function() {  
