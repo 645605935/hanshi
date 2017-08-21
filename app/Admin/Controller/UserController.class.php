@@ -82,6 +82,11 @@ class UserController extends AuthController {
 
     //会员列表
     public function ajax_get_user_list(){
+        global $user;
+        $config=M('Config')->find(1);
+        $_oss_url_='http://'.$config['oss_url'].'/';
+        $_oss_style_48x48_=$config['oss_style_50x50'];
+        
         $map=array();
         if($_GET['username']){
             $map['username']=array('like','%'.$_GET['username'].'%');
@@ -95,16 +100,11 @@ class UserController extends AuthController {
         $d = D('User');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
 
-
-            
-        $config=M('Config')->find(1);
-        $_oss_url_='http://'.$config['oss_url'].'/';
-        $_oss_style_48x48_=$config['oss_style_48x48'];
+        
         foreach ($list as $key => $value) {
             $list[$key]['register_time']=date('Y-m-d',$value['register_time']);
             $list[$key]['img']=$_oss_url_ . $value['img']. "?x-oss-process=" . $_oss_style_48x48_;
         }
-
 
         if($list){
             $data=array();

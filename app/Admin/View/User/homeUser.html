@@ -382,6 +382,15 @@
       });
 
       //自定义报警列格式
+      function statusFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue == "1"){
+              return '<button class="btn btn-primary btn-xs">正常</button>';
+          }else{
+              return '<button class="btn btn-danger btn-xs">禁止</button>';
+          }
+      }
+
+      //自定义报警列格式
       function imgFormatter(cellvalue, options, rowdata){ 
           if (cellvalue != "0"){
               return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
@@ -400,14 +409,15 @@
           caption: "用户列表",
           data: grid_data,
           datatype: "local",
-          colNames:['id', '姓名', '用户名','用户组', '头像', '注册时间', '操作'],
+          colNames:['id', '姓名', '用户名','用户组', '头像', '状态', '注册时间', '操作'],
           colModel:[
             {name:'id', index:'id', sorttype:"int", align:"center", hidden: true},
 
-            {name:'truename',index:'truename',align:"center"},
+            {name:'truename',index:'truename',align:"center",hidden: true},
             {name:'username',index:'username',align:"center"},
             {name:'_auth_group_title',index:'_auth_group_title',align:"center"},
             {name:'img',index:'img',align:"center", formatter: imgFormatter },
+            {name:'status',index:'status',align:"center", formatter: statusFormatter },
             {name:'time',index:'time',align:"center",hidden: true},
 
             {name:'operates',index:'operates',align:'center',sortable:false,width:200}
@@ -422,7 +432,7 @@
           pager : pager_selector,
           altRows: true,
           width:'100%',
-          height: 700,
+          height: 450,
           multiselect: false,
           multiboxonly: true,
           sortable: true,
@@ -1047,7 +1057,17 @@
                             </div>
                           </td>
                           <td>
-                           
+                            <div class="layui-inline">
+                              <div class="layui-form-item">
+                                <label class="layui-form-label">状态</label>
+                                <div class="layui-input-inline">
+                                  <select name="status" id="status_select">
+                                    <option value="0">禁止</option>
+                                    <option value="1">正常</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
                           </td>
                         </tr>
                       </tbody>
@@ -1111,6 +1131,14 @@
 
                   if(_user.gid>0){
                       $('#edit_select_group option[value='+_user.gid+']').attr('selected',true);
+                  }
+
+                  if(_user.status==1){
+                      $('#status_select option[value=1]').attr('selected',true);
+                      $('#status_select option[value=0]').removeAttr('selected');
+                  }else{
+                      $('#status_select option[value=0]').attr('selected',true);
+                      $('#status_select option[value=1]').removeAttr('selected');
                   }
 
                   var form = layui.form();
