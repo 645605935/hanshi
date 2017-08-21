@@ -142,7 +142,7 @@ class AuthManagerController extends AuthController{
 
                 $this->success('权限编辑成功',U('Admin/AuthManager/index'));
             }else{
-                $this->error('权限编辑成功'); 
+                $this->success('权限编辑成功',U('Admin/AuthManager/index'));
             }
         }else{
             $group_id=I('id');
