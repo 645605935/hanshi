@@ -913,7 +913,7 @@ class UserController extends CommonController{
     }
 
     public function login(){
-        if(!$_GET['gr']||$_GET['zf']||$_GET['qy']){
+        if(!$_GET['gr']&&!$_GET['zf']&&!$_GET['qy']){
             $this->redirect('Home/User/login', array('gr' => 1));
         }else{
             $this->display();
@@ -923,11 +923,16 @@ class UserController extends CommonController{
     public function ajax_login(){
         if($_POST){
             $where=array();
+            $where['gid']=$_POST['gid'];
             $where['username']=$_POST['username'];
             $where['password']=md5($_POST['password']);
 
             $row=M('User')->where($where)->find();
-            if($row){
+            if($row && $row['status']==0){
+                $data=array();
+                $data['code']=1;
+                $data['msg']='请审核通过后再登录';
+            }elseif($row && $row['status']==1){
                 session('userinfo',$row);
 
                 $data=array();
@@ -935,10 +940,28 @@ class UserController extends CommonController{
                 $data['msg']='登录成功';
             }else{
                 $data=array();
-                $data['code']=1;
-                $data['msg']='登录失败';
+                $data['code']=2;
+                $data['msg']='用户名或密码不存在';
             }
+            echo json_encode($data);
+        }
+    }
 
+    public function ajax_check_username_exist(){
+        if($_POST){
+            $where=array();
+            $where['username']=$_POST['username'];
+
+            $row=M('User')->where($where)->find();
+            if($row){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='存在！';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='用户名不存在！';
+            }
             echo json_encode($data);
         }
     }

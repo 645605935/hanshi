@@ -6,10 +6,8 @@
     </head>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/re/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/re/bootstrap/css/bootstrap-theme.css" />
-    <script type="text/javascript" src="__PUBLIC__/Home/re/js/jquery.min.js"></script>
-    <script type="text/javascript" src="__PUBLIC__/Home/re/bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" href="__PUBLIC__/Home/re/css/test.css" />
-    
+    <link rel="stylesheet" href="__PUBLIC__/Admin/layui-v1.0.4/layui/css/layui.css"  media="all">
     <body>
         <div class="body">
             <div class="title"></div>
@@ -32,14 +30,26 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </span>
-                                <input type="text" class="form-control Username" placeholder="用户名/手机号"></label>
+                                <input type="text" class="form-control username" placeholder="用户名/手机号"></label>
+                                
                             <label class="input-group pwd">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-lock"></span>
                                 </span>
                                 <input type="password" class="form-control password" /></label>
-                            <button type="button" class="btn btn-info login_button">登陆</button>
-                            <label class="a_pwd">
+                                
+                                <if condition="$_GET['gr'] eq 1">
+                                    <input type="hidden" name="gid" class="form-control gid" value="44" />
+                                    <button type="button" class="btn btn-info login_button">【个人】登陆</button>
+                                <elseif condition="$_GET['zf'] eq 1" />
+                                    <input type="hidden" name="gid" class="form-control gid" value="33" />
+                                    <button type="button" class="btn btn-info login_button">【政府】登陆</button>
+                                <elseif condition="$_GET['qy'] eq 1" />
+                                    <input type="hidden" name="gid" class="form-control gid" value="22" />
+                                    <button type="button" class="btn btn-info login_button">【企业】登陆</button>
+                                </if>
+                            
+                                <label class="a_pwd">
                                 <a>忘记密码</a>
                                 <if condition="$_GET['gr'] eq 1">
                                     <a href="{:U('Home/User/gr_reg')}">免费注册</a></label>
@@ -57,21 +67,59 @@
     </body>
 
 </html>
-<script>$(function() {
+<script type="text/javascript" src="__PUBLIC__/Home/re/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Home/re/bootstrap/js/bootstrap.js"></script>
+<script src="__PUBLIC__/layer/layer.js"></script>
+<script>
+    $(function() {
         // $("#ul1 li").click(function() {
         //     $(this).addClass("li1").siblings().removeClass("li1");
         //     $("#bottom div").eq($(this).index()).show().siblings().hide();
         // })
 
         $('.login_button').click(function(){
-            var username=$('.Username').val();
+            var gid=$('.gid').val();
+            var username=$('.username').val();
             var password=$('.password').val();
-            if(username&&password){
-                _ajax_login(username, password);
+            if(gid && username && password){
+                _ajax_login(gid, username, password);
             }
         });
 
-        function _ajax_login(username, password){
+        $('.username').blur(function(){
+            var username=$('.username').val();
+            if(username){
+                _ajax_check_username_exist(username);
+            }
+        });
+
+        function _ajax_check_username_exist(username){
+             var _json;
+             $.ajax({  
+                 async:false,
+                 type:'post',  
+                 contentType:"application/x-www-form-urlencoded",
+                 url : "{:U('Home/User/ajax_check_username_exist')}",
+                 data: {
+                    username:username
+                 },
+                 dataType : 'json',
+                 success  : function(json) {
+                     if(json.code==0){
+                         // alert(json.msg);
+                     }else{
+                         layer.msg(json.msg);
+                         $('.username').val('');
+                     }
+                 },
+                 error  : function() {  
+                     alert('error');
+                 }  
+             }); 
+             return _json;
+        }
+
+        function _ajax_login(gid, username, password){
              var _json;
              $.ajax({  
                  async:false,
@@ -79,6 +127,7 @@
                  contentType:"application/x-www-form-urlencoded",
                  url : "{:U('Home/User/ajax_login')}",
                  data: {
+                    gid:gid,
                     username:username,
                     password:password
                  },
@@ -96,4 +145,5 @@
              }); 
              return _json;
         }
-    })</script>
+    })
+</script>

@@ -41,7 +41,7 @@
                        <div class="layui-form-item">
                          <label class="layui-form-label left_label">用户名</label>
                          <div class="layui-input-inline">
-                            <input type="text" name="username" lay-verify="required" autocomplete="off" placeholder="" class="layui-input username">
+                            <input type="text" name="username" lay-verify="username" autocomplete="off" placeholder="" class="layui-input username">
                          </div>
                          <label class="layui-form-label right_label">* 6位以上英文字母或数字组成</label>
                        </div>
@@ -55,7 +55,7 @@
                          <div class="layui-form-item">
                            <label class="layui-form-label left_label">电子邮箱</label>
                            <div class="layui-input-inline">
-                              <input type="text" name="email" lay-verify="required" autocomplete="off" placeholder="" class="layui-input email">
+                              <input type="text" name="email" lay-verify="email" autocomplete="off" placeholder="" class="layui-input email">
                            </div>
                            <label class="layui-form-label right_label">* 用于密码找回及登录</label>
                          </div>
@@ -69,7 +69,7 @@
                           <div class="layui-form-item">
                             <label class="layui-form-label left_label">手机号</label>
                             <div class="layui-input-inline">
-                               <input type="text" name="phone" lay-verify="required" autocomplete="off" placeholder="" class="layui-input phone">
+                               <input type="text" name="phone" lay-verify="phone" autocomplete="off" placeholder="" class="layui-input phone">
                             </div>
                             <label class="layui-form-label right_label">* 用于密码找回及登录</label>
                           </div>
@@ -83,7 +83,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label left_label">密码</label>
                           <div class="layui-input-inline">
-                             <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="" class="layui-input password">
+                             <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="" class="layui-input password">
                           </div>
                           <label class="layui-form-label right_label">* 英文字母或数字组成</label>
                         </div>
@@ -97,7 +97,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label left_label">确认密码</label>
                           <div class="layui-input-inline">
-                             <input type="password" name="repassword" lay-verify="required" autocomplete="off" placeholder="" class="layui-input repassword">
+                             <input type="password" name="repassword" lay-verify="repassword" autocomplete="off" placeholder="" class="layui-input repassword">
                           </div>
                           <label class="layui-form-label right_label">* 请再次确认密码</label>
                         </div>
@@ -106,11 +106,11 @@
                 </tr>
 
                 <tr>
-                  <td colspan="2">
+                  <td colspan="2" align="center">
                      <div class="layui-inline">
                         <div class="layui-form-item">
-                          <div class="layui-input-inline">
-                             <input type="checkbox" name="agree" lay-verify="required" lay-skin="primary" title="我已经仔细阅读并接受" checked=""  lay-ignore>
+                          <div class="layui-input-inline" style="width:200px;">
+                             <input type="checkbox" name="agree" lay-verify="required" lay-skin="primary" title="我已经仔细阅读并接受" checked="">
                           </div>
                           <label class="layui-form-label right_label">《服务协议》</label>
                         </div>
@@ -135,8 +135,41 @@
 </body>
 </html>
 
-
+<script type="text/javascript">
+    $(function(){
+        $('.username').blur(function(){
+            var username=$('.username').val();
+            if(username){
+                _ajax_check_username_exist(username);
+            }
+        });
+    });
+</script>
 <script>
+    function _ajax_check_username_exist(username){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/User/ajax_check_username_exist')}",
+             data: {
+                username:username
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     layer.msg('用户名已存在');
+                     $('.username').val('');
+                 }
+             },
+             error  : function() {  
+                 alert('error');
+             }  
+         }); 
+         return _json;
+    }
+
     //添加
     function _ajax_reg(_data){
          var _json;
@@ -162,7 +195,8 @@
          return _json;
     }
 
-    layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
+    layui.use(['form', 'layedit', 'laydate', 'upload', 'jquery'], function(){
+      var $ = layui.jquery;
       var form = layui.form()
       ,layer = layui.layer
       ,layedit = layui.layedit
@@ -170,14 +204,21 @@
 
       //自定义验证规则
       form.verify({
-        title: function(value){
+        username: function(value){
           if(value.length < 5){
-            return '标题至少得5个字符啊';
+            return '用户名至少6个字符';
           }
         }
-        ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+        ,password: [/(.+){6,12}$/, '密码必须6到12位']
         ,content: function(value){
           layedit.sync(editIndex);
+        }
+        ,repassword: function(value) {
+          //获取密码
+          var password = $(".password").val();
+          if(!new RegExp(password).test(value)) {
+              return '两次输入的密码不一致';
+          }
         }
       });
 
