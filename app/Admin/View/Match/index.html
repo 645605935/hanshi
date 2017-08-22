@@ -511,6 +511,24 @@
                     </td>
                   </tr>
 
+                  <tr>
+                    <td colspan="2">
+
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">是否推存</label>
+                          <div class="layui-input-inline">
+                            <select name="recommend" class="recommend">
+                               <option value="0">不推存</option>
+                               <option value="1">推存</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div> 
+
+                    </td>
+                  </tr>
+
                  
                   <tr>
                     <td class="center" colspan="2">
@@ -720,6 +738,14 @@
                           }
                       });
 
+                      if(data.recommend==1){
+                          $('#edit_form .recommend option[value=1]').attr('selected', true);
+                          $('#edit_form .recommend option[value=0]').removeAttr('selected');
+                      }else{
+                          $('#edit_form .recommend option[value=0]').attr('selected', true);
+                          $('#edit_form .recommend option[value=1]').removeAttr('selected');
+                      }
+
 
                       $('#edit_form .content').val(data.content);
 
@@ -819,7 +845,6 @@
           return _json;
       }
 
-
       function imgFormatter(cellvalue, options, rowdata){ 
           if (cellvalue){
               return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
@@ -830,13 +855,22 @@
       }
 
 
+      function recommendFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue==1){
+              return '推荐';
+          }else{
+              return "";
+          }
+      }
+
+
       function init_grid_table(grid_data){
           $(grid_selector).jqGrid({
               caption: "列表",
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '比赛名称','比赛图片','比赛类型','开始日期','结束日期','点击量','操作'],
+              colNames:['id', '比赛名称','比赛图片','比赛类型','开始日期','结束日期','点击量','推荐','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
@@ -846,6 +880,7 @@
                 {name:'start_time',index:'start_time', align : "center"},
                 {name:'end_time',index:'end_time', align : "center"},
                 {name:'eye',index:'eye', align : "center"},
+                {name:'recommend',index:'recommend', align : "center", formatter: recommendFormatter},
 
                 {name:'options',index:'options',align:'center',width:200}
               ], 

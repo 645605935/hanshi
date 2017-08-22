@@ -10,6 +10,8 @@ class MatchController extends CommonController{
         global $user;
         $user=session('userinfo');
         $this->user=$user;
+
+
     }
 
     public function index(){
@@ -34,8 +36,14 @@ class MatchController extends CommonController{
             $list[$key]['start_time_m_d']=date('m-d', $value['start_time']);
         }
 
+        //recommmend
+        $recommmend=M('Match')->where(array('recommmend'=>1))->find();
+        $left_company_info=M('Config')->find(1);
+
         $this->page=$Page->show();
         $this->list=$list;
+        $this->recommmend=$recommmend;
+        $this->left_company_info=$left_company_info;
         $this->display();
     }
 

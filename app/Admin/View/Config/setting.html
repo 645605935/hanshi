@@ -109,6 +109,7 @@
 								  <ul class="layui-tab-title">
 								    <li class="layui-this">网站设置</li>
 								    <li>图片样式</li>
+								    <li>公司信息</li>
 								  </ul>
 								  <div class="layui-tab-content">
 								    <div class="layui-tab-item layui-show">
@@ -253,6 +254,67 @@
 									            </tr>
 
 									            
+									          </tbody>
+
+									          <tfoot>
+									            <tr>
+									              <td colspan="3">
+									              		<input type="hidden" value="1" name="id">
+						              					<button class="btn btn-info" type="submit">
+					              		              		<i class="icon-ok bigger-110"></i>
+					              		              		保存
+					              		              	</button>
+					              		              	<button class="btn" type="reset">
+					              		              		<i class="icon-undo bigger-110"></i>
+					              		              		重置
+					              		              	</button>
+									              </td>
+									            </tr> 
+									          </tfoot>
+									        </table>
+								        </form>
+								    </div>
+								    <div class="layui-tab-item">
+								    	<form action="{:U('Admin/Config/setting')}" class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+									      	<table class="layui-table">
+									          <colgroup>
+									            <col width="150">
+									            <col>
+									            <col>
+									          </colgroup>
+									          
+									          <tbody>
+									          	<tr>
+									              <td>客服电话</td>
+									              <td>
+									              	<input type="text" id="form-field-1" name="phone" value="{$config['phone']}" placeholder="phone" class="col-xs-10 col-sm-5" />
+									              </td>
+									              <td></td>
+									            </tr>
+
+									            <tr>
+									              <td>企业QQ</td>
+									              <td>
+									              	<input type="text" id="form-field-1" name="qq" value="{$config['qq']}" placeholder="qq" class="col-xs-10 col-sm-5" />
+									              </td>
+									              <td></td>
+									            </tr>
+
+									            <tr>
+									              <td>电子邮箱</td>
+									              <td>
+									              	<input type="text" id="form-field-1" name="email" value="{$config['email']}" placeholder="email" class="col-xs-10 col-sm-5" />
+									              </td>
+									              <td></td>
+									            </tr>
+
+									            <tr>
+									              <td>地址</td>
+									              <td>
+									              	<input type="text" id="form-field-1" name="address" value="{$config['address']}" placeholder="address" class="col-xs-10 col-sm-5" />
+									              </td>
+									              <td></td>
+									            </tr>
 									          </tbody>
 
 									          <tfoot>
