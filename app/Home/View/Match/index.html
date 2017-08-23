@@ -58,7 +58,13 @@
                                 <if condition="$_GET['type']">{$top_nav_type_info.title}<else/>全部</if>
                             </span>
                         </div>  
-                        <div class="sousuo fl"><input type="text" class="ss-in" placeholder="作者/比赛项目/编号"><a href="javascript:;" class="ss-txt">搜索</a></div>
+                        <div class="sousuo fl">
+                            <form action="" method="get">
+                                <input type="text" name="title" class="ss-in" placeholder="比赛项目">
+                                <input type="hidden" name="type" class="ss-in" value="{$_GET['type']}">
+                                <button type="submit" class="ss-txt">搜索</button>
+                            </form>
+                        </div>
                         <div class="clear"></div>
                         <div class="neirong">
                             <ul class="activityList overhid">

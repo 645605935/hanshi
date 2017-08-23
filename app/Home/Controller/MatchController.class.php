@@ -20,6 +20,9 @@ class MatchController extends CommonController{
         if($type=$_GET['type']){
             $where['type']=$type;
         }
+        if($title=$_GET['title']){
+            $where['title']=array('like', '%'.$_GET['title'].'%');
+        }
 
         $count      = M('Match')->where($where)->count();
         $Page       = new \Common\Extend\Page($count,6);
