@@ -876,6 +876,12 @@ class UserController extends CommonController{
             $data['password']=md5($_POST['password']);
             $data['time']=time();
 
+            if($_POST['gid']==44){
+                $data['status']=1;
+            }else{
+                $data['status']=0;
+            }
+
             $id=M('User')->add($data);
             if($id){
                 $row=M('User')->find($id);
@@ -921,7 +927,7 @@ class UserController extends CommonController{
     }
 
     public function ajax_login(){
-        if($_POST){
+        if($_POST['gid']==44){
             $where=array();
             $where['gid']=$_POST['gid'];
             $where['username']=$_POST['username'];
@@ -943,8 +949,13 @@ class UserController extends CommonController{
                 $data['code']=2;
                 $data['msg']='用户名或密码不存在';
             }
-            echo json_encode($data);
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='您不属于个人用户！';
         }
+
+        echo json_encode($data);
     }
 
     public function ajax_check_username_exist(){
