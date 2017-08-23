@@ -30,6 +30,8 @@
 
   <ul class="nav nav-list">
 
+
+
 <?php if( name_to_status('Config') == 1 && $user['gid']==427 || in_array('Config', $user['auth_controller_names'])){ ?>
     <li <if condition="$cur_c eq 'Config'">class="active open"</if> style="display:none;">
       <a href="#" class="dropdown-toggle">
@@ -43,6 +45,25 @@
           <a href="{:U('Admin/Config/setting')}" page="Admin/Config/setting" title="setting" data-title="网站设置">
             <i class="icon-double-angle-right"></i>
             网站设置
+          </a>
+        </li>
+      </ul>
+    </li>
+<?php } ?>
+
+<?php if( name_to_status('Ad') == 1 && $user['gid']==427 || in_array('Ad', $user['auth_controller_names'])){ ?>
+    <li <if condition="$cur_c eq 'Ad'">class="active open"</if>>
+      <a href="#" class="dropdown-toggle">
+        <i class="icon-film"></i>
+        <span class="menu-text"> 广告设置 </span>
+        <b class="arrow icon-angle-down"></b>
+      </a>
+
+      <ul class="submenu">
+        <li <if condition="$cur_v eq 'Ad-index'">class="active"</if>>
+          <a href="{:U('Admin/Ad/index')}" page="Admin/Ad/index" title="index" data-title="广告设置">
+            <i class="icon-double-angle-right"></i>
+            广告设置
           </a>
         </li>
       </ul>
