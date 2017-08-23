@@ -72,8 +72,11 @@ class BaomingController extends CommonController{
             $where['type']=array('in', $arrs);
             $match=M('Match')->where($where)->select();
         }
+
+        $types=M('Type')->where(array('pid'=>1283))->select();
         
         $this->type=$type;
+        $this->types=$types;
         $this->match=$match;
         $this->display();
     }

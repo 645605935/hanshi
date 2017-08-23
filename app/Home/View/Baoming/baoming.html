@@ -28,8 +28,8 @@
             <div class="slideBox">
                 <div class="hd">
                     <ul>
-                        <foreach name="type" item="v">
-                            <li <if condition="$v['id'] eq $row['type']">class="on"</if>><a href="fenlei-yanchu.html">{$v.title}</a></li>
+                        <foreach name="types" item="v">
+                            <li <if condition="$type eq $v['id']">class="on"</if>><a href="{:U('Home/Baoming/baoming',array('type'=>$v['id']))}">{$v.title}</a></li>
                         </foreach>
                     </ul>
                 </div>
