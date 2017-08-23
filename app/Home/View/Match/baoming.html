@@ -194,7 +194,7 @@
              success  : function(json) {
                  if(json.code==0){
                      alert(json.msg);
-                     window.location.reload();
+                     window.location.href="{:U('Home/Baoming/index')}";
                  }else{
                      alert(json.msg);
                  }
