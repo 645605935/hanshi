@@ -82,39 +82,63 @@ class BaomingController extends CommonController{
 
     public function ajax_vote(){
         // echo get_client_ip();die;
+        $t = time();
+        $_start_ = mktime(0,0,0,date("m",$t),date("d",$t),date("Y",$t));
+        $_end_ = mktime(23,59,59,date("m",$t),date("d",$t),date("Y",$t));
+
         global $user;
 
         $id=$_GET['id'];
-        if($id&&$user){
-            $votelog=M('Votelog')->where(array('uid'=>$user['id'],'bid'=>$id))->find();
-            if($votelog){
-                $data=array();
-                $data['code']=1;
-                $data['msg']='您已投过！';
-            }else{
+        $mid=$_GET['mid'];
+        $type=$_GET['type'];
+        if($user){
+            //一个比赛有好多人报名
+            //每一比赛的每个人每天最多可以投五个报名
+            $where=array();
+            $where['time']=array('between',array($_start_, $_end_));
+            $where['mid']=$mid;
+            $where['uid']=$user['id'];
+            $count=M('Votelog')->where($where)->count();
+
+            if($count<5){
                 $where=array();
-                $where['id']=$id;
-
-
-                $data=array();
-                $data['uid']=$user['id'];
-                $data['bid']=$id;
-                $data['time']=time();
-                M('Votelog')->add($data);
-
-                $res = M('Baoming')->where($where)->setInc('vote');
-                if($res){
-                    $num=$this->getReward();
-
-                    $data=array();
-                    $data['code']=0;
-                    $data['msg']='success';
-                    $data['num']=$num;
-                }else{
+                $where['time']=array('between',array($_start_, $_end_));
+                $where['uid']=$user['id'];
+                $where['bid']=$id;
+                $votelog=M('Votelog')->where($where)->find();
+                if($votelog){
                     $data=array();
                     $data['code']=1;
-                    $data['msg']='error';
+                    $data['msg']='该报名今天已投过！';
+                }else{
+                    $data=array();
+                    $data['type']=$type;
+                    $data['uid']=$user['id'];
+                    $data['mid']=$mid;
+                    $data['bid']=$id;
+                    $data['time']=time();
+                    M('Votelog')->add($data);
+
+                    $where=array();
+                    $where['id']=$id;
+                    $res = M('Baoming')->where($where)->setInc('vote');
+                    if($res){
+                        $num=$this->getReward();
+
+                        $data=array();
+                        $data['code']=0;
+                        $data['msg']='success';
+                        $data['num']=$num;
+                    }else{
+                        $data=array();
+                        $data['code']=1;
+                        $data['msg']='error';
+                    }
                 }
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='比赛的报名今天已经投过五场了！';
             }
         }else{
             $data=array();

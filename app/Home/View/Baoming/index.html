@@ -49,7 +49,7 @@
                                     </div>
                                 </a>
                                 <div class="info-btn">
-                                    <a href="javascript:;" data-id="{$v.id}" data-uid="{$user.id}" class="btn vote_btn">立即投票</a>
+                                    <a href="javascript:;" data-id="{$v.id}" data-mid="{$v.mid}" data-type="{$v.type}" data-uid="{$user.id}" class="btn vote_btn">立即投票</a>
                                     <span class="btn1"><i></i><em>{$v.vote}</em></span>
                                 </div>
                             </li>
@@ -106,7 +106,9 @@
                 return false;
             }else{
                 var id=$(this).attr('data-id');
-                var _json=_ajax_vote(id);
+                var mid=$(this).attr('data-mid');
+                var type=$(this).attr('data-type');
+                var _json=_ajax_vote(id, mid, type);
                 if(_json.code==0){
                     $(this).next().find('em').html(++cur_num);
                 }
@@ -116,7 +118,7 @@
 </script>
 
 <script>
-    function _ajax_vote(id){
+    function _ajax_vote(id, mid, type){
          var _json;
          $.ajax({  
              async:false,
@@ -124,7 +126,9 @@
              contentType:"application/x-www-form-urlencoded",
              url : "{:U('Home/Baoming/ajax_vote')}",
              data: {
-                id:id
+                id:id,
+                mid:mid,
+                type:type
              },
              dataType : 'json',
              success  : function(json) {

@@ -25,7 +25,7 @@
                         <ul>
                             <li><a href="#changyan_box" class="tit-pl">评论</a></li>
                             <li><a href="#4" class="tit-lp">一键拉票</a></li>
-                            <li><a href="#4" data-id="{$row.id}" class="tit-tp vote_btn">我要投票</a><p>{$row.vote}票</p></li>
+                            <li><a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.type}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a><p>{$row.vote}票</p></li>
                         </ul>
     <style type="text/css">
         #baiduShare_box{position: relative;}
@@ -68,6 +68,22 @@
 
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
 <script src="__PUBLIC__/Home/js/index.js"></script>
+<script src="__PUBLIC__/layer/layer.js"></script>
+
+<div class="around_images" style="display:none;">
+    <style type="text/css">
+        .layui-layer-page .layui-layer-content{overflow: hidden;}
+    </style>
+    <div id="tong_1">
+        <img style="width:100%;height:100%;overflow:hidden;" src="__PUBLIC__/Home/images/ad_1.png">
+    </div>
+    <div id="tong_2">
+        <img style="width:100%;height:100%;overflow:hidden;" src="__PUBLIC__/Home/images/ad_2.jpg">
+    </div>
+    <div id="tong_3">
+        <img style="width:100%;height:100%;overflow:hidden;" src="__PUBLIC__/Home/images/ad_3.jpg">
+    </div>
+</div>
 </body>
 </html>
 
@@ -75,14 +91,25 @@
 <script type="text/javascript">
     $(function(){
         $('.vote_btn').click(function(){
-            var id=$(this).attr('data-id');
-            _ajax_vote(id);
+            var uid=$(this).attr('data-uid');
+            if(!uid){
+                window.location.href="{:U('Home/User/login')}";
+            }else{
+                var id=$(this).attr('data-id');
+                var mid=$(this).attr('data-mid');
+                var type=$(this).attr('data-type');
+
+                var _json=_ajax_vote(id, mid, type);
+                if(_json.code==0){
+                    window.location.reload();
+                }
+            }
         });
     });
 </script>
 
 <script>
-    function _ajax_vote(id){
+    function _ajax_vote(id, mid, type){
          var _json;
          $.ajax({  
              async:false,
@@ -90,16 +117,30 @@
              contentType:"application/x-www-form-urlencoded",
              url : "{:U('Home/Baoming/ajax_vote')}",
              data: {
-                id:id
+                id:id,
+                mid:mid,
+                type:type
              },
              dataType : 'json',
              success  : function(json) {
-                 if(json.code==0){
-                     alert(json.msg);
-                     window.location.reload();
-                 }else{
-                     alert(json.msg);
-                 }
+                  if(json.code==0){
+                      var num=json.num;
+                      if(num>0){
+                         layer.open({
+                           type: 1,
+                           title: false,
+                           closeBtn: 1,
+                           shadeClose: true,
+                           skin: 'yourclass',
+                           content: $('#tong_'+num).html()
+                         });
+                      }else{
+                         layer.msg(json.msg);
+                      }
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
              },
              error  : function() {  
                  alert('error');
