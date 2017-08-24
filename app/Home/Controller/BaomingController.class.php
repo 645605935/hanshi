@@ -42,12 +42,11 @@ class BaomingController extends CommonController{
         global $user;
 
         $id=I('id');
-        $row=M('Baoming')->find($id);
-
+        $row=D('Baoming')->relation(true)->find($id);
+        
         if($row['images']){
             $images=explode('#', $row['images']);
         }
-        
 
         $this->row=$row;
         $this->images=$images;
@@ -120,7 +119,7 @@ class BaomingController extends CommonController{
         }else{
             $data=array();
             $data['code']=2;
-            $data['msg']='error';
+            $data['msg']='请登录';
         }
 
         echo json_encode($data);
