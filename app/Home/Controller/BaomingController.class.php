@@ -44,12 +44,12 @@ class BaomingController extends CommonController{
         $id=I('id');
         $row=D('Baoming')->relation(true)->find($id);
         
-        if($row['images']){
-            $images=explode('#', $row['images']);
+        if(in_array($row['type'], '1286,1288,1289')){
+            $row['files']=explode('#', $row['files']);
         }
 
         $this->row=$row;
-        $this->images=$images;
+        $this->files=$files;
         $this->display();
     }
 
