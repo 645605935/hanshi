@@ -270,6 +270,8 @@
            if(res.code==0){
               $('#add_form .cover').attr('src', res.data.src);
               $('#add_form .img').val(res.data.src);
+           }else{
+              layer.msg(res.msg);
            }
          }
       });
@@ -284,6 +286,8 @@
            if(res.code==0){
               $('#add_form .files').val(res.data.src);
               $('#add_form .show_file_btn').show().attr('href', res.data.src);
+           }else{
+              layer.msg(res.msg);
            }
          }
       });
@@ -298,6 +302,8 @@
            if(res.code==0){
               $('#add_form .files').val(res.data.src);
               $('#add_form .show_file_btn').show().attr('href', res.data.src);
+           }else{
+              layer.msg(res.msg);
            }
          }
       });
@@ -312,6 +318,8 @@
            if(res.code==0){
               $('#add_form .files').val(res.data.src);
               $('#add_form .show_file_btn').show().attr('href', res.data.src);
+           }else{
+              layer.msg(res.msg);
            }
          }
       });
@@ -338,6 +346,8 @@
               var arr2str=arr.join('#');
               console.log(arr2str);
               $('#add_form .fiels').val(arr2str);
+           }else{
+              layer.msg(res.msg);
            }
          }
       });

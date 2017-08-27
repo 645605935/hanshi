@@ -64,6 +64,14 @@ class MatchController extends AuthController {
         if($_GET['title']){
             $map['title']=array('like','%'.$_GET['title'].'%');
         }
+        if($_GET['start_time'] && $_GET['end_time']){
+            $start_time=strtotime($_GET['start_time']);
+            $end_time=strtotime($_GET['end_time']);
+
+            $map['start_time']=array('between',array($start_time, $end_time));
+            $map['end_time']=array('between',array($start_time, $end_time));
+        }
+
 
         $d = D('Match');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
@@ -196,7 +204,7 @@ class MatchController extends AuthController {
 
         $data=array();
         $data=$_POST;
-        if($data){
+        if($user){
             $data['uid']=$user['uid'];
             $data['time']=time();
             $data['start_time']=strtotime($data['start_time']);
@@ -257,7 +265,7 @@ class MatchController extends AuthController {
         }else{
             $data=array();
             $data['code']=2;
-            $data['msg']='error';
+            $data['msg']='请登录';
         }
 
         echo json_encode($data);

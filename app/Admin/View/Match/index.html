@@ -1242,10 +1242,10 @@
     <script type="text/javascript">
       function init_page(){
           var title=$('#search_table .title').val();
-          var Date1=$('#search_table .Date1').val();
-          var Date2=$('#search_table .Date2').val();
+          var start_time=$('#search_table .start_time').val();
+          var end_time=$('#search_table .end_time').val();
 
-          var _json_=_ajax_get_list(title, Date1, Date2);
+          var _json_=_ajax_get_list(title, start_time, end_time);
           init_grid_table(_json_.data);
 
           //初使化按钮操作权限
@@ -1254,7 +1254,7 @@
       }
 
       //获取列表
-      function _ajax_get_list(title, Date1, Date2){
+      function _ajax_get_list(title, start_time, end_time){
           var _data;
           $.ajax({   
               async:false,
@@ -1263,8 +1263,8 @@
               url : "{:U('Admin/Match/ajax_get_list')}",
               data: {
                 'title':title, 
-                'Date1':Date1, 
-                'Date2':Date2
+                'start_time':start_time, 
+                'end_time':end_time
               },
               dataType : 'json',
               success  : function(json) { 

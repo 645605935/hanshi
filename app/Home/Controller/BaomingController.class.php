@@ -81,7 +81,6 @@ class BaomingController extends CommonController{
     }
 
     public function ajax_vote(){
-        // echo get_client_ip();die;
         $t = time();
         $_start_ = mktime(0,0,0,date("m",$t),date("d",$t),date("Y",$t));
         $_end_ = mktime(23,59,59,date("m",$t),date("d",$t),date("Y",$t));

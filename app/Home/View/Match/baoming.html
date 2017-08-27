@@ -193,10 +193,10 @@
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
-                     alert(json.msg);
+                     layer.msg(json.msg);
                      window.location.href="{:U('Home/Baoming/index')}";
                  }else{
-                     alert(json.msg);
+                     layer.msg(json.msg);
                  }
              },
              error  : function() {  
@@ -223,6 +223,8 @@
            if(res.code==0){
               $('#add_form .file_url').val(res.data.src);
               $('#add_form .show_file_btn').show().attr('href', res.data.src);
+           }else{
+              layer.msg(res.msg);
            }
          }
       });
@@ -250,6 +252,8 @@
               var arr2str=arr.join('#');
               console.log(arr2str);
               $('#add_form .images').val(arr2str);
+           }else{
+              layer.msg(res.msg);
            }
          }
       });
