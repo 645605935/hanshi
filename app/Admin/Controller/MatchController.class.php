@@ -33,8 +33,29 @@ class MatchController extends AuthController {
         $this->page_buttons=$page_buttons;
         $this->page=$page;
 
+        $this->type_bmz=M('Type')->where(array('pid'=>1358))->select();
+        $this->type_sqz=M('Type')->where(array('pid'=>1362))->select();
         $this->type=M('Type')->where(array('pid'=>1283))->select();
         $this->display();
+    }
+
+    public function ajax_get_type_sq(){
+        $type_sqz=I('id');
+
+        $type_sq = M('Type')->where(array('pid'=>$type_sqz))->select();
+
+        if($type_sq){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$type_sq;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
     }
 
     //列表
@@ -72,12 +93,83 @@ class MatchController extends AuthController {
         $id=I('id');
 
         if($id){
-            $row = D('Match')->relation(true)->find($id);
+            $row = D('Match')->find($id);
+            $match_bmz_info=M('match_bmz')->where(array('mid'=>$row['id']))->select();
+            foreach ($match_bmz_info as $key => $value) {
+                if($value['start_time_1']){
+                    $match_bmz_info[$key]['start_time_1']=date('Y-m-d', $value['start_time_1']);
+                }else{
+                    $match_bmz_info[$key]['start_time_1']="";
+                }
+                if($value['end_time_1']){
+                    $match_bmz_info[$key]['end_time_1']=date('Y-m-d', $value['end_time_1']);
+                }else{
+                    $match_bmz_info[$key]['end_time_1']="";
+                }
+
+                if($value['start_time_2']){
+                    $match_bmz_info[$key]['start_time_2']=date('Y-m-d', $value['start_time_2']);
+                }else{
+                    $match_bmz_info[$key]['start_time_2']="";
+                }
+                if($value['end_time_2']){
+                    $match_bmz_info[$key]['end_time_2']=date('Y-m-d', $value['end_time_2']);
+                }else{
+                    $match_bmz_info[$key]['end_time_2']="";
+                }
+
+                if($value['start_time_3']){
+                    $match_bmz_info[$key]['start_time_3']=date('Y-m-d', $value['start_time_3']);
+                }else{
+                    $match_bmz_info[$key]['start_time_3']="";
+                }
+                if($value['end_time_3']){
+                    $match_bmz_info[$key]['end_time_3']=date('Y-m-d', $value['end_time_3']);
+                }else{
+                    $match_bmz_info[$key]['end_time_3']="";
+                }
+
+                if($value['start_time_4']){
+                    $match_bmz_info[$key]['start_time_4']=date('Y-m-d', $value['start_time_4']);
+                }else{
+                    $match_bmz_info[$key]['start_time_4']="";
+                }
+                if($value['end_time_4']){
+                    $match_bmz_info[$key]['end_time_4']=date('Y-m-d', $value['end_time_4']);
+                }else{
+                    $match_bmz_info[$key]['end_time_4']="";
+                }
+
+                if($value['start_time_5']){
+                    $match_bmz_info[$key]['start_time_5']=date('Y-m-d', $value['start_time_5']);
+                }else{
+                    $match_bmz_info[$key]['start_time_5']="";
+                }
+                if($value['end_time_5']){
+                    $match_bmz_info[$key]['end_time_5']=date('Y-m-d', $value['end_time_5']);
+                }else{
+                    $match_bmz_info[$key]['end_time_5']="";
+                }
+
+                if($value['start_time_6']){
+                    $match_bmz_info[$key]['start_time_6']=date('Y-m-d', $value['start_time_6']);
+                }else{
+                    $match_bmz_info[$key]['start_time_6']="";
+                }
+                if($value['end_time_6']){
+                    $match_bmz_info[$key]['end_time_6']=date('Y-m-d', $value['end_time_6']);
+                }else{
+                    $match_bmz_info[$key]['end_time_6']="";
+                }
+            }
+            $row['_bmz']=$match_bmz_info;
 
             $row['time']=date('Y-m-d H:i',$row['time']);
             $row['start_time']=date('Y-m-d H:i',$row['start_time']);
             $row['end_time']=date('Y-m-d H:i',$row['end_time']);
 
+
+// dump($row);die;
             if($row){
                 $data=array();
                 $data['code']=0;
@@ -112,6 +204,35 @@ class MatchController extends AuthController {
 
             $id = M('Match')->add($data);
             if($id){
+                //添加比赛报名组
+                foreach ($_POST['match_bmz'] as $key => $value) {
+                    if($value!=''){
+                        $arr=explode('#', $value);
+                        $data=array();
+                        $data['mid']=$id;
+                        $data['type']=$key;
+                        $data['time']=time();
+
+                        $data['start_time_1']=strtotime($arr[0]);
+                        $data['end_time_1']=strtotime($arr[1]);
+                        $data['start_time_2']=strtotime($arr[2]);
+                        $data['end_time_2']=strtotime($arr[3]);
+                        $data['start_time_3']=strtotime($arr[4]);
+                        $data['end_time_3']=strtotime($arr[5]);
+                        $data['start_time_4']=strtotime($arr[6]);
+                        $data['end_time_4']=strtotime($arr[7]);
+                        $data['start_time_5']=strtotime($arr[8]);
+                        $data['end_time_5']=strtotime($arr[9]);
+                        $data['start_time_6']=strtotime($arr[10]);
+                        $data['end_time_6']=strtotime($arr[11]);
+
+                        M('match_bmz')->add($data);
+                    }
+                }
+
+                
+
+
                 $row= D('Match')->relation(true)->find($id);
 
                 $row['time']=date('Y-m-d H:i',$row['time']);
@@ -155,6 +276,7 @@ class MatchController extends AuthController {
 
             $res = M('Match')->save($data);
             if($res){
+
                 $id=$data['id'];
                 $row= D('Match')->relation(true)->find($id);
 
@@ -163,6 +285,36 @@ class MatchController extends AuthController {
                 $row['end_time']=date('Y-m-d H:i',$row['end_time']);
 
                 if($row){
+
+                    //重置比赛报名组
+                    M('match_bmz')->where(array('mid'=>$_POST['id']))->delete();
+                    foreach ($_POST['match_bmz'] as $key => $value) {
+                        if($value!=''){
+                            $arr=explode('#', $value);
+                            $data=array();
+                            $data['mid']=$_POST['id'];
+                            $data['type']=$key;
+                            $data['time']=time();
+
+                            $data['start_time_1']=strtotime($arr[0]);
+                            $data['end_time_1']=strtotime($arr[1]);
+                            $data['start_time_2']=strtotime($arr[2]);
+                            $data['end_time_2']=strtotime($arr[3]);
+                            $data['start_time_3']=strtotime($arr[4]);
+                            $data['end_time_3']=strtotime($arr[5]);
+                            $data['start_time_4']=strtotime($arr[6]);
+                            $data['end_time_4']=strtotime($arr[7]);
+                            $data['start_time_5']=strtotime($arr[8]);
+                            $data['end_time_5']=strtotime($arr[9]);
+                            $data['start_time_6']=strtotime($arr[10]);
+                            $data['end_time_6']=strtotime($arr[11]);
+
+                            M('match_bmz')->add($data);
+                        }
+                    }
+
+
+                    
                     $data=array();
                     $data['code']=0;
                     $data['msg']='success';
@@ -236,7 +388,7 @@ class MatchController extends AuthController {
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$img;
+                $data['data']["src"]='/Uploads/layui/'.$img;
             }
 
             echo json_encode($data);
@@ -265,7 +417,7 @@ class MatchController extends AuthController {
                 $data['msg']=$upload->getError();
             }else{
                 $video=$info['file_video']['savename'];
-                $video_url='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$video;
+                $video_url='/Uploads/layui/'.$video;
 
                 $data=array();
                 $data['code']=0;
@@ -274,7 +426,7 @@ class MatchController extends AuthController {
             }
 
             //上传到阿里云OSS
-            oss_upload( './Uploads/layui/'.$video );
+            oss_upload( '/Uploads/layui/'.$video );
 
             echo json_encode($data);
         }

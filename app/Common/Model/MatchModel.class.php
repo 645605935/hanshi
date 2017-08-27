@@ -14,6 +14,18 @@ class MatchModel extends RelationModel{
 			'class_name'=>'Type',
 			'foreign_key'=>'type',
 			'as_fields' => 'title:type',
+		),
+		'_type_sqz'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'type_sqz',
+			'as_fields' => 'title:type_sqz',
+		),
+		'_type_sq'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'type_sq',
+			'as_fields' => 'title:type_sq',
 		)
 	);
 }

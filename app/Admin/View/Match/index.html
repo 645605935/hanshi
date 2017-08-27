@@ -50,6 +50,10 @@
     <!-- layui.js   -->
     <script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
     <script src="__PUBLIC__/layer/layer.js"></script>
+
+    <style type="text/css">
+        .activing{background-color: #009688;color: white;}
+    </style>
 <script>
 
   
@@ -332,6 +336,10 @@
            <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
             
               <table class="table table-striped table-bordered table-hover">
+                <colgroup>
+                  <col width="400">
+                  <col width="600">
+                </colgroup>
                 <tbody>
                   <tr>
                     <td>
@@ -350,7 +358,7 @@
                           <label class="layui-form-label">比赛类型</label>
                           <div class="layui-input-inline">
                             <select name="type" class="type">
-                               <option value="请选择">请选择</option>
+                               <option value="">请选择</option>
                                <foreach name="type" item="v">
                                   <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
                                </foreach>
@@ -380,7 +388,162 @@
                     </td>
                   </tr>
 
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">赛区类型</label>
+                          <div class="layui-input-inline">
+                            <select name="type_sqz" class="type_sqz" lay-filter="type_sqz">
+                               <option value="">请选择</option>
+                               <foreach name="type_sqz" item="v">
+                                  <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
+                               </foreach>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">具体赛区</label>
+                          <div class="layui-input-inline">
+                            <select name="type_sq" class="type_sq">
+                               <option value="">请选择</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
 
+                  <tr>
+                    <td>
+
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">报名组</label>
+                          <div class="layui-input-inline bmz_box_left" style="width:330px;">
+                              
+                              <foreach name="type_bmz" item="v">
+                                 <label class="layui-btn layui-btn-primary {$v.id}" data-time="" data-id="{$v.id}">{$v.title}</label>
+                                 <input type="hidden" name="match_bmz[{$v.id}]" value="" class="layui-input {$v.id}">
+                              </foreach>
+
+                          </div>
+                        </div>
+                      </div> 
+
+                    </td>
+                    <td>
+
+                      <table class="bmz_box_table" style="display:none;">
+                        <thead>
+                          <tr>
+                            <td align="center">
+                              <a class="layui-btn layui-btn-radius bmz_box_header"></a>
+                            </td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="bmz_box_right">
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">初赛报名</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_1 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_1 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">初赛投票</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_2 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_2 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">复赛报名</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_3 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_3 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">复赛投票</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_4 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_4 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">决赛报名</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_5 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_5 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">决赛投票</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_6 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_6 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td align="center">
+                              <a class="layui-btn layui-btn-normal bmz_box_save">保存</a>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+
+                      
+
+                    </td>
+                  </tr>
 
                   <tr>
                     <td>
@@ -459,7 +622,7 @@
                             <select name="type" class="type">
                                <option value="请选择">请选择</option>
                                <foreach name="type" item="v">
-                                  <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
+                                  <option value="{$v.id}" alt="{$v.id}">{$v.title}</option>
                                </foreach>
                             </select>
                           </div>
@@ -483,6 +646,166 @@
                           </div>
                         </div>
                       </div> 
+
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">赛区类型</label>
+                          <div class="layui-input-inline">
+                            <select name="type_sqz" class="type_sqz" lay-filter="type_sqz_edit">
+                               <option value="">请选择</option>
+                               <foreach name="type_sqz" item="v">
+                                  <option value="{$v.id}" alt="{$v.id}">{$v.title}</option>
+                               </foreach>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">具体赛区</label>
+                          <div class="layui-input-inline">
+                            <select name="type_sq" class="type_sq">
+                               <option value="">请选择</option>
+                               <foreach name="type_sq" item="v">
+                                  <option value="{$v.id}" alt="{$v.id}">{$v.title}</option>
+                               </foreach>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">报名组</label>
+                          <div class="layui-input-inline bmz_box_left" style="width:330px;">
+                              
+                              <foreach name="type_bmz" item="v">
+                                 <label class="layui-btn layui-btn-primary {$v.id}" data-time="" data-id="{$v.id}">{$v.title}</label>
+                                 <input type="hidden" name="match_bmz[{$v.id}]" value="" class="layui-input {$v.id}">
+                              </foreach>
+
+                          </div>
+                        </div>
+                      </div> 
+
+                    </td>
+                    <td>
+
+                      <table class="bmz_box_table" style="display:none;">
+                        <thead>
+                          <tr>
+                            <td align="center">
+                              <a class="layui-btn layui-btn-radius bmz_box_header"></a>
+                            </td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="bmz_box_right">
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">初赛报名</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_1 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_1 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">初赛投票</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_2 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_2 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">复赛报名</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_3 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_3 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">复赛投票</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_4 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_4 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">决赛报名</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_5 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_5 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="layui-inline">
+                                <div class="layui-form-item">
+                                  <label class="layui-form-label">决赛投票</label>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input start_time_6 LAY_demorange_s" placeholder="开始日">
+                                  </div>
+                                  <div class="layui-form-mid">-</div>
+                                  <div class="layui-input-inline">
+                                    <input class="layui-input end_time_6 LAY_demorange_e" placeholder="截止日">
+                                  </div>
+                                </div>
+                              </div>
+
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <td align="center">
+                              <a class="layui-btn layui-btn-normal bmz_box_save">保存</a>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+
+                      
 
                     </td>
                   </tr>
@@ -579,6 +902,23 @@
 
         {{ } }}
     </script>
+
+    <!-- 模板引擎doT.js    start -->
+    <script id="j-tmpl_type_sq" type="text/template">
+        {{ if(it.code==0){ }}
+
+                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+
+                      <option value="{{=it.data[i].id}}">{{=it.data[i].title}}</option>
+
+                {{ } }}
+
+        {{ }else{ }}
+
+                
+
+        {{ } }}
+    </script>
     <script src="__PUBLIC__/Admin/doT-master/doT.js"></script>
 
 
@@ -600,7 +940,7 @@
               resizable: false,
               modal: true,
               title: "",
-              width:800,
+              width:1000,
               title_html: true,
             });
 
@@ -610,6 +950,9 @@
           //编辑
           $( "body" ).on('click','.id-btn-dialog2_edit', function(e) {
             e.preventDefault();
+
+            $('#edit_form .bmz_box_left label').attr('data-time', '');
+            $('#edit_form .bmz_box_left input').val('');
 
             var id=$(this).attr('data-id');
             if(id){
@@ -621,7 +964,7 @@
                       resizable: false,
                       modal: true,
                       title: "",
-                      width:800,
+                      width:1000,
                       title_html: true,
                     });
 
@@ -653,8 +996,246 @@
                   $('#edit_form .show_video').attr('src', video_url).show();
               }
           });
-        
-        
+
+
+          $('#add_form .bmz_box_left label').click(function(){
+              $('#add_form .bmz_box_left label').removeClass('editing');
+              $(this).addClass('editing');
+
+              $.each($('#add_form .bmz_box_left label'), function(name, value){
+                  var temp=$(value).attr('data-time');
+                  if(temp==''){
+                      $(value).removeClass('activing');
+                  }else{
+                      $(value).addClass('activing');
+                  }
+              });
+              
+              
+
+
+              $('#add_form .bmz_box_table .bmz_box_header').html($(this).html());
+              $('#add_form .bmz_box_table').show();
+              var time_str=$(this).attr('data-time');
+              if(time_str==''){
+                  var start_time_1='';
+                  var end_time_1='';
+                  var start_time_2='';
+                  var end_time_2='';
+                  var start_time_3='';
+                  var end_time_3='';
+                  var start_time_4='';
+                  var end_time_4='';
+                  var start_time_5='';
+                  var end_time_5='';
+                  var start_time_6='';
+                  var end_time_6='';
+              }else{
+                  temp=time_str.split('#');
+
+                  var start_time_1=temp[0];
+                  var end_time_1=temp[1];
+                  var start_time_2=temp[2];
+                  var end_time_2=temp[3];
+                  var start_time_3=temp[4];
+                  var end_time_3=temp[5];
+                  var start_time_4=temp[6];
+                  var end_time_4=temp[7];
+                  var start_time_5=temp[8];
+                  var end_time_5=temp[9];
+                  var start_time_6=temp[10];
+                  var end_time_6=temp[11];
+              }
+
+              $('#add_form .bmz_box_right .start_time_1').val(start_time_1);
+              $('#add_form .bmz_box_right .end_time_1').val(end_time_1);
+              $('#add_form .bmz_box_right .start_time_2').val(start_time_2);
+              $('#add_form .bmz_box_right .end_time_2').val(end_time_2);
+              $('#add_form .bmz_box_right .start_time_3').val(start_time_3);
+              $('#add_form .bmz_box_right .end_time_3').val(end_time_3);
+              $('#add_form .bmz_box_right .start_time_4').val(start_time_4);
+              $('#add_form .bmz_box_right .end_time_4').val(end_time_4);
+              $('#add_form .bmz_box_right .start_time_5').val(start_time_5);
+              $('#add_form .bmz_box_right .end_time_5').val(end_time_5);
+              $('#add_form .bmz_box_right .start_time_6').val(start_time_6);
+              $('#add_form .bmz_box_right .end_time_6').val(end_time_6);
+
+
+              layui.form().render();
+          });
+          
+          $('#add_form .bmz_box_save').click(function(){
+
+              var start_time_1=$('#add_form .bmz_box_right .start_time_1').val();
+              var end_time_1=$('#add_form .bmz_box_right .end_time_1').val();
+              var start_time_2=$('#add_form .bmz_box_right .start_time_2').val();
+              var end_time_2=$('#add_form .bmz_box_right .end_time_2').val();
+              var start_time_3=$('#add_form .bmz_box_right .start_time_3').val();
+              var end_time_3=$('#add_form .bmz_box_right .end_time_3').val();
+              var start_time_4=$('#add_form .bmz_box_right .start_time_4').val();
+              var end_time_4=$('#add_form .bmz_box_right .end_time_4').val();
+              var start_time_5=$('#add_form .bmz_box_right .start_time_5').val();
+              var end_time_5=$('#add_form .bmz_box_right .end_time_5').val();
+              var start_time_6=$('#add_form .bmz_box_right .start_time_6').val();
+              var end_time_6=$('#add_form .bmz_box_right .end_time_6').val();
+
+              if(start_time_1||end_time_1||start_time_2||end_time_2||start_time_3||end_time_3||start_time_4||end_time_4||start_time_5||end_time_5||start_time_6||end_time_6){
+                  var arr=[];
+                  var str="";
+
+                  arr.push(start_time_1);
+                  arr.push(end_time_1);
+                  arr.push(start_time_2);
+                  arr.push(end_time_2);
+                  arr.push(start_time_3);
+                  arr.push(end_time_3);
+                  arr.push(start_time_4);
+                  arr.push(end_time_4);
+                  arr.push(start_time_5);
+                  arr.push(end_time_5);
+                  arr.push(start_time_6);
+                  arr.push(end_time_6);
+
+                  str=arr.join('#');
+              }else{
+                  var str="";
+                  $('#add_form .bmz_box_left label.activing').removeClass('activing');
+              }
+
+              var data_id=$('#add_form .bmz_box_left label.editing').attr('data-id');
+              $('#add_form .bmz_box_left label.editing').attr('data-time',str);
+              $('#add_form .bmz_box_left input.'+data_id).val(str);
+              $('#add_form .bmz_box_table').hide();
+
+              $.each($('#add_form .bmz_box_left label'), function(name, value){
+                  var temp=$(value).attr('data-time');
+                  if(temp==''){
+                      $(value).removeClass('activing');
+                  }else{
+                      $(value).addClass('activing');
+                  }
+              });
+          });
+
+          $('#edit_form .bmz_box_left label').click(function(){
+              $('#edit_form .bmz_box_left label').removeClass('editing');
+              $(this).addClass('editing');
+
+              $.each($('#edit_form .bmz_box_left label'), function(name, value){
+                  var temp=$(value).attr('data-time');
+                  if(temp==''){
+                      $(value).removeClass('activing');
+                  }else{
+                      $(value).addClass('activing');
+                  }
+              });
+              
+              
+
+
+              $('#edit_form .bmz_box_table .bmz_box_header').html($(this).html());
+              $('#edit_form .bmz_box_table').show();
+              var time_str=$(this).attr('data-time');
+              if(time_str==''){
+                  var start_time_1='';
+                  var end_time_1='';
+                  var start_time_2='';
+                  var end_time_2='';
+                  var start_time_3='';
+                  var end_time_3='';
+                  var start_time_4='';
+                  var end_time_4='';
+                  var start_time_5='';
+                  var end_time_5='';
+                  var start_time_6='';
+                  var end_time_6='';
+              }else{
+                  temp=time_str.split('#');
+
+                  var start_time_1=temp[0];
+                  var end_time_1=temp[1];
+                  var start_time_2=temp[2];
+                  var end_time_2=temp[3];
+                  var start_time_3=temp[4];
+                  var end_time_3=temp[5];
+                  var start_time_4=temp[6];
+                  var end_time_4=temp[7];
+                  var start_time_5=temp[8];
+                  var end_time_5=temp[9];
+                  var start_time_6=temp[10];
+                  var end_time_6=temp[11];
+              }
+
+              $('#edit_form .bmz_box_right .start_time_1').val(start_time_1);
+              $('#edit_form .bmz_box_right .end_time_1').val(end_time_1);
+              $('#edit_form .bmz_box_right .start_time_2').val(start_time_2);
+              $('#edit_form .bmz_box_right .end_time_2').val(end_time_2);
+              $('#edit_form .bmz_box_right .start_time_3').val(start_time_3);
+              $('#edit_form .bmz_box_right .end_time_3').val(end_time_3);
+              $('#edit_form .bmz_box_right .start_time_4').val(start_time_4);
+              $('#edit_form .bmz_box_right .end_time_4').val(end_time_4);
+              $('#edit_form .bmz_box_right .start_time_5').val(start_time_5);
+              $('#edit_form .bmz_box_right .end_time_5').val(end_time_5);
+              $('#edit_form .bmz_box_right .start_time_6').val(start_time_6);
+              $('#edit_form .bmz_box_right .end_time_6').val(end_time_6);
+
+
+              layui.form().render();
+          });
+          
+          $('#edit_form .bmz_box_save').click(function(){
+
+              var start_time_1=$('#edit_form .bmz_box_right .start_time_1').val();
+              var end_time_1=$('#edit_form .bmz_box_right .end_time_1').val();
+              var start_time_2=$('#edit_form .bmz_box_right .start_time_2').val();
+              var end_time_2=$('#edit_form .bmz_box_right .end_time_2').val();
+              var start_time_3=$('#edit_form .bmz_box_right .start_time_3').val();
+              var end_time_3=$('#edit_form .bmz_box_right .end_time_3').val();
+              var start_time_4=$('#edit_form .bmz_box_right .start_time_4').val();
+              var end_time_4=$('#edit_form .bmz_box_right .end_time_4').val();
+              var start_time_5=$('#edit_form .bmz_box_right .start_time_5').val();
+              var end_time_5=$('#edit_form .bmz_box_right .end_time_5').val();
+              var start_time_6=$('#edit_form .bmz_box_right .start_time_6').val();
+              var end_time_6=$('#edit_form .bmz_box_right .end_time_6').val();
+
+              if(start_time_1||end_time_1||start_time_2||end_time_2||start_time_3||end_time_3||start_time_4||end_time_4||start_time_5||end_time_5||start_time_6||end_time_6){
+                  var arr=[];
+                  var str="";
+
+                  arr.push(start_time_1);
+                  arr.push(end_time_1);
+                  arr.push(start_time_2);
+                  arr.push(end_time_2);
+                  arr.push(start_time_3);
+                  arr.push(end_time_3);
+                  arr.push(start_time_4);
+                  arr.push(end_time_4);
+                  arr.push(start_time_5);
+                  arr.push(end_time_5);
+                  arr.push(start_time_6);
+                  arr.push(end_time_6);
+
+                  str=arr.join('#');
+              }else{
+                  var str="";
+                  $('#edit_form .bmz_box_left label.activing').removeClass('activing');
+              }
+
+              var data_id=$('#edit_form .bmz_box_left label.editing').attr('data-id');
+              $('#edit_form .bmz_box_left label.editing').attr('data-time',str);
+              $('#edit_form .bmz_box_left input.'+data_id).val(str);
+              $('#edit_form .bmz_box_table').hide();
+
+              $.each($('#edit_form .bmz_box_left label'), function(name, value){
+                  var temp=$(value).attr('data-time');
+                  if(temp==''){
+                      $(value).removeClass('activing');
+                  }else{
+                      $(value).addClass('activing');
+                  }
+              });
+          });
+          
       });
     </script>
 
@@ -738,6 +1319,61 @@
                           }
                       });
 
+                      $.each($("#edit_form .type_bmz option"), function(name, value){
+                          if($(value).attr('alt')==data.type_bmz){
+                              $(value).attr('selected','selected');
+                          }else{
+                              $(value).removeAttr('selected');
+                          }
+                      });
+
+                      $.each($("#edit_form .type_sqz option"), function(name, value){
+                          if($(value).attr('alt')==data.type_sqz){
+                              $(value).attr('selected','selected');
+                          }else{
+                              $(value).removeAttr('selected');
+                          }
+                      });
+
+                      _ajax_get_type_sq_edit(data.type_sqz, data.type_sq);
+                      
+                      $.each(data._bmz, function(name, value){
+                          var start_time_1=value.start_time_1;
+                          var end_time_1=value.end_time_1;
+                          var start_time_2=value.start_time_2;
+                          var end_time_2=value.end_time_2;
+                          var start_time_3=value.start_time_3;
+                          var end_time_3=value.end_time_3;
+                          var start_time_4=value.start_time_4;
+                          var end_time_4=value.end_time_4;
+                          var start_time_5=value.start_time_5;
+                          var end_time_5=value.end_time_5;
+                          var start_time_6=value.start_time_6;
+                          var end_time_6=value.end_time_6;
+
+                          var arr=[];
+                          var str="";
+
+                          arr.push(start_time_1);
+                          arr.push(end_time_1);
+                          arr.push(start_time_2);
+                          arr.push(end_time_2);
+                          arr.push(start_time_3);
+                          arr.push(end_time_3);
+                          arr.push(start_time_4);
+                          arr.push(end_time_4);
+                          arr.push(start_time_5);
+                          arr.push(end_time_5);
+                          arr.push(start_time_6);
+                          arr.push(end_time_6);
+
+                          str=arr.join('#');
+
+                          $("#edit_form .bmz_box_left label."+value.type).attr('data-time',str).addClass('activing');
+                          $("#edit_form .bmz_box_left input."+value.type).val(str);
+                      });
+
+
                       if(data.recommend==1){
                           $('#edit_form .recommend option[value=1]').attr('selected', true);
                           $('#edit_form .recommend option[value=0]').removeAttr('selected');
@@ -750,6 +1386,15 @@
                       $('#edit_form .content').val(data.content);
 
                       _json=json;
+
+                      $.each($('#edit_form .bmz_box_left label'), function(name, value){
+                          var temp=$(value).attr('data-time');
+                          if(temp==''){
+                              $(value).removeClass('activing');
+                          }else{
+                              $(value).addClass('activing');
+                          }
+                      });
 
                       layui.form().render();
                   }else{
@@ -803,6 +1448,10 @@
               success  : function(json) {  
                   if(json.code == 0){
                       layer.msg(json.msg);
+
+                      console.log(json.data);
+
+                      
                       var selectID=$("#grid-table").getGridParam("selrow");
                       $("#grid-table").setRowData(selectID, json.data);
                       $("div[aria-describedby='dialog-confirm_edit'] .ui-dialog-titlebar-close").trigger("click");
@@ -836,6 +1485,85 @@
                   }else{
                       layer.msg(json.msg);
                       _json=json;
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //获取赛区
+      function _ajax_get_type_sq(type_sqz){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Match/ajax_get_type_sq')}",
+              data:{
+                  id: type_sqz
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_type_sq').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#add_form .type_sq').html(doT_Str);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //获取赛区
+      function _ajax_get_type_sq_edit(type_sqz, type_sq){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Match/ajax_get_type_sq')}",
+              data:{
+                  id: type_sqz
+              },
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var data=json.data;
+                      var str='';
+
+                      str+='<option value="">请选择</option>';
+console.log(data);
+                      $.each(data, function(name, value){
+                          if(value.id==type_sq){
+                              str+='<option value="'+value.id+'" selected="selected">'+value.title+'</option>';
+                          }else{
+                              str+='<option value="'+value.id+'">'+value.title+'</option>';
+                          }
+                      });
+                     
+console.log(str);
+                      $('#edit_form .type_sq').html(str);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
                   }
               },
               error  : function() {  
@@ -1033,6 +1761,7 @@
 
               //监听提交
               form.on('submit(demo1_add)', function(data){
+                // console.log(data);
                 var _json=_ajax_add(data.field);
                 return false;
               });
@@ -1042,6 +1771,19 @@
                 var _json=_ajax_edit(data.field);
                 return false;
               });
+
+              form.on('select(type_sqz)', function(data){
+                  var type_sqz=data.value;
+                  _ajax_get_type_sq(type_sqz);
+                  console.log(data);
+              });
+
+              form.on('select(type_sqz_edit)', function(data){
+                  var type_sqz=data.value;
+                  _ajax_get_type_sq_edit(type_sqz);
+                  console.log(data);
+              });
+
             });
         }
     </script>
