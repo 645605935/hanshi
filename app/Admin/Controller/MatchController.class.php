@@ -216,42 +216,110 @@ class MatchController extends AuthController {
 
         $data=array();
         $data=$_POST;
+
+        // dump($_POST);die;
         if($user){
             $data['uid']=$user['uid'];
             $data['time']=time();
             $data['start_time']=strtotime($data['start_time']);
             $data['end_time']=strtotime($data['end_time']);
 
+            if($_POST['type_sqz_online']){
+                foreach ($_POST['type_sqz_online'] as $key => $value) {
+                    $data['type_sqz_online']=$key;
+                    $online_sqz=$key;
+                }
+            }
+            if($_POST['type_sqz_offline']){
+                foreach ($_POST['type_sqz_offline'] as $key => $value) {
+                    $data['type_sqz_offline']=$key;
+                    $offline_sqz=$key;
+                }
+            }
+            if($_POST['type_sq_online']){
+                $str="";
+                $arr=array();
+                foreach ($_POST['type_sq_online'] as $key => $value) {
+                    $arr[]=$key;
+                }
+                $str=implode(',', $arr);
+                $data['type_sq_online']=$str;
+            }
+            if($_POST['type_sq_offline']){
+                $str="";
+                $arr=array();
+                foreach ($_POST['type_sq_offline'] as $key => $value) {
+                    $arr[]=$key;
+                }
+                $str=implode(',', $arr);
+                $data['type_sq_offline']=$str;
+            }
+
             $id = M('Match')->add($data);
             if($id){
                 //添加比赛报名组
-                foreach ($_POST['match_bmz'] as $key => $value) {
-                    if($value!=''){
-                        $arr=explode('#', $value);
-                        $data=array();
-                        $data['mid']=$id;
-                        $data['type']=$key;
-                        $data['time']=time();
+                if($_POST['type_sqz_online']){
+                    $sqz=$online_sqz;
+                    if($_POST['online_bmz']){
+                        foreach ($_POST['online_bmz'] as $key => $value) {
+                            if($value!=''){
+                                $arr=explode('#', $value);
+                                $data=array();
+                                $data['mid']=$id;
+                                $data['type']=$key;
+                                $data['sqz']=$sqz;
+                                $data['time']=time();
 
-                        $data['start_time_1']=strtotime($arr[0]);
-                        $data['end_time_1']=strtotime($arr[1]);
-                        $data['start_time_2']=strtotime($arr[2]);
-                        $data['end_time_2']=strtotime($arr[3]);
-                        $data['start_time_3']=strtotime($arr[4]);
-                        $data['end_time_3']=strtotime($arr[5]);
-                        $data['start_time_4']=strtotime($arr[6]);
-                        $data['end_time_4']=strtotime($arr[7]);
-                        $data['start_time_5']=strtotime($arr[8]);
-                        $data['end_time_5']=strtotime($arr[9]);
-                        $data['start_time_6']=strtotime($arr[10]);
-                        $data['end_time_6']=strtotime($arr[11]);
+                                $data['start_time_1']=strtotime($arr[0]);
+                                $data['end_time_1']=strtotime($arr[1]);
+                                $data['start_time_2']=strtotime($arr[2]);
+                                $data['end_time_2']=strtotime($arr[3]);
+                                $data['start_time_3']=strtotime($arr[4]);
+                                $data['end_time_3']=strtotime($arr[5]);
+                                $data['start_time_4']=strtotime($arr[6]);
+                                $data['end_time_4']=strtotime($arr[7]);
+                                $data['start_time_5']=strtotime($arr[8]);
+                                $data['end_time_5']=strtotime($arr[9]);
+                                $data['start_time_6']=strtotime($arr[10]);
+                                $data['end_time_6']=strtotime($arr[11]);
 
-                        M('match_bmz')->add($data);
+                                M('match_bmz')->add($data);
+                            }
+                        }
                     }
                 }
 
-                
+                if($_POST['type_sqz_offline']){
+                    $sqz=$offline_sqz;
+                    if($_POST['offline_bmz']){
+                        foreach ($_POST['offline_bmz'] as $key => $value) {
+                            if($value!=''){
+                                $arr=explode('#', $value);
+                                $data=array();
+                                $data['mid']=$id;
+                                $data['type']=$key;
+                                $data['sqz']=$sqz;
+                                $data['time']=time();
 
+                                $data['start_time_1']=strtotime($arr[0]);
+                                $data['end_time_1']=strtotime($arr[1]);
+                                $data['start_time_2']=strtotime($arr[2]);
+                                $data['end_time_2']=strtotime($arr[3]);
+                                $data['start_time_3']=strtotime($arr[4]);
+                                $data['end_time_3']=strtotime($arr[5]);
+                                $data['start_time_4']=strtotime($arr[6]);
+                                $data['end_time_4']=strtotime($arr[7]);
+                                $data['start_time_5']=strtotime($arr[8]);
+                                $data['end_time_5']=strtotime($arr[9]);
+                                $data['start_time_6']=strtotime($arr[10]);
+                                $data['end_time_6']=strtotime($arr[11]);
+
+                                M('match_bmz')->add($data);
+                            }
+                        }
+                    }
+                }
+                
 
                 $row= D('Match')->relation(true)->find($id);
 
@@ -279,7 +347,7 @@ class MatchController extends AuthController {
             $data['code']=2;
             $data['msg']='请登录';
         }
-
+die;
         echo json_encode($data);
     }
 
