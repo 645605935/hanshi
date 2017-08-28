@@ -28,13 +28,25 @@ class MatchController extends AuthController {
 
         $this->cur_v='Match-index';
 
+        //网络赛区
+        $this->online_sq=M('Type')->where(array('pid'=>1363))->select();
+
+        //线下赛区
+        $this->offline_sq=M('Type')->where(array('pid'=>1364))->select();
+
+        //网络报名组
+        $this->online_bmz=M('Type')->where(array('pid'=>1359))->select();
+
+        //线下报名组
+        $this->offline_bmz=M('Type')->where(array('pid'=>1360))->select();
+
         $page="Match/index";
         $page_buttons=M('PageButtons')->where(array('page'=>$page))->select();
         $this->page_buttons=$page_buttons;
         $this->page=$page;
 
-        $this->type_bmz=M('Type')->where(array('pid'=>1358))->select();
-        $this->type_sqz=M('Type')->where(array('pid'=>1362))->select();
+        // $this->type_bmz=M('Type')->where(array('pid'=>1358))->select();
+        // $this->type_sqz=M('Type')->where(array('pid'=>1362))->select();
         $this->type=M('Type')->where(array('pid'=>1283))->select();
         $this->display();
     }
