@@ -29,16 +29,12 @@ class MatchController extends AuthController {
         $this->cur_v='Match-index';
 
         //网络赛区
-        $this->online_sq=M('Type')->where(array('pid'=>1363))->select();
+        $this->online_sq=M('Type')->where(array('pid'=>1375))->select();
+        $this->online_bmz=M('Type')->where(array('pid'=>1374))->select();
 
         //线下赛区
-        $this->offline_sq=M('Type')->where(array('pid'=>1364))->select();
-
-        //网络报名组
-        $this->online_bmz=M('Type')->where(array('pid'=>1359))->select();
-
-        //线下报名组
-        $this->offline_bmz=M('Type')->where(array('pid'=>1360))->select();
+        $this->offline_sq=M('Type')->where(array('pid'=>1378))->select();
+        $this->offline_bmz=M('Type')->where(array('pid'=>1379))->select();
 
         $page="Match/index";
         $page_buttons=M('PageButtons')->where(array('page'=>$page))->select();
@@ -89,9 +85,9 @@ class MatchController extends AuthController {
         $list = $d->where($map)->order('id desc')->relation(true)->select();
 
         foreach ($list as $key => $value) {
-            $list[$key]['time']=date('Y-m-d H:i',$value['time']);
-            $list[$key]['start_time']=date('Y-m-d H:i',$value['start_time']);
-            $list[$key]['end_time']=date('Y-m-d H:i',$value['end_time']);
+            $list[$key]['time']=date('Y-m-d H:i:s H:i',$value['time']);
+            $list[$key]['start_time']=date('Y-m-d H:i:s H:i',$value['start_time']);
+            $list[$key]['end_time']=date('Y-m-d H:i:s H:i',$value['end_time']);
         }
 
         if($list){
@@ -117,76 +113,76 @@ class MatchController extends AuthController {
             $match_bmz_info=M('match_bmz')->where(array('mid'=>$row['id']))->select();
             foreach ($match_bmz_info as $key => $value) {
                 if($value['start_time_1']){
-                    $match_bmz_info[$key]['start_time_1']=date('Y-m-d', $value['start_time_1']);
+                    $match_bmz_info[$key]['start_time_1']=date('Y-m-d H:i:s', $value['start_time_1']);
                 }else{
                     $match_bmz_info[$key]['start_time_1']="";
                 }
                 if($value['end_time_1']){
-                    $match_bmz_info[$key]['end_time_1']=date('Y-m-d', $value['end_time_1']);
+                    $match_bmz_info[$key]['end_time_1']=date('Y-m-d H:i:s', $value['end_time_1']);
                 }else{
                     $match_bmz_info[$key]['end_time_1']="";
                 }
 
                 if($value['start_time_2']){
-                    $match_bmz_info[$key]['start_time_2']=date('Y-m-d', $value['start_time_2']);
+                    $match_bmz_info[$key]['start_time_2']=date('Y-m-d H:i:s', $value['start_time_2']);
                 }else{
                     $match_bmz_info[$key]['start_time_2']="";
                 }
                 if($value['end_time_2']){
-                    $match_bmz_info[$key]['end_time_2']=date('Y-m-d', $value['end_time_2']);
+                    $match_bmz_info[$key]['end_time_2']=date('Y-m-d H:i:s', $value['end_time_2']);
                 }else{
                     $match_bmz_info[$key]['end_time_2']="";
                 }
 
                 if($value['start_time_3']){
-                    $match_bmz_info[$key]['start_time_3']=date('Y-m-d', $value['start_time_3']);
+                    $match_bmz_info[$key]['start_time_3']=date('Y-m-d H:i:s', $value['start_time_3']);
                 }else{
                     $match_bmz_info[$key]['start_time_3']="";
                 }
                 if($value['end_time_3']){
-                    $match_bmz_info[$key]['end_time_3']=date('Y-m-d', $value['end_time_3']);
+                    $match_bmz_info[$key]['end_time_3']=date('Y-m-d H:i:s', $value['end_time_3']);
                 }else{
                     $match_bmz_info[$key]['end_time_3']="";
                 }
 
                 if($value['start_time_4']){
-                    $match_bmz_info[$key]['start_time_4']=date('Y-m-d', $value['start_time_4']);
+                    $match_bmz_info[$key]['start_time_4']=date('Y-m-d H:i:s', $value['start_time_4']);
                 }else{
                     $match_bmz_info[$key]['start_time_4']="";
                 }
                 if($value['end_time_4']){
-                    $match_bmz_info[$key]['end_time_4']=date('Y-m-d', $value['end_time_4']);
+                    $match_bmz_info[$key]['end_time_4']=date('Y-m-d H:i:s', $value['end_time_4']);
                 }else{
                     $match_bmz_info[$key]['end_time_4']="";
                 }
 
                 if($value['start_time_5']){
-                    $match_bmz_info[$key]['start_time_5']=date('Y-m-d', $value['start_time_5']);
+                    $match_bmz_info[$key]['start_time_5']=date('Y-m-d H:i:s', $value['start_time_5']);
                 }else{
                     $match_bmz_info[$key]['start_time_5']="";
                 }
                 if($value['end_time_5']){
-                    $match_bmz_info[$key]['end_time_5']=date('Y-m-d', $value['end_time_5']);
+                    $match_bmz_info[$key]['end_time_5']=date('Y-m-d H:i:s', $value['end_time_5']);
                 }else{
                     $match_bmz_info[$key]['end_time_5']="";
                 }
 
                 if($value['start_time_6']){
-                    $match_bmz_info[$key]['start_time_6']=date('Y-m-d', $value['start_time_6']);
+                    $match_bmz_info[$key]['start_time_6']=date('Y-m-d H:i:s', $value['start_time_6']);
                 }else{
                     $match_bmz_info[$key]['start_time_6']="";
                 }
                 if($value['end_time_6']){
-                    $match_bmz_info[$key]['end_time_6']=date('Y-m-d', $value['end_time_6']);
+                    $match_bmz_info[$key]['end_time_6']=date('Y-m-d H:i:s', $value['end_time_6']);
                 }else{
                     $match_bmz_info[$key]['end_time_6']="";
                 }
             }
             $row['_bmz']=$match_bmz_info;
 
-            $row['time']=date('Y-m-d H:i',$row['time']);
-            $row['start_time']=date('Y-m-d H:i',$row['start_time']);
-            $row['end_time']=date('Y-m-d H:i',$row['end_time']);
+            $row['time']=date('Y-m-d H:i:s H:i',$row['time']);
+            $row['start_time']=date('Y-m-d H:i:s H:i',$row['start_time']);
+            $row['end_time']=date('Y-m-d H:i:s H:i',$row['end_time']);
 
 
 // dump($row);die;
@@ -253,6 +249,28 @@ class MatchController extends AuthController {
                 }
                 $str=implode(',', $arr);
                 $data['type_sq_offline']=$str;
+            }
+            if($_POST['online_bmz']){
+                $str="";
+                $arr=array();
+                foreach ($_POST['online_bmz'] as $key => $value) {
+                    if($value!=""){
+                        $arr[]=$key;
+                    }
+                }
+                $str=implode(',', $arr);
+                $data['online_bmz']=$str;
+            }
+            if($_POST['offline_bmz']){
+                $str="";
+                $arr=array();
+                foreach ($_POST['offline_bmz'] as $key => $value) {
+                    if($value!=""){
+                        $arr[]=$key;
+                    }
+                }
+                $str=implode(',', $arr);
+                $data['offline_bmz']=$str;
             }
 
             $id = M('Match')->add($data);
@@ -323,9 +341,9 @@ class MatchController extends AuthController {
 
                 $row= D('Match')->relation(true)->find($id);
 
-                $row['time']=date('Y-m-d H:i',$row['time']);
-                $row['start_time']=date('Y-m-d H:i',$row['start_time']);
-                $row['end_time']=date('Y-m-d H:i',$row['end_time']);
+                $row['time']=date('Y-m-d H:i:s H:i',$row['time']);
+                $row['start_time']=date('Y-m-d H:i:s H:i',$row['start_time']);
+                $row['end_time']=date('Y-m-d H:i:s H:i',$row['end_time']);
 
                 if($row){
                     $data=array();
@@ -347,7 +365,7 @@ class MatchController extends AuthController {
             $data['code']=2;
             $data['msg']='请登录';
         }
-die;
+
         echo json_encode($data);
     }
 
@@ -362,42 +380,135 @@ die;
             $data['start_time']=strtotime($data['start_time']);
             $data['end_time']=strtotime($data['end_time']);
 
+
+            if($_POST['type_sqz_online']){
+                foreach ($_POST['type_sqz_online'] as $key => $value) {
+                    $data['type_sqz_online']=$key;
+                    $online_sqz=$key;
+                }
+            }
+            if($_POST['type_sqz_offline']){
+                foreach ($_POST['type_sqz_offline'] as $key => $value) {
+                    $data['type_sqz_offline']=$key;
+                    $offline_sqz=$key;
+                }
+            }
+            if($_POST['type_sq_online']){
+                $str="";
+                $arr=array();
+                foreach ($_POST['type_sq_online'] as $key => $value) {
+                    $arr[]=$key;
+                }
+                $str=implode(',', $arr);
+                $data['type_sq_online']=$str;
+            }
+            if($_POST['type_sq_offline']){
+                $str="";
+                $arr=array();
+                foreach ($_POST['type_sq_offline'] as $key => $value) {
+                    $arr[]=$key;
+                }
+                $str=implode(',', $arr);
+                $data['type_sq_offline']=$str;
+            }
+            if($_POST['online_bmz']){
+                $str="";
+                $arr=array();
+                foreach ($_POST['online_bmz'] as $key => $value) {
+                    if($value!=""){
+                        $arr[]=$key;
+                    }
+                }
+                $str=implode(',', $arr);
+                $data['online_bmz']=$str;
+            }
+            if($_POST['offline_bmz']){
+                $str="";
+                $arr=array();
+                foreach ($_POST['offline_bmz'] as $key => $value) {
+                    if($value!=""){
+                        $arr[]=$key;
+                    }
+                }
+                $str=implode(',', $arr);
+                $data['offline_bmz']=$str;
+            }
+
+
+
             $res = M('Match')->save($data);
             if($res){
 
                 $id=$data['id'];
                 $row= D('Match')->relation(true)->find($id);
 
-                $row['time']=date('Y-m-d H:i',$row['time']);
-                $row['start_time']=date('Y-m-d H:i',$row['start_time']);
-                $row['end_time']=date('Y-m-d H:i',$row['end_time']);
+                $row['time']=date('Y-m-d H:i:s H:i',$row['time']);
+                $row['start_time']=date('Y-m-d H:i:s H:i',$row['start_time']);
+                $row['end_time']=date('Y-m-d H:i:s H:i',$row['end_time']);
 
                 if($row){
-
-                    //重置比赛报名组
+                    //先删除重置比赛报名组
                     M('match_bmz')->where(array('mid'=>$_POST['id']))->delete();
-                    foreach ($_POST['match_bmz'] as $key => $value) {
-                        if($value!=''){
-                            $arr=explode('#', $value);
-                            $data=array();
-                            $data['mid']=$_POST['id'];
-                            $data['type']=$key;
-                            $data['time']=time();
+                    //再添加比赛报名组
+                    if($_POST['type_sqz_online']){
+                        $sqz=$online_sqz;
+                        if($_POST['online_bmz']){
+                            foreach ($_POST['online_bmz'] as $key => $value) {
+                                if($value!=''){
+                                    $arr=explode('#', $value);
+                                    $data=array();
+                                    $data['mid']=$id;
+                                    $data['type']=$key;
+                                    $data['sqz']=$sqz;
+                                    $data['time']=time();
 
-                            $data['start_time_1']=strtotime($arr[0]);
-                            $data['end_time_1']=strtotime($arr[1]);
-                            $data['start_time_2']=strtotime($arr[2]);
-                            $data['end_time_2']=strtotime($arr[3]);
-                            $data['start_time_3']=strtotime($arr[4]);
-                            $data['end_time_3']=strtotime($arr[5]);
-                            $data['start_time_4']=strtotime($arr[6]);
-                            $data['end_time_4']=strtotime($arr[7]);
-                            $data['start_time_5']=strtotime($arr[8]);
-                            $data['end_time_5']=strtotime($arr[9]);
-                            $data['start_time_6']=strtotime($arr[10]);
-                            $data['end_time_6']=strtotime($arr[11]);
+                                    $data['start_time_1']=strtotime($arr[0]);
+                                    $data['end_time_1']=strtotime($arr[1]);
+                                    $data['start_time_2']=strtotime($arr[2]);
+                                    $data['end_time_2']=strtotime($arr[3]);
+                                    $data['start_time_3']=strtotime($arr[4]);
+                                    $data['end_time_3']=strtotime($arr[5]);
+                                    $data['start_time_4']=strtotime($arr[6]);
+                                    $data['end_time_4']=strtotime($arr[7]);
+                                    $data['start_time_5']=strtotime($arr[8]);
+                                    $data['end_time_5']=strtotime($arr[9]);
+                                    $data['start_time_6']=strtotime($arr[10]);
+                                    $data['end_time_6']=strtotime($arr[11]);
 
-                            M('match_bmz')->add($data);
+                                    M('match_bmz')->add($data);
+                                }
+                            }
+                        }
+                    }
+
+                    if($_POST['type_sqz_offline']){
+                        $sqz=$offline_sqz;
+                        if($_POST['offline_bmz']){
+                            foreach ($_POST['offline_bmz'] as $key => $value) {
+                                if($value!=''){
+                                    $arr=explode('#', $value);
+                                    $data=array();
+                                    $data['mid']=$id;
+                                    $data['type']=$key;
+                                    $data['sqz']=$sqz;
+                                    $data['time']=time();
+
+                                    $data['start_time_1']=strtotime($arr[0]);
+                                    $data['end_time_1']=strtotime($arr[1]);
+                                    $data['start_time_2']=strtotime($arr[2]);
+                                    $data['end_time_2']=strtotime($arr[3]);
+                                    $data['start_time_3']=strtotime($arr[4]);
+                                    $data['end_time_3']=strtotime($arr[5]);
+                                    $data['start_time_4']=strtotime($arr[6]);
+                                    $data['end_time_4']=strtotime($arr[7]);
+                                    $data['start_time_5']=strtotime($arr[8]);
+                                    $data['end_time_5']=strtotime($arr[9]);
+                                    $data['start_time_6']=strtotime($arr[10]);
+                                    $data['end_time_6']=strtotime($arr[11]);
+
+                                    M('match_bmz')->add($data);
+                                }
+                            }
                         }
                     }
 

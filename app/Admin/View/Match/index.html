@@ -740,6 +740,10 @@
            <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="edit_form" enctype="multipart/form-data">
             
               <table class="table table-striped table-bordered table-hover">
+                <colgroup>
+                  <col width="600">
+                  <col width="600">
+                </colgroup>
                 <tbody>
                   <tr>
                     <td>
@@ -794,7 +798,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">赛区类型</label>
                           <div class="layui-input-inline">
-                            <input type="checkbox" name="type_sqz_online[1359]" title="网络赛区">
+                            <input type="checkbox" name="type_sqz_online[1359]" class="type_sqz_online" title="网络赛区">
                           </div>
                         </div>
                       </div>
@@ -804,7 +808,7 @@
                         <div class="layui-form-item">
                           <label class="layui-form-label">赛区类型</label>
                           <div class="layui-input-inline">
-                            <input type="checkbox" name="type_sqz_offline[1360]" title="线下赛区">
+                            <input type="checkbox" name="type_sqz_offline[1360]" class="type_sqz_offline" title="线下赛区">
                           </div>
                         </div>
                       </div>
@@ -818,7 +822,7 @@
                           <label class="layui-form-label">具体赛区</label>
                           <div class="layui-input-inline">
                             <foreach name="online_sq" item="v">
-                                <input type="checkbox" name="type_sq_online[{$v.id}]" title="{$v.title}">
+                                <input type="checkbox" name="type_sq_online[{$v.id}]" class="type_sq_online" data-id="{$v.id}" title="{$v.title}">
                             </foreach>
                           </div>
                         </div>
@@ -830,7 +834,7 @@
                           <label class="layui-form-label">具体赛区</label>
                           <div class="layui-input-inline">
                             <foreach name="offline_sq" item="v">
-                                <input type="checkbox" name="type_sq_offline[{$v.id}]" title="{$v.title}">
+                                <input type="checkbox" name="type_sq_offline[{$v.id}]" class="type_sq_offline" data-id="{$v.id}" title="{$v.title}">
                             </foreach>
                           </div>
                         </div>
@@ -848,7 +852,7 @@
                               
                               <foreach name="online_bmz" item="v">
                                  <label class="layui-btn layui-btn-primary {$v.id}" data-time="" data-id="{$v.id}">{$v.title}</label>
-                                 <input type="hidden" name="online_bmz[{$v.id}]" value="" class="layui-input {$v.id}">
+                                 <input type="hidden" name="online_bmz[{$v.id}]" value="" data-id="{$v.id}" class="layui-input {$v.id} online_bmz">
                               </foreach>
 
                           </div>
@@ -865,7 +869,7 @@
                               
                               <foreach name="offline_bmz" item="v">
                                  <label class="layui-btn layui-btn-primary {$v.id}" data-time="" data-id="{$v.id}">{$v.title}</label>
-                                 <input type="hidden" name="offline_bmz[{$v.id}]" value="" class="layui-input {$v.id}">
+                                 <input type="hidden" name="offline_bmz[{$v.id}]" value="" data-id="{$v.id}" class="layui-input {$v.id} offline_bmz">
                               </foreach>
 
                           </div>
@@ -1830,23 +1834,58 @@
                           }
                       });
 
-                      $.each($("#edit_form .type_bmz option"), function(name, value){
-                          if($(value).attr('alt')==data.type_bmz){
-                              $(value).attr('selected','selected');
+                      if(data.type_sqz_online){
+                          $('#edit_form input.type_sqz_online').attr('checked','checked');
+                      }else{
+                          $('#edit_form input.type_sqz_online').removeAttr('checked');
+                      }
+
+                      if(data.type_sqz_offline){
+                          $('#edit_form input.type_sqz_offline').attr('checked','checked');
+                      }else{
+                          $('#edit_form input.type_sqz_offline').removeAttr('checked');
+                      }
+
+                      $.each($("#edit_form input.type_sq_online"), function(name, value){
+                          var arr=data.type_sq_online.split(',');
+                          if( $.inArray( $(value).attr('data-id'), arr )>=0 ){
+                              $(value).attr('checked','checked');
                           }else{
-                              $(value).removeAttr('selected');
+                              $(value).removeAttr('checked');
                           }
                       });
 
-                      $.each($("#edit_form .type_sqz option"), function(name, value){
-                          if($(value).attr('alt')==data.type_sqz){
-                              $(value).attr('selected','selected');
+                      $.each($("#edit_form input.type_sq_offline"), function(name, value){
+                          var arr=data.type_sq_offline.split(',');
+                          if( $.inArray( $(value).attr('data-id'), arr )>=0 ){
+                              $(value).attr('checked','checked');
                           }else{
-                              $(value).removeAttr('selected');
+                              $(value).removeAttr('checked');
                           }
                       });
 
-                      _ajax_get_type_sq_edit(data.type_sqz, data.type_sq);
+                      $.each($("#edit_form input.online_bmz"), function(name, value){
+                          var arr=data.online_bmz.split(',');
+
+                          if( $.inArray( $(value).attr('data-id'), arr )>=0 ){
+                              $('#edit_form .online_bmz_box label.'+ $(value).attr('data-id') ).addClass('activing');
+                              $(value).attr('checked','checked');
+                          }else{
+                              $('#edit_form .online_bmz_box label.'+ $(value).attr('data-id') ).removeAttr('activing');
+                              $(value).removeAttr('checked');
+                          }
+                      });
+
+                      $.each($("#edit_form input.offline_bmz"), function(name, value){
+                          var arr=data.offline_bmz.split(',');
+                          if( $.inArray( $(value).attr('data-id'), arr )>=0 ){
+                              $('#edit_form .offline_bmz_box label.'+ $(value).attr('data-id') ).addClass('activing');
+                              $(value).attr('checked','checked');
+                          }else{
+                              $('#edit_form .offline_bmz_box label.'+ $(value).attr('data-id') ).removeAttr('activing');
+                              $(value).removeAttr('checked');
+                          }
+                      });
                       
                       $.each(data._bmz, function(name, value){
                           var start_time_1=value.start_time_1;
@@ -1880,8 +1919,10 @@
 
                           str=arr.join('#');
 
-                          $("#edit_form .bmz_box_left label."+value.type).attr('data-time',str).addClass('activing');
-                          $("#edit_form .bmz_box_left input."+value.type).val(str);
+                          $("#edit_form .online_bmz_box label."+value.type).attr('data-time',str).addClass('activing');
+                          $("#edit_form .online_bmz_box input."+value.type).val(str);
+                          $("#edit_form .offline_bmz_box label."+value.type).attr('data-time',str).addClass('activing');
+                          $("#edit_form .offline_bmz_box input."+value.type).val(str);
                       });
 
 
@@ -2025,50 +2066,6 @@
                       var doTtmpl = doT.template(tmpl);
                       var doT_Str=str+doTtmpl(json);
                       $('#add_form .type_sq').html(doT_Str);
-
-                      layui.form().render();
-
-                      _json=json;
-                  }else{
-                      layer.msg(json.msg);
-                  }
-              },
-              error  : function() {  
-                  layer.msg('error');
-              }  
-          }); 
-          return _json;
-      }
-
-      //获取赛区
-      function _ajax_get_type_sq_edit(type_sqz, type_sq){
-          var _json;
-          $.ajax({  
-              async:false,
-              type:'get',  
-              url : "{:U('Admin/Match/ajax_get_type_sq')}",
-              data:{
-                  id: type_sqz
-              },
-              dataType : 'json',
-              success  : function(json) { 
-
-                  if(json.code == 0){
-                      var data=json.data;
-                      var str='';
-
-                      str+='<option value="">请选择</option>';
-console.log(data);
-                      $.each(data, function(name, value){
-                          if(value.id==type_sq){
-                              str+='<option value="'+value.id+'" selected="selected">'+value.title+'</option>';
-                          }else{
-                              str+='<option value="'+value.id+'">'+value.title+'</option>';
-                          }
-                      });
-                     
-console.log(str);
-                      $('#edit_form .type_sq').html(str);
 
                       layui.form().render();
 
@@ -2277,18 +2274,6 @@ console.log(str);
               form.on('submit(demo1_edit)', function(data){
                 var _json=_ajax_edit(data.field);
                 return false;
-              });
-
-              form.on('select(type_sqz)', function(data){
-                  var type_sqz=data.value;
-                  _ajax_get_type_sq(type_sqz);
-                  console.log(data);
-              });
-
-              form.on('select(type_sqz_edit)', function(data){
-                  var type_sqz=data.value;
-                  _ajax_get_type_sq_edit(type_sqz);
-                  console.log(data);
               });
 
             });
