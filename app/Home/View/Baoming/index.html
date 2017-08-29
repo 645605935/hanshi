@@ -49,7 +49,7 @@
                                     </div>
                                 </a>
                                 <div class="info-btn">
-                                    <a href="javascript:;" data-id="{$v.id}" data-mid="{$v.mid}" data-type="{$v.type}" data-uid="{$user.id}" class="btn vote_btn">立即投票</a>
+                                    <a href="javascript:;" data-id="{$v.id}" data-mid="{$v.mid}" data-type="{$v.type}" data-sqz="{$v.sqz}" data-uid="{$user.id}" class="btn vote_btn">立即投票</a>
                                     <span class="btn1"><i></i><em>{$v.vote}</em></span>
                                 </div>
                             </li>
@@ -108,7 +108,8 @@
                 var id=$(this).attr('data-id');
                 var mid=$(this).attr('data-mid');
                 var type=$(this).attr('data-type');
-                var _json=_ajax_vote(id, mid, type);
+                var sqz=$(this).attr('data-sqz');
+                var _json=_ajax_vote(id, mid, type, sqz);
                 if(_json.code==0){
                     $(this).next().find('em').html(++cur_num);
                 }
@@ -118,7 +119,7 @@
 </script>
 
 <script>
-    function _ajax_vote(id, mid, type){
+    function _ajax_vote(id, mid, type, sqz){
          var _json;
          $.ajax({  
              async:false,
@@ -128,7 +129,8 @@
              data: {
                 id:id,
                 mid:mid,
-                type:type
+                type:type,
+                sqz:sqz
              },
              dataType : 'json',
              success  : function(json) {

@@ -90,6 +90,18 @@ class BaomingController extends CommonController{
         $id=$_GET['id'];
         $mid=$_GET['mid'];
         $type=$_GET['type'];
+        $sqz=$_GET['sqz'];
+
+        //查看当前报名是否处于可投票时间段
+        $where=array();
+        $where['mid']=$mid;
+        $where['type']=$type;
+        $where['sqz']=$sqz;
+        $match_bmz_info=M('match_bmz')->where($where)->find();
+        if(1){
+
+        }
+
         if($user){
             //一个比赛有好多人报名
             //每一比赛的每个人每天最多可以投五个报名
@@ -174,8 +186,92 @@ class BaomingController extends CommonController{
          return $return[array_rand($return) ];
     }
          
+    
+    public function ajax_get_sqz(){
+        $mid=I('mid');
 
+        $row = M('Match')->find($mid);
+        $list=array();
+        if($row['type_sqz_online']){
+            $list[]=M('Type')->find($row['type_sqz_online']);
+        }
+        if($row['type_sqz_offline']){
+            $list[]=M('Type')->find($row['type_sqz_offline']);
+        }
 
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
+    public function ajax_get_sq(){
+        $mid=I('mid');
+        $sqz=I('sqz');
+
+        $row = M('Match')->find($mid);
+        if(1359==$sqz){
+            $arr=explode(',', $row['type_sq_online']);
+            $list=M('Type')->where(array('id'=>array('in', $arr)))->select();
+        }
+
+        if(1360==$sqz){
+            $arr=explode(',', $row['type_sq_offline']);
+            $list=M('Type')->where(array('id'=>array('in', $arr)))->select();
+        }
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
+    public function ajax_get_bmz(){
+        $mid=I('mid');
+        $sqz=I('sqz');
+
+        $row = M('Match')->find($mid);
+        if(1359==$sqz){
+            $arr=explode(',', $row['online_bmz']);
+            $list=M('Type')->where(array('id'=>array('in', $arr)))->select();
+        }
+
+        if(1360==$sqz){
+            $arr=explode(',', $row['offline_bmz']);
+            $list=M('Type')->where(array('id'=>array('in', $arr)))->select();
+        }
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
+    
 
 
 

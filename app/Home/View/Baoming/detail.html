@@ -25,7 +25,7 @@
                         <ul>
                             <li><a href="#changyan_box" class="tit-pl">评论</a></li>
                             <li><a href="#4" class="tit-lp">一键拉票</a></li>
-                            <li><a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.type}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a><p>{$row.vote}票</p></li>
+                            <li><a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.type}" data-sqz="{$row.sqz}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a><p>{$row.vote}票</p></li>
                         </ul>
     <style type="text/css">
         #baiduShare_box{position: relative;}
@@ -125,8 +125,9 @@
                 var id=$(this).attr('data-id');
                 var mid=$(this).attr('data-mid');
                 var type=$(this).attr('data-type');
+                var sqz=$(this).attr('data-sqz');
 
-                var _json=_ajax_vote(id, mid, type);
+                var _json=_ajax_vote(id, mid, type, sqz);
                 if(_json.code==0){
                     window.location.reload();
                 }
@@ -136,7 +137,7 @@
 </script>
 
 <script>
-    function _ajax_vote(id, mid, type){
+    function _ajax_vote(id, mid, type, sqz){
          var _json;
          $.ajax({  
              async:false,
@@ -146,7 +147,8 @@
              data: {
                 id:id,
                 mid:mid,
-                type:type
+                type:type,
+                sqz:sqz
              },
              dataType : 'json',
              success  : function(json) {
