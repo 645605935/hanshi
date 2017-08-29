@@ -57,6 +57,9 @@ class BaomingController extends CommonController{
     public function baoming(){
         global $user;
 
+        $temp=M('User')->field('personal_authentication')->find($user['id']);
+        $this->personal_authentication=$temp['personal_authentication'];
+
         $type=I('type');
         $where=array();
         if($type){

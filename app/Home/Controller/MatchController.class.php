@@ -64,8 +64,20 @@ class MatchController extends CommonController{
     public function baoming(){
         global $user;
 
+        $temp=M('User')->field('personal_authentication')->find($user['id']);
+        $this->personal_authentication=$temp['personal_authentication'];
+
         $id=$_GET['id'];
         $row=M('Match')->find($id);
+
+        $sqz=array();
+        if($row['type_sqz_online']){
+            $sqz[]=M('Type')->find($row['type_sqz_online']);
+        }
+        if($row['type_sqz_offline']){
+            $sqz[]=M('Type')->find($row['type_sqz_offline']);
+        }
+
 
         $type=M('Type')->where(array('pid'=>1283))->select();
 
@@ -73,6 +85,7 @@ class MatchController extends CommonController{
         $match=M('Match')->where(array('type'=>$row['type']))->select();
 
         $this->row=$row;
+        $this->sqz=$sqz;
         $this->type=$type;
         $this->match=$match;
         $this->display();

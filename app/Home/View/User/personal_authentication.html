@@ -140,13 +140,13 @@
 
 <script>
     //添加
-    function _ajax_add(_data){
+    function _ajax_personal_authentication(_data){
          var _json;
          $.ajax({  
              async:false,
              type:'post',  
              contentType:"application/x-www-form-urlencoded",
-             url : "{:U('Home/User/ajax_add_sfz')}",
+             url : "{:U('Home/User/ajax_personal_authentication')}",
              data: _data,
              dataType : 'json',
              success  : function(json) {
@@ -206,7 +206,7 @@
 
       //监听提交
       form.on('submit(demo1_add)', function(data){
-        var _json=_ajax_add(data.field);
+        var _json=_ajax_personal_authentication(data.field);
         return false;
       });
     });

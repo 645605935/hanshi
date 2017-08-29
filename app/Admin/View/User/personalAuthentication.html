@@ -1,0 +1,715 @@
+<include file="Public/header"/>
+    <!-- basic styles -->
+    <link href="__PUBLIC__/Admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/chosen.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/datepicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/daterangepicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/colorpicker.css" />
+    
+    <!-- 模块jqgrid  start -->
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/jquery-ui-1.10.3.full.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/datepicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ui.jqgrid.css" />
+    <!-- 模块jqgrid  end -->
+
+    <!-- fonts -->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Admin/assets/css/google_font_css.css">
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace-skins.min.css" />
+
+    <!-- jQuery smartMenu右键自定义上下文菜单插件  start -->
+    <link rel="stylesheet" href="__PUBLIC__/Admin/jquery-smartMenu/css/smartMenu.css" type="text/css" />
+    <!-- jQuery smartMenu右键自定义上下文菜单插件  end -->
+
+    <link rel="stylesheet" href="__PUBLIC__/Admin/layui-v1.0.4/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/my_diy_css.css"  media="all">
+
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace-ie.min.css" />
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+
+    <script src="__PUBLIC__/Admin/assets/js/ace-extra.min.js"></script>
+    <script src="__PUBLIC__/Admin/assets/js/jquery.min.js"></script>
+    <!-- layui.js   -->
+    <script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
+    <script src="__PUBLIC__/layer/layer.js"></script>
+
+    <!-- jquery获取地址栏参数 -->
+    <script src="__PUBLIC__/js/jquery_get.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        console.log($.request.queryString);
+      });
+    </script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+
+
+    <!--[if lt IE 9]>
+
+    <script src="__PUBLIC__/Admin/assets/js/html5shiv.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/respond.min.js"></script>
+
+    <![endif]-->
+
+  </head>
+
+  <body>
+    <div class="navbar navbar-default" id="navbar">
+      <include file="Public/navbar"/>
+    </div>
+
+    <div class="main-container" id="main-container">
+
+      <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+      </script>
+
+      <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+          <span class="menu-text"></span>
+        </a>
+
+        <!-- 左侧菜单栏 start-->
+        <div class="sidebar" id="sidebar">
+          <include file="Public/left"/>
+        </div>
+        
+        <!-- 右侧主要内容 start-->
+        <div class="main-content">
+          
+
+          <!-- 右block_1  start -->
+          <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+              try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+              <include file="Public/_breadcrumb"/>
+            </ul><!-- .breadcrumb -->
+
+            <div class="nav-search" id="nav-search">
+              <form class="form-search">
+                <span class="input-icon">
+                  <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                  <i class="icon-search nav-search-icon"></i>
+                </span>
+              </form>
+            </div><!-- #nav-search -->
+          </div>
+          <!-- 右block_1  end -->
+
+          <div class="page-content">
+            <!-- 权限设置  start -->
+            <include file="Public/role_page_setting"/>
+            <!-- 权限设置  end -->
+
+            <div class="row">
+              <div class="col-xs-12">
+
+                <style>
+                  .layui-form-item .layui-input-inline{width: auto!important;}
+                  .layui-form-item{margin-bottom: 0px;}
+                  #gbox_grid-table{width: 100%!important;}
+                  #gview_grid-table{width: 100%!important;}
+                  #gview_grid-table>div{width: 100%!important;}
+                </style>
+
+                <!-- 搜索  start -->
+                <div class="row">
+                    <form class="layui-form layui-form-pane col-xs-12" action="" method="post">
+                        <table class="layui-table" id="search_table">
+                          <thead>
+                            <tr>
+                              <th>搜索</th>
+                            </tr> 
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+
+                                <div class="layui-inline" style="margin-top: 5px;">
+                                  <div class="layui-form-item">
+                                    <label class="layui-form-label">用户名</label>
+                                    <div class="layui-input-inline">
+                                      <input type="text" name="username" value="{$_POST['username']}" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                  </div>
+                                </div>  
+                                
+                                <div class="layui-inline" style="margin-top: 5px;">
+                                  <div class="layui-form-item">
+                                    <label class="layui-form-label">用户组</label>
+                                    <div class="layui-input-inline">
+                                      <select name="gid">
+                                        <option value="请选择">请选择</option>
+                                        <foreach name="group" item="vo">
+                                           <optgroup label="{$vo['title']}">
+                                             <foreach name="vo['_child']" item="v">
+                                               <option value="{$v.id}" <if condition="$v.id eq $_POST['gid']">selected</if>>{$v.title}</option>
+                                             </foreach>
+                                           </optgroup>
+                                        </foreach>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>  
+
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td>
+                                <button style="float:left;" class="layui-btn id-btn-dialog2_add" title="id-btn-dialog2_add"> 添加 </button>
+                                <a style="float:right;" href="{:U('Admin/User/homeUser')}" class="layui-btn search_btn" >重置</a>
+                                <button style="float:right;" type="submit" class="layui-btn search_btn" id="search_submit" name="submit" title="search_btn">搜索</button>
+                              </td>
+                            </tr> 
+                          </tfoot>
+                        </table>
+                    </form>
+                </div>
+                <!-- 搜索  end -->
+
+                <div class="row">
+                    <div class="col-xs-7">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">会员列表</div>
+                          <div class="panel-body">
+                            <table id="grid-table"></table>
+                            <div id="grid-pager"></div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-5">
+                        <div class="panel panel-default" id="detail_show" style="display:none;">
+                          <div class="panel-heading">更多</div>
+                          <div class="panel-body">
+                              
+                              <form class="layui-form layui-form-pane col-xs-12" id="edit_form">
+                                 <table id="sample-table_add" class="table table-striped table-bordered table-hover">
+                                   <colgroup>
+                                     <col width="50%">
+                                     <col width="50%">
+                                   </colgroup>
+                                   <tbody>
+                                     <tr>
+                                       <td class="center">
+                                         <div class="layui-inline">
+                                           <div class="layui-form-item">
+                                             <label class="layui-form-label">正面</label>
+                                             <div class="layui-input-inline">
+                                               <img class="sfz_1" src="" style="width:100%;">
+                                             </div>
+                                           </div>
+                                         </div>
+                                       </td>
+                                       <td>
+                                         <div class="layui-inline">
+                                           <div class="layui-form-item">
+                                             <label class="layui-form-label">反面</label>
+                                             <div class="layui-input-inline">
+                                               <img class="sfz_2" src="" style="width:100%;">
+                                             </div>
+                                           </div>
+                                         </div>
+                                       </td>
+                                     </tr>
+                                     <tr>
+                                       <td class="center" colspan="2">
+                                         <div class="layui-inline">
+                                           <div class="layui-form-item">
+                                             <label class="layui-form-label">是否同意</label>
+                                             <div class="layui-input-inline">
+                                               <input type="checkbox" checked="" class="personal_authentication" name="personal_authentication" lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
+                                             </div>
+                                           </div>
+                                         </div>
+                                       </td>
+                                     </tr>
+                                   </tbody>
+                                   <tfoot>
+                                     <tr>
+                                       <td colspan="2" style="text-align:right;">
+                                         <input type="text" name="id" value="" class="layui-input id">
+                                         <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确定</button>
+                                       </td>
+                                     </tr>
+                                   </tfoot>
+                                 </table>
+                              </form>
+
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE CONTENT ENDS -->
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.page-content -->
+
+        </div><!-- /.main-content -->
+        <!-- 右侧主要内容 end-->
+
+        
+        
+        <!-- 模板相关设置 -->
+        <include file="Public/ace-settings-container"/>
+
+      </div><!-- /.main-container-inner -->
+
+
+
+      <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+
+      </a>
+
+    </div><!-- /.main-container -->
+
+    <!-- 底栏版本说明 -->
+    <include file="Public/footer"/>
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+
+
+    <!-- <![endif]-->
+
+
+
+    <!--[if IE]>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<![endif]-->
+
+
+
+    <!--[if !IE]> -->
+
+
+
+    <script type="text/javascript">
+
+      window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+
+    </script>
+
+
+
+    <!-- <![endif]-->
+
+
+
+    <!--[if IE]>
+
+<script type="text/javascript">
+
+ window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+
+</script>
+
+<![endif]-->
+
+
+
+    <script type="text/javascript">
+
+      if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+
+    </script>
+
+    <script src="__PUBLIC__/Admin/assets/js/bootstrap.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/typeahead-bs2.min.js"></script>
+
+
+
+    <!-- page specific plugin scripts -->
+
+    <script src="__PUBLIC__/Admin/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/jquery.ui.touch-punch.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/chosen.jquery.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/fuelux/fuelux.spinner.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/date-time/bootstrap-timepicker.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/date-time/moment.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/date-time/daterangepicker.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/bootstrap-colorpicker.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/jquery.knob.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/jquery.autosize.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/jquery.maskedinput.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/bootstrap-tag.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/jquery.dataTables.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/jquery.dataTables.bootstrap.js"></script>
+    
+    <!-- 模块jqgrid  start -->
+    <script src="__PUBLIC__/Admin/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+    <script src="__PUBLIC__/Admin/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+    <!-- <script src="__PUBLIC__/Admin/assets/js/jqGrid/grid.setcolumns.js"></script> -->
+    <!-- <script src="__PUBLIC__/Admin/assets/js/jqGrid/i18n/grid.locale-en.js"></script> -->
+    <script src="__PUBLIC__/Admin/assets/js/jqGrid/i18n/grid.locale-zh.js"></script>
+    
+    <script src="__PUBLIC__/Admin/assets/js/jquery-ui-1.10.3.full.min.js"></script>
+    <script src="__PUBLIC__/Admin/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <!-- 模块jqgrid  end -->
+
+    <!-- ace scripts -->
+    <script src="__PUBLIC__/Admin/assets/js/jquery.nestable.min.js"></script>
+
+
+    <script src="__PUBLIC__/Admin/assets/js/ace-elements.min.js"></script>
+
+    <script src="__PUBLIC__/Admin/assets/js/ace.min.js"></script>
+
+    
+
+    <!-- inline scripts related to this page -->
+
+
+    <script type="text/javascript">
+      $(function(){
+          pageInit();
+
+          //初使化按钮操作权限
+          var page="{$page}";
+          _init_button_operate(page);
+      });
+
+      //自定义报警列格式
+      function statusFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue == "1"){
+              return '<button class="btn btn-primary btn-xs">正常</button>';
+          }else{
+              return '<button class="btn btn-danger btn-xs">禁止</button>';
+          }
+      }
+
+      //自定义报警列格式
+      function imgFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue != "0"){
+              return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
+          }else{
+              return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
+          }
+      }
+
+      function pageInit(){
+        var grid_data=_ajax_list_user_list();
+
+        jQuery(grid_selector).jqGrid({
+          caption: "个人认证申请列表",
+          data: grid_data,
+          datatype: "local",
+          colNames:['id', '姓名', '用户名','用户组', '头像', '状态', '注册时间', '操作'],
+          colModel:[
+            {name:'id', index:'id', sorttype:"int", align:"center", hidden: true},
+
+            {name:'truename',index:'truename',align:"center",hidden: true},
+            {name:'username',index:'username',align:"center"},
+            {name:'_auth_group_title',index:'_auth_group_title',align:"center"},
+            {name:'img',index:'img',align:"center", formatter: imgFormatter },
+            {name:'status',index:'status',align:"center", formatter: statusFormatter },
+            {name:'time',index:'time',align:"center",hidden: true},
+
+            {name:'operates',index:'operates',align:'center',sortable:false,width:200}
+          ], 
+          rownumbers:true,
+          rownumWidth:50,//设置行号列宽度
+          shrinkToFit:true,//ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
+          autowidth:true,
+          viewrecords : true,
+          rowNum:10,
+          rowList:[10,20,30],
+          pager : pager_selector,
+          altRows: true,
+          width:'100%',
+          height: 450,
+          multiselect: false,
+          multiboxonly: true,
+          sortable: true,
+      
+          loadComplete : function() {
+            var table = this;
+            setTimeout(function(){
+              updatePagerIcons(table);
+            }, 0);
+          },
+
+          onSelectRow : function(id) {
+                _ajax_get_user_info(id);
+          },
+
+          gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
+              var ids=jQuery(grid_selector).jqGrid('getDataIDs');
+              for(var i=0; i<ids.length; i++){
+
+                  var id=ids[i];   
+                  var _rowData = $(grid_selector).jqGrid('getRowData',id);
+
+                  var operates =""; 
+                      operates += "<button style='margin-right:5px;' class='btn btn-warm btn-xs id-btn-dialog2_show'>查看</button>";
+
+                  jQuery(grid_selector).jqGrid('setRowData', ids[i], { operates: operates });
+              }
+          },
+        }).navGrid(pager_selector, {
+          	search: false,
+  	        add: false,
+  	        edit: false,
+  	        del: false,
+  	        refresh: false
+        });
+
+        jQuery(grid_selector).closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });//去除jqgrid横向滚动条
+
+
+
+        //更新分页图标  
+        function updatePagerIcons(table) {
+          var replacement = 
+          {
+            'ui-icon-seek-first' : 'icon-double-angle-left bigger-140',
+            'ui-icon-seek-prev' : 'icon-angle-left bigger-140',
+            'ui-icon-seek-next' : 'icon-angle-right bigger-140',
+            'ui-icon-seek-end' : 'icon-double-angle-right bigger-140'
+          };
+          $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+            var icon = $(this);
+            var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+            
+            if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+          })
+        }
+      }
+    </script>
+
+    
+    <!-- 确认弹框 end-->
+
+    <script type="text/javascript">
+       //获取列表
+       function _ajax_list_user_list(){
+          var grid_data;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              contentType:"application/x-www-form-urlencoded",
+              url : "{:U('Admin/User/ajax_get_personalAuthentication_list')}",
+              dataType : 'json',
+              success  : function(json) { 
+                  if(json.code==0){
+                      // layer.msg(json.msg);
+                      grid_data=json.data;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              }
+          });  
+          return grid_data;  
+       } 
+
+       //异步获取一条信息
+       function _ajax_get_user_info(id){
+           $.ajax({  
+               async:false,
+               type:'post',  
+               contentType:"application/x-www-form-urlencoded",
+               url : "{:U('Admin/User/ajax_get_user_info_by_id')}",
+               data: {
+                  id:id
+               },
+               dataType : 'json',
+               success  : function(json) {  
+                   if(json.code == 0){
+                       $('#edit_form .sfz_1').attr('src', json.data.sfz_1);
+                       $('#edit_form .sfz_2').attr('src', json.data.sfz_2);
+                       $('#edit_form .id').val(json.data.id);
+                       
+                       $('#detail_show').show();
+                   }else{
+                       layer.msg(json.msg);
+                   }
+               },
+               error  : function() {  
+                   alert('error');
+               }  
+           }); 
+       }
+
+       //异步编辑信息
+       function _ajax_personalAuthentication(data){
+           $.ajax({  
+               async:false,
+               type:'post',  
+               contentType:"application/x-www-form-urlencoded",
+               url : "{:U('Admin/User/ajax_personalAuthentication')}",
+               data: data,
+               dataType : 'json',
+               success  : function(json) {  
+                   if(json.code == 0){
+                       layer.msg(json.msg);
+                       window.location.reload();
+                   }else{
+                       layer.msg(json.msg);
+                   }
+               },
+               error  : function() {  
+                   alert('error');
+               }  
+           }); 
+       }
+    </script>
+
+    <script>
+        //layui表单
+        layui.use(['form', 'layedit', 'laydate'], function(){
+          var form = layui.form()
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+          //创建一个编辑器
+          var editIndex = layedit.build('LAY_demo_editor');
+
+          //自定义验证规则
+          form.verify({
+            title: function(value){
+              if(value.length < 5){
+                return '标题至少得5个字符啊';
+              }
+            }
+            ,truename: function(value){  
+              if(value.length < 2){  
+                return '请输入真实姓名';  
+              }  
+            }
+            ,username: function(value){  
+              if(value.length < 4){  
+                return '请输入至少4位的用户名';  
+              }  
+            }
+            ,password: [/(.+){6,12}$/, '密码必须6到12位']
+            ,content: function(value){
+              layedit.sync(editIndex);
+            }
+          });
+
+
+          //监听提交
+          form.on('submit(demo1)', function(data){
+            var _keyword=data.field.keyword;
+            get_bl_list(_keyword);
+            return false;
+          });
+
+
+          //监听提交
+          form.on('submit(demo1_search)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+              title: '最终的提交信息'
+            })
+            pageInit(_username, _gid);
+            return false;
+          });
+
+          //监听提交
+          form.on('submit(demo1_detail)', function(data){
+            alert('demo1_detail');
+            console.log(data.field);
+            return false;
+          });
+
+          //监听提交
+          form.on('submit(demo1_add)', function(data){
+            var _json=_ajax_add_user(data.field);
+
+            if(_json.code==0){
+                $("div[aria-describedby='dialog-confirm_add'] .ui-dialog-titlebar-close").trigger("click");
+            }
+            return false;
+          });
+
+          //监听提交
+          form.on('submit(demo1_edit)', function(data){
+            var _json=_ajax_personalAuthentication(data.field);
+
+            return false;
+          });
+        });
+    </script>
+
+
+    <script>
+        layui.use('upload', function(){
+          //上传文件
+          layui.upload({
+             url: "{:U('Admin/User/upload_img')}" //上传接口
+             ,elem: '#edit_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
+             ,success: function(res){ //上传成功后的回调
+               console.log(res);
+               if(res.code==0){
+                  $('#LAY_demo_upload_edit').attr('src',res.data.src);
+                  $('#edit_img').val(res.data.src);
+               }
+             }
+           });
+
+          //上传文件
+          layui.upload({
+             url: "{:U('Admin/User/upload_img')}" //上传接口
+             ,elem: '#add_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
+             ,success: function(res){ //上传成功后的回调
+               console.log(res);
+               if(res.code==0){
+                  $('#LAY_demo_upload_add').attr('src',res.data.src);
+                  $('#add_img').val(res.data.src);
+               }
+             }
+           });
+        });
+    </script>
+  </body>
+</html>
+

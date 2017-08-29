@@ -196,13 +196,14 @@ class UserController extends CommonController{
     }
 
     //添加身份证
-    public function ajax_add_sfz(){
+    public function ajax_personal_authentication(){
         global $user;
 
         $data=array();
         $data=$_POST;
         if($data){
             $data['time']=time();
+            $data['personal_authentication']=1;
 
             $id = M('User')->save($data);
             if($id){

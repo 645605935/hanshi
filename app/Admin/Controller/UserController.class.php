@@ -10,10 +10,6 @@ class UserController extends AuthController {
         $user=session('auth');
         $this->user=$user;
         $this->cur_c='User';
-
-        if($_POST){
-            $this->_POST=$_POST;
-        }
     }
 
     //删除用户，对应的权限也需要删除
@@ -57,6 +53,77 @@ class UserController extends AuthController {
         echo json_encode(array('txt'=>$txt));
     }
 
+
+    //个人认证列表
+    public function personalAuthentication(){
+        global $user;
+
+        $group=M('auth_group')->where(array('pid'=>0))->select();
+        foreach ($group as $key => $value) {
+            $group[$key]['_child']=M('auth_group')->where(array('pid'=>$value['id']))->select();
+        }
+        $this->group=$group;
+
+
+        $this->cur_v='User-personalAuthentication';
+        $this->display();
+    }
+
+    //异步获取个人认证
+    public function ajax_get_personalAuthentication_list(){
+        global $user;
+        $config=M('Config')->find(1);
+        $_oss_url_='http://'.$config['oss_url'].'/';
+        $_oss_style_48x48_=$config['oss_style_50x50'];
+        
+        $map=array();
+        $map['id']=array('neq',1);
+        $map['personal_authentication']=1;
+        $list = D('User')->where($map)->order('id desc')->relation(true)->select();
+
+        foreach ($list as $key => $value) {
+            $list[$key]['register_time']=date('Y-m-d',$value['register_time']);
+            $list[$key]['img']=$_oss_url_ . $value['img']. "?x-oss-process=" . $_oss_style_48x48_;
+        }
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='empty';
+        }
+        echo json_encode($data);
+    }
+
+    //异步个人认证
+    public function ajax_personalAuthentication(){
+        global $user;
+        
+        $data=array();
+        $data=$_POST;
+        if($_POST['personal_authentication']=='on'){
+            $data['personal_authentication']=2;
+        }else{
+            $data['personal_authentication']=-1;
+        }
+        $data['time']=time();
+        
+        $res = D('User')->save($data);
+        if($res){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='error';
+        }
+        echo json_encode($data);
+    }
 
     //会员列表
     public function homeUser(){
@@ -182,13 +249,7 @@ class UserController extends AuthController {
 
     //根据ID获取用户信息
     public function ajax_get_user_info_by_id(){
-
-        $_json=file_get_contents('php://input');
-        $_arr=json_decode($_json,true);
-
-        if($_arr){
-            $id=$_arr['id'];
-
+        if($id=$_POST['id']){
             $row = D('User')->find($id);
             if($row){
                 $data=array();

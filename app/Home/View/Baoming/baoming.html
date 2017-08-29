@@ -42,210 +42,226 @@
                                <col width="300">
                                <col>
                              </colgroup>
-                             <tbody>
-                               
-                               <tr>
-                                 <td>
-                                   <img class="cover" src="__PUBLIC__/Home/images/erweima.jpg">
-                                   <input type="file" id="add_upload_cover" name="img" class="layui-upload-file"><br>
-                                   <div class="layui-elem-quote" style="margin-top: 20px;border-left: 0px solid red;color: red;">
-                                     注：封面
-                                   </div>
-                                 </td>
 
-                                 <td>
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">报名单位</label>
-                                       <div class="layui-input-inline">
-                                          <input type="radio" name="unit" class="unit" value="1" title="个人" checked="">
-                                          <input type="radio" name="unit" class="unit" value="2" title="团体">
-                                       </div>
-                                     </div>
-                                   </div>
+                             <if condition="$personal_authentication neq 2">
+                                  <thead>
+                                    <tr>
+                                      <td colspan="2">
+                                        <div class="layui-elem-quote" style="margin-top: 0px;margin-bottom: 0px;">
+                                          <p>提示 - <a href="{:U('Home/User/personal_authentication')}" class="layui-btn layui-btn-mini layui-btn-normal">个人认证</a>之后才可以报名</p>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </thead>
+                             <else/>
+                                  <tbody>
+                                    
+                                    <tr>
+                                      <td>
+                                        <img class="cover" src="__PUBLIC__/Home/images/erweima.jpg">
+                                        <input type="file" id="add_upload_cover" name="img" class="layui-upload-file"><br>
+                                        <div class="layui-elem-quote" style="margin-top: 20px;border-left: 0px solid red;color: red;">
+                                          注：封面
+                                        </div>
+                                      </td>
 
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">作者/单位</label>
-                                       <div class="layui-input-inline">
-                                         <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
-                                       </div>
-                                     </div>
-                                   </div>
-
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">联系电话</label>
-                                       <div class="layui-input-inline">
-                                         <input type="text" name="phone" lay-verify="required" placeholder="" class="layui-input phone">
-                                       </div>
-                                     </div>
-                                   </div>
-
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">作品主题</label>
-                                       <div class="layui-input-inline">
-                                         <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
-                                       </div>
-                                     </div>
-                                   </div>
-
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">参赛项目</label>
-                                       <div class="layui-input-inline">
-                                           <select name="mid" class="mid" lay-verify="required" lay-filter="match_select" id="match_select">
-                                             <option value="">请选择</option>
-                                             <foreach name="match" item='v'>
-                                                <option value="{$v.id}">{$v.title}</option>
-                                             </foreach>
-                                           </select>
-                                       </div>
-                                     </div>
-                                   </div>
-
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">赛区组</label>
-                                       <div class="layui-input-inline">
-                                           <select name="sqz" class="sqz" lay-verify="required" lay-filter="sqz_select" id="sqz_select">
-                                             <option value="">请选择赛区组</option>
-                                           </select>
-                                       </div>
-                                     </div>
-                                   </div>
-
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">赛区</label>
-                                       <div class="layui-input-inline">
-                                           <select name="sq" class="sq" lay-verify="required" lay-filter="sq_select" id="sq_select">
-                                             <option value="">请选择赛区</option>
-                                           </select>
-                                       </div>
-                                     </div>
-                                   </div>
-
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">报名组</label>
-                                       <div class="layui-input-inline">
-                                           <select name="bmz" class="bmz" lay-verify="required" id="bmz_select">
-                                             <option value="">请选择报名组</option>
-                                           </select>
-                                       </div>
-                                     </div>
-                                   </div>
-
-                                   <div class="layui-inline">
-                                     <div class="layui-form-item">
-                                       <label class="layui-form-label">参赛宣言</label>
-                                       <div class="layui-input-inline">
-                                         <input type="text" name="desc" lay-verify="required" placeholder="" class="layui-input title">
-                                       </div>
-                                     </div>
-                                   </div>
-                                 </td>
-                               </tr>
-
-                               <tr>
-                                 <td colspan="2">
-                                    <div class="layui-elem-quote" style="margin-top: 0px;margin-bottom: 0px;">
-                                      <p>注：上传文件【单视频、单音频、多图片、单PDF】</p>
-                                    </div>
-                                 </td>
-                               </tr>
-
-                               <tr>
-                                 <td colspan="2">
-                                      
-                                      <if condition="$_GET['type'] eq 1284">
-                                            <div class="layui-inline" title="音频类">
-                                              <div class="layui-form-item">
-                                                <label class="layui-form-label">上传音频</label>
-                                                <div class="layui-input-inline">
-                                                  <input type="file" id="add_upload_voice" name="file" lay-type="audio" class="layui-upload-file">
-                                                </div>
-                                                <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
-                                                  预览
-                                                </a>
-                                              </div>
+                                      <td>
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">报名单位</label>
+                                            <div class="layui-input-inline">
+                                               <input type="radio" name="unit" class="unit" value="1" title="个人" checked="">
+                                               <input type="radio" name="unit" class="unit" value="2" title="团体">
                                             </div>
-                                      </if>
+                                          </div>
+                                        </div>
 
-                                      <if condition="$_GET['type'] eq 1285">
-                                            <div class="layui-inline" title="视频类">
-                                              <div class="layui-form-item">
-                                                <label class="layui-form-label">上传视频</label>
-                                                <div class="layui-input-inline">
-                                                  <input type="file" id="add_upload_video" name="file" lay-type="video" class="layui-upload-file">
-                                                </div>
-                                                <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
-                                                  预览
-                                                </a>
-                                              </div>
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">作者/单位</label>
+                                            <div class="layui-input-inline">
+                                              <input type="text" name="author" lay-verify="required" placeholder="" class="layui-input author">
                                             </div>
-                                      </if>
+                                          </div>
+                                        </div>
 
-                                      <if condition="in_array($_GET['type'], array('1286', '1288', '1289'))">  
-                                            <div class="layui-inline" title="图片类">
-                                              <div class="layui-form-item">
-                                                <label class="layui-form-label">上传图片</label>
-                                                <div class="layui-input-inline">
-                                                  <input type="file" id="add_upload_images" name="images" class="layui-upload-file">
-                                                </div>
-                                                <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
-                                                  预览
-                                                </a>
-                                              </div>
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">联系电话</label>
+                                            <div class="layui-input-inline">
+                                              <input type="text" name="phone" lay-verify="required" placeholder="" class="layui-input phone">
                                             </div>
-                                      </if>  
+                                          </div>
+                                        </div>
 
-                                      <if condition="$_GET['type'] eq 1287">
-                                            <div class="layui-inline" title="文件类">
-                                              <div class="layui-form-item">
-                                                <label class="layui-form-label">上传pdf</label>
-                                                <div class="layui-input-inline">
-                                                  <input type="file" id="add_upload_pdf" name="file" lay-type="file" class="layui-upload-file">
-                                                </div>
-                                                <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
-                                                  预览
-                                                </a>
-                                              </div>
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">作品主题</label>
+                                            <div class="layui-input-inline">
+                                              <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
                                             </div>
-                                      </if>
-                                          
-                                 </td>
-                               </tr>
+                                          </div>
+                                        </div>
 
-                               <tr>
-                                 <td colspan="2">
-                                    <div class="row image_box"></div>
-                                 </td>
-                               </tr>
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">参赛项目</label>
+                                            <div class="layui-input-inline">
+                                                <select name="mid" class="mid" lay-verify="required" lay-filter="match_select" id="match_select">
+                                                  <option value="">请选择</option>
+                                                  <foreach name="match" item='v'>
+                                                     <option value="{$v.id}">{$v.title}</option>
+                                                  </foreach>
+                                                </select>
+                                            </div>
+                                          </div>
+                                        </div>
 
-                               <tr>
-                                 <td class="center" colspan="2">
-                                   <div class="layui-form-item layui-form-text">
-                                       <label class="layui-form-label" style="width: 100%!important;text-align: left;">文字说明</label>
-                                       <div class="layui-input-block">
-                                           <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_add"></textarea>
-                                       </div>
-                                   </div>
-                                 </td>
-                               </tr>
-                             </tbody>
-                             <tfoot>
-                               <tr>
-                                 <td colspan="2" style="text-align:right;">
-                                   <input type="hidden" name="type" lay-verify="required" class="layui-input type" value="{$_GET['type']}">
-                                   <input type="hidden" name="files" lay-verify="required" class="layui-input files">
-                                   <input type="hidden" name="img" lay-verify="required" class="layui-input img">
-                                   <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>
-                                 </td>
-                               </tr>
-                             </tfoot>
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">赛区组</label>
+                                            <div class="layui-input-inline">
+                                                <select name="sqz" class="sqz" lay-verify="required" lay-filter="sqz_select" id="sqz_select">
+                                                  <option value="">请选择赛区组</option>
+                                                </select>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">赛区</label>
+                                            <div class="layui-input-inline">
+                                                <select name="sq" class="sq" lay-verify="required" lay-filter="sq_select" id="sq_select">
+                                                  <option value="">请选择赛区</option>
+                                                </select>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">报名组</label>
+                                            <div class="layui-input-inline">
+                                                <select name="bmz" class="bmz" lay-verify="required" id="bmz_select">
+                                                  <option value="">请选择报名组</option>
+                                                </select>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="layui-inline">
+                                          <div class="layui-form-item">
+                                            <label class="layui-form-label">参赛宣言</label>
+                                            <div class="layui-input-inline">
+                                              <input type="text" name="desc" lay-verify="required" placeholder="" class="layui-input title">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td colspan="2">
+                                         <div class="layui-elem-quote" style="margin-top: 0px;margin-bottom: 0px;">
+                                           <p>注：上传文件【单视频、单音频、多图片、单PDF】</p>
+                                         </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td colspan="2">
+                                           
+                                           <if condition="$_GET['type'] eq 1284">
+                                                 <div class="layui-inline" title="音频类">
+                                                   <div class="layui-form-item">
+                                                     <label class="layui-form-label">上传音频</label>
+                                                     <div class="layui-input-inline">
+                                                       <input type="file" id="add_upload_voice" name="file" lay-type="audio" class="layui-upload-file">
+                                                     </div>
+                                                     <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
+                                                       预览
+                                                     </a>
+                                                   </div>
+                                                 </div>
+                                           </if>
+
+                                           <if condition="$_GET['type'] eq 1285">
+                                                 <div class="layui-inline" title="视频类">
+                                                   <div class="layui-form-item">
+                                                     <label class="layui-form-label">上传视频</label>
+                                                     <div class="layui-input-inline">
+                                                       <input type="file" id="add_upload_video" name="file" lay-type="video" class="layui-upload-file">
+                                                     </div>
+                                                     <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
+                                                       预览
+                                                     </a>
+                                                   </div>
+                                                 </div>
+                                           </if>
+
+                                           <if condition="in_array($_GET['type'], array('1286', '1288', '1289'))">  
+                                                 <div class="layui-inline" title="图片类">
+                                                   <div class="layui-form-item">
+                                                     <label class="layui-form-label">上传图片</label>
+                                                     <div class="layui-input-inline">
+                                                       <input type="file" id="add_upload_images" name="images" class="layui-upload-file">
+                                                     </div>
+                                                     <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
+                                                       预览
+                                                     </a>
+                                                   </div>
+                                                 </div>
+                                           </if>  
+
+                                           <if condition="$_GET['type'] eq 1287">
+                                                 <div class="layui-inline" title="文件类">
+                                                   <div class="layui-form-item">
+                                                     <label class="layui-form-label">上传pdf</label>
+                                                     <div class="layui-input-inline">
+                                                       <input type="file" id="add_upload_pdf" name="file" lay-type="file" class="layui-upload-file">
+                                                     </div>
+                                                     <a target="_blank" class="layui-form-label show_file_btn" style="width:61px!important;display: none;">
+                                                       预览
+                                                     </a>
+                                                   </div>
+                                                 </div>
+                                           </if>
+                                               
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td colspan="2">
+                                         <div class="row image_box"></div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td class="center" colspan="2">
+                                        <div class="layui-form-item layui-form-text">
+                                            <label class="layui-form-label" style="width: 100%!important;text-align: left;">文字说明</label>
+                                            <div class="layui-input-block">
+                                                <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_add"></textarea>
+                                            </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <td colspan="2" style="text-align:center;">
+                                        <input type="hidden" name="type" lay-verify="required" class="layui-input type" value="{$_GET['type']}">
+                                        <input type="hidden" name="files" lay-verify="required" class="layui-input files">
+                                        <input type="hidden" name="img" lay-verify="required" class="layui-input img">
+                                        <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>
+                                      </td>
+                                    </tr>
+                                  </tfoot>
+
+                             </if>
+                             
+                             
                            </table>
                         </form>
                     </div>
