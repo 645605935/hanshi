@@ -187,10 +187,9 @@
          ,success: function(res){ //上传成功后的回调
            if(res.code==0){
               var str='';
-                 str+='<a href="#">'+
-                        '<img src="'+res.data.src+'">'+
+                 str+='<a href="'+res.data.src+'"  style="width: 330px;">'+
+                        '<img src="'+res.data.src+'" style="max-width: 100%;">'+
                       '</a>';
-
               $('#add_form .sfz_1_box').html(str);
               $('#add_form .sfz_1').val(res.data.src);
            }
