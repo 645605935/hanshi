@@ -80,9 +80,11 @@
                                         <if condition="$row['personal_authentication'] eq 1">
                                             <button class="layui-btn layui-btn-danger" disabled="">审核中</button>
                                         <elseif condition="$row['personal_authentication'] eq 2" />
-                                            <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">审核通过</button>
+                                            <button class="layui-btn layui-btn-danger">审核通过</button>
                                         <elseif condition="$row['personal_authentication'] eq -1" />
-                                            <button class="layui-btn layui-btn-danger" disabled="">未通过</button>
+                                            <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">未通过</button>
+                                        <else/>
+                                            <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">提交</button>
                                         </if>
                                         
                                      </td>
