@@ -901,6 +901,10 @@ class UserController extends CommonController{
         }
     }
 
+    public function yindao(){
+        $this->display();
+    }
+
     public function gr_reg(){
         $this->gid=44;
         $this->display();
