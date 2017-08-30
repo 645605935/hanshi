@@ -436,6 +436,7 @@
 
       //监听提交
       form.on('submit(demo1_add)', function(data){
+        $('#add_form .username').val('');
         var _json=_ajax_reg(data.field);
         return false;
       });

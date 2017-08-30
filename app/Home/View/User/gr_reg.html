@@ -110,7 +110,7 @@
                      <div class="layui-inline">
                         <div class="layui-form-item">
                           <div class="layui-input-inline" style="width:200px;">
-                             <input type="checkbox" name="agree" lay-verify="required" lay-skin="primary" title="我已经仔细阅读并接受" checked="">
+                             <input type="checkbox" name="agree" lay-verify="agree" lay-skin="primary" title="我已经仔细阅读并接受" checked="">
                           </div>
                           <label class="layui-form-label right_label">《服务协议》</label>
                         </div>
@@ -164,7 +164,7 @@
                  }
              },
              error  : function() {  
-                 alert('error');
+                 layer.msg('error');
              }  
          }); 
          return _json;
@@ -182,10 +182,10 @@
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
-                     alert(json.msg);
+                     layer.msg(json.msg);
                      window.location.href="{:U('Home/User/login')}";
                  }else{
-                     alert(json.msg);
+                     layer.msg(json.msg);
                  }
              },
              error  : function() {  
@@ -224,6 +224,7 @@
 
       //监听提交
       form.on('submit(demo1_add)', function(data){
+        $('#add_form .username').val('');
         var _json=_ajax_reg(data.field);
         return false;
       });

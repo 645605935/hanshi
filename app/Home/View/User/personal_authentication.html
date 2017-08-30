@@ -73,10 +73,18 @@
                                  <tfoot>
                                    <tr>
                                      <td colspan="2" style="text-align:center;">
-                                        <input type="hidden" name="sfz_1" lay-verify="required" class="layui-input sfz_1" readonly>
-                                        <input type="hidden" name="sfz_2" lay-verify="required" class="layui-input sfz_2" readonly>
-                                        <input type="hidden" name="id" lay-verify="required" value="{$row.id}" class="layui-input id" readonly>
-                                        <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>
+                                        <input type="hidden" name="sfz_1" lay-verify="required" value="{$row.sfz_1}" class="layui-input sfz_1">
+                                        <input type="hidden" name="sfz_2" lay-verify="required" value="{$row.sfz_2}" class="layui-input sfz_2">
+                                        <input type="hidden" name="id" lay-verify="required" value="{$row.id}" class="layui-input id">
+
+                                        <if condition="$row['personal_authentication'] eq 1">
+                                            <button class="layui-btn layui-btn-danger" disabled="">审核中</button>
+                                        <elseif condition="$row['personal_authentication'] eq 2" />
+                                            <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">审核通过</button>
+                                        <elseif condition="$row['personal_authentication'] eq -1" />
+                                            <button class="layui-btn layui-btn-danger" disabled="">未通过</button>
+                                        </if>
+                                        
                                      </td>
                                    </tr>
                                  </tfoot>
