@@ -37,8 +37,13 @@ class UserController extends CommonController{
     public function personal_authentication(){
         global $user;
 
-        $this->row=M('User')->find($user['id']);
-        $this->display();
+        if(!$user){
+            $this->row=M('User')->find($user['id']);
+            $this->display();
+        }else{
+            $this->redirect('Home/User/login', array('gr' => 1));
+        }
+        
     }
 
     //任务库
