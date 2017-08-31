@@ -11,6 +11,11 @@ class UserController extends CommonController{
         global $user;
         $user=session('userinfo');
         $this->user=$user;
+
+        if(!$user){
+            $_SESSION['returnUrl']=$_SERVER['HTTP_REFERER'];
+            $this->redirect('Home/Index/login',array('gr'=>1));
+        }
     }
 
     //帐号设置
@@ -37,13 +42,74 @@ class UserController extends CommonController{
     public function personal_authentication(){
         global $user;
 
-        if($user){
+        $userinfo=M('user')->find($user['id']);
+        if($userinfo['email_authentication']==1){
             $this->row=M('User')->find($user['id']);
             $this->display();
         }else{
-            $this->redirect('Home/User/login', array('gr' => 1));
+            $this->redirect('Home/User/bd_email');
         }
         
+    }
+
+    //绑定邮箱
+    public function bd_email(){
+        global $user;
+
+        if($_GET['code']){
+            $row=M('SendEmail')->find($_GET['code']);
+            $data=array();
+            $data['email']=$row['email'];
+            $data['id']=$row['uid'];
+            $data['email_authentication']=1;
+            $data['time']=time();
+
+            M('User')->save($data);
+        }
+
+        $this->row=M('User')->find($user['id']);
+        $this->display();
+    }
+
+    //发送邮件
+    public function ajax_send_email(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+
+        if($data){
+            $data['time']=time();
+
+            $row=M('SendEmail')->where(array('uid'=>$_POST['uid']))->find();
+            if($row){
+                $res=M('SendEmail')->where(array('uid'=>$_POST['uid']))->save($data);
+                $id=$row['id'];
+            }else{
+                $id=M('SendEmail')->add($data);
+            }
+            
+            if($id){
+                $userinfo=M('User')->find($user['id']);
+                $e_email=$userinfo['email'];
+                $e_username=$userinfo['username'];
+                think_send_mail($e_email, $e_username, '瞰世商城','瞰世商城 http://'.$_SERVER['HTTP_HOST'].'/Home/User/bd_email.html&code='.$id.' ！');
+
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
     }
 
     //任务库

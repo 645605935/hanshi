@@ -465,5 +465,24 @@ $(function(){
     $('.js-by-oldphone').click(function(){
         $('.js-oldemail').hide();
         $('.js-oldphone').show();
+    });
+    var validCode=true;
+    $(".send-code").click(function(){
+        var time=60;
+        var code=$(this);
+        if (validCode) {
+            validCode=false;
+            var t=setInterval(function(){
+                code.addClass("msg-btn1");
+                time--;
+                code.html(time+"秒后重新获取");
+                if (time==0){
+                    clearInterval(t);
+                code.html("重新获取");
+                    validCode=true;
+                code.removeClass("msg-btn1");
+                }
+            },1000)
+        }
     })
 });  

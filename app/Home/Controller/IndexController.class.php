@@ -13,7 +13,7 @@ class IndexController extends CommonController{
     }
 
     public function index(){
-        // think_send_mail('645605935@qq.com','火星人','瞰世商城','来瞰世商城 www.01ty.com 跟陈老师学PHP！');
+        
         $this->display();
     }
 
@@ -244,6 +244,12 @@ class IndexController extends CommonController{
                         $data['msg']='请审核通过后再登录';
                     }elseif($row['status']==1){
                         session('userinfo',$row);
+
+                        if($_SESSION['returnUrl']){
+                            header('Location: '.$_SESSION['returnUrl']);
+                        }else{
+                            $this->redirect('Home/Index/index');
+                        }
 
                         $data=array();
                         $data['code']=0;
