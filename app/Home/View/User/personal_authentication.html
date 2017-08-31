@@ -41,6 +41,19 @@
                                    <col width="50%">
                                    <col>
                                  </colgroup>
+
+                                 <if condition="$row['personal_authentication'] eq -1">
+                                     <thead>
+                                        <tr>
+                                          <td colspan="2">
+                                              <blockquote class="layui-elem-quote layui-text">
+                                                驳回原因：1. <a href="javascript:;">{$row.personal_authentication_remark}</a> 
+                                              </blockquote>
+                                          </td>
+                                        </tr>
+                                      </thead>
+                                 </if>
+                                 
                                  <tbody>
                                    <tr>
                                      <td align="center">
@@ -59,7 +72,8 @@
                                         </div>
                                      </td>
                                    </tr>
-                                   <tr>
+                                   
+                                   <tr <if condition="$row['personal_authentication'] eq 1">style="display:none;"</if>>
                                      <td align="center">
                                         <input type="file" id="add_upload_sfz_1" name="sfz_1" class="layui-upload-file">
                                      </td>
@@ -68,6 +82,7 @@
                                         <input type="file" id="add_upload_sfz_2" name="sfz_2" class="layui-upload-file">
                                      </td>
                                    </tr>
+
                                    
                                  </tbody>
                                  <tfoot>
