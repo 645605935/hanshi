@@ -47,6 +47,7 @@ class UserController extends CommonController{
             $this->row=M('User')->find($user['id']);
             $this->display();
         }else{
+            header("Content-type:text/html;charset=utf-8");
             $this->redirect('Home/User/bd_email', array(), 3, '请先进行邮箱验证...');
         }
         
