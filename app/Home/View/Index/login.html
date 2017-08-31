@@ -15,11 +15,11 @@
                 <div class="login">
                     <ul id="ul1">
                         <li <if condition="$_GET['gr'] eq 1">class="li1"</if>>
-                            <span><a href="{:U('Home/User/login',array('gr'=>1))}">个人</a></span></li>
+                            <span><a href="{:U('Home/Index/login',array('gr'=>1))}">个人</a></span></li>
                         <li <if condition="$_GET['zf'] eq 1">class="li1"</if> style="background: #ddd;margin-left:0px;">
-                            <span><a href="{:U('Home/User/login',array('zf'=>1))}">政府</a></span></li>
+                            <span><a href="{:U('Home/Index/login',array('zf'=>1))}">政府</a></span></li>
                         <li <if condition="$_GET['qy'] eq 1">class="li1"</if> style="background: #999;margin-left:0px;">
-                            <span><a href="{:U('Home/User/login',array('qy'=>1))}">企业</a></span></li>
+                            <span><a href="{:U('Home/Index/login',array('qy'=>1))}">企业</a></span></li>
                     </ul>
                 </div>
                 <form action="{:U('Admin/Login/index')}" method="post">
@@ -51,7 +51,7 @@
                             
                                 <label class="a_pwd">
                                 <a>忘记密码</a>
-                                <a href="{:U('Home/User/yindao')}">免费注册</a></label>
+                                <a href="{:U('Home/Index/yindao')}">免费注册</a></label>
                         </div>
 
                     </div>
@@ -80,12 +80,12 @@
             }
         });
 
-        $('.username').blur(function(){
-            var username=$('.username').val();
-            if(username){
-                _ajax_check_username_exist(username);
-            }
-        });
+        // $('.username').blur(function(){
+        //     var username=$('.username').val();
+        //     if(username){
+        //         _ajax_check_username_exist(username);
+        //     }
+        // });
 
         function _ajax_check_username_exist(username){
              var _json;
@@ -93,22 +93,19 @@
                  async:false,
                  type:'post',  
                  contentType:"application/x-www-form-urlencoded",
-                 url : "{:U('Home/User/ajax_check_username_exist')}",
+                 url : "{:U('Home/Index/ajax_check_username_exist')}",
                  data: {
                     username:username
                  },
                  dataType : 'json',
                  success  : function(json) {
                      if(json.code==0){
-                         // alert(json.msg);
+                         // layer.msg(json.msg);
                      }else{
                          layer.msg(json.msg);
                          $('.username').val('');
                      }
-                 },
-                 error  : function() {  
-                     alert('error');
-                 }  
+                 }
              }); 
              return _json;
         }
@@ -119,7 +116,7 @@
                  async:false,
                  type:'post',  
                  contentType:"application/x-www-form-urlencoded",
-                 url : "{:U('Home/User/ajax_login')}",
+                 url : "{:U('Home/Index/ajax_login')}",
                  data: {
                     gid:gid,
                     username:username,

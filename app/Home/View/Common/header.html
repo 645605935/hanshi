@@ -168,7 +168,7 @@
             </ul>
         </li>
         <li>
-            <a <if condition="$user">href="{:U('Home/User/personal_authentication')}"<else/>href="javascript:alert('请先登录');"</if> id="authentication" class="li-a">认证</a>
+            <a id="authentication_btn" class="li-a">认证</a>
             <ul>
                 <li><a href="{:U('Home/User/personal_authentication')}"><span class="color1">个人身份认证</span></a></li>
                 <li><a href="{:U('Home/User/personal_authentication')}">作家认证</a></li>
@@ -190,3 +190,18 @@
         </div>
     </div>
 </div>
+
+<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var username="{$user.username}";
+    $(function(){
+        $('#authentication_btn').click(function(){
+            if(username){
+                window.location.href="{:U('Home/User/personal_authentication')}";
+            }else{
+                alert('请先登录');
+                window.location.href="{:U('Home/Index/login',array('gr'=>1))}";
+            }
+        })
+    });
+</script>

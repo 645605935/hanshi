@@ -222,7 +222,7 @@ class IndexController extends CommonController{
 
     public function login(){
         if(!$_GET['gr']&&!$_GET['zf']&&!$_GET['qy']){
-            $this->redirect('Home/User/login', array('gr' => 1));
+            $this->redirect('Home/Index/login', array('gr' => 1));
         }else{
             $this->display();
         }
