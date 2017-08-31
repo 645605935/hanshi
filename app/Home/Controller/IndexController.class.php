@@ -225,47 +225,47 @@ class IndexController extends CommonController{
     }
 
     public function ajax_login(){
-        if($_POST['gid']==44){
-            $where=array();
-            $where['gid']=$_POST['gid'];
-            $where['username']=$_POST['username'];
+        if($_SESSION['returnUrl']){
+            $returnUrl=$_SESSION['returnUrl'];
+        }else{
+            $returnUrl=$_SERVER['HTTP_HOST'];
+        }
 
-            $row=M('User')->where($where)->find();
-            if($row){
 
-                if($row['password']==md5($_POST['password'])){
-                    if($row['status']==0){
-                        $data=array();
-                        $data['code']=1;
-                        $data['msg']='请审核通过后再登录';
-                    }elseif($row['status']==1){
-                        session('userinfo',$row);
+        $where=array();
+        $where['gid']=$_POST['gid'];
+        $where['username']=$_POST['username'];
 
-                        if($_SESSION['returnUrl']){
-                            $returnUrl=$_SESSION['returnUrl'];
-                        }else{
-                            $returnUrl=$_SERVER['HTTP_HOST'];
-                        }
+        $row=M('User')->where($where)->find();
+        if($row){
 
-                        $data=array();
-                        $data['code']=0;
-                        $data['msg']='登录成功';
-                        $data['data']=$returnUrl;
-                    }
-                }else{
+            if($row['password']==md5($_POST['password'])){
+                if($row['status']==0){
                     $data=array();
-                    $data['code']=2;
-                    $data['msg']='密码不正确';
+                    $data['code']=1;
+                    $data['msg']='请审核通过后再登录';
+                    $data['data']=$returnUrl;
+                }
+                if($row['status']==1){
+                    session('userinfo',$row);
+
+                    $data=array();
+                    $data['code']=0;
+                    $data['msg']='登录成功';
+                    $data['data']=$returnUrl;
                 }
             }else{
                 $data=array();
-                $data['code']=0;
-                $data['msg']='此用户名不存在';
+                $data['code']=2;
+                $data['msg']='密码不正确';
+                $data['data']=$returnUrl;
             }
         }else{
+
             $data=array();
-            $data['code']=2;
-            $data['msg']='您不属于个人用户！';
+            $data['code']=1;
+            $data['msg']='此用户名不存在';
+            $data['data']=$returnUrl;
         }
 
         echo json_encode($data);
