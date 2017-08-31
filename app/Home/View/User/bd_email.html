@@ -33,10 +33,21 @@
                         <h3>绑定邮箱</h3>
 
                         <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
+                            <if condition="$row['email_authentication'] eq 1">
+                                <blockquote class="layui-elem-quote layui-text">
+                                  温馨提示：<a href="/doc/base/faq.html#form" target="_blank">验证通过</a>
+                                </blockquote>
+                            <else/>
+                                <blockquote class="layui-elem-quote layui-text">
+                                  温馨提示：<a href="/doc/base/faq.html#form" target="_blank">验证不通过</a>
+                                </blockquote>
+                            </if>
+                            
+
 
                             <div class="per-xg clearfix">
                                 <div class="fl per-fd">邮箱</div>
-                                <div class="fl per-fss"><input type="text" name="email" class="layui-input birthday" lay-verify="required" value="" placeholder="{$row.email}"></div>
+                                <div class="fl per-fss"><input type="text" name="email" class="layui-input birthday" lay-verify="required" value=""></div>
                             </div>
                             <input type="hidden" name="uid" lay-verify="required" value="{$row.id}" class="layui-input uid">
                             <div class="tj-btn"><a href="javascript:;" lay-submit="" lay-filter="demo1_add">提交</a></div>
