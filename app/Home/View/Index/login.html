@@ -126,7 +126,7 @@
                  success  : function(json) {
                      if(json.code==0){
                          layer.msg('登录成功');
-                         window.location.href="{:U('Home/Index/index')}";
+                         window.location.href=json.data;
                      }else{
                          layer.msg(json.msg);
                      }

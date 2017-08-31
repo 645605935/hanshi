@@ -221,11 +221,7 @@ class IndexController extends CommonController{
     }
 
     public function login(){
-        if(!$_GET['gr']&&!$_GET['zf']&&!$_GET['qy']){
-            $this->redirect('Home/Index/login', array('gr' => 1));
-        }else{
-            $this->display();
-        }
+        $this->display();
     }
 
     public function ajax_login(){
@@ -246,14 +242,15 @@ class IndexController extends CommonController{
                         session('userinfo',$row);
 
                         if($_SESSION['returnUrl']){
-                            header('Location: '.$_SESSION['returnUrl']);
+                            $returnUrl=$_SESSION['returnUrl'];
                         }else{
-                            $this->redirect('Home/Index/index');
+                            $returnUrl=$_SERVER['HTTP_HOST'];
                         }
 
                         $data=array();
                         $data['code']=0;
                         $data['msg']='登录成功';
+                        $data['data']=$returnUrl;
                     }
                 }else{
                     $data=array();
