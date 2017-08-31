@@ -2169,4 +2169,5 @@ function ccStrLen($str) {
 
 require './app/Common/Common/cache.php';
 require './app/Common/Common/oss.php';
+require './app/Common/Common/email.php';
 ?>

@@ -168,7 +168,7 @@
             </ul>
         </li>
         <li>
-            <a href="{:U('Home/User/personal_authentication')}" class="li-a">认证</a>
+            <a <if condition="$user">href="{:U('Home/User/personal_authentication')}"<else/>href="javascript:alert('请先登录');"</if> id="authentication" class="li-a">认证</a>
             <ul>
                 <li><a href="{:U('Home/User/personal_authentication')}"><span class="color1">个人身份认证</span></a></li>
                 <li><a href="{:U('Home/User/personal_authentication')}">作家认证</a></li>
@@ -183,8 +183,8 @@
                     <a href="{:U('Home/User/book_list')}">{$user.username}</a>
                     <a href="{:U('Home/User/logout')}">退出</a>
                 <else/>
-                    <a href="{:U('Home/User/yindao')}">注册</a><span>|</span>
-                    <a href="{:U('Home/User/login')}">登录</a>
+                    <a href="{:U('Home/Index/yindao')}">注册</a><span>|</span>
+                    <a href="{:U('Home/Index/login')}">登录</a>
                 </if>
             </div>
         </div>

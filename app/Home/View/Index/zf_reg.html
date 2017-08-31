@@ -25,7 +25,7 @@
 <body>
 		<div class="title">
 			<h3 class="gr_title">政府注册</h3>
-			<span class="yizc">已有账号,请<a href="{:U('Home/User/login')}" class="layui-btn layui-btn-mini layui-btn-normal">登录</a></span>
+			<span class="yizc">已有账号,请<a href="{:U('Home/Index/login')}" class="layui-btn layui-btn-mini layui-btn-normal">登录</a></span>
 		</div>
 		<div class="line"></div>
 		<div class="information">
@@ -223,7 +223,7 @@
              async:false,
              type:'post',  
              contentType:"application/x-www-form-urlencoded",
-             url : "{:U('Home/User/ajax_check_username_exist')}",
+             url : "{:U('Home/Index/ajax_check_username_exist')}",
              data: {
                 username:username
              },
@@ -248,13 +248,13 @@
              async:false,
              type:'post',  
              contentType:"application/x-www-form-urlencoded",
-             url : "{:U('Home/User/register')}",
+             url : "{:U('Home/Index/register')}",
              data: _data,
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
                      alert(json.msg);
-                     window.location.href="{:U('Home/User/login')}";
+                     window.location.href="{:U('Home/Index/login')}";
                  }else{
                      alert(json.msg);
                  }

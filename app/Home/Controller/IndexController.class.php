@@ -13,6 +13,7 @@ class IndexController extends CommonController{
     }
 
     public function index(){
+        // think_send_mail('645605935@qq.com','火星人','瞰世商城','来瞰世商城 www.01ty.com 跟陈老师学PHP！');
         $this->display();
     }
 
@@ -160,6 +161,139 @@ class IndexController extends CommonController{
         echo json_encode($data);
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public function register(){
+        $data=array();
+        if($data=$_POST){
+            $data['username']=$_POST['username'];
+            $data['email']=$_POST['email'];
+            $data['phone']=$_POST['phone'];
+            $data['password']=md5($_POST['password']);
+            $data['time']=time();
+
+            if($_POST['gid']==44){
+                $data['status']=1;
+            }else{
+                $data['status']=0;
+            }
+
+            $id=M('User')->add($data);
+            if($id){
+                $row=M('User')->find($id);
+
+                $data=array();
+                $data['code']=0;
+                $data['msg']='注册成功';
+                $data['data']=$row;
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='注册失败';
+            }
+
+            echo json_encode($data);
+        }
+    }
+
+    public function yindao(){
+        $this->display();
+    }
+
+    public function gr_reg(){
+        $this->gid=44;
+        $this->display();
+    }
+
+    public function zf_reg(){
+        $this->gid=33;
+        $this->display();
+    }
+
+    public function qy_reg(){
+        $company_type=M('Type')->where(array('pid'=>1290))->select();
+
+        $this->gid=22;
+        $this->company_type=$company_type;
+        $this->display();
+    }
+
+    public function login(){
+        if(!$_GET['gr']&&!$_GET['zf']&&!$_GET['qy']){
+            $this->redirect('Home/User/login', array('gr' => 1));
+        }else{
+            $this->display();
+        }
+    }
+
+    public function ajax_login(){
+        if($_POST['gid']==44){
+            $where=array();
+            $where['gid']=$_POST['gid'];
+            $where['username']=$_POST['username'];
+
+            $row=M('User')->where($where)->find();
+            if($row){
+
+                if($row['password']==md5($_POST['password'])){
+                    if($row['status']==0){
+                        $data=array();
+                        $data['code']=1;
+                        $data['msg']='请审核通过后再登录';
+                    }elseif($row['status']==1){
+                        session('userinfo',$row);
+
+                        $data=array();
+                        $data['code']=0;
+                        $data['msg']='登录成功';
+                    }
+                }else{
+                    $data=array();
+                    $data['code']=2;
+                    $data['msg']='密码不正确';
+                }
+            }else{
+                $data=array();
+                $data['code']=0;
+                $data['msg']='此用户名不存在';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='您不属于个人用户！';
+        }
+
+        echo json_encode($data);
+    }
+
+    public function ajax_check_username_exist(){
+        if($_POST){
+            $where=array();
+            $where['username']=$_POST['username'];
+
+            $row=M('User')->where($where)->find();
+            if($row){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='存在！';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='用户名不存在！';
+            }
+            echo json_encode($data);
+        }
+    }
+
+
+
+
+
+
+    
+
     
     //前端所有上传文件都用这个
     // 上传图片
@@ -277,6 +411,7 @@ class IndexController extends CommonController{
         }
         
     }
+
 
 
 }
