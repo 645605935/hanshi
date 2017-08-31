@@ -37,7 +37,7 @@ class UserController extends CommonController{
     public function personal_authentication(){
         global $user;
 
-        if(!$user){
+        if($user){
             $this->row=M('User')->find($user['id']);
             $this->display();
         }else{

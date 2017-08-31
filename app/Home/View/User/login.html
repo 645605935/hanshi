@@ -128,9 +128,10 @@
                  dataType : 'json',
                  success  : function(json) {
                      if(json.code==0){
+                         layer.msg('登录成功');
                          window.location.href="{:U('Home/Index/index')}";
                      }else{
-                         alert(json.msg);
+                         layer.msg(json.msg);
                      }
                  },
                  error  : function() {  
