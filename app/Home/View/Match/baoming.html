@@ -377,7 +377,7 @@
       layui.upload({
          url: "{:U('Home/Index/lay_upload_file')}" //上传接口
          ,elem: '#add_upload_voice' //指定原始元素，默认直接查找class="layui-upload-file"
-         ,ext : 'mp3'
+         // ,ext : 'mp3'
          ,method: 'post' //上传接口的http类型
          ,success: function(res){ //上传成功后的回调
            if(res.code==0){
@@ -393,7 +393,7 @@
       layui.upload({
          url: "{:U('Home/Index/lay_upload_file')}" //上传接口
          ,elem: '#add_upload_video' //指定原始元素，默认直接查找class="layui-upload-file"
-         ,ext : 'mp4'
+         // ,ext : 'mp4'
          ,method: 'post' //上传接口的http类型
          ,success: function(res){ //上传成功后的回调
            if(res.code==0){
@@ -409,7 +409,7 @@
       layui.upload({
          url: "{:U('Home/Index/lay_upload_file')}" //上传接口
          ,elem: '#add_upload_pdf' //指定原始元素，默认直接查找class="layui-upload-file"
-         ,ext : 'pdf'
+         // ,ext : 'pdf'
          ,method: 'post' //上传接口的http类型
          ,success: function(res){ //上传成功后的回调
            if(res.code==0){
