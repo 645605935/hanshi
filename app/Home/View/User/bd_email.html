@@ -87,11 +87,11 @@
                  if(json.code==0){
                      layer.msg("邮件发送成功！请查收");
                  }else{
-                     layer.msg(json.msg);
+                     layer.msg('邮件发送失败！');
                  }
              },
              error  : function() {  
-                 alert('error');
+                 layer.msg('邮件发送失败！');
              }  
          }); 
          return _json;

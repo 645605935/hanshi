@@ -85,12 +85,11 @@ class UserController extends CommonController{
             $row=M('SendEmail')->where(array('uid'=>$_POST['uid']))->find();
             if($row){
                 $res=M('SendEmail')->where(array('uid'=>$_POST['uid']))->save($data);
-                $id=$row['id'];
             }else{
-                $id=M('SendEmail')->add($data);
+                $res=M('SendEmail')->add($data);
             }
             
-            if($id){
+            if($res){
                 $userinfo=M('User')->find($user['id']);
                 $e_email=$userinfo['email'];
                 $e_username=$userinfo['username'];
