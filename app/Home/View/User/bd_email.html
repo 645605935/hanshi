@@ -137,7 +137,7 @@
         var email=$('.email').val();
         if(email){
             var _json=_ajax_check_email_exist(email);
-            if(_json.code==0){
+            if(_json.code!=0){
                 _ajax_add(data.field);
             }
         }
