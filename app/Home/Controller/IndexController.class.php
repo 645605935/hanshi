@@ -223,15 +223,6 @@ class IndexController extends CommonController{
     public function login(){
         global $user;
 
-        if($_GET['gr']&&$_GET['gr']!='1'){
-            $this->redirect('Home/Index/login',array('gr'=>1));
-        }
-
-        if($user){
-            $this->redirect('Home/Index/index');
-        }
-
-
         $this->display();
     }
 
