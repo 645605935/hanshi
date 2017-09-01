@@ -38,9 +38,9 @@
                                 </span>
                                 <input type="password" name="password" class="form-control password" /></label>
                                 
-                                <if condition="$_GET['gr'] eq 1">
+                                <if condition="($_GET['gr'] eq 1) or !$_GET">
                                     <input type="hidden" name="gid" class="form-control gid" value="44" />
-                                    <button type="button" class="btn btn-info login_button">【个人】登陆</button>
+                                    <button type="button" class="btn btn-info login_button">登陆</button>
                                 <elseif condition="$_GET['zf'] eq 1" />
                                     <input type="hidden" name="gid" class="form-control gid" value="33" />
                                     <button type="submit" class="btn btn-info">【政府】登陆</button>

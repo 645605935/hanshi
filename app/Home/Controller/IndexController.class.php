@@ -232,11 +232,15 @@ class IndexController extends CommonController{
         }
 
 
-        $where=array();
-        $where['gid']=$_POST['gid'];
-        $where['username']=$_POST['username'];
+        $map=array();
+        $where['username']  = $_POST['username'];
+        $where['email']  = $_POST['username'];
+        $where['phone']  = $_POST['username'];
+        $where['_logic'] = 'or';
+        $map['_complex'] = $where;
+        $map['gid']=$_POST['gid'];
 
-        $row=M('User')->where($where)->find();
+        $row=M('User')->where($map)->find();
         if($row){
 
             if($row['password']==md5($_POST['password'])){
