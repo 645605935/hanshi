@@ -294,6 +294,44 @@ class IndexController extends CommonController{
         }
     }
 
+    public function ajax_check_email_exist(){
+        if($_POST){
+            $where=array();
+            $where['email']=$_POST['email'];
+
+            $row=M('User')->where($where)->find();
+            if($row){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='存在！';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='邮箱不存在！';
+            }
+            echo json_encode($data);
+        }
+    }
+
+    public function ajax_check_phone_exist(){
+        if($_POST){
+            $where=array();
+            $where['phone']=$_POST['phone'];
+
+            $row=M('User')->where($where)->find();
+            if($row){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='存在！';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='手机号不存在！';
+            }
+            echo json_encode($data);
+        }
+    }
+
 
 
 

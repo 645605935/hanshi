@@ -145,6 +145,20 @@
             }
         });
 
+        $('.email').blur(function(){
+            var email=$('.email').val();
+            if(email){
+                _ajax_check_email_exist(email);
+            }
+        });
+
+        $('.phone').blur(function(){
+            var phone=$('.phone').val();
+            if(phone){
+                _ajax_check_phone_exist(phone);
+            }
+        });
+
         $('.serivce_btn').click(function(){
             //iframe层
             layer.open({
@@ -174,6 +188,54 @@
                  if(json.code==0){
                      layer.msg('用户名已存在');
                      $('.username').focus();
+                 }
+             },
+             error  : function() {  
+                 layer.msg('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    function _ajax_check_phone_exist(email){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/Index/ajax_check_email_exist')}",
+             data: {
+                email:email
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     layer.msg('该邮箱已存在');
+                     $('.email').focus();
+                 }
+             },
+             error  : function() {  
+                 layer.msg('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    function _ajax_check_phone_exist(phone){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/Index/ajax_check_phone_exist')}",
+             data: {
+                phone:phone
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     layer.msg('该手机号已存在');
+                     $('.phone').focus();
                  }
              },
              error  : function() {  
