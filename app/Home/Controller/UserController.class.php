@@ -58,7 +58,7 @@ class UserController extends CommonController{
         global $user;
 
         if($_GET['code']){
-            $row=M('SendEmail')->find($_GET['code']);
+            $row=M('SendEmail')->where(array('uid'=>$_GET['code']))->find();
             $data=array();
             $data['email']=$row['email'];
             $data['id']=$row['uid'];
