@@ -352,7 +352,7 @@
              success  : function(json) {
                  if(json.code==0){
                      alert(json.msg);
-                     window.location.href="{:U('Home/Index/login')}";
+                     window.location.href="{:U('Home/Index/login',array('qy'=>1))}";
                  }else{
                      alert(json.msg);
                  }

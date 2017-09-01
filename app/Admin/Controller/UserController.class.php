@@ -87,6 +87,7 @@ class UserController extends AuthController {
         }
 
         if($list){
+
             $data=array();
             $data['code']=0;
             $data['msg']='success';
@@ -114,6 +115,13 @@ class UserController extends AuthController {
         
         $res = D('User')->save($data);
         if($res){
+            $userinfo=M('User')->find($_POST['id']);
+            $e_email=$userinfo['email'];
+            $e_username=$userinfo['username'];
+            $e_personal_authentication_remark=$userinfo['personal_authentication_remark'];
+
+            think_send_mail($e_email, $e_username, '瞰世商城', $e_personal_authentication_remark);
+
             $data=array();
             $data['code']=0;
             $data['msg']='success';

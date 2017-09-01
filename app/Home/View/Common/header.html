@@ -184,7 +184,7 @@
                     <a href="{:U('Home/User/logout')}">退出</a>
                 <else/>
                     <a href="{:U('Home/Index/yindao')}">注册</a><span>|</span>
-                    <a href="{:U('Home/Index/login')}">登录</a>
+                    <a href="{:U('Home/Index/login',array('gr'=>1))}">登录</a>
                 </if>
             </div>
         </div>
@@ -200,7 +200,7 @@
                 window.location.href="{:U('Home/User/personal_authentication')}";
             }else{
                 alert('请先登录');
-                window.location.href="{:U('Home/Index/login',array('gr'=>1))}";
+                window.location.href="{:U('Home/User/personal_authentication')}";
             }
         })
     });

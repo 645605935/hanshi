@@ -41,43 +41,33 @@
                             <div class="set_Inner">
                               <div class="personal_verify verify_mail ">
                                 <div class="personal_verify_title">邮箱验证</div>
-                                <div class="personal_verify_email">tly***342@163.com</div>
-                                <div class="personal_verify_status2">已验证</div>
+                                <div class="personal_verify_email">{$row['email']}</div>
+                                <if condition="$row['email_authentication'] eq 1">
+                                    <div class="personal_verify_status2">已验证</div>
+                                <else/>
+                                    <div class="personal_verify_status">未验证！</div>
+                                </if>
                                 <div>
-                                  <a id="email_bind2" href="javascript:;">更改邮箱</a>
-                                </div>
-                              </div>
-                                <!-- 未验证时显示 -->
-                              <div class="personal_verify unverify_mail hidden ">
-                                <div class="personal_verify_title">邮箱验证</div>
-                                <div class="personal_verify_email">tly***342@163.com</div>
-                                <div class="personal_verify_status">未验证！</div>
-                                <div>
-                                  <a id="resendMail2" href="javascript:;" email="tly***342@163.com">验证</a>
+                                  <a id="email_bind2" href="{:U('Home/User/bd_email')}">更改邮箱</a>
                                 </div>
                               </div>
                               <div class="personal_verify verify_mobile ">
                                 <div class="personal_verify_title">绑定手机</div>
-                                <div class="personal_verify_mobile">138****8080</div>
-                                <div class="personal_verify_status2">已验证</div>
+                                <div class="personal_verify_mobile">{$row['phone']}</div>
+                                <if condition="$row['phone_authentication'] eq 1">
+                                    <div class="personal_verify_status2">已验证</div>
+                                <else/>
+                                    <div class="personal_verify_status">未验证！</div>
+                                </if>
                                 <div><a id="phone_bind" href="javascript:;">修改手机</a></div>
-                              </div>
-                              <!-- 未绑定时显示 -->
-                              <div class="personal_verify unverify_mobile hidden ">
-                                <div class="personal_verify_title">绑定手机</div>
-                                <div class="personal_verify_mobile">138****8080</div>
-                                <div class="personal_verify_status">未绑定！</div>
-                                <div><a id="phone_bind2" href="javascript:;">绑定手机</a></div>
                               </div>
                               <div class="personal_verify verify_vip ">
                                 <div class="personal_verify_title">加V认证</div>
-                                <div class="personal_verify_status2">已认证</div>
-                              </div>
-                              <!-- 未认证时显示 -->
-                              <div class="personal_verify unverify_vip hidden">
-                                <div class="personal_verify_title">加V认证</div>
-                                <div class="personal_verify_status">未认证！</div>
-                                <div><a href="#2">认证</a></div>
+                                <if condition="$row['phone_authentication'] eq 1">
+                                    <div class="personal_verify_status2">已认证</div>
+                                <else/>
+                                    <div class="personal_verify_status">未认证！</div>
+                                </if>
                               </div>
                             </div>
                           </td>

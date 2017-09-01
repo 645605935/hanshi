@@ -73,7 +73,7 @@
                                      </td>
                                    </tr>
                                    
-                                   <tr <if condition="$row['personal_authentication'] eq 1">style="display:none;"</if>>
+                                   <tr <if condition="($row['personal_authentication'] eq 1) or ($row['personal_authentication'] eq 2)">style="display:none;"</if>>
                                      <td align="center">
                                         <input type="file" id="add_upload_sfz_1" name="sfz_1" class="layui-upload-file">
                                      </td>

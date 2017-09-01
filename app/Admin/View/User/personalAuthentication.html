@@ -249,20 +249,13 @@
                                      </tr>
                                      <tr>
                                        <td class="center" colspan="2">
-                                         <div class="layui-inline" style="width:100%;">
-                                           <div class="layui-form-item">
-                                             <label class="layui-form-label">说明</label>
-                                             <div class="layui-input-inline" style="width:475px!important;">
-                                               <textarea placeholder="请输入内容" name="personal_authentication_remark" class="layui-textarea personal_authentication_remark"></textarea>
-                                             </div>
-                                           </div>
-                                         </div>
+                                         <textarea placeholder="请输入内容" name="personal_authentication_remark" class="layui-textarea personal_authentication_remark"></textarea>
                                        </td>
                                      </tr>
                                    </tbody>
                                    <tfoot>
                                      <tr>
-                                       <td colspan="2" style="text-align:right;">
+                                       <td colspan="2" style="text-align:center;">
                                          <input type="hidden" name="id" value="" class="layui-input id">
                                          <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确定</button>
                                        </td>
@@ -601,7 +594,7 @@
                dataType : 'json',
                success  : function(json) {  
                    if(json.code == 0){
-                       layer.msg(json.msg);
+                       layer.msg(json.msg+"，邮件已送达");
                        window.location.reload();
                    }else{
                        layer.msg(json.msg);

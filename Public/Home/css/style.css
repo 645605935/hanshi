@@ -168,10 +168,10 @@
 .per-xg input[type='text'] {border:none;margin-top: -2px;width: 100%;}
 .per-fd {width: 100px;}
 .per-fs {width: 100%;margin-left: -100px;padding-left: 100px;box-sizing: border-box;}
-.per-fss {width: 100%;margin-left: -100px;padding-left: 100px;margin-right: -100px;box-sizing: border-box;}
+.per-fss {width: 100%;margin-left: -100px;padding-left: 100px;margin-right: -140px;box-sizing: border-box;}
 .tj-btn {margin-top: 30px;text-align: center;}
 .tj-btn a {width: 220px;height: 44px;line-height: 44px;font-size: 16px;text-align: center;border-radius: 4px;display: block;background: #1053a4;color: #fff;margin:0 auto;}
-.send-code {border:1px solid #1053a4;height: 30px;line-height: 30px;border-radius: 15px;padding: 0 8px;display: inline-block;color: #1053a4;margin-top: -10px;}
+.send-code {border:1px solid #1053a4;height: 30px;line-height: 30px;border-radius: 15px;padding: 0 8px;display: inline-block;color: #1053a4;margin-top: -10px;width: 110px;text-align: center;}
 .right-per-p .send-code:hover {color: #1053a4;}
 .right-per-p .tj-btn a:hover {color: #fff;}
 .per-yzm {position: absolute;right: 0;top: -9px;}
@@ -3700,3 +3700,5 @@ a {
 .zhuce-l {background: #30a6ff;color: #fff;display: inline-block;padding: 3px;border-radius: 2px;margin-left: 2px;margin-top: 20px;}
 .zhuce-l:hover {color: #fff;}
 .zhuce-t {float: left;width: 100%;border-bottom: 1px solid #ddd;margin-bottom: 20px;}
+.msg-btn1 {background: #b7b7b7;color: #fff;border-color: #b7b7b7;cursor: wait;}
+.msg-btn1:hover {color: #fff !important;}
