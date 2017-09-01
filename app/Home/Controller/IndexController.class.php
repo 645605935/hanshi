@@ -221,6 +221,11 @@ class IndexController extends CommonController{
     }
 
     public function login(){
+        if($_GET['gr']&&$_GET['gr']!='1'){
+            $this->redirect('Home/Index/login',array('gr'=>1));
+        }
+
+
         $this->display();
     }
 
@@ -230,6 +235,7 @@ class IndexController extends CommonController{
         }else{
             $returnUrl=$_SERVER['HTTP_HOST'];
         }
+
 
 
         $map=array();
