@@ -42,6 +42,7 @@
                             <div class="per-xg clearfix">
                                 <div class="fl per-fd">邮箱</div>
                                 <div class="fl per-fss">
+
                                     <if condition="$row['email_authentication'] eq 1">
                                         <input type="text" name="email" class="layui-input email" lay-verify="required" value="{$row.email}">
                                     <else/>
@@ -71,7 +72,16 @@
 <script src="__PUBLIC__/Home/js/index.js"></script>
 </body>
 </html>
-
+<script type="text/javascript">
+    $(function(){
+        $('.email').blur(function(){
+            var email=$('.email').val();
+            if(email){
+                _ajax_check_email_exist(email);
+            }
+        });
+    });
+</script>
 <script>
     //添加
     function _ajax_add(_data){
@@ -92,6 +102,30 @@
              },
              error  : function() {  
                  layer.msg('邮件发送失败！');
+             }  
+         }); 
+         return _json;
+    }
+
+    function _ajax_check_email_exist(email){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/Index/ajax_check_email_exist')}",
+             data: {
+                email:email
+             },
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     layer.msg('该邮箱已存在');
+                     $('.email').focus();
+                 }
+             },
+             error  : function() {  
+                 layer.msg('error');
              }  
          }); 
          return _json;
