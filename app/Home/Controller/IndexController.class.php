@@ -10,6 +10,8 @@ class IndexController extends CommonController{
         global $user;
         $user=session('userinfo');
         $this->user=$user;
+
+        
     }
 
     public function index(){
