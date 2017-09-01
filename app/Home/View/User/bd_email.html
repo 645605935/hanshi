@@ -72,16 +72,7 @@
 <script src="__PUBLIC__/Home/js/index.js"></script>
 </body>
 </html>
-<script type="text/javascript">
-    $(function(){
-        $('.email').blur(function(){
-            var email=$('.email').val();
-            if(email){
-                _ajax_check_email_exist(email);
-            }
-        });
-    });
-</script>
+
 <script>
     //添加
     function _ajax_add(_data){
@@ -119,6 +110,7 @@
              },
              dataType : 'json',
              success  : function(json) {
+                 _json=json;
                  if(json.code==0){
                      layer.msg('该邮箱已存在');
                      $('.email').focus();
@@ -141,7 +133,15 @@
 
       //监听提交
       form.on('submit(demo1_add)', function(data){
-        var _json=_ajax_add(data.field);
+
+        var email=$('.email').val();
+        if(email){
+            var _json=_ajax_check_email_exist(email);
+            if(_json.code==0){
+                _ajax_add(data.field);
+            }
+        }
+
         return false;
       });
     });
