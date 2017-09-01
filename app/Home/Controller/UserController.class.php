@@ -91,7 +91,7 @@ class UserController extends CommonController{
             
             if($res){
                 $userinfo=M('User')->find($user['id']);
-                $e_email=$userinfo['email'];
+                $e_email=$_POST['email'];
                 $e_username=$userinfo['username'];
                 think_send_mail($e_email, $e_username, '瞰世商城','瞰世商城 http://'.$_SERVER['HTTP_HOST'].'/Home/User/bd_email.html&code='.$id.' ！');
 
