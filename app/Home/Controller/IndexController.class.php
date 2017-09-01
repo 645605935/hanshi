@@ -230,7 +230,7 @@ class IndexController extends CommonController{
         if($_SESSION['returnUrl']){
             $returnUrl=$_SESSION['returnUrl'];
         }else{
-            $returnUrl=$_SERVER['HTTP_HOST'];
+            $returnUrl="http://".$_SERVER['HTTP_HOST'];
         }
 
 
