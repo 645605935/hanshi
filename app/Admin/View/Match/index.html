@@ -1215,9 +1215,9 @@
 
             $( "#dialog-confirm_add" ).removeClass('hide').dialog({
               resizable: false,
-              modal: true,
+              modal: false,
               title: "",
-              width:1200,
+              width:'1200',
               title_html: true,
             });
 
@@ -1239,7 +1239,7 @@
 
                     $( "#dialog-confirm_edit" ).removeClass('hide').dialog({
                       resizable: false,
-                      modal: true,
+                      modal: false,
                       title: "",
                       width:1200,
                       title_html: true,
@@ -1847,7 +1847,12 @@
                       }
 
                       $.each($("#edit_form input.type_sq_online"), function(name, value){
-                          var arr=data.type_sq_online.split(',');
+                          if(data.type_sq_online){
+                              var arr=data.type_sq_online.split(',');
+                          }else{
+                              var arr=[];
+                          }
+                          
                           if( $.inArray( $(value).attr('data-id'), arr )>=0 ){
                               $(value).attr('checked','checked');
                           }else{
@@ -1856,7 +1861,12 @@
                       });
 
                       $.each($("#edit_form input.type_sq_offline"), function(name, value){
-                          var arr=data.type_sq_offline.split(',');
+                          if(data.type_sq_offline){
+                              var arr=data.type_sq_offline.split(',');
+                          }else{
+                              var arr=[];
+                          }
+
                           if( $.inArray( $(value).attr('data-id'), arr )>=0 ){
                               $(value).attr('checked','checked');
                           }else{
@@ -1865,7 +1875,11 @@
                       });
 
                       $.each($("#edit_form input.online_bmz"), function(name, value){
-                          var arr=data.online_bmz.split(',');
+                          if(data.online_bmz){
+                              var arr=data.online_bmz.split(',');
+                          }else{
+                              var arr=[];
+                          }
 
                           if( $.inArray( $(value).attr('data-id'), arr )>=0 ){
                               $('#edit_form .online_bmz_box label.'+ $(value).attr('data-id') ).addClass('activing');
@@ -1877,7 +1891,12 @@
                       });
 
                       $.each($("#edit_form input.offline_bmz"), function(name, value){
-                          var arr=data.offline_bmz.split(',');
+                          if(data.offline_bmz){
+                              var arr=data.offline_bmz.split(',');
+                          }else{
+                              var arr=[];
+                          }
+
                           if( $.inArray( $(value).attr('data-id'), arr )>=0 ){
                               $('#edit_form .offline_bmz_box label.'+ $(value).attr('data-id') ).addClass('activing');
                               $(value).attr('checked','checked');
