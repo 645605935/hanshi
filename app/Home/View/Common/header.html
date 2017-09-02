@@ -2,11 +2,13 @@
     $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select();
     $top_nav_type_info=M('Type')->find($_GET['type']);
 
+    $top_ad=M('Type')->find(3);
+
     $_page_=$_SERVER['PATH_INFO'];
 ?>
 
 
-<div class="top-add"><a href="#4"><img src="__PUBLIC__/Home/images/img3.jpg" alt=""></a></div>
+<div class="top-add"><a href="#4"><img src="{$top_ad.img}" alt=""></a></div>
 <div class="head w1000">
     <div class="header fl">
         <div class="logo fl"><a href="#"><img src="__PUBLIC__/Home/images/logo.jpg" alt=""></a></div>
