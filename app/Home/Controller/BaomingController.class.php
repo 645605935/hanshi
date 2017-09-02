@@ -92,6 +92,16 @@ class BaomingController extends CommonController{
 
         global $user;
 
+
+
+
+
+
+
+
+
+
+
         $id=$_GET['id'];
         $mid=$_GET['mid'];
         $type=$_GET['type'];
@@ -102,10 +112,42 @@ class BaomingController extends CommonController{
         $where['mid']=$mid;
         $where['type']=$type;
         $where['sqz']=$sqz;
-        $match_bmz_info=M('match_bmz')->where($where)->find();
-        if(1){
+        $time_info=M('match_bmz')->where($where)->find();
 
+        //初赛报名时间
+        if(time()>$time_info['start_time_1'] && time()<$time_info['end_time_1']){
+            $data=array();
+            $data['code']=2;
+            $data['msg']='当前是：初赛报名时间，不可投票';
+            echo json_encode($data);return false;
         }
+        if(time()>$time_info['start_time_2'] && time()<$time_info['end_time_2']){
+            
+        }
+        if(time()>$time_info['start_time_3'] && time()<$time_info['end_time_3']){
+            $data=array();
+            $data['code']=2;
+            $data['msg']='当前是：复赛报名时间，不可投票';
+            echo json_encode($data);return false;
+        }
+        if(time()>$time_info['start_time_4'] && time()<$time_info['end_time_4']){
+            
+        }
+        if(time()>$time_info['start_time_5'] && time()<$time_info['end_time_5']){
+            $data=array();
+            $data['code']=2;
+            $data['msg']='当前是：决赛投票时间，不可投票';
+            echo json_encode($data);return false;
+        }
+        if(time()>$time_info['start_time_6'] && time()<$time_info['end_time_6']){
+            
+        }
+
+
+
+
+
+
 
         if($user){
             //一个比赛有好多人报名
