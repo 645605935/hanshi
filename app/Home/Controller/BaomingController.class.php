@@ -15,6 +15,8 @@ class BaomingController extends CommonController{
     public function index(){
         global $user;
 
+        $this->ad_center=M('Ad')->where(array('type'=>1399))->find();
+
         $type=I('type');
         $where=array();
         if($type){

@@ -11,11 +11,12 @@ class IndexController extends CommonController{
         $user=session('userinfo');
         $this->user=$user;
 
-        
+
     }
 
     public function index(){
         
+        $this->ad_focus=M('Ad')->where(array('type'=>1357))->select();
         $this->display();
     }
 

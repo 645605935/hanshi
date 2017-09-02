@@ -29,9 +29,9 @@
                         <div class="slide-box">
                             <div class="bd">
                                 <ul>
-                                    <li><a href="#2"><img src="__PUBLIC__/Home/images/imgg.jpg" alt=""></a></li>
-                                    <li><a href="#2"><img src="__PUBLIC__/Home/images/imgg.jpg" alt=""></a></li>
-                                    <li><a href="#2"><img src="__PUBLIC__/Home/images/imgg.jpg" alt=""></a></li>
+                                    <foreach name="ad_focus" item="v">
+                                        <li><a href="javascript:;"><img src="{$v.img}" alt=""></a></li>
+                                    </foreach>
                                 </ul>
                             </div>
                             <a class="prev" href="javascript:void(0)"></a>
