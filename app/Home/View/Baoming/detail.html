@@ -40,8 +40,8 @@
                 </div>
                 <div class="wenzhang">
                     <div class="cs-con">
-                        <if condition="$_GET['type'] eq 1284">{$row['files']}
-                              <audio src="{$row['files']}">
+                        <if condition="$_GET['type'] eq 1284">
+                              <audio src="{$row['files']}" controls="controls">
                               您的浏览器不支持 audio 标签。
                               </audio>
                         </if>
@@ -61,12 +61,9 @@
                         <if condition="$_GET['type'] eq 1287">
                               <iframe src="{$row.files}" style="width: 100px;height: 100px;"></iframe>
                         </if>
-
-                        <foreach name="files" item="v">
-                            <foreach name="row['files']" item="v">
-                                <img src="{$v}" alt="">
-                            </foreach>
-                        </foreach>
+                    </div>
+                    <div class="cs-con">
+                        {$row.content}
                     </div>
                 </div>
             </div>
