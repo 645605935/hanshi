@@ -19,7 +19,7 @@ class UserController extends CommonController{
     }
 
     //帐号设置
-    public function setting(){
+    public function personal_setting(){
         global $user;
 
         $row=M('User')->find($user['id']);
@@ -30,6 +30,105 @@ class UserController extends CommonController{
         $this->row=$row;
         $this->display();
     }
+
+    public function personal_baoming(){
+        global $user;
+
+        $where=array();
+        $where['uid']=$user['id'];
+        if($_GET['type']&&$_GET['type']=='待审核'){
+            $where['status']=0;
+        }
+        if($_GET['type']&&$_GET['type']=='已退回'){
+            $where['status']=-1;
+        }
+
+        $count      = M('Baoming')->where($where)->count();
+        $Page       = new \Common\Extend\Page($count,6);
+        $nowPage = isset($_GET['p'])?$_GET['p']:1;
+        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->order('time desc')->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['time']=date('Y-m-d',$value['time']);
+        }
+
+        $this->page=$Page->show();
+        $this->list=$list;
+        $this->display();
+    }
+
+    public function personal_baoming_edit(){
+        global $user;
+
+        //比赛时间信息
+        $temp=M('Baoming')->find($_GET['id']);
+        $where=array();
+        $where['mid']=$temp['mid'];
+        $where['sqz']=$temp['sqz'];
+        $time_info=M('MatchBmz')->where($where)->find();
+
+        //初赛报名时间
+        if(time()>$time_info['start_time_1'] && time()<$time_info['end_time_1']){
+            $time_info['_tip']="当前是：初赛报名时间，可编辑";
+            $this->editable=1;
+        }
+        if(time()>$time_info['start_time_2'] && time()<$time_info['end_time_2']){
+            $time_info['_tip']="当前是：初赛投票时间，不可编辑";
+            $this->editable=0;
+        }
+        if(time()>$time_info['start_time_3'] && time()<$time_info['end_time_3']){
+            $time_info['_tip']="当前是：复赛报名时间，可编辑";
+            $this->editable=1;
+        }
+        if(time()>$time_info['start_time_4'] && time()<$time_info['end_time_4']){
+            $time_info['_tip']="当前是：初赛投票时间，不可编辑";
+            $this->editable=0;
+        }
+        if(time()>$time_info['start_time_5'] && time()<$time_info['end_time_5']){
+            $time_info['_tip']="当前是：决赛报名时间，可编辑";
+            $this->editable=1;
+        }
+        if(time()>$time_info['start_time_6'] && time()<$time_info['end_time_6']){
+            $time_info['_tip']="当前是：初赛报名时间，不可编辑";
+            $this->editable=0;
+        }
+        
+
+        $row=D('Baoming')->relation(true)->find($_GET['id']);
+        $row['_files']=explode('#', $row['files']);
+        $this->row=$row;
+
+        $this->time_info=$time_info;
+        $this->display();
+    }
+
+    public function ajax_edit_baoming(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+
+            $res = M('Baoming')->save($data);
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    
 
     //个人主页
     public function index(){

@@ -1,0 +1,8 @@
+<?php
+    $_page_=$_SERVER['PATH_INFO'];
+?>
+
+<a class="intro j-pageTitle mr20 <if condition="stripos($_page_,'User/voice_index') nheq false">cur</if>" href="{:U('Home/User/voice_index')}">作家工作台</a>
+<a class="intro j-pageTitle mr20 <if condition="stripos($_page_,'User/task') nheq false">cur</if>" href="{:U('Home/User/task')}">任务库(1)</a>
+<a class="intro j-pageTitle mr20 <if condition="stripos($_page_,'User/voice_demo_list') nheq false">cur</if>" href="{:U('Home/User/voice_demo_list')}">我的样音(2)</a>
+<a class="intro j-pageTitle <if condition="stripos($_page_,'User/voice_create_demo') nheq false">cur</if>" href="{:U('Home/User/voice_create_demo')}">上传样音</a>

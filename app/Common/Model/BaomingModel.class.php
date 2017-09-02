@@ -20,6 +20,24 @@ class BaomingModel extends RelationModel{
 			'class_name'=>'match',
 			'foreign_key'=>'mid',
 			'as_fields' => 'title:match',
+		),
+		'_sqz'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'sqz',
+			'as_fields' => 'title:sqz',
+		),
+		'_sq'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'sq',
+			'as_fields' => 'title:sq',
+		),
+		'_bmz'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'bmz',
+			'as_fields' => 'title:bmz',
 		)
 	);
 }
