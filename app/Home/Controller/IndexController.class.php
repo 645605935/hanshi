@@ -20,6 +20,43 @@ class IndexController extends CommonController{
         $this->display();
     }
 
+    //志愿者报名入口
+    public function volunteer_join(){
+        $this->display();
+    }
+
+    public function ajax_add_volunteer(){
+        global $user;
+
+        $data=array();
+
+        $row=M('VolunteerJoin')->where(array('uid'=>$user['id']))->find();
+
+        if(!$row){
+            if($data=$_POST){
+                $data['time']=time();
+
+                $id=M('VolunteerJoin')->add($data);
+                if($id){
+                    $data=array();
+                    $data['code']=0;
+                    $data['msg']='恭喜你成为平台志愿者！';
+                }else{
+                    $data=array();
+                    $data['code']=1;
+                    $data['msg']='报名失败';
+                }
+            }
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='您已报名成功！';
+        }
+        echo json_encode($data);
+        
+    }
+    
+
     public function shop(){
         global $user;
 
