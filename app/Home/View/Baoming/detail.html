@@ -40,35 +40,32 @@
                 </div>
                 <div class="wenzhang">
                     <div class="cs-con">
-
-
-                        
-
-
-                        <if condition="$row['type'] eq 1284">
-                              <audio src="{$row.files}">
+                        <if condition="$_GET['type'] eq 1284">{$row['files']}
+                              <audio src="{$row['files']}">
                               您的浏览器不支持 audio 标签。
                               </audio>
                         </if>
 
-                        <if condition="$row['type'] eq 1285">
-                              <video src="$row['files']" controls="controls">
+                        <if condition="$_GET['type'] eq 1285">
+                              <video src="{$row['files']}" controls="controls">
                               您的浏览器不支持 video 标签。
                               </video>
                         </if>
 
-                        <if condition="in_array($row['type'], array('1286', '1288', '1289'))">  
-                              <foreach name="files" item="v">
+                        <if condition="in_array($_GET['type'], array('1286', '1288', '1289'))">  
+                              <foreach name="row['files']" item="v">
                                   <img src="{$v}" alt="">
                               </foreach>
                         </if>  
 
-                        <if condition="$row['type'] eq 1287">
+                        <if condition="$_GET['type'] eq 1287">
                               <iframe src="{$row.files}" style="width: 100px;height: 100px;"></iframe>
                         </if>
 
                         <foreach name="files" item="v">
-                            <img src="{$v}" alt="">
+                            <foreach name="row['files']" item="v">
+                                <img src="{$v}" alt="">
+                            </foreach>
                         </foreach>
                     </div>
                 </div>
