@@ -257,7 +257,8 @@ class UserController extends AuthController {
 
     //根据ID获取用户信息
     public function ajax_get_user_info_by_id(){
-        if($id=$_POST['id']){
+        if($id=$_GET['id']){
+
             $row = D('User')->find($id);
             if($row){
                 $data=array();
@@ -280,28 +281,10 @@ class UserController extends AuthController {
 
     //编辑用户信息
     public function ajax_edit_user(){
-
-        $_json=file_get_contents('php://input');
-        $_arr=json_decode($_json,true);
-
-        if($_arr){
+        if($_arr=$_POST){
             $id=$_arr['id'];
-            $where=array('id'=>$id);
 
-            $data=array();
-            $data['truename']=$_arr['truename'];
-            $data['username']=$_arr['username'];
-            $data['gid']=$_arr['gid'];
-            if($_arr['img']!=''){
-                //删除原来的图片
-                $_old_img = D('User')->where('id='.$id)->getField('img');
-                unlink('./Uploads'.$_old_img);
-
-                $data['img']=$_arr['img'];
-            }
-            
-
-            $res = D('User')->where($where)->save($data);
+            $res = D('User')->save($_arr);
             $row = D('User')->relation(true)->find($id);
             if($res){
                 // 赋权限,如果没有则添加
