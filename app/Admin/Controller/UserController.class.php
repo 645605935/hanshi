@@ -155,6 +155,30 @@ class UserController extends AuthController {
         $this->display();
     }
 
+    //个人列表
+    public function gr(){
+        global $user;
+
+        $this->cur_v='User-gr';
+        $this->display();
+    }
+
+    //政府列表
+    public function zf(){
+        global $user;
+
+        $this->cur_v='User-zf';
+        $this->display();
+    }
+
+    //企业列表
+    public function qy(){
+        global $user;
+
+        $this->cur_v='User-qy';
+        $this->display();
+    }
+
     //会员列表
     public function ajax_get_user_list(){
         global $user;
@@ -193,6 +217,9 @@ class UserController extends AuthController {
         }
         echo json_encode($data);
     }
+
+    
+
 
 
     //排序

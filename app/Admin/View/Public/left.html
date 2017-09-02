@@ -372,10 +372,24 @@
       </a>
 
       <ul class="submenu">
-        <li <if condition="$cur_v eq 'User-homeUser'">class="active"</if>>
-          <a href="{:U('Admin/User/homeUser')}" page="Admin/User/homeUser" title="homeUser" data-title="用户管理">
+        <li <if condition="$cur_v eq 'User-gr'">class="active"</if>>
+          <a href="{:U('Admin/User/gr')}" page="Admin/User/gr" title="gr" data-title="个人列表">
             <i class="icon-double-angle-right"></i>
-            用户管理
+            个人列表
+          </a>
+        </li>
+
+        <li <if condition="$cur_v eq 'User-qy'">class="active"</if>>
+          <a href="{:U('Admin/User/qy')}" page="Admin/User/qy" title="qy" data-title="企业列表">
+            <i class="icon-double-angle-right"></i>
+            企业列表
+          </a>
+        </li>
+
+        <li <if condition="$cur_v eq 'User-zf'">class="active"</if>>
+          <a href="{:U('Admin/User/zf')}" page="Admin/User/zf" title="zf" data-title="政府列表">
+            <i class="icon-double-angle-right"></i>
+            政府列表
           </a>
         </li>
 

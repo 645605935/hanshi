@@ -15,7 +15,10 @@ class IndexController extends CommonController{
     }
 
     public function index(){
-        
+
+        //推荐企业
+        $this->companys=M('User')->where(array('recommend'=>1, 'status'=>1, 'gid'=>33))->limit(5)->select();
+
         $this->ad_focus=M('Ad')->where(array('type'=>1357))->select();
         $this->display();
     }

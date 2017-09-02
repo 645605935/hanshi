@@ -154,24 +154,6 @@
                                     </div>
                                   </div>
                                 </div>  
-                                
-                                <div class="layui-inline" style="margin-top: 5px;">
-                                  <div class="layui-form-item">
-                                    <label class="layui-form-label">用户组</label>
-                                    <div class="layui-input-inline">
-                                      <select name="gid">
-                                        <option value="请选择">请选择</option>
-                                        <foreach name="group" item="vo">
-                                           <optgroup label="{$vo['title']}">
-                                             <foreach name="vo['_child']" item="v">
-                                               <option value="{$v.id}" <if condition="$v.id eq $_POST['gid']">selected</if>>{$v.title}</option>
-                                             </foreach>
-                                           </optgroup>
-                                        </foreach>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>  
 
                               </td>
                             </tr>
@@ -193,7 +175,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="panel panel-default">
-                          <div class="panel-heading">会员列表</div>
+                          <div class="panel-heading">个人列表</div>
                           <div class="panel-body">
                             <table id="grid-table"></table>
                             <div id="grid-pager"></div>
@@ -349,13 +331,8 @@
     <script type="text/javascript">
       $(function(){
           var _username="{$_POST['username']}";
-          var _gid="{$_POST['gid']}";
 
-          pageInit(_username, _gid);
-
-          //初使化按钮操作权限
-          var page="{$page}";
-          _init_button_operate(page);
+          pageInit(_username);
       });
 
       //自定义报警列格式
@@ -385,23 +362,19 @@
           }
       }
 
-      function pageInit(_username, _gid){
-        var grid_selector = "#grid-table";
-        var pager_selector = "#grid-pager";
-
-        var grid_data=_ajax_list_device(_username,_gid);
+      function pageInit(_username){
+        var grid_data=_ajax_user_list(_username);
 
         jQuery(grid_selector).jqGrid({
-          caption: "用户列表",
+          caption: "个人列表",
           data: grid_data,
           datatype: "local",
-          colNames:['id', '姓名', '用户名','用户组', '头像', '状态', '推荐', '注册时间', '操作'],
+          colNames:['id', '姓名', '用户名', '头像', '状态', '推荐', '注册时间', '操作'],
           colModel:[
             {name:'id', index:'id', sorttype:"int", align:"center", hidden: true},
 
             {name:'truename',index:'truename',align:"center",hidden: true},
             {name:'username',index:'username',align:"center"},
-            {name:'_auth_group_title',index:'_auth_group_title',align:"center"},
             {name:'img',index:'img',align:"center", formatter: imgFormatter },
             {name:'status',index:'status',align:"center", formatter: statusFormatter },
             {name:'recommend',index:'recommend',align:"center", formatter: recommendFormatter },
@@ -431,27 +404,6 @@
             }, 0);
           },
 
-          onSelectRow : function(ids) {
-            $('#grid-table-2').jqGrid('clearGridData');
-
-            if (ids == null) {
-              ids = 0;
-              if (jQuery("#grid-table-2").jqGrid('getGridParam','records') > 0) {
-                jQuery("#grid-table-2").jqGrid('setGridParam', {
-                      url : "index.php?s=/Admin/User/ajax_get_user_relation_logs.html&id=" + ids,
-                      page : 1
-                    });
-                jQuery("#grid-table-2").jqGrid('setCaption',"操作日志: " + ids).trigger('reloadGrid');
-              }
-            } else {
-              jQuery("#grid-table-2").jqGrid('setGridParam', {
-                url : "index.php?s=/Admin/User/ajax_get_user_relation_logs.html&id=" + ids,
-                page : 1
-              });
-              jQuery("#grid-table-2").jqGrid('setCaption',"操作日志: " + ids).trigger('reloadGrid');
-            }
-          },
-
           gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
               var ids=jQuery(grid_selector).jqGrid('getDataIDs');
               for(var i=0; i<ids.length; i++){
@@ -468,149 +420,14 @@
               }
           },
         }).navGrid(pager_selector, {
-          	search: false,
-  	        add: false,
-  	        edit: false,
-  	        del: false,
-  	        refresh: false
+            search: false,
+            add: false,
+            edit: false,
+            del: false,
+            refresh: false
         });
 
-        //显示隐藏列
-        jQuery("#hcg").click(function() {
-            var len=$(grid_selector).getGridParam("width");
-            $(grid_selector).setGridParam().hideCol("username");
-            $(grid_selector).setGridWidth(len);
-        });
-        jQuery("#scg").click(function() {
-            var len=$(grid_selector).getGridParam("width");
-            $(grid_selector).setGridParam().showCol("username");
-            $(grid_selector).setGridWidth(len);
-        });
         jQuery(grid_selector).closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });//去除jqgrid横向滚动条
-
-        //选择列显示与隐藏
-        $(grid_selector).jqGrid('navButtonAdd', pager_selector, {
-            caption: "Columns",
-            buttonicon: "ui-icon-calculator",
-            title: "Choose columns", 
-            onClickButton: function () {
-                $(grid_selector).jqGrid('columnChooser',{
-        					width: 550, 
-        					dialog_opts: {
-        						modal: true,
-        						minWidth: 470,
-        						height: 470,
-        						show: 'blind',
-        						hide: 'explode',
-        						dividerLocation: 0.5
-        					},
-        					done : function (perm) {
-
-        						// var len=$(grid_selector).getGridParam("width");
-        						// $(grid_selector).setGridParam().hideCol("username");
-        						// $(grid_selector).setGridWidth(len);
-
-        						console.log(perm);
-        						if (perm) {
-        						  // "OK" button are clicked
-        						  this.jqGrid("remapColumns", perm, true);
-        						  // the grid width is probably changed co we can get new width
-        						  // and adjust the width of other elements on the page
-        						  var gwdth = this.jqGrid("getGridParam","width");
-        						  this.jqGrid("setGridWidth",gwdth);
-        						} else {
-        						  // we can do some action in case of "Cancel" button clicked
-        						}
-        				    }
-        				});
-        			}
-        });
-
-        
-        jQuery("#grid-table-2").jqGrid({
-          url : "index.php?s=/Admin/User/ajax_get_user_relation_logs.html&id=0",
-          datatype: "json",
-          colNames:['id', '用户名', '时间', '操作'],
-          colModel:[
-            {name:'id', index:'id', sorttype:"int", align:"center", hidden: true, editable: true ,sortable: false},
-
-            {name:'username',index:'username',align:"center", editable: true,editrules: { required: true }},
-            {name:'time',index:'time',align:"center", editable: true,editrules: { required: true }},
-            {name:'url',index:'url',align:'center',sortable:false}
-          ], 
-          rownumbers:true,
-          rownumWidth:50,//设置行号列宽度
-          rowNum:10,
-          rowList:[10,100,1000],
-          // pager : '#grid-pager-2',
-          viewrecords : true,
-          autowidth:true,
-          shrinkToFit:true,//ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
-          height : 250,
-          caption : "操作日志",
-
-          loadComplete : function(data) {
-            var table = this;
-            setTimeout(function(){
-              updatePagerIcons(table);
-            }, 0);
-          },
-
-          onSelectRow : function(ids) {
-            $('#grid-table-3').jqGrid('clearGridData');
-
-            if (ids == null) {
-              ids = 0;
-              if (jQuery("#grid-table-3").jqGrid('getGridParam','records') > 0) {
-                jQuery("#grid-table-3").jqGrid('setGridParam', {
-                      url : "index.php?s=/Admin/User/ajax_get_user_relation_cases.html&id=" + ids,
-                      page : 1
-                    });
-                jQuery("#grid-table-3").jqGrid('setCaption',"案例: " + ids).trigger('reloadGrid');
-              }
-            } else {
-              jQuery("#grid-table-3").jqGrid('setGridParam', {
-                url : "index.php?s=/Admin/User/ajax_get_user_relation_cases.html&id=" + ids,
-                page : 1
-              });
-              jQuery("#grid-table-3").jqGrid('setCaption',"案例: " + ids).trigger('reloadGrid');
-            }
-          },
-
-        }).navGrid('#grid-pager-2', {
-          add : false,
-          edit : false,
-          del : false
-        });
-
-
-
-        jQuery("#grid-table-3").jqGrid({
-          url : "index.php?s=/Admin/User/ajax_get_user_relation_cases.html&id=0",
-          datatype: "json",
-          colNames:['id', '标题', '时间', '操作'],
-          colModel:[
-            {name:'id', index:'id', sorttype:"int", align:"center", hidden: true, editable: true ,sortable: false},
-
-            {name:'title',index:'title',align:"center", editable: true,editrules: { required: true }},
-            {name:'time',index:'time',align:"center", editable: true,editrules: { required: true }},
-            {name:'url',index:'url',align:'center',sortable:false}
-          ], 
-          rownumbers:true,
-          rownumWidth:50,//设置行号列宽度
-          rowNum:10,
-          rowList:[10,100,1000],
-          // pager : '#grid-pager-3',
-          viewrecords : true,
-          autowidth:true,
-          shrinkToFit:true,//ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
-          height : 250,
-          caption : "案例",
-        }).navGrid('#grid-pager-3', {
-          add : false,
-          edit : false,
-          del : false
-        });
 
         //更新分页图标  
         function updatePagerIcons(table) {
@@ -714,179 +531,10 @@
         .site-demo-upload .site-demo-upbar{position: absolute; top: 50%; left: 50%; margin: -18px 0 0 -56px;}
         .site-demo-upload .layui-upload-button{background-color: rgba(0,0,0,.2); color: rgba(255,255,255,1);}
     </style>
-    <!-- 确认弹框 start-->
-    <div id="dialog-confirm_add" class="hide">
-       <div class="row">
-              <table class="table table-striped table-bordered table-hover">
-                <tbody id="update_img_block">
-                  <tr>
-                    <td colspan="2" style="text-align:center;">
-                      <div class="site-demo-upload">
-                        <img id="LAY_demo_upload_add" src="__PUBLIC__/Admin/images/avatar.png">
-                        <div class="site-demo-upbar">
-                          <input type="file" name="img" class="layui-upload-file avatar" id="add_upload_img">
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-             <form class="layui-form layui-form-pane col-xs-12">
-                <table id="sample-table_add" class="table table-striped table-bordered table-hover">
-                  <tbody>
-                    <tr>
-                      <td class="center">
-                        <div class="layui-inline">
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">姓名</label>
-                            <div class="layui-input-inline">
-                              <input type="text" name="truename" lay-verify="truename" placeholder="" autocomplete="off" class="layui-input">
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="layui-inline">
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">用户名</label>
-                            <div class="layui-input-inline">
-                              <input type="text" name="username" lay-verify="username" placeholder="" autocomplete="off" class="layui-input">
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="center">
-                        <div class="layui-inline">
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">密码</label>
-                            <div class="layui-input-inline">
-                              <input type="text" name="password" lay-verify="password" placeholder="" autocomplete="off" class="layui-input">
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="layui-inline">
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">用户组</label>
-                            <div class="layui-input-inline">
-                              <select name="gid" lay-filter="group">
-                                <option value="请选择">请选择</option>
-                                <foreach name="group" item="vo">
-                                   <optgroup label="{$vo['title']}">
-                                     <foreach name="vo['_child']" item="v">
-                                       <option value="{$v.id}">{$v.title}</option>
-                                     </foreach>
-                                   </optgroup>
-                                </foreach>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="center">
-                        <div class="layui-inline">
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">邮箱</label>
-                            <div class="layui-input-inline">
-                              <input type="text" name="email" placeholder="" autocomplete="off" class="layui-input">
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="layui-inline">
-                          <div class="layui-form-item">
-                            <label class="layui-form-label">手机</label>
-                            <div class="layui-input-inline">
-                              <input type="text" name="phone" placeholder="" autocomplete="off" class="layui-input">
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2">
-                        <div class="layui-form-item layui-form-text">
-                          <div class="layui-input-block">
-                            <textarea placeholder="简介" class="layui-textarea"></textarea>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <!-- <tr>
-                      <td colspan="2" align="center">
-                        <div class="layui-form-item layui-form-text">
-                          <div class="layui-input-block">
-                            <a class="layui-btn layui-btn-normal id-btn-dialog2_editer" data-url="{:U('Admin/Index/baidu_editer')}">百度编辑器</a>
-                            <a class="layui-btn layui-btn-warm id-btn-dialog2_editer" data-url="{:U('Admin/Index/layui_editer')}">Layui编辑器</a>
-                            <a class="layui-btn layui-btn-danger id-btn-dialog2_editer" data-url="{:U('Admin/Index/ace_editer')}">ace编辑器</a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr> -->
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="2" style="text-align:right;">
-                        <input type="text" name="img" id="add_img" class="layui-input" style="display:none;">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo1_add">添加</button>
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
-             </form>
-        </div>
-    </div><!-- #dialog-confirm -->
-
-    <!-- 确认弹框 start-->
-    <div id="dialog-confirm_del" class="hide">
-       <div class="row">
-           <form class="layui-form layui-form-pane col-xs-12">
-            
-            <table id="sample-table_del" class="table table-striped table-bordered table-hover">
-                <tbody id="liaoliao_box">
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">扫码</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="keyword" lay-verify="required" placeholder="" autocomplete="off" class="layui-input item-4">
-                          </div>
-                        </div>
-                      </div> 
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-           </form>
-        </div>
-    </div><!-- #dialog-confirm -->
 
     <!-- 确认弹框 start-->
     <div id="dialog-confirm_edit" class="hide">
        <div class="row">
-              <table class="table table-striped table-bordered table-hover">
-                <tbody id="update_img_block">
-                  <tr>
-                    <td colspan="2" style="text-align:center;">
-                      <div class="site-demo-upload">
-                        <img id="LAY_demo_upload_edit" src="__PUBLIC__/Admin/images/avatar.png">
-                        <div class="site-demo-upbar">
-                          <input type="file" name="img" class="layui-upload-file avatar" id="edit_upload_img">
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
               <form class="layui-form layui-form-pane col-xs-12" id="edit_form">
                   <table class="table table-striped table-bordered table-hover">
                       <tbody id="edit_form_block">
@@ -894,9 +542,24 @@
                           <td>
                             <div class="layui-inline">
                               <div class="layui-form-item">
+                                <label class="layui-form-label">头像</label>
+                                <div class="layui-input-inline">
+                                  <input type="file" id="edit_upload_img" name="img" class="layui-upload-file">
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <img data-src="holder.js/140x140" class="img-thumbnail show_img" alt="140x140" src="" data-holder-rendered="true" style="width: 140px; height: 140px;">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="layui-inline">
+                              <div class="layui-form-item">
                                 <label class="layui-form-label">姓名</label>
                                 <div class="layui-input-inline">
-                                  <input type="text" name="truename" placeholder="" autocomplete="off" class="layui-input">
+                                  <input type="text" name="truename" placeholder="" autocomplete="off" class="layui-input truename">
                                 </div>
                               </div>
                             </div>
@@ -906,7 +569,7 @@
                               <div class="layui-form-item">
                                 <label class="layui-form-label">用户名</label>
                                 <div class="layui-input-inline">
-                                  <input type="text" name="username" placeholder="" autocomplete="off" class="layui-input">
+                                  <input type="text" name="username" placeholder="" autocomplete="off" class="layui-input username">
                                 </div>
                               </div>
                             </div>
@@ -916,17 +579,11 @@
                           <td>
                             <div class="layui-inline">
                               <div class="layui-form-item">
-                                <label class="layui-form-label">用户组</label>
+                                <label class="layui-form-label">推荐</label>
                                 <div class="layui-input-inline">
-                                  <select name="gid" id="edit_select_group">
-                                    <option value="请选择">请选择</option>
-                                    <foreach name="group" item="vo">
-                                       <optgroup label="{$vo['title']}">
-                                         <foreach name="vo['_child']" item="v">
-                                           <option value="{$v.id}">{$v.title}</option>
-                                         </foreach>
-                                       </optgroup>
-                                    </foreach>
+                                  <select name="recommend" id="recommend_select">
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
                                   </select>
                                 </div>
                               </div>
@@ -946,24 +603,7 @@
                             </div>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                           
-                          </td>
-                          <td>
-                            <div class="layui-inline">
-                              <div class="layui-form-item">
-                                <label class="layui-form-label">推荐</label>
-                                <div class="layui-input-inline">
-                                  <select name="recommend" id="recommend_select">
-                                    <option value="1">是</option>
-                                    <option value="0">否</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
+                        
                       </tbody>
                       <tfoot>
                         <tr>
@@ -980,10 +620,6 @@
         </div>
     </div><!-- #dialog-confirm -->
 
-    <!-- 确认弹框 start-->
-    <div id="dialog-confirm_editer" class="hide">
-        <iframe src="" id="editer" name="editer" width="100%" height="100%" frameborder="0" scrolling="no" marginwidth="0" marginheight="0"></iframe>
-    </div><!-- #dialog-confirm -->
     
     <!-- 详情 start-->
     <div id="dialog-confirm_show" class="hide">
@@ -993,21 +629,6 @@
   
     <script type="text/javascript">
         $(function(){
-            //添加
-            $( "body" ).on('click', '.id-btn-dialog2_add', function(e) {
-              e.preventDefault();
-              
-              $( "#dialog-confirm_add" ).removeClass('hide').dialog({
-                resizable: false,
-                modal: true,
-                title: "",
-                width:800,
-                title_html: true,
-              });
-
-              $("div[aria-describedby='dialog-confirm_add'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 添加：</h4></div>");
-            });
-
             //编辑
             $( "body" ).on('click', '.id-btn-dialog2_edit', function(e) {
               e.preventDefault();
@@ -1018,15 +639,11 @@
               if(_json.code==0){
                   var _user=_json.data;
 
-                  $('#LAY_demo_upload_edit').attr('src',_user.img);
-                  $('#edit_form_block input[name=truename]').val(_user.truename);
-                  $('#edit_form_block input[name=username]').val(_user.username);
-                  $('#edit_form  .id').val(_user.id);
+                  $('#edit_form .truename').val(_user.truename);
+                  $('#edit_form .username').val(_user.username);
+                  $('#edit_form .id').val(_user.id);
                   $('#edit_form .img').val(_user.img);
-
-                  if(_user.gid>0){
-                      $('#edit_select_group option[value='+_user.gid+']').attr('selected',true);
-                  }
+                  $('#edit_form .show_img').attr('src', _user.img);
 
                   if(_user.status==1){
                       $('#status_select option[value=1]').attr('selected',true);
@@ -1058,22 +675,6 @@
               });
 
               $("div[aria-describedby='dialog-confirm_edit'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 编辑：</h4></div>");
-            });
-
-            //编辑器弹框
-            $( "body" ).on('click', '.id-btn-dialog2_editer', function(e) {
-              e.preventDefault();
-
-              $('#editer').attr('src',$(this).attr('data-url'));
-              var _editer_url=$(this).attr('data-url');
-
-              //弹出即全屏
-              var index = layer.open({
-                type: 2,
-                content: _editer_url,
-                area: ['800px', '500px'],
-                maxmin: true
-              });
             });
 
             //查看
@@ -1130,18 +731,20 @@
 
     <script type="text/javascript">
        //获取列表
-       function _ajax_list_device(_username,_gid){
+       function _ajax_user_list(_username){
           var grid_data;
           $.ajax({  
               async:false,
               type:'get',  
               contentType:"application/x-www-form-urlencoded",
               url : "{:U('Admin/User/ajax_get_user_list')}",
-              data: {'username':_username, 'gid':_gid},
+              data: {
+                username:_username,
+                gid:44
+              },
               dataType : 'json',
               success  : function(json) { 
                   if(json.code==0){
-                      // layer.msg(json.msg);
                       grid_data=json.data;
                   }else{
                       layer.msg(json.msg);
@@ -1150,34 +753,6 @@
           });  
           return grid_data;  
        } 
-
-       //异步获取用户关联的信息
-       function _ajax_get_user_relation_logs(id){
-           var _data='{"id":"'+id+'"}';
-
-           var _json;
-           $.ajax({  
-               async:false,
-               type:'post',  
-               contentType:"application/x-www-form-urlencoded",
-               url : "{:U('Admin/User/ajax_get_user_relation_logs')}",
-               data: _data,
-               dataType : 'json',
-               success  : function(json) {  
-                   if(json.code == 0){
-                       layer.msg(json.msg);
-                       _json=json;
-                   }else{
-                       layer.msg(json.msg);
-                       _json=json;
-                   }
-               },
-               error  : function() {  
-                   alert('error');
-               }  
-           }); 
-           return _json;  
-       }
 
        //异步获取一条信息
        function _ajax_get_user_info(id){
@@ -1222,53 +797,6 @@
                    if(json.code == 0){
                        layer.msg(json.msg);
                        _json=json;
-                   }else{
-                       layer.msg(json.msg);
-                       _json=json;
-                   }
-               },
-               error  : function() {  
-                   alert('error');
-               }  
-           }); 
-           return _json;  
-       }
-
-       //异步添加信息
-       function _ajax_add_user(data){
-
-           var truename=data.truename;
-           var password=data.password;
-           var username=data.username;
-           var gid=data.gid;
-           var img=data.img;
-
-           var _edit_data ='{';
-               _edit_data+='"truename":"'+truename+'","password":"'+password+'","username":"'+username+'","img":"'+img+'","gid":"'+gid+'"';
-               _edit_data+='}';
-
-           var _json;
-           $.ajax({  
-               async:false,
-               type:'post',  
-               contentType:"application/x-www-form-urlencoded",
-               url : "{:U('Admin/User/ajax_add_user')}",
-               data: _edit_data,
-               dataType : 'json',
-               success  : function(json) {  
-                   if(json.code == 0){
-                       layer.msg(json.msg);
-                       _json=json;
-
-                       var _row=json.data;
-                       console.log(_row);
-                       var operate =""; 
-                       operate  = "<button style='margin-right:5px;' class='btn btn-warm btn-xs id-btn-dialog2_show' data-id='"+_row.id+"'>查看</button>";
-                       operate += "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' data-id='"+_row.id+"'>编辑</button>";
-                       operate += "<button class='btn btn-danger btn-xs id-btn-dialog2_del' data-id='"+_row.id+"'>删除</button>";
-
-                       $("#grid-table").addRowData("1", {"id":_row.id,"truename":_row.truename,"_auth_group_title":_row._auth_group_title,"username":_row.username,"time":_row.time,"img":_row.img,"operates":_row.operate}, "first");  
-
                    }else{
                        layer.msg(json.msg);
                        _json=json;
@@ -1391,45 +919,26 @@
             }
             return false;
           });
-
-          //监听提交
-          // form.on('submit(demo1)', function(data){
-          //   layer.alert(JSON.stringify(data.field), {
-          //     title: '最终的提交信息'
-          //   })
-          //   return false;
-          // });
         });
     </script>
 
 
     <script>
         layui.use('upload', function(){
-          //上传文件
+
+          //上传图片
           layui.upload({
              url: "{:U('Admin/User/upload_img')}" //上传接口
              ,elem: '#edit_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
              ,success: function(res){ //上传成功后的回调
-               console.log(res);
                if(res.code==0){
-                  $('#LAY_demo_upload_edit').attr('src',res.data.src);
-                  $('#edit_img').val(res.data.src);
+                  $('#edit_form .img').val(res.data.src);
+                  $('#edit_form .show_img').attr('src', res.data.src);
                }
              }
-           });
+          });
 
-          //上传文件
-          layui.upload({
-             url: "{:U('Admin/User/upload_img')}" //上传接口
-             ,elem: '#add_upload_img' //指定原始元素，默认直接查找class="layui-upload-file"
-             ,success: function(res){ //上传成功后的回调
-               console.log(res);
-               if(res.code==0){
-                  $('#LAY_demo_upload_add').attr('src',res.data.src);
-                  $('#add_img').val(res.data.src);
-               }
-             }
-           });
+
         });
     </script>
   </body>

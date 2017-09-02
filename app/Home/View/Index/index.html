@@ -64,46 +64,16 @@
             <div class="con-tongji">目前已有<span>9999</span>名志愿者参与公共文化志愿活动</div>
             <div class="tuijian mt20">
                 <ul>
-                    <li class="rq-color1">
-                        <a href="#2">
-                            <span class="tuij-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                            <h3>可惜是水瓶</h3>
-                            <p>不潮不花钱</p>
-                            <p class="tuij-rq"><span></span>人气99999</p>
-                        </a>
-                    </li>
-                    <li class="rq-color2">
-                        <a href="#2">
-                            <span class="tuij-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                            <h3>气质女神</h3>
-                            <p>傻白甜慎入</p>
-                            <p class="tuij-rq"><span></span>人气99999</p>
-                        </a>
-                    </li>
-                    <li class="rq-color3">
-                        <a href="#2">
-                            <span class="tuij-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                            <h3>水果大咖</h3>
-                            <p>维生素加油站</p>
-                            <p class="tuij-rq"><span></span>人气99999</p>
-                        </a>
-                    </li>
-                    <li class="rq-color4">
-                        <a href="#2">
-                            <span class="tuij-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                            <h3>家有萌娃</h3>
-                            <p>宝宝快快长大</p>
-                            <p class="tuij-rq"><span></span>人气99999</p>
-                        </a>
-                    </li>
-                    <li class="rq-color5">
-                        <a href="#2">
-                            <span class="tuij-img"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                            <h3>蕾丝控</h3>
-                            <p>少女蕾丝心</p>
-                            <p class="tuij-rq"><span></span>人气99999</p>
-                        </a>
-                    </li>
+                    <foreach name="companys" item="v">
+                        <li class="rq-color{$key}">
+                            <a href="#2">
+                                <span class="tuij-img"><img src="{$v.company_logo}" alt=""></span>
+                                <h3>{$v.company_name}</h3>
+                                <p>{$v.company_slogan}</p>
+                                <p class="tuij-rq"><span></span>人气99999</p>
+                            </a>
+                        </li>
+                    </foreach>
                 </ul>
             </div>
             <div class="clear"></div>
