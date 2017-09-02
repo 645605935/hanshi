@@ -16,7 +16,9 @@
     .left_label{width:158px!important;}
     .right_label{width:auto!important;border:0px!important;}
     .layui-form-item{margin-bottom: 0px!important;}
-
+	
+	.logo_box a{display: block;width: 25%;box-sizing: border-box;padding: 5px;overflow: hidden;float: left;}
+    .logo_box a img{width: 100%;height: 100%;}
     .img_box a{display: block;width: 25%;box-sizing: border-box;padding: 5px;overflow: hidden;float: left;}
     .img_box a img{width: 100%;height: 100%;}
     .images_box a{display: block;width: 25%;box-sizing: border-box;padding: 5px;overflow: hidden;float: left;}
@@ -154,6 +156,41 @@
 		              </tr>
 
 		              <tr>
+	                      <td colspan="2">
+	                         <div class="layui-inline">
+	                            <div class="layui-form-item">
+	                              <label class="layui-form-label left_label">政府口号</label>
+	                              <div class="layui-input-inline">
+	                                 <input type="text" name="company_slogan" lay-verify="required" autocomplete="off" placeholder="" class="layui-input company_slogan">
+	                              </div>
+	                            </div>
+	                        </div>
+	                      </td>
+	                    </tr>
+
+	                    <tr>
+	                      <td colspan="2">
+	                         <div class="layui-inline">
+	                            <div class="layui-form-item">
+	                              <label class="layui-form-label left_label">政府LOGO</label>
+	                              <div class="layui-input-inline">
+	                                 <input type="file" id="add_upload_img_0" name="img_0" class="layui-upload-file img_0"><br>
+	                                 <div class="layui-elem-quote" style="margin-top: 20px;border-left: 0px solid red;color: red;">
+	                                   注：政府LOGO
+	                                 </div>
+	                              </div>
+	                            </div>
+	                        </div>
+	                      </td>
+	                    </tr>
+
+	                    <tr>
+	                      <td colspan="2">
+	                         <div class="row logo_box"></div>
+	                      </td>
+	                    </tr>
+
+		              <tr>
 		                <td colspan="2">
 		                   <div class="layui-inline">
 		                      <div class="layui-form-item">
@@ -192,6 +229,7 @@
 		              <tr>
 		                <td colspan="2" style="text-align:center;">
 		                  <input type="hidden" name="gid" lay-verify="required" value="{$gid}" autocomplete="off" placeholder="" class="layui-input gid">
+		                  <input type="hidden" name="comapny_logo" lay-verify="required" autocomplete="off" placeholder="" class="layui-input company_logo">
 		                  <input type="hidden" name="company_img" lay-verify="required" autocomplete="off" placeholder="" class="layui-input company_img">
 		                  <button class="layui-btn" lay-submit="" lay-filter="demo1_add">立即注册</button>
 		                </td>
@@ -291,6 +329,23 @@
               return '两次输入的密码不一致';
           }
         }
+      });
+
+      //上传图片
+      layui.upload({
+         url: "{:U('Home/Index/lay_upload_img')}" //上传接口
+         ,elem: '#add_upload_img_0' //指定原始元素，默认直接查找class="layui-upload-file"
+         ,success: function(res){ //上传成功后的回调
+           if(res.code==0){
+              var str='';
+                 str+='<a href="#">'+
+                        '<img src="'+res.data.src+'">'+
+                      '</a>';
+
+              $('#add_form .logo_box').html(str);
+              $('#add_form .company_logo').val(res.data.src);
+           }
+         }
       });
 
       //上传图片
