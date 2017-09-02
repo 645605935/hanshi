@@ -348,14 +348,14 @@
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
-                     layer.msg(json.msg);
+                     alert(json.msg);
                      window.location.href="{:U('Home/Baoming/index')}";
                  }else{
                      layer.msg(json.msg);
                  }
              },
              error  : function() {  
-                 alert('error');
+                 layer.msg('error');
              }  
          }); 
          return _json;

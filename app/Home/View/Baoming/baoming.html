@@ -352,13 +352,13 @@
              success  : function(json) {
                  if(json.code==0){
                      alert(json.msg);
-                     window.location.reload();
+                     window.location.href="{:U('Home/Baoming/index')}";
                  }else{
-                     alert(json.msg);
+                     layer.msg(json.msg);
                  }
              },
              error  : function() {  
-                 alert('error');
+                 layer.msg('error');
              }  
          }); 
          return _json;
