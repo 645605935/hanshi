@@ -16,6 +16,8 @@ class BaomingController extends CommonController{
         global $user;
 
         $this->ad_center=M('Ad')->where(array('type'=>1399))->find();
+        $this->ad_vote=M('Ad')->where(array('type'=>1400))->limit(10)->select();
+
 
         $type=I('type');
         $where=array();
@@ -212,23 +214,53 @@ class BaomingController extends CommonController{
      * @param int $total
      */
     public function getReward($total=1000){
-         $win1 = floor((12 * $total) / 100);
-         $win2 = floor((30 * $total) / 100);
-         $win3 = floor((52 * $total) / 100);
-         $other = $total - $win1 - $win2 - $win3;
+         $ad_vote=M('Ad')->where(array('type'=>1400))->limit(10)->select();
+
+         $win1 = floor((intval($ad_vote[0]['bfb']) * $total) / 100);
+         $win2 = floor((intval($ad_vote[1]['bfb']) * $total) / 100);
+         $win3 = floor((intval($ad_vote[2]['bfb']) * $total) / 100);
+         $win4 = floor((intval($ad_vote[3]['bfb']) * $total) / 100);
+         $win5 = floor((intval($ad_vote[4]['bfb']) * $total) / 100);
+         $win6 = floor((intval($ad_vote[5]['bfb']) * $total) / 100);
+         $win7 = floor((intval($ad_vote[6]['bfb']) * $total) / 100);
+         $win8 = floor((intval($ad_vote[7]['bfb']) * $total) / 100);
+         $win9 = floor((intval($ad_vote[8]['bfb']) * $total) / 100);
+         $win10 = floor((intval($ad_vote[9]['bfb']) * $total) / 100);
+
          $return = array();
-         for ($i = 0;$i < $win1;$i++) {
-             $return[] = 1;
+         for ($a1 = 0;$a1 < $win1;$a1++) {
+             $return[] = $ad_vote[$a1]['img'];
          }
-         for ($j = 0;$j < $win2;$j++) {
-             $return[] = 2;
+         for ($a2 = 0;$a2 < $win2;$a2++) {
+             $return[] = $ad_vote[$a2]['img'];
          }
-         for ($m = 0;$m < $win3;$m++) {
-             $return[] = 3;
+         for ($a3 = 0;$a3 < $win3;$a3++) {
+             $return[] = $ad_vote[$a3]['img'];
          }
-         for ($n = 0;$n < $other;$n++) {
-             $return[] = '谢谢惠顾';
+         for ($a4 = 0;$a4 < $win4;$a4++) {
+             $return[] = $ad_vote[$a4]['img'];
          }
+         for ($a5 = 0;$a5 < $win5;$a5++) {
+             $return[] = $ad_vote[$a5]['img'];
+         }
+
+         for ($a6 = 0;$a6 < $win6;$a6++) {
+             $return[] = $ad_vote[$a6]['img'];
+         }
+         for ($a7 = 0;$a7 < $win7;$a7++) {
+             $return[] = $ad_vote[$a7]['img'];
+         }
+         for ($a8 = 0;$a3 < $win8;$a3++) {
+             $return[] = $ad_vote[$a3]['img'];
+         }
+         for ($a9 = 0;$a9 < $win9;$a9++) {
+             $return[] = $ad_vote[$a9]['img'];
+         }
+         for ($a10 = 0;$a10 < $win10;$a10++) {
+             $return[] = $ad_vote[$a10]['img'];
+         }
+        
+         
          shuffle($return);
          return $return[array_rand($return) ];
     }
