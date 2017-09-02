@@ -27,7 +27,7 @@ class MatchController extends CommonController{
         $count      = M('Match')->where($where)->count();
         $Page       = new \Common\Extend\Page($count,6);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
-        $list=M('Match')->page($nowPage.','.$Page->listRows)->where($where)->select();
+        $list=M('Match')->page($nowPage.','.$Page->listRows)->where($where)->order('time desc')->select();
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
             if($value['type']){

@@ -27,7 +27,7 @@ class BaomingController extends CommonController{
         $count      = M('Baoming')->where($where)->count();
         $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
-        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->select();
+        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->order('time desc')->select();
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
