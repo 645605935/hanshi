@@ -19,6 +19,18 @@ class IndexController extends CommonController{
         //推荐企业
         $this->companys=M('User')->where(array('recommend'=>1, 'status'=>1, 'gid'=>33))->limit(5)->select();
 
+        //本周热榜
+        $this->books_hot=M('Book')->where(array('finish'=>1))->order('collect desc')->limit(4)->select();
+
+        //精彩演出
+        $this->videos=M('Video')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
+
+        //传统文化演出
+        $this->activitys=M('Activity')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
+
+        //热卖产品
+        $this->products_hot=M('Product')->where(array('recommend'=>1, 'status'=>1))->limit(4)->select();
+
         $this->ad_focus=M('Ad')->where(array('type'=>1357))->select();
         $this->display();
     }

@@ -88,40 +88,24 @@
                                 <div class="slider">
                                     <div class="bd">
                                         <ul>
-                                            <li>
-                                                <a href="shucheng.html"><img src="__PUBLIC__/Home/images/img1.jpg" /></a>
-                                            </li>
-                                            <li>
-                                                <a href="shucheng.html"><img src="__PUBLIC__/Home/images/img1.jpg" /></a>
-                                            </li>
-                                            <li>
-                                                <a href="shucheng.html"><img src="__PUBLIC__/Home/images/img1.jpg" /></a>
-                                            </li>
+                                            <foreach name="books_hot" item="v">
+                                                <li>
+                                                    <a href="shucheng.html"><img src="{$v.img}" /></a>
+                                                </li>
+                                            </foreach>
                                         </ul>
                                     </div>
                                     <div class="txt">
                                         <ul>
-                                            <li>
-                                                <div class="right-blcon">
-                                                    <div class="bok-n">《手动阀手动阀》<span class="fr">9.6分</span></div>
-                                                    <p><span>作者：</span>xxx<span class="ml20">主播：</span>xxx</p>
-                                                    <p><span>简介：</span>斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="right-blcon">
-                                                    <div class="bok-n">《手动阀手动阀》<span class="fr">9.6分</span></div>
-                                                    <p><span>作者：</span>xxx<span class="ml20">主播：</span>xxx</p>
-                                                    <p><span>简介：</span>死啦的咖啡机阿里山的价格拉深刻的解放啦开始的减肥</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="right-blcon">
-                                                    <div class="bok-n">《手动阀手动阀》<span class="fr">9.6分</span></div>
-                                                    <p><span>作者：</span>xxx<span class="ml20">主播：</span>xxx</p>
-                                                    <p><span>简介：</span>阿萨德法师迪欧按公司的感觉萨洛克</p>
-                                                </div>
-                                            </li>
+                                            <foreach name="books_hot" item="v">
+                                                <li>
+                                                    <div class="right-blcon">
+                                                        <div class="bok-n">《{$v.title}》<span class="fr">9.6分</span></div>
+                                                        <p><span>作者：</span>xxx<span class="ml20">主播：</span>xxx</p>
+                                                        <p><span>简介：</span>{$v.desc}</p>
+                                                    </div>
+                                                </li>
+                                            </foreach>
                                         </ul>
                                     </div>
                                     <div class="pnBtn prev">
@@ -136,107 +120,38 @@
                             </div>
                             <div class="right-br fl pl10">
                                 <ul class="rightt-ul">
-                                    <li>
-                                        <a href="shucheng.html">
-                                            <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《撒的》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>行行行</p>
-                                                <p><span class="fs16">主播</span>行行行</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shucheng.html">
-                                            <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《撒的》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>行行行</p>
-                                                <p><span class="fs16">主播</span>行行行</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shucheng.html">
-                                            <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《撒的》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>行行行</p>
-                                                <p><span class="fs16">主播</span>行行行</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shucheng.html">
-                                            <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《撒的》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>行行行</p>
-                                                <p><span class="fs16">主播</span>行行行</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    <foreach name="books_hot" item="v">
+                                        <li>
+                                            <a href="shucheng.html">
+                                                <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
+                                                <div class="shu-r">
+                                                    <h3>《{$v.title}》</h3>
+                                                    <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
+                                                    <p><span class="fs16">作者</span>{$v.uid}</p>
+                                                    <p><span class="fs16">主播</span>{$v.uid}</p>
+                                                    <p class="mt5 jj"><span class="fs16">简介</span>{$v.desc}</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </foreach>
                                 </ul>
                             </div>
                             <div class="right-blb fl">
                                 <ul class="rightt-ul">
-                                    
-                                    <li>
-                                        <a href="shucheng.html">
-                                            <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《撒的》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>行行行</p>
-                                                <p><span class="fs16">主播</span>行行行</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shucheng.html">
-                                            <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《撒的》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>行行行</p>
-                                                <p><span class="fs16">主播</span>行行行</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shucheng.html">
-                                            <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《撒的》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>行行行</p>
-                                                <p><span class="fs16">主播</span>行行行</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shucheng.html">
-                                            <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《撒的》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>行行行</p>
-                                                <p><span class="fs16">主播</span>行行行</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    <foreach name="books_hot" item="v">
+                                        <li>
+                                            <a href="shucheng.html">
+                                                <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
+                                                <div class="shu-r">
+                                                    <h3>《{$v.title}》</h3>
+                                                    <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
+                                                    <p><span class="fs16">作者</span>{$v.uid}</p>
+                                                    <p><span class="fs16">主播</span>{$v.uid}</p>
+                                                    <p class="mt5 jj"><span class="fs16">简介</span>{$v.desc}</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </foreach>
                                 </ul>
                             </div>
                         </div>
@@ -343,39 +258,16 @@
                         <div class="right-bottom">
                             <div class="yanchu">
                                 <ul>
-                                    <li>
-                                         <img class="videoo fl" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <!-- <video controls="controls" class="videoo">
-                                           <source src="shipin.mp4" type="video/mp4">
-                                        </video> -->
-                                        <div class="yanchu-r fl">
-                                            <p>剧目名称：<span>《惺惺惜惺惺》</span>表演类型：<span>惺惺惜惺惺</span>导演/指导：<span>惺惺惜惺惺</span>表演团队：<span>惺惺惜惺惺</span></p>
-                                            <p><em class="fs16">介绍</em>：介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                            <div class="y-time"><em class="fs16">热播时间</em>：1999年9月9日<div class="fr sc-btn"><a href="javascript:;" class="sc"></a><a href="#2" class="buy-btn"><i></i>在线购票</a></div></div>
-                                        </div>
-                                    </li>
-                                     <li>
-                                         <img class="videoo fl" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <!-- <video controls="controls" class="videoo">
-                                           <source src="shipin.mp4" type="video/mp4">
-                                        </video> -->
-                                        <div class="yanchu-r fl">
-                                            <p>剧目名称：<span>《惺惺惜惺惺》</span>表演类型：<span>惺惺惜惺惺</span>导演/指导：<span>惺惺惜惺惺</span>表演团队：<span>惺惺惜惺惺</span></p>
-                                            <p><em class="fs16">介绍</em>：介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                            <div class="y-time"><em class="fs16">热播时间</em>：1999年9月9日<div class="fr sc-btn"><a href="javascript:;" class="sc"></a><a href="#2" class="buy-btn"><i></i>在线购票</a></div></div>
-                                        </div>
-                                    </li>
-                                     <li>
-                                         <img class="videoo fl" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <!-- <video controls="controls" class="videoo">
-                                           <source src="shipin.mp4" type="video/mp4">
-                                        </video> -->
-                                        <div class="yanchu-r fl">
-                                            <p>剧目名称：<span>《惺惺惜惺惺》</span>表演类型：<span>惺惺惜惺惺</span>导演/指导：<span>惺惺惜惺惺</span>表演团队：<span>惺惺惜惺惺</span></p>
-                                            <p><em class="fs16">介绍</em>：介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍</p>
-                                            <div class="y-time"><em class="fs16">热播时间</em>：1999年9月9日<div class="fr sc-btn"><a href="javascript:;" class="sc"></a><a href="#2" class="buy-btn"><i></i>在线购票</a></div></div>
-                                        </div>
-                                    </li>
+                                    <foreach name="videos" item="v">
+                                        <li>
+                                            <img class="videoo fl" src="{$v.img}" alt="">
+                                            <div class="yanchu-r fl">
+                                                <p>剧目名称：<span>《{$v.title}》</span>表演类型：<span>{$v.special}</span>导演/指导：<span>{$v.director}</span>表演团队：<span>{$v.team}</span></p>
+                                                <p><em class="fs16">介绍</em>：{$v.content}</p>
+                                                <div class="y-time"><em class="fs16">热播时间</em>：{$v.time|date="Y-m-d",###}<div class="fr sc-btn"><a href="javascript:;" class="sc"></a><a href="#2" class="buy-btn"><i></i>在线购票</a></div></div>
+                                            </div>
+                                        </li>
+                                    </foreach>
                                 </ul>
                             </div>
                         </div>
@@ -390,46 +282,18 @@
                         <div class="right-bottom">
                             <div class="right-r fl">
                                 <h3><i class="scdw"></i>上传单位</h3>
-                                <img class="videoo" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                <!-- <video controls="controls" class="videoo">
-                                   <source src="shipin.mp4" type="video/mp4">
-                                </video> -->
+                                <img class="videoo" src="{$activitys[0]['img']}" alt="">
                                 <p>剧目名称<span class="leibie">类别</span><span class="fr num">收看人数：100</span></p>
                             </div>
                             <div class="right-l fl">
                                 <ul>
-                                    <li>
-                                        <h3><i class="scdw"></i>上传单位</h3>
-                                        <img class="videoo" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <!-- <video controls="controls" class="videoo">
-                                           <source src="shipin.mp4" type="video/mp4">
-                                        </video> -->
-                                        <p>剧目名称<span class="leibie">类别</span><span class="fr num">收看人数：100</span></p>
-                                    </li>
-                                    <li>
-                                        <h3><i class="scdw"></i>上传单位</h3>
-                                        <img class="videoo" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <!-- <video controls="controls" class="videoo">
-                                           <source src="shipin.mp4" type="video/mp4">
-                                        </video> -->
-                                        <p>剧目名称<span class="leibie">类别</span><span class="fr num">收看人数：100</span></p>
-                                    </li>
-                                    <li>
-                                        <h3><i class="scdw"></i>上传单位</h3>
-                                        <img class="videoo" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <!-- <video controls="controls" class="videoo">
-                                           <source src="shipin.mp4" type="video/mp4">
-                                        </video> -->
-                                        <p>剧目名称<span class="leibie">类别</span><span class="fr num">收看人数：100</span></p>
-                                    </li>
-                                    <li>
-                                        <h3><i class="scdw"></i>上传单位</h3>
-                                        <img class="videoo" src="__PUBLIC__/Home/images/img1.jpg" alt="">
-                                        <!-- <video controls="controls" class="videoo">
-                                           <source src="shipin.mp4" type="video/mp4">
-                                        </video> -->
-                                        <p>剧目名称<span class="leibie">类别</span><span class="fr num">收看人数：100</span></p>
-                                    </li>
+                                    <foreach name="activitys" item="v">
+                                        <li>
+                                            <h3><i class="scdw"></i>上传单位</h3>
+                                            <img class="videoo" src="{$v.img}" alt="">
+                                            <p>剧目名称<span class="leibie">类别</span><span class="fr num">收看人数：100</span></p>
+                                        </li>
+                                    </foreach>
                                 </ul>
                             </div>
                         </div>
@@ -443,54 +307,20 @@
                         </div>
                         <div class="right-bottom hot-goods">
                             <ul>
-                                <li>
-                                    <h2>录音设备</h2>
-                                    <div class="hot-left">
-                                        <p class="hot-name"><a href="#2">产品名称及型号</a></p>
-                                        <p class="hot-pri">200元</p>
-                                        <p class="hot-num">已售2222件</p>
-                                        <p class="hot-by">全场包邮</p>
-                                    </div>
-                                    <div class="hot-img">
-                                        <a href="qiye.html"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2>出版图书</h2>
-                                    <div class="hot-left">
-                                        <p class="hot-name"><a href="#2">产品名称及型号</a></p>
-                                        <p class="hot-pri">200元</p>
-                                        <p class="hot-num">已售2222件</p>
-                                        <p class="hot-by">全场包邮</p>
-                                    </div>
-                                    <div class="hot-img">
-                                        <a href="qiye.html"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2>培训课程</h2>
-                                    <div class="hot-left">
-                                        <p class="hot-name"><a href="#2">产品名称及型号</a></p>
-                                        <p class="hot-pri">200元</p>
-                                        <p class="hot-num">已售2222件</p>
-                                        <p class="hot-by">全场包邮</p>
-                                    </div>
-                                    <div class="hot-img">
-                                        <a href="qiye.html"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2>在线配音</h2>
-                                    <div class="hot-left">
-                                        <p class="hot-name"><a href="#2">产品名称及型号</a></p>
-                                        <p class="hot-pri">200元</p>
-                                        <p class="hot-num">已售2222件</p>
-                                        <p class="hot-by">全场包邮</p>
-                                    </div>
-                                    <div class="hot-img">
-                                        <a href="qiye.html"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a>
-                                    </div>
-                                </li>
+                                <foreach name="videos" item="v">
+                                    <li>
+                                        <h2>{$v.title}</h2>
+                                        <div class="hot-left">
+                                            <p class="hot-name"><a href="#2">产品名称及型号</a></p>
+                                            <p class="hot-pri">{$v.price}元</p>
+                                            <p class="hot-num">已售2222件</p>
+                                            <p class="hot-by">全场包邮</p>
+                                        </div>
+                                        <div class="hot-img">
+                                            <a href=""><img src="{$v.img}" alt=""></a>
+                                        </div>
+                                    </li>
+                                </foreach>
                             </ul>
                         </div>
                     </div>
