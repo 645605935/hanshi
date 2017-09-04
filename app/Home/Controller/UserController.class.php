@@ -712,8 +712,6 @@ class UserController extends CommonController{
         echo json_encode($data);
     }
 
-    
-
     //编辑书
     public function ajax_save_book(){
         global $user;
