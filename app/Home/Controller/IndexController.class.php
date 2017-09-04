@@ -27,6 +27,10 @@ class IndexController extends CommonController{
 
         //传统文化演出
         $this->activitys=M('Activity')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
+        //传统文化演出
+        $this->activitys=M('Activity')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
+        //传统文化演出
+        $this->activitys=M('Activity')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
 
         //热卖产品
         $this->products_hot=M('Product')->where(array('recommend'=>1, 'status'=>1))->limit(4)->select();

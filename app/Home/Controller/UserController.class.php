@@ -780,7 +780,8 @@ class UserController extends CommonController{
         $where['status']=0;
 
         $res=M('Book')->where($where)->find();
-        if(!$res){
+        // if(!$res){
+        if($res){
             $data=array();
             $data['code']=0;
             $data['msg']='success';
