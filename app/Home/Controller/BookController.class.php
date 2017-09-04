@@ -15,15 +15,10 @@ class BookController extends CommonController{
     public function index(){
         global $user;
 
-        $type=I('type');
-        $where=array();
-        if($type){
-            $where['type']=$type;
-            $match=M('Match')->where(array('type'=>$type))->select();
-        }else{
-            $match=M('Match')->select();
-        }
+        $list_left=D('Book')->where($where)->relation(true)->limit(3)->select();
+        $list_right=D('Book')->where($where)->relation(true)->limit(2)->select();
 
+        $where=array();
         $count      = M('Book')->where($where)->count();
         $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
@@ -32,9 +27,19 @@ class BookController extends CommonController{
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
 
+
+        //作家
+        $recommend_bookers=M('User')->where(array('is_booker'=>1))->limit(3)->select();
+
+        //主播
+        $recommend_voicers=M('User')->where(array('is_voicer'=>1))->limit(3)->select();
+
         $this->page=$Page->show();
         $this->list=$list;
-        $this->type=$type;
+        $this->list_left=$list_left;
+        $this->list_right=$list_right;
+        $this->recommend_bookers=$recommend_bookers;
+        $this->recommend_voicers=$recommend_voicers;
         $this->display();
     }
 

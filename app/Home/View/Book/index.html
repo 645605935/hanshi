@@ -42,7 +42,7 @@
 <div class="logo-wrap box-center">
     <div class="box-center cf">
         <div class="book-shelf fr">
-            <a href="#2" target="_blank"><em class="iconfont"></em><i>我的书架</i>
+            <a href="{:U('Home/User/book_list')}"><em class="iconfont"></em><i>我的书架</i>
             </a>
         </div>
         <div class="logo fl">
@@ -222,40 +222,24 @@
                             <div class="slider">
                                 <div class="bd">
                                     <ul>
-                                        <li>
-                                            <a href="shucheng.html"><img src="__PUBLIC__/Home/images/img1.jpg" /></a>
-                                        </li>
-                                        <li>
-                                            <a href="shucheng.html"><img src="__PUBLIC__/Home/images/img1.jpg" /></a>
-                                        </li>
-                                        <li>
-                                            <a href="shucheng.html"><img src="__PUBLIC__/Home/images/img1.jpg" /></a>
-                                        </li>
+                                        <foreach name="list_left" item="v">
+                                            <li>
+                                                <a href="javascript:;"><img src="{$v.img}" /></a>
+                                            </li>
+                                        </foreach>
                                     </ul>
                                 </div>
                                 <div class="txt">
                                     <ul>
-                                        <li>
-                                            <div class="right-blcon">
-                                                <div class="bok-n">《手动阀手动阀》<span class="fr">9.6分</span></div>
-                                                <p><span>作者：</span>xxx<span class="ml20">主播：</span>xxx</p>
-                                                <p><span>简介：</span>斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法斯蒂芬撒旦法</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="right-blcon">
-                                                <div class="bok-n">《手动阀手动阀》<span class="fr">9.6分</span></div>
-                                                <p><span>作者：</span>xxx<span class="ml20">主播：</span>xxx</p>
-                                                <p><span>简介：</span>死啦的咖啡机阿里山的价格拉深刻的解放啦开始的减肥</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="right-blcon">
-                                                <div class="bok-n">《手动阀手动阀》<span class="fr">9.6分</span></div>
-                                                <p><span>作者：</span>xxx<span class="ml20">主播：</span>xxx</p>
-                                                <p><span>简介：</span>阿萨德法师迪欧按公司的感觉萨洛克</p>
-                                            </div>
-                                        </li>
+                                        <foreach name="list_left" item="v">
+                                            <li>
+                                                <div class="right-blcon">
+                                                    <div class="bok-n">《{$v.title}》<span class="fr">9.6分</span></div>
+                                                    <p><span>作者：</span>{$v.author}<span class="ml20">主播：</span>{$v.title}</p>
+                                                    <p><span>简介：</span>{$v.desc}</p>
+                                                </div>
+                                            </li>
+                                        </foreach>
                                     </ul>
                                 </div>
                                 <div class="pnBtn prev">
@@ -270,130 +254,38 @@
                         </div>
                         <div class="right-br right-brr fl pl10">
                             <ul class="rightt-ul rightt-ul11">
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <foreach name="list_right" item="v">
+                                    <li>
+                                        <a href="shucheng.html">
+                                            <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
+                                            <div class="shu-r">
+                                                <h3>《{$v.title}》</h3>
+                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
+                                                <p><span class="fs16">作者</span>{$v.author}</p>
+                                                <p><span class="fs16">主播</span>{$v.author}</p>
+                                                <p class="mt5 jj"><span class="fs16">简介</span>{$v.desc}</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </foreach>
                             </ul>
                         </div>
                         <div class="right-blb right-blb11 fl">
                             <ul class="rightt-ul">
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="shu-imgg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                        <div class="shu-r">
-                                            <h3>《撒的》</h3>
-                                            <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                            <p><span class="fs16">作者</span>行行行</p>
-                                            <p><span class="fs16">主播</span>行行行</p>
-                                            <p class="mt5 jj"><span class="fs16">简介</span>行行行行行行行行行行行行行行行</p>
-                                        </div>
-                                    </a>
-                                </li>
+                                <foreach name="list" item="v">
+                                    <li>
+                                        <a href="shucheng.html">
+                                            <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
+                                            <div class="shu-r">
+                                                <h3>《{$v.title}》</h3>
+                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
+                                                <p><span class="fs16">作者</span>{$v.author}</p>
+                                                <p><span class="fs16">主播</span>{$v.author}</p>
+                                                <p class="mt5 jj"><span class="fs16">简介</span>{$v.desc}</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </foreach>
                             </ul>
                         </div>
                     </div>
@@ -402,91 +294,35 @@
                     <div class="author-tj">
                         <h3>作家推荐</h3>
                         <ul>
-                            <li>
-                                <a href="shucheng.html">
-                                    <span class="tj-head fl"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                    <div class="tj-info">
-                                        <p class="tj-penname">笔名</p>
-                                        <p class="tj-dbz">代表作品</p>
-                                        <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="shucheng.html">
-                                    <span class="tj-head fl"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                    <div class="tj-info">
-                                        <p class="tj-penname">笔名</p>
-                                        <p class="tj-dbz">代表作品</p>
-                                        <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="shucheng.html">
-                                    <span class="tj-head fl"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                    <div class="tj-info">
-                                        <p class="tj-penname">笔名</p>
-                                        <p class="tj-dbz">代表作品</p>
-                                        <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="shucheng.html">
-                                    <span class="tj-head fl"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                    <div class="tj-info">
-                                        <p class="tj-penname">笔名</p>
-                                        <p class="tj-dbz">代表作品</p>
-                                        <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="shucheng.html">
-                                    <span class="tj-head fl"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                    <div class="tj-info">
-                                        <p class="tj-penname">笔名</p>
-                                        <p class="tj-dbz">代表作品</p>
-                                        <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                    </div>
-                                </a>
-                            </li>
+                            <foreach name="recommend_bookers" item="v">
+                                <li>
+                                    <a href="shucheng.html">
+                                        <span class="tj-head fl"><img src="{$v.img}" alt=""></span>
+                                        <div class="tj-info">
+                                            <p class="tj-penname">{$v.truename}</p>
+                                            <p class="tj-dbz">代表作品</p>
+                                            <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </foreach>
                         </ul>
                     </div>
                     <div class="author-tj">
                         <h3>主播推荐</h3>
                         <ul>
-                            <li>
-                                <a href="shucheng.html">
-                                    <span class="tj-head fl"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                    <div class="tj-info">
-                                        <p class="tj-penname">艺名</p>
-                                        <p class="tj-dbz">代表作品</p>
-                                        <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="shucheng.html">
-                                    <span class="tj-head fl"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                    <div class="tj-info">
-                                        <p class="tj-penname">艺名</p>
-                                        <p class="tj-dbz">代表作品</p>
-                                        <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="shucheng.html">
-                                    <span class="tj-head fl"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></span>
-                                    <div class="tj-info">
-                                        <p class="tj-penname">艺名</p>
-                                        <p class="tj-dbz">代表作品</p>
-                                        <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                    </div>
-                                </a>
-                            </li>
+                            <foreach name="recommend_bookers" item="v">
+                                <li>
+                                    <a href="shucheng.html">
+                                        <span class="tj-head fl"><img src="{$v.img}" alt=""></span>
+                                        <div class="tj-info">
+                                            <p class="tj-penname">{$v.truename}</p>
+                                            <p class="tj-dbz">代表作品</p>
+                                            <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </foreach>
                         </ul>
                     </div>
                 </div>

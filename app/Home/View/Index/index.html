@@ -263,7 +263,7 @@
                         </div>
                         <div class="right-bottom hot-goods">
                             <ul>
-                                <foreach name="videos" item="v">
+                                <foreach name="products_hot" item="v">
                                     <li>
                                         <h2>{$v.title}</h2>
                                         <div class="hot-left">
@@ -273,7 +273,7 @@
                                             <p class="hot-by">全场包邮</p>
                                         </div>
                                         <div class="hot-img">
-                                            <a href=""><img src="{$v.img}" alt=""></a>
+                                            <a href="{:U('Home/Index/chanpin_detail',array('id'=>$v['id']))}"><img src="{$v.images}" alt=""></a>
                                         </div>
                                     </li>
                                 </foreach>
