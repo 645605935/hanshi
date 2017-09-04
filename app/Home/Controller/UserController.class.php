@@ -473,12 +473,18 @@ class UserController extends CommonController{
         $where['bid']=$_GET['id'];
 
         $juan_list=M('BookJuan')->where($where)->select();
+        $all_zhang_count=0;
         foreach ($juan_list as $key => $value) {
-            $juan_list[$key]['num']=M('BookZhang')->where(array('bjid'=>$value['id']))->count();
+            $zhang_count=M('BookZhang')->where(array('bjid'=>$value['id'], 'status'=>1))->count();
+            $juan_list[$key]['num']=$zhang_count;
             $juan_list[$key]['_child']=M('BookZhang')->where(array('bjid'=>$value['id'], 'status'=>1))->select();
+            $all_zhang_count+=count($zhang_count);
         }
 
+        $this->juan_count=count($juan_list);
+        $this->all_zhang_count=$all_zhang_count;
         $this->juan_list=$juan_list;
+
         $this->display();
     }
 
