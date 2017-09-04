@@ -166,38 +166,16 @@
                         <div class="right-bottom">
                             <div class="huodong">
                                 <ul>
-                                    <li>
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="img1">
-                                        <div class="plr10">
-                                            <h3>活动主题</h3>
-                                            <p><span class="fs16">活动内容</span>：活动内容活动内容活动内容活动内容活动内容活动内容活动内容</p>
-                                            <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="img1">
-                                        <div class="plr10">
-                                            <h3>活动主题</h3>
-                                            <p><span class="fs16">活动内容</span>：活动内容活动内容活动内容活动内容活动内容活动内容活动内容</p>
-                                            <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="img1">
-                                        <div class="plr10">
-                                            <h3>活动主题</h3>
-                                            <p><span class="fs16">活动内容</span>：活动内容活动内容活动内容活动内容活动内容活动内容活动内容</p>
-                                            <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="img1">
-                                        <div class="plr10">
-                                            <h3>活动主题</h3>
-                                            <p><span class="fs16">活动内容</span>：活动内容活动内容活动内容活动内容活动内容活动内容活动内容</p>
-                                            <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
-                                        </div>
-                                    </li>
+                                    <foreach name="activitys_1" item="v">
+                                        <li>
+                                            <img src="{$v.img}" alt="" class="img1">
+                                            <div class="plr10">
+                                                <h3>{$v.title}</h3>
+                                                <p><span class="fs16">活动内容</span>：{$v.title}</p>
+                                                <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
+                                            </div>
+                                        </li>
+                                    </foreach>
                                 </ul>
                             </div>
                         </div>
@@ -212,38 +190,16 @@
                         <div class="right-bottom">
                             <div class="huodong">
                                 <ul>
-                                    <li>
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="img1">
-                                        <div class="plr10">
-                                            <h3>活动主题</h3>
-                                            <p><span class="fs16">活动内容</span>：活动内容活动内容活动内容活动内容活动内容活动内容活动内容</p>
-                                            <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="img1">
-                                        <div class="plr10">
-                                            <h3>活动主题</h3>
-                                            <p><span class="fs16">活动内容</span>：活动内容活动内容活动内容活动内容活动内容活动内容活动内容</p>
-                                            <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="img1">
-                                        <div class="plr10">
-                                            <h3>活动主题</h3>
-                                            <p><span class="fs16">活动内容</span>：活动内容活动内容活动内容活动内容活动内容活动内容活动内容</p>
-                                            <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="img1">
-                                        <div class="plr10">
-                                            <h3>活动主题</h3>
-                                            <p><span class="fs16">活动内容</span>：活动内容活动内容活动内容活动内容活动内容活动内容活动内容</p>
-                                            <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
-                                        </div>
-                                    </li>
+                                    <foreach name="activitys_2" item="v">
+                                        <li>
+                                            <img src="{$v.img}" alt="" class="img1">
+                                            <div class="plr10">
+                                                <h3>{$v.title}</h3>
+                                                <p><span class="fs16">活动内容</span>：{$v.title}</p>
+                                                <p class="mt10"><a href="baoming.html" class="hd-bm">报名</a><span class="fr">主办单位</span></p>
+                                            </div>
+                                        </li>
+                                    </foreach>
                                 </ul>
                             </div>
                         </div>
@@ -282,12 +238,12 @@
                         <div class="right-bottom">
                             <div class="right-r fl">
                                 <h3><i class="scdw"></i>上传单位</h3>
-                                <img class="videoo" src="{$activitys[0]['img']}" alt="">
+                                <img class="videoo" src="{$activitys_3[0]['img']}" alt="">
                                 <p>剧目名称<span class="leibie">类别</span><span class="fr num">收看人数：100</span></p>
                             </div>
                             <div class="right-l fl">
                                 <ul>
-                                    <foreach name="activitys" item="v">
+                                    <foreach name="activitys_3" item="v">
                                         <li>
                                             <h3><i class="scdw"></i>上传单位</h3>
                                             <img class="videoo" src="{$v.img}" alt="">

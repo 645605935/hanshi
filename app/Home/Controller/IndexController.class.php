@@ -25,12 +25,12 @@ class IndexController extends CommonController{
         //精彩演出
         $this->videos=M('Video')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
 
+        //志愿者活动
+        $this->activitys_1=M('Activity')->where(array('type'=>1270, 'recommend'=>1, 'status'=>1))->limit(4)->select();
+        //热门活动
+        $this->activitys_2=M('Activity')->where(array('type'=>1271, 'recommend'=>1, 'status'=>1))->limit(4)->select();
         //传统文化演出
-        $this->activitys=M('Activity')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
-        //传统文化演出
-        $this->activitys=M('Activity')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
-        //传统文化演出
-        $this->activitys=M('Activity')->where(array('recommend'=>1, 'status'=>1))->limit(3)->select();
+        $this->activitys_3=M('Activity')->where(array('type'=>1272, 'recommend'=>1, 'status'=>1))->limit(3)->select();
 
         //热卖产品
         $this->products_hot=M('Product')->where(array('recommend'=>1, 'status'=>1))->limit(4)->select();
