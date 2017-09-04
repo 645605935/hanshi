@@ -51,8 +51,16 @@
                                     <div class="sectionManage">
                                         <div class="sectionList">
                                             <ul>
-                                                <foreach name="list" item="v" key="k">
+                                                <if condition="$_GET['type']">
                                                     <li class="<if condition='$k eq 0'> act act_first </if>">
+                                                        <div class="sectionBox" data-id="{$v.id}">
+                                                            <p><em>无标题</em></p>
+                                                            <p class="f12"><i>&nbsp;</i>&nbsp;</p>
+                                                        </div>
+                                                    </li>
+                                                </if>
+                                                <foreach name="list" item="v" key="k">
+                                                    <li class="<if condition='($k eq 0) and (!$_GET["type"])'> act act_first </if>">
                                                         <div class="sectionBox" data-id="{$v.id}">
                                                             <p><em>{$v.title}</em></p>
                                                             <p class="f12"><i>{$v.time}</i>共{$v.num}字</p>
@@ -69,33 +77,57 @@
                                     <form name="formDraft" method="post" action="#2">
                                         <div class="sectionViewWrap">
                                             <div>
-                                            <div class="sectionBtnBox cf">
-                                                <div class="titleBtn fr">
-                                                    <a class="button white cg-del" href="javascript:">删除</a>
-                                                    <a class="button white font_count" href="javascript:">字数统计</a>
-                                                    <a class="button white save_btn" href="javascript:">保存</a>
-                                                    <a class="button green publish_btn" href="javascript:"><span class="icon "></span>发布</a>
+                                                <div class="sectionBtnBox cf">
+                                                    <div class="titleBtn fr">
+                                                        <if condition="!$_GET['type']">
+                                                            <a class="button white cg-del" href="javascript:">删除</a>
+                                                        </if>
+                                                        
+                                                        <a class="button white font_count" href="javascript:">字数统计</a>
+
+                                                        <if condition="$_GET['type'] eq 'add'">
+                                                            <a class="button white add_btn" data-href="{:U('Home/User/book_draft',array('id'=>$_GET['id']))}" href="javascript:">添加</a>
+                                                        <else/>
+                                                            <a class="button white save_btn" href="javascript:">保存</a>
+                                                        </if>
+
+                                                        <a class="button green publish_btn" href="javascript:"><span class="icon "></span>发布</a>
+                                                    </div>
+                                                    <em class="c999">发布至：</em>
+                                                    <div class="select-wrap mid">
+                                                        <select id="bjid" class="bjid">
+                                                            <foreach name="juan_list" item="v">
+                                                                <option value="{$v.id}">{$v.title}</option>
+                                                            </foreach>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <em class="c999">发布至：</em>
-                                                <div class="select-wrap mid">
-                                                    <select id="bjid" class="bjid">
-                                                        <foreach name="juan_list" item="v">
-                                                            <option value="{$v.id}">{$v.title}</option>
-                                                        </foreach>
-                                                    </select>
+                                            </div>
+
+
+                                            <if condition="$_GET['type']">
+                                                <div class="zwText">
+                                                    <input type="text" class="title" placeholder="此处输入 章节号与章节名。示例：“第十章 天降奇缘”">
+                                                    <textarea class="content" placeholder="请输入正文"></textarea>
                                                 </div>
-                                            </div>
-                                            </div>
-                                            <div class="zwText">
-                                                <input type="text" class="title" placeholder="此处输入 章节号与章节名。示例：“第十章 天降奇缘”">
-                                                <textarea class="content" placeholder="请输入正文"></textarea>
-                                            </div>
-                                            <div class="say-area">
-                                                <p>
-                                                    <textarea class="desc" value="" placeholder="作者的话（此段不计入字数）"></textarea>
-                                                </p>
-                                            </div>
+                                                <div class="say-area">
+                                                    <p>
+                                                        <textarea class="desc" value="" placeholder="作者的话（此段不计入字数）"></textarea>
+                                                    </p>
+                                                </div>
+                                            <else/>
+                                                <div class="zwText">
+                                                    <input type="text" class="title" placeholder="此处输入 章节号与章节名。示例：“第十章 天降奇缘”">
+                                                    <textarea class="content" placeholder="请输入正文"></textarea>
+                                                </div>
+                                                <div class="say-area">
+                                                    <p>
+                                                        <textarea class="desc" value="" placeholder="作者的话（此段不计入字数）"></textarea>
+                                                    </p>
+                                                </div>
+                                            </if>
                                         </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -200,6 +232,23 @@
             }
         });
 
+        //添加
+        $('.add_btn').click(function(){
+            var bjid=$('#bjid option:selected').val();
+
+            var title=$('.mRightContent .editWrap .title').val();
+            var content=$('.mRightContent .editWrap .content').val();
+            var desc=$('.mRightContent .editWrap .desc').val();
+
+            if(title&&content){
+                var json=_ajax_add_zhang_not_publish(bjid, title, content, desc);
+                if(json.code==0){
+                    layer.msg("添加操作成功");
+                    window.location.href=$('.add_btn').attr('data-href');
+                }
+            }
+        });
+
         //保存
         $('.save_btn').click(function(){
             var zid=$(this).attr('data-id');
@@ -235,8 +284,10 @@
             }
         });
         
-
-        $('.act_first .sectionBox').trigger('click');
+        var getType="{$_GET['type']}";
+        if(!getType){
+            $('.act_first .sectionBox').trigger('click');
+        }
     });
 </script>
 <script type="text/javascript">
@@ -358,6 +409,31 @@
               content:content,
               desc:desc,
               status:0 
+            },
+            dataType : 'json',
+            success  : function(json) {
+                _json=json;  
+            },
+            error  : function() {  
+                layer.msg('error');
+            }  
+        }); 
+        return _json;
+    }
+
+    //发布
+    function _ajax_add_zhang_not_publish(bjid, title, content, desc){
+        var _json;
+        $.ajax({  
+            async:false,
+            type:'post',  
+            contentType:"application/x-www-form-urlencoded", 
+            url : "{:U('Home/User/ajax_add_zhang_not_publish')}",
+            data:{ 
+              bjid:bjid,
+              title:title,
+              content:content,
+              desc:desc
             },
             dataType : 'json',
             success  : function(json) {

@@ -473,18 +473,21 @@ class UserController extends CommonController{
         $where['bid']=$_GET['id'];
 
         $juan_list=M('BookJuan')->where($where)->select();
+
+
         $all_zhang_count=0;
         foreach ($juan_list as $key => $value) {
             $zhang_count=M('BookZhang')->where(array('bjid'=>$value['id'], 'status'=>1))->count();
             $juan_list[$key]['num']=$zhang_count;
             $juan_list[$key]['_child']=M('BookZhang')->where(array('bjid'=>$value['id'], 'status'=>1))->select();
-            $all_zhang_count+=count($zhang_count);
+            $all_zhang_count+=$zhang_count;
         }
+
+
 
         $this->juan_count=count($juan_list);
         $this->all_zhang_count=$all_zhang_count;
         $this->juan_list=$juan_list;
-
         $this->display();
     }
 
@@ -753,6 +756,18 @@ class UserController extends CommonController{
         $data=array();
         $data=$_POST;
         if($data){
+            //获得默认卷名
+            $juan_list=M('BookJuan')->where(array('uid'=>$user['id'], 'bid'=>$_POST['bid']))->order('id desc')->select();
+            if($juan_list){
+                $juan_num=$juan_list[0]['juan_num'];
+            }else{
+                $juan_num=0;
+            }
+            
+            $juan="第".$this->number2chinese($juan_num+1,false)."卷";
+
+            $data['juan_num']=$juan_num+1;
+            $data['juan']=$juan;
             $data['uid']=$user['id'];
             $data['time']=time();
 
@@ -822,8 +837,11 @@ class UserController extends CommonController{
     public function ajax_render_juan_info(){
         global $user;
 
+
         $jid=$_GET['jid'];
         $row = M('BookJuan')->find($jid);
+        $row['num']=M('BookZhang')->where(array('bjid'=>$row['id'], 'status'=>1))->count();
+        
         if($row){
             $data=array();
             $data['code']=0;
@@ -848,6 +866,37 @@ class UserController extends CommonController{
             $data['time']=time();
 
             $res = M('BookJuan')->save($data);
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
+    //添加章但不发布
+    public function ajax_add_zhang_not_publish(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $book_juan_info=M('BookJuan')->find($_POST['id']);
+            $data['time']=time();
+            $data['uid']=$user['id'];
+            $data['bid']=$book_juan_info['bid'];
+
+            $res = M('BookZhang')->add($data);
             if($res){
                 $data=array();
                 $data['code']=0;
@@ -1047,4 +1096,51 @@ class UserController extends CommonController{
         session('userinfo',null);
         $this->redirect('Home/Index/index');
     }   
+
+
+    /**
+    * 数字转换为中文
+    * @param  string|integer|float  $num  目标数字
+    * @param  integer $mode 模式[true:金额（默认）,false:普通数字表示]
+    * @param  boolean $sim 使用小写（默认）
+    * @return string
+    */
+    public function number2chinese($num,$mode = true,$sim = true){
+        if(!is_numeric($num)) return '含有非数字非小数点字符！';
+        $char    = $sim ? array('零','一','二','三','四','五','六','七','八','九')
+        : array('零','壹','贰','叁','肆','伍','陆','柒','捌','玖');
+        $unit    = $sim ? array('','十','百','千','','万','亿','兆')
+        : array('','拾','佰','仟','','萬','億','兆');
+        $retval  = $mode ? '元':'';
+        //小数部分
+        if(strpos($num, '.')){
+            list($num,$dec) = explode('.', $num);
+            $dec = strval(round($dec,2));
+            if($mode){
+                $retval .= "{$char[$dec['0']]}角{$char[$dec['1']]}分";
+            }else{
+                for($i = 0,$c = strlen($dec);$i < $c;$i++) {
+                    $retval .= $char[$dec[$i]];
+                }
+            }
+        }
+        //整数部分
+        $str = $mode ? strrev(intval($num)) : strrev($num);
+        for($i = 0,$c = strlen($str);$i < $c;$i++) {
+            $out[$i] = $char[$str[$i]];
+            if($mode){
+                $out[$i] .= $str[$i] != '0'? $unit[$i%4] : '';
+                    if($i>1 and $str[$i]+$str[$i-1] == 0){
+                    $out[$i] = '';
+                }
+                    if($i%4 == 0){
+                    $out[$i] .= $unit[4+floor($i/4)];
+                }
+            }
+        }
+        $retval = join('',array_reverse($out)) . $retval;
+        return $retval;
+    }
+    
+    
 }

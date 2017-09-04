@@ -5,7 +5,7 @@
 <if condition="stripos($_page_,'User/book_create') nheq false">
 	<a class="button white new-fj" href="javascript:;">新建分卷</a>
 </if>
-<a class="create button" href="{:U('Home/User/book_draft',array('id'=>$_GET['id']))}"><em class="icon"></em>新建章节</a>
+<a class="create button" href="{:U('Home/User/book_draft',array('id'=>$_GET['id'], 'type'=>'add'))}"><em class="icon"></em>新建章节</a>
 <div class="tabSwitch cf">
     <span <if condition="stripos($_page_,'User/book_set') nheq false">class="act"</if>><a href="{:U('Home/User/book_set',array('id'=>$_GET['id']))}">作品设置</a></span>
     <span <if condition="stripos($_page_,'User/book_draft') nheq false">class="act"</if>><a href="{:U('Home/User/book_draft',array('id'=>$_GET['id']))}">草稿箱</a></span>
