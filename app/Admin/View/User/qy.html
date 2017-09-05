@@ -369,14 +369,32 @@
           caption: "个人列表",
           data: grid_data,
           datatype: "local",
-          colNames:['id', '用户名', 'logo', '企业名称', '企业口号', '状态', '推荐', '注册时间', '操作'],
+          colNames:['id', 
+            '用户名', '邮箱', '手机号', 
+            '社会统一代码', '企业名称', '注册地址', '企业座机', '有效期限', '单位性质', '企业简称', '主营产品', '企业口号', '企业LOGO', '营业执照副本扫描件','列名长度与列模式不相等！',
+            '状态', '推荐', '注册时间',
+            '操作'],
           colModel:[
             {name:'id', index:'id', sorttype:"int", align:"center", hidden: true},
 
             {name:'username',index:'username',align:"center"},
-            {name:'company_logo',index:'company_logo',align:"center", formatter: imgFormatter },
+            {name:'email',index:'email',align:"center"},
+            {name:'phone',index:'phone',align:"center"},
+
+            {name:'company_code',index:'company_code',align:"center"},
             {name:'company_name',index:'company_name',align:"center"},
+            {name:'company_address',index:'company_address',align:"center"},
+            {name:'company_zuoji',index:'company_zuoji',align:"center"},
+            {name:'company_time',index:'company_time',align:"center"},
+            {name:'company_type',index:'company_type',align:"center"},
+            {name:'company_short_name',index:'company_short_name',align:"center"},
+            {name:'company_zhuyingchanpin',index:'company_zhuyingchanpin',align:"center"},
             {name:'company_slogan',index:'company_slogan',align:"center"},
+            {name:'company_logo',index:'company_logo',align:"center", formatter: imgFormatter },
+            {name:'comapny_yyzz_img',index:'comapny_yyzz_img',align:"center" , formatter: imgFormatter},
+            {name:'company_xkz_img',index:'company_xkz_img',align:"center" , formatter: imgFormatter},
+
+         
             {name:'status',index:'status',align:"center", formatter: statusFormatter },
             {name:'recommend',index:'recommend',align:"center", formatter: recommendFormatter },
             {name:'time',index:'time',align:"center",hidden: true},
@@ -502,12 +520,64 @@
               </colgroup>
               <tbody>
                 <tr>
+                  <td>用户名</td>
+                  <td>{{=it.data.username}}</td>
+                </tr>
+                <tr>
+                  <td>电子邮箱</td>
+                  <td>{{=it.data.email}}</td>
+                </tr>
+                <tr>
+                  <td>手机号</td>
+                  <td>{{=it.data.phone}}</td>
+                </tr>
+                <tr>
+                  <td>社会统一代码</td>
+                  <td>{{=it.data.company_code}}</td>
+                </tr>
+                <tr>
                   <td>企业名称</td>
                   <td>{{=it.data.company_name}}</td>
                 </tr>
                 <tr>
-                  <td>用户名</td>
-                  <td>{{=it.data.username}}</td>
+                  <td>注册地址</td>
+                  <td>{{=it.data.company_address}}</td>
+                </tr>
+                <tr>
+                  <td>企业座机</td>
+                  <td>{{=it.data.company_zuoji}}</td>
+                </tr>
+                <tr>
+                  <td>有效期限</td>
+                  <td>{{=it.data.company_time}}</td>
+                </tr>
+                <tr>
+                  <td>单位性质</td>
+                  <td>{{=it.data.company_type}}</td>
+                </tr>
+                <tr>
+                  <td>企业简称</td>
+                  <td>{{=it.data.company_short_name}}</td>
+                </tr>
+                <tr>
+                  <td>主营产品</td>
+                  <td>{{=it.data.company_zhuyingchanpin}}</td>
+                </tr>
+                <tr>
+                  <td>企业口号</td>
+                  <td>{{=it.data.company_slogan}}</td>
+                </tr>
+                <tr>
+                  <td>企业LOGO</td>
+                  <td>{{=it.data.company_logo}}</td>
+                </tr>
+                <tr>
+                  <td>营业执照副本扫描件</td>
+                  <td>{{=it.data.comapny_yyzz_img}}</td>
+                </tr>
+                <tr>
+                  <td>经营许可证扫描件</td>
+                  <td>{{=it.data.company_xkz_img}}</td>
                 </tr>
               </tbody>
             </table>

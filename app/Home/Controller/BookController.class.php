@@ -27,7 +27,6 @@ class BookController extends CommonController{
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
 
-
         //作家
         $recommend_bookers=M('User')->where(array('is_booker'=>1))->limit(3)->select();
 
@@ -49,13 +48,7 @@ class BookController extends CommonController{
         $id=I('id');
         $row=M('Book')->find($id);
 
-        if($row['images']){
-            $images=explode('#', $row['images']);
-        }
-        
-
         $this->row=$row;
-        $this->images=$images;
         $this->display();
     }
 

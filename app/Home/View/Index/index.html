@@ -90,7 +90,7 @@
                                         <ul>
                                             <foreach name="books_hot" item="v">
                                                 <li>
-                                                    <a href="shucheng.html"><img src="{$v.img}" /></a>
+                                                    <a href="{:U('Home/Book/detail',array('id'=>$v['id']))}"><img src="{$v.img}" /></a>
                                                 </li>
                                             </foreach>
                                         </ul>
@@ -122,7 +122,7 @@
                                 <ul class="rightt-ul">
                                     <foreach name="books_hot" item="v">
                                         <li>
-                                            <a href="shucheng.html">
+                                            <a href="{:U('Home/Book/detail',array('id'=>$v['id']))}">
                                                 <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
                                                 <div class="shu-r">
                                                     <h3>《{$v.title}》</h3>
@@ -140,7 +140,7 @@
                                 <ul class="rightt-ul">
                                     <foreach name="books_hot" item="v">
                                         <li>
-                                            <a href="shucheng.html">
+                                            <a href="{:U('Home/Book/detail',array('id'=>$v['id']))}">
                                                 <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
                                                 <div class="shu-r">
                                                     <h3>《{$v.title}》</h3>
