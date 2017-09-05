@@ -487,6 +487,36 @@
                         </table>  
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">推荐</label>
+                          <div class="layui-input-inline">
+                            <select name="recommend" class="recommend">
+                              <option value="">请选择</option>
+                              <option value="1">是</option>
+                              <option value="0">否</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">状态</label>
+                          <div class="layui-input-inline">
+                            <select name="status" class="status">
+                              <option value="">请选择</option>
+                              <option value="0">禁止</option>
+                              <option value="1">正常</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
                 <tfoot>
                   <tr>
@@ -656,6 +686,36 @@
                             
                           </tbody>
                         </table>  
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">推荐</label>
+                          <div class="layui-input-inline">
+                            <select name="recommend" class="recommend">
+                              <option value="">请选择</option>
+                              <option value="1">是</option>
+                              <option value="0">否</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">状态</label>
+                          <div class="layui-input-inline">
+                            <select name="status" class="status">
+                              <option value="">请选择</option>
+                              <option value="0">禁止</option>
+                              <option value="1">正常</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -976,6 +1036,22 @@
                       $('#edit_form .sale_price').val(data.sale_price);
                       $('#edit_form .content').val(data.content);
                       $('#edit_form .tx_attr').val(tx_attr);
+
+                      if(data.status==1){
+                          $('#edit_form .status option[value=1]').attr('selected',true);
+                          $('#edit_form .status option[value=0]').removeAttr('selected');
+                      }else{
+                          $('#status_select option[value=0]').attr('selected',true);
+                          $('#status_select option[value=1]').removeAttr('selected');
+                      }
+
+                      if(data.recommend==1){
+                          $('#edit_form .recommend option[value=1]').attr('selected',true);
+                          $('#edit_form .recommend option[value=0]').removeAttr('selected');
+                      }else{
+                          $('#edit_form .recommend option[value=0]').attr('selected',true);
+                          $('#edit_form .recommend option[value=1]').removeAttr('selected');
+                      }
 
                       _json=json;
                   }else{
@@ -1339,11 +1415,21 @@
           }
       }
 
+      //自定义报警列格式
       function statusFormatter(cellvalue, options, rowdata){ 
           if (cellvalue == "1"){
-              return '<span class="label label-success" alt="'+cellvalue+'">通过</span>';
+              return '<button class="btn btn-primary btn-xs">正常</button>';
           }else{
-              return '<span class="label label-danger" alt="'+cellvalue+'">待审核</span>';
+              return '<button class="btn btn-danger btn-xs">禁止</button>';
+          }
+      }
+
+      //自定义报警列格式
+      function recommendFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue == "1"){
+              return '<button class="btn btn-primary btn-xs">推荐</button>';
+          }else{
+              return '';
           }
       }
 
@@ -1353,7 +1439,7 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '产品名称','产品图片','规格|价格|库存','时间','状态','操作'],
+              colNames:['id', '产品名称','产品图片','规格|价格|库存','时间','状态','推荐','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
@@ -1362,6 +1448,7 @@
                 {name:'tx_attr',index:'tx_attr', align : "center", formatter: tx_attrFormatter},
                 {name:'time',index:'time', align : "center"},
                 {name:'status',index:'status', align : "center", formatter: statusFormatter},
+                {name:'recommend',index:'recommend', align : "center", formatter: recommendFormatter},
 
                 {name:'options',index:'options',align:'center',width:200}
               ], 
