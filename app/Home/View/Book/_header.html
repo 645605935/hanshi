@@ -1,0 +1,47 @@
+<div class="top-nav">
+    <div class="box-center cf">
+        <div class="login-box fr">
+        	<if condition="$user">
+				<div class="sign-in hidden">
+				    <span>你好，</span><a class="black"target="_blank">xxx</a><em>|</em><a class="black" href="" target="_blank">消息<cite>(<i></i>)</cite></a><em>|</em><a href="javascript:">退出</a>
+				</div>
+        	<else/>
+				<div class="sign-out">
+				    <a class="black" href="{:U('Home/Index/login')}">登录</a><em>|</em><a href="{:U('Home/Index/gr_reg')}">注册</a>
+				</div>
+        	</if>
+        </div>
+        <div class="nav-link fl">
+            <a class="act" href="{:U('Home/Index/index')}">发现</a>
+            <a href="{:U('Home/Tongchengjieyue/index')}">分类清单</a><em>|</em>
+            <a href="{:U('Home/Index/shop')}">瞰世商城</a><em>|</em>
+            <a href="{:U('Home/Match/index')}">赛事活动</a><em>|</em>
+            <a href="{:U('Home/Baoming/index')}">赛事报名</a><em>|</em>
+            <a href="javascript:;">合作通道</a><em>|</em>
+            <a href="{:U('Home/User/personal_authentication')}">认证</a><em>|</em>
+        </div>
+    </div>
+</div>
+<div class="top-game-op">
+    <div class="game-wrap">
+        <a class="close"  href="#2"><img src="__PUBLIC__/Home/images/img3.jpg" alt=""></a>
+    </div>
+</div>
+<div class="logo-wrap box-center">
+    <div class="box-center cf">
+        <div class="book-shelf fr">
+            <a href="{:U('Home/User/book_list')}"><em class="iconfont"></em><i>我的书架</i>
+            </a>
+        </div>
+        <div class="logo fl">
+            <a href="#2"><img src="__PUBLIC__/Home/images/logo.jpg" alt=""></a>
+        </div>
+        <div class="search-wrap fl">
+            <form action="" method="get" target="_blank">
+                <p><input class="search-box" type="text" placeholder="逆流纯真年代" autocomplete="off"></p>
+                <input class="submit-input" type="submit">
+                <label class="search-btn" for="searchSubmit"><em class="i-sousou"></em></label>
+            </form>
+        </div>
+    </div>
+</div>

@@ -232,13 +232,13 @@ table {
     padding: 20px;
 }
 
-.baoming-ban {background: url(../images/tuu.png) no-repeat center center;height: 360px;}
+.baoming-ban {background: url(../images/tuu.png) no-repeat center center;width: 1000px;height: 400px;margin: 0 auto;}
 .bm-bnn {text-align: center;margin-top: 20px;}
 .bm-bnn a {display: inline-block;font-size: 20px;font-weight: bold;width: 150px;height: 40px;line-height: 40px;color: #fff;background: #F32F30;text-align: center;margin: 0 auto;}
 #bot .bot3{background: #d0dbe8;border-top: 1px solid #a7c0dc;line-height: 20px;color:#154573;text-align:center;padding: 5px;}
-#bot .bot2{/*background: url(../images/bg.png) no-repeat center center/cover;*/height: 90px;padding-top: 10px;background: #ddd;}
+#bot .bot2{background: url(../images/bg.png) no-repeat center center/cover;height: 82px;padding-top: 20px;}
 #bot .bot2 .botlogo{display: block;margin-bottom: 20px;}
-#bot .bot2 .botlogo img{height:80px;display: block;margin: 0 auto;width:auto;}
+#bot .bot2 .botlogo img{height:62px;display: block;margin: 0 auto;width:auto;}
 #bot .bot2 .w1000{position: relative;}
 #bot .bot2 .icon{font-size: 30px;}
 #bot .bot2 .bgsinaRed{position: absolute;right: 10px;top: 0;}

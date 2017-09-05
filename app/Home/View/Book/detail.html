@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="renderer" content="webkit">
-<title>书城首页</title>
+<title>图书页</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
@@ -76,7 +76,7 @@
 <div class="container container1 clearfix">
     <div class="con">
         <div class="content pt20 clearfix">
-            <div class="left-all fl">
+            <div class="left-all left-all11 fl">
                 <div class="all-tit">
                     <ul>
                         <li class="cur"><a href="javascript:;">男生</a></li>
@@ -166,125 +166,160 @@
                     </div>
                 </div>
             </div>
-            <div class="right-pp right-all fr">
-                <div class="rightt-con fl">
-                    <div class="rightt-paixu clearfix">
-                        <ul>
-                            <li class="cur"><a href="javascript:;">人气排序<i class="i-xia"></i></a></li>
-                            <li><a href="javascript:;">更新时间<i class="i-xia"></i></a></li>
-                            <li><a href="javascript:;">总收藏<i class="i-xia"></i></a></li>
-                            <li><a href="javascript:;">总字数<i class="i-xia"></i></a></li>
-                        </ul>
-                        <span class="rightt-spann fr">共<span>1111</span>本相关作品<i class="i-yiwen"></i><p class="yiwen-tip">由于政策和内容原因部分作品未能显示</p></span>
-                    </div>
-                    <div class="right-bb p20 bg2 clearfix">
-                        <div class="right-bl right-bll fl bg5 pt10 pb10 pr10">
-                            <div class="slider">
-                                <div class="bd">
-                                    <ul>
-                                        <foreach name="list_left" item="v">
-                                            <li>
-                                                <a href="{:U('Home/Book/detail',array('id'=>$v['id']))}"><img src="{$v.img}" /></a>
-                                            </li>
-                                        </foreach>
-                                    </ul>
+            <div class="mid-part mid-part11 plr10">
+                <div class="bg2">
+                    <div class="mid-top p20 clearfix">
+                        <div class="book-imgg">
+                            <img src="{$row.img}" alt="">
+                            <span class="book-status">完结</span>
+                        </div>
+                        <div class="book-imgr">
+                            <div class="book-det">
+                                <div class="det-name">
+                                    <h2>《{$row.title}》</h2>
+                                    <div class="det-pd">频道：xxx</div>
                                 </div>
-                                <div class="txt">
-                                    <ul>
-                                        <foreach name="list_left" item="v">
-                                            <li>
-                                                <div class="right-blcon">
-                                                    <div class="bok-n">《{$v.title}》<span class="fr">9.6分</span></div>
-                                                    <p><span>作者：</span>{$v.author}<span class="ml20">主播：</span>{$v.title}</p>
-                                                    <p><span>简介：</span>{$v.desc}</p>
-                                                </div>
-                                            </li>
-                                        </foreach>
-                                    </ul>
-                                </div>
-                                <div class="pnBtn prev">
-                                    <span class="blackBg"></span>
-                                    <span class="arrow"></span>
-                                </div>
-                                <div class="pnBtn next">
-                                    <span class="blackBg"></span>
-                                    <span class="arrow"></span>
+                                <div class="det-pf fr">
+                                    <div class="det-xing">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                    <span class="det-fs">9.6分</span>
                                 </div>
                             </div>
+                            <div class="book-xx">
+                                <span class="fs16">作者：</span>{$row.author}
+                                <span class="fs16">主播：</span>XXX
+                            </div>
+                            <div class="book-js">
+                                <span class="fs16">简介：</span>{$row.desc}
+                            </div>
+                            <div class="book-bq">
+                                <span class="fs16">标签：</span>
+                                <a href="javascript:;" class="bq1">标签1</a>
+                                <a href="javascript:;" class="bq2">标签2</a>
+                                <a href="javascript:;" class="bq3">标签3</a>
+                            </div>
+                            <div class="book-cz">
+                                <ul>
+                                    <li><a href="#4">购书</a></li>
+                                    <li><a href="#4">借阅</a></li>
+                                    <li><a href="shucheng-mulu.html">阅读</a></li>
+                                    <li><a href="#4">收听</a></li>
+                                    <li><a href="#4">存入书架</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="right-br right-brr fl pl10">
-                            <ul class="rightt-ul rightt-ul11">
-                                <foreach name="list_right" item="v">
-                                    <li>
-                                        <a href="{:U('Home/Book/detail',array('id'=>$v['id']))}">
-                                            <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《{$v.title}》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>{$v.author}</p>
-                                                <p><span class="fs16">主播</span>{$v.author}</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>{$v.desc}</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </foreach>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="mid-lw p20 clearfix">
+                        <div class="lw-l fl">礼物榜</div>
+                        <div class="lw-m">
+                            <ul>
+                                <li>
+                                    <a href="#2">
+                                        <span class="lw-xing1">1</span>
+                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="lw-img">
+                                        <span class="lw-vip"></span>
+                                        <p>礼物值</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#2">
+                                        <span class="lw-xing2">2</span>
+                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="lw-img">
+                                        <span class="lw-vip"></span>
+                                        <p>礼物值</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#2">
+                                        <span class="lw-xing3">3</span>
+                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="lw-img">
+                                        <span class="lw-viph"></span>
+                                        <p>礼物值</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#2">
+                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="lw-img">
+                                        <span class="lw-viph"></span>
+                                        <p>礼物值</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#2">
+                                        <img src="__PUBLIC__/Home/images/img1.jpg" alt="" class="lw-img">
+                                        <span class="lw-viph"></span>
+                                        <p>礼物值</p>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                        <div class="right-blb right-blb11 fl">
-                            <ul class="rightt-ul">
-                                <foreach name="list" item="v">
-                                    <li>
-                                        <a href="{:U('Home/Book/detail',array('id'=>$v['id']))}">
-                                            <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《{$v.title}》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>{$v.author}</p>
-                                                <p><span class="fs16">主播</span>{$v.author}</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>{$v.desc}</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </foreach>
-                            </ul>
+                        <div class="lw-r fr"><a href="#4">更多&gt;</a></div>
+                    </div>
+                    <div class="mid-pl p10 clearfix">
+                        <h3 class="fs16">评论</h3>
+                        <div class="pl-con">
+                            <div id="changyan_box">
+                                <!--PC版-->
+                                <div id="SOHUCS" sid="{$row.id}"></div>
+                                <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+                                <script type="text/javascript">
+                                    window.changyan.api.config({
+                                        appid: 'cysvouAoc',
+                                        conf: 'prod_897d920e6d325c021c81d49500347fe7'
+                                    });
+                                </script>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="rightt-rank">
-                    <div class="author-tj">
-                        <h3>作家推荐</h3>
+            </div>
+            <div class="right-p fr">
+                <div class="right-pcon bg2 p20">
+                    <a href="#4" class="r-yx"></a>
+                    <div class="r-head mb15">
+                        <span class="r-himg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""><i class="r-vip"></i></span>
+                        <p class="mt10">笔名<span class="r-tx">作家</span></p>
+                    </div>
+                    <div class="r-zp">
                         <ul>
-                            <foreach name="recommend_bookers" item="v">
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="tj-head fl"><img src="{$v.img}" alt=""></span>
-                                        <div class="tj-info">
-                                            <p class="tj-penname">{$v.truename}</p>
-                                            <p class="tj-dbz">代表作品</p>
-                                            <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </foreach>
+                            <li>
+                                <p class="r-t1"><i></i></p>
+                                <p class="mb5 mt10">作品总数</p>
+                                <p class="r-num">4</p>
+                            </li>
+                            <li>
+                                <p class="r-t2"><i></i></p>
+                                <p class="mb5 mt10">累计字数</p>
+                                <p class="r-num">114万</p>
+                            </li>
+                            <li>
+                                <p class="r-t3"><i></i></p>
+                                <p class="mb5 mt10">创作天数</p>
+                                <p class="r-num">44442</p>
+                            </li>
                         </ul>
                     </div>
-                    <div class="author-tj">
-                        <h3>主播推荐</h3>
+                    <div class="clear"></div>
+                    <p class="mt10"><span class="fs16 mr10">籍贯</span>深蓝的废旧塑料的空间</p>
+                    <p class="mt10"><span class="fs16 mr10">民族</span>xxx</p>
+                    <p class="mt10"><span class="fs16 mr10">圈子</span><a href="#2" class="join-qz">点击加入</a></p>
+                    <p class="mt10"><span class="fs16">擅长创作类型</span></p>
+                    <div class="r-lx">
                         <ul>
-                            <foreach name="recommend_bookers" item="v">
-                                <li>
-                                    <a href="shucheng.html">
-                                        <span class="tj-head fl"><img src="{$v.img}" alt=""></span>
-                                        <div class="tj-info">
-                                            <p class="tj-penname">{$v.truename}</p>
-                                            <p class="tj-dbz">代表作品</p>
-                                            <p class="tj-addr mt10"><a href="#4" class="tj-szd">所在地</a><a href="#4" class="tj-rqz">人气值</a></p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </foreach>
+                            <li class="lx1"><a href="javascript:;">类型</a></li>
+                            <li class="lx2"><a href="javascript:;">类型</a></li>
+                            <li class="lx3"><a href="javascript:;">类型</a></li>
                         </ul>
                     </div>
+                    <p><span class="fs16">简介</span> 是的发生都发打反手</p>
+                    <p class="mt15 fs16">代表作品</p>
+                    <p class="mt5">是的发生都发打反手</p>
                 </div>
             </div>
         </div>

@@ -395,6 +395,37 @@ class IndexController extends CommonController{
     }
 
 
+    // 找回密码
+    public function findpassword_1(){
+        global $user;
+        $this->display();
+    }
+
+    // 找回密码
+    public function findpassword_2(){
+        global $user;
+        $this->display();
+    }
+
+    // 找回密码
+    public function findpassword_3(){
+        global $user;
+        $this->display();
+    }
+
+    // 找回密码
+    public function findpassword_4(){
+        global $user;
+        $this->display();
+    }
+
+
+
+
+
+
+
+
 
 
 
