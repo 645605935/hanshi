@@ -25,7 +25,7 @@
                         <ul>
                             <li><a href="#changyan_box" class="tit-pl">评论</a></li>
                             <li><a href="#4" class="tit-lp">一键拉票</a></li>
-                            <li><a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.type}" data-sqz="{$row.sqz}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a><p>{$row.vote}票</p></li>
+                            <!-- <li><a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.type}" data-sqz="{$row.sqz}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a><p>{$row.vote}票</p></li> -->
                         </ul>
     <style type="text/css">
         #baiduShare_box{position: relative;}
@@ -37,6 +37,10 @@
                         </div>
                     </div>
                     <p class="tit-sub"><span>作者：{$row.author}</span><span>编号：{$row.id}</span><span>比赛项目：{$row.match}</span></p>
+                    <div class="vote-add">
+                        <a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.type}" data-sqz="{$row.sqz}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a>
+                        <p>{$row.vote}票</p>
+                    </div>
                 </div>
                 <div class="wenzhang">
                     <div class="cs-con">

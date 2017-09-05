@@ -3383,6 +3383,10 @@ span.paging-num:hover {
   font-size: 22px;
   font-weight: normal;
 }
+#record_box .conTit h3 span {
+  font-size: 14px;
+  margin-left: 10px;
+}
 
 #record_box .conAct {
   position: relative;

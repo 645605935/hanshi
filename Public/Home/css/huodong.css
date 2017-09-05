@@ -63,14 +63,17 @@ body, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ul, ol, li, input, textarea, th, td
 .bisai img {text-align: center;width: 100%;margin-top: 20px;}
 .tit-sub {text-align: center;}
 .tit-sub span {margin-left: 20px;}
-.tit-right {position: absolute;right: 0;top: 0;}
+.tit-right {position: absolute;right: 0;top: 0;width: 200px;}
 .tit-right ul li {float: left;line-height: 30px;margin-left: 20px;}
 .tit-right ul li .tit-pl {color: #f00;}
 .tit-right ul li .tit-lp {color: #fff;background: #F94B15;width: 90px;height: 30px;line-height: 30px;text-align: center;display: inline-block;}
-.tit-right ul li .tit-tp {color: #fff;background: #A01724;width: 90px;height: 30px;line-height: 30px;text-align: center;display: inline-block;}
+.vote-add {text-align: center;margin-top: 20px;}
+.tit-tp {color: #fff;background: #A01724;width: 90px;height: 30px;line-height: 30px;text-align: center;display: inline-block;margin-bottom: 5px;}
+.tit-tp:hover {color: #fff;}
 .tit-right ul li p {text-align: center;}
 .cs-con {text-align: center;}
 .cs-con img {width: 80%;margin-bottom: 20px;}
+.cs-con audio {width: 60%;}
 
 .swpierr ul li {width: 260px;height: 350px;float: left;}
 .swpierr ul li img {width: 100%;height: 100%;}
