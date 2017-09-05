@@ -1,0 +1,508 @@
+﻿.wrapper2 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+}
+.min-w2 {
+    min-width: 980px;
+}
+.br-so {
+    border-right: 1px solid #ddd;
+}
+
+input::-ms-clear {
+    display:none;
+}
+.login-head {
+    height: 120px;
+}
+.login-head .logo-a {
+    margin-top: 40px;
+    height: 40px;
+}
+.login-head .logo-a img {
+    height: 100%;
+}
+.login-head span {
+    display: inline-block;
+    padding-left: 15px;
+    margin-top: 58px;
+    margin-left: 15px;
+    line-height: 20px;
+    color: #666;
+    font-size: 20px;
+    border-left: 1px solid #ddd;
+}
+.return-index {
+    font-size: 14px;
+    margin-top: 64px;
+}
+.return-index .arrow {
+    font-family: "simsun";
+    margin-left: 5px;
+}
+/**/
+.login-part,
+.sign-in-part {
+    padding-top: 46px;
+    padding-bottom: 46px;
+    height: 443px;
+}
+.login-left {
+    padding-left: 100px;
+    width: 436px;
+    /*height: 445px;*/
+    border-right: 1px dashed #d7d7d7;
+}
+.login-title {
+    line-height: 20px;
+    padding-bottom: 6px;
+}
+.login-title li,
+.sign-in-title {
+    width: 166px;
+    font-size: 18px;
+    text-align: center;
+}
+.login-title li a {
+    color: #666;
+}
+.login-title li a:hover {
+    color: #ad1117;
+}
+.login-title li.active a {
+    color: #ad1117;
+}
+.sign-in-title {
+    padding-bottom: 6px;
+    text-align: left;
+    color: #666;
+}
+/**/
+.login-con {
+    position: relative;
+    padding-top: 30px;
+}
+.login-right {
+    width: 322px;
+    padding-left: 58px;
+}
+/**/
+.xieyi-line {
+    width: 340px;
+}
+/**/
+.login-tips {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-bottom: 6px;
+    padding-left: 12px;
+    width: 326px;
+    height: 22px;
+    line-height: 22px;
+    background: #fdeeee;
+    border: 1px solid #f8cccc;
+    color: #666;
+    display: none;
+}
+.login-wrong .login-tips {
+    display: block;
+}
+.login-line {
+    
+}
+.login-input {
+    position: relative;
+    padding: 6px;
+    width: 326px;/* 338-12 */
+    height: 31px;/* 43-12 */
+    line-height: 31px;
+    border: 1px solid #d2d2d2;
+}
+.login-line label {
+    width: 36px;
+    height: 31px;
+    border-right: 1px solid #ebeaea;
+    background: url(../images/icon-login.png) no-repeat;
+}
+
+.user-name label {
+    background-position: -43px 5px;
+}
+.user-tel label {
+    background-position: -43px -116px;
+}
+.user-mail label {
+    background-position: -43px -192px;
+}
+.user-pwd label {
+    background-position: -43px -35px;
+}
+.user-code label {
+    background-position: -43px -76px;
+}
+.user-dx label {
+    background-position: -43px -152px;
+}
+.login-line input {
+    padding-left: 8px;
+    width: 272px;
+    height: 31px;
+    border: none;
+    font-size: 12px;
+    color: #333;
+}
+.clear-input {
+    position: absolute;
+    right: 10px;
+    top: 16px;
+    width: 12px;
+    height: 12px;
+    background: url(../images/icon-attention2.png) no-repeat -4px -44px;
+    display: none;
+    z-index: 100;
+}
+/**/
+.login-right p {
+    line-height: 36px;
+    font-size: 18px;
+    color: #666;
+}
+.one-login {
+    margin-top: 20px;
+    text-align: center;
+    background: url(../images/one-login-bg.png) no-repeat center center;
+}
+.one-login span {
+    color: #666;
+}
+.fast-login {
+    margin-top: 60px;
+    text-align: center;
+}
+.fast-login p {
+    margin-top: 10px;
+    margin-right: -30px;
+    padding-left: 40px;
+    margin-bottom: 20px;
+}
+.fast-login a {
+    float: left;
+    margin-right: 30px;
+}
+.fast-login a:before {
+    content: "";
+    display: inline-block;
+    width: 59px;
+    height: 59px;
+    background: url(../images/fast-login-icon.png) no-repeat;
+}
+.fast-login .qq-icon:before {
+    background-position: 0 0;
+}
+.fast-login .baidu-icon:before {
+    background-position: -60px 0;
+}
+.fast-login .wechat-icon:before {
+    background-position: -120px 0;
+}
+.fast-login .alipay-icon:before {
+    background-position: 0 -60px;
+}
+.fast-login .qihu-icon:before {
+    background-position: -60px -60px;
+}
+.fast-login .sina-icon:before {
+    background-position: -120px -60px;
+}
+.fast-login a:hover:before {
+    opacity: 0.6;
+}
+/**/
+.user-code,
+.user-dx {
+    width: 146px;/* 158-12 */
+}
+.user-code input,
+.user-dx input {
+    width: 84px;/* 94-10 */
+}
+/**/
+.code-img {
+    width: 113px;
+    height: 45px;
+    cursor: pointer;
+}
+.code-f5 {
+    width: 47px;
+    line-height: 45px;
+    font-size: 14px;
+    color: #0fa7f5;
+}
+.msg {
+    width: 167px;
+    height: 43px;
+    line-height: 43px;
+    background: #f6f6f6;
+    border: 1px solid #d2d2d2;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+.xieyi {
+    line-height: 32px;
+    color: #666;
+}
+.xieyi input {
+    margin-right: 6px;
+    vertical-align: -2px;
+}
+.xieyi a {
+    color: #ad1117;
+}
+.btn-style {
+    width: 340px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background:#af0c0d;
+    display: inline-block;
+    text-align: center;
+}
+.btn-style:hover {
+	color: #fff;
+}
+.btn-style2 {
+    margin-left: 138px;
+    color: #999;
+    background: #fff;
+    font-size: 16px;
+}
+/**/
+.input-now {
+    border-color: #49b449;
+}
+.input-now label {
+    background-position-x: -3px;
+}
+.input-wrong {
+    border-color: #ff5a5a;
+}
+.icon-login-tip-wrong:before,
+.icon-login-tip-right:before {
+    content: "";
+    float: left;
+    background: url(../images/icon-attention2.png) no-repeat;
+}
+.icon-login-tip-wrong:before {
+    margin-top: 3px;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    background-position: -2px -22px;
+}
+.icon-login-tip-right:before {
+    margin-left: 8px;
+    margin-top: 15px;
+    width: 14px;
+    height: 14px;
+    background-position: -3px -3px;
+}
+/**/
+.login-footer {
+    padding-top: 16px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #999;
+}
+.login-footer a {
+    margin-left: 10px;
+    color: #999;
+}
+.login-footer a:hover {
+    color: #ad1117;
+}
+/**/
+.forget-pwd-nav {
+    width: 790px;
+    margin: 0 auto;
+    background: url(../images/forget-pwd-bg.png) no-repeat 71px 12px;
+}
+.forget-pwd-nav2 {
+    background-image: url(../images/forget-pwd-bg2.png); 
+}
+.forget-pwd-nav3 {
+    background-image: url(../images/forget-pwd-bg3.png); 
+}
+.forget-pwd-nav4 {
+    background-image: url(../images/forget-pwd-bg4.png); 
+}
+.forget-pwd-nav li {
+    float: left;
+    width: 90px;
+    margin-right: 142px;
+    text-align: center;
+}
+.forget-pwd-nav li:last-of-type{
+    margin-right: 0;
+}
+.forget-pwd-title {
+    line-height: 46px;
+    font-size: 18px;
+    color: #666;
+}
+.forget-pwd-con {
+    position: relative;
+    padding-top: 30px;
+    width: 390px;
+    margin: 30px auto 0;
+}
+.forget-pwd-con4 {
+    text-align: center;
+}
+.forget-pwd-p {
+    line-height: 34px;
+    font-size: 14px;
+    color: #777;
+}
+.reset-tip {
+    line-height: 80px;
+    font-size: 18px;
+    color: #666;
+}
+.reset-tip .spe-color {
+    margin-left: 3px;
+    color: #49b449;
+}
+.reset-tip .spe-color:hover {
+    text-decoration: underline;
+}
+.href-tip {
+    font-size: 18px;
+    color: #1e9fee;
+}
+/**/
+/**/
+.login-window-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 10000;
+}
+.login-window {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    margin-left: -205px;
+    width: 410px;
+    height: 490px;
+    background: #fff;
+    z-index: 10001;
+}
+.close-login-window {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: url(../images/close-login-window.png) no-repeat center center;
+    z-index: 10002;
+}
+.login-window-head {
+    width: 100%;
+    height: 98px;
+    text-align: center;
+}
+.login-window-head span {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.login-window-head img {
+    margin-top: 40px;
+    vertical-align: middle;
+    min-height: 40px;
+    max-height: 60px;
+	width:325px;
+}
+/**/
+.login-window-con {
+    position: relative;
+    /*padding-top: 30px;*/
+    margin-left: 35px;
+}
+.login-window-con .one-login {
+    width: 340px;
+    font-size: 14px;
+    color: #666;
+}
+.login-window-con .fast-login {
+    margin-top: 15px;
+    width: 340px;
+    margin-left: 35px;
+    margin-right: -30px;
+}
+.login-window-con .fast-login a {
+    float: left;
+    margin-right: 30px;
+    color: #bdbdbd;
+    line-height: 30px;
+}
+.login-window-con .fast-login a:before {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 44px;
+    background: url(../images/fast-login-icon2.png) no-repeat;
+}
+.login-window-con .fast-login .qq-icon:before {
+    background-position: 0 0px;
+}
+.login-window-con .fast-login .baidu-icon:before {
+    background-position: 0 -50px;
+}
+.login-window-con .fast-login .wechat-icon:before {
+    background-position: 0 -100px;
+}
+.login-window-con .fast-login .sina-icon:before {
+    background-position: 0 -150px;
+}
+
+/*forget password*/
+.login-head-btn {
+    margin-top: 60px;
+    height: 18px;
+}
+.login-head-btn a {
+    float: left;
+    height: 16px;
+    line-height: 16px;
+    font-size: 16px;
+}
+/**/
+.icon-forget-pwd {
+    display: inline-block;
+    width: 28px;
+    height: 32px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    font-family: "Arial";
+    background: url(../images/forget-pwd-icon.png) no-repeat -1px -52px;
+}
+.icon-forget-pwd-green {
+    background-position: -1px 0;
+}
+
+.msg-btn1 {background: #b7b7b7;color: #fff;border-color: #b7b7b7;cursor: wait;}
+.msg-btn1:hover {color: #fff !important;}

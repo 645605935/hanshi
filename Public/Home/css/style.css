@@ -76,7 +76,7 @@
 .nav ul li>ul {display: none;position: absolute;top:32px;left: 0;right: 0}
 .nav ul li>ul li a {font-size: 12px}
 .ul-con {background-color: #E5E4E2;height: 30px;line-height: 30px;width: 100%}
-.lon a {color: #2B7785;margin: 0 5px}
+.lon a {color: #2B7785;margin: 0 5px;position: relative;z-index: 999999;}
 .color1 {color: #f00}
 
 
@@ -126,7 +126,7 @@
 .huodong ul li {width: 25%;float: left;padding-left: 20px;box-sizing: border-box;margin-bottom: 20px}
 .huodong ul li h3 {text-align: center;margin: 10px 0}
 .huodong ul li p {line-height: 22px}
-.huodong .img1 {width: 100%}
+.huodong .img1 {width: 100%;height: 160px;}
 .huodong .hd-bm {padding: 3px 15px;border:1px solid #6f1c27;border-radius: 12px;color: #6f1c27}
 
 .left-part {width: 20%;padding-left: 20px;box-sizing: border-box;text-align: center;border-right: 1px solid #ddd;float: left;position: relative;z-index: 3;}
@@ -3702,3 +3702,8 @@ a {
 .zhuce-t {float: left;width: 100%;border-bottom: 1px solid #ddd;margin-bottom: 20px;}
 .msg-btn1 {background: #b7b7b7;color: #fff;border-color: #b7b7b7;cursor: wait;}
 .msg-btn1:hover {color: #fff !important;}
+
+.article-con {margin: 30px 0;}
+.article-con h1 {font-size: 20px;text-align: center;margin-bottom: 30px;}
+.article-con p {font-size: 16px;text-indent: 2em;line-height: 1.6;}
+.article-con h2 {font-size: 18px;margin: 15px 0;}
