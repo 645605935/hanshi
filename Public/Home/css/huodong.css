@@ -111,7 +111,7 @@ body, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ul, ol, li, input, textarea, th, td
   .hezuo .comRight .neirong{padding:20px 10px 0 10px;}
 }
 .activityList li{float: left;width: 33.33%;border:1px solid #cde9ff;border-bottom: 2px solid #14619f;padding-bottom: 15px;margin-bottom: 20px;position: relative;box-sizing: border-box;}
-.activityList li .imgP{position: relative;width: 100%;padding-bottom: 120%;}
+.activityList li .imgP{position: relative;width: 100%;padding-bottom: 95%;}
 .activityList li img{width: 100%;height: 100%;position: absolute;top: 0;left: 0;}
 .activityList li h3{color: #333;font-size: 14px;font-weight: normal;text-align: center;padding: 0 10px;margin-top: -30px;height: 44px;line-height: 22px;}
 .activityList li .timeCir{border-radius: 50%;background: #fff;width: 100px;height: 100px;box-shadow: 0 0 10px #ccc;margin:0 auto;position: relative;top:-50px;text-align: center;}

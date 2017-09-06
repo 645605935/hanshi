@@ -30,7 +30,7 @@
                             <div class="bd">
                                 <ul>
                                     <foreach name="ad_focus" item="v">
-                                        <li><a href="Home/Index/rules1.html"><img src="{$v.img}" alt=""></a></li>
+                                        <li><a href="http://hanshi.zhangtr.com/Home/Match/rule/type/1284/id/30.html"><img src="{$v.img}" alt=""></a></li>
                                     </foreach>
                                 </ul>
                             </div>
@@ -46,7 +46,7 @@
                     <div class="ann-top">
                         <h2>志愿者报名</h2>
                         <ul>
-                            <li><a href="#2">报名需知</a></li>
+                            <li><a href="{:U('Home/Index/zhaomu')}">报名需知</a></li>
                         </ul>
                         <p class="mt10"><a href="{:U('Home/Index/volunteer_join')}" class="bm-rk">报名入口</a></p>
                     </div>
@@ -265,7 +265,7 @@
                             <ul>
                                 <foreach name="products_hot" item="v">
                                     <li>
-                                        <h2>{$v.title}</h2>
+                                        <!-- <h2>{$v.title}</h2>
                                         <div class="hot-left">
                                             <p class="hot-name"><a href="#2">产品名称及型号</a></p>
                                             <p class="hot-pri">{$v.price}元</p>
@@ -274,6 +274,14 @@
                                         </div>
                                         <div class="hot-img">
                                             <a href="{:U('Home/Index/chanpin_detail',array('id'=>$v['id']))}"><img src="{$v.images}" alt=""></a>
+                                            <p class="hot-name"><a href="{:U('Home/Index/chanpin_detail',array('id'=>$v['id']))}">{$v.title}</a></p>
+                                            <p class="hot-pri">{$v.price}元</p>
+                                        </div> -->
+                                        <div class="chanp">
+                                            <a class="chap-img" href="{:U('Home/Index/chanpin_detail',array('id'=>$v['id']))}"><img src="{$v.images}" alt=""></a>
+                                            <p class="hot-name"><a href="{:U('Home/Index/chanpin_detail',array('id'=>$v['id']))}">{$v.title}</a></p>
+                                            <p><span class="hot-num fl">已售2222件</span><span class="hot-by">全场包邮</span></p>
+                                            <p class="hot-pri fl">{$v.price}元<span class="chanp-youh">原价:666元</span></p>
                                         </div>
                                     </li>
                                 </foreach>

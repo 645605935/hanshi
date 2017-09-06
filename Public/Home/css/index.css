@@ -102,7 +102,7 @@
 .hot-goods .hot-left {float: left;}
 .hot-goods .hot-name a {color: #333;}
 .hot-goods .hot-pri {color: #f00;font-size: 12px;margin-top: 10px;}
-.hot-goods .hot-num {color: #999;font-size: 12px;margin-top: 5px;}
+.hot-goods .hot-num {color: #999;font-size: 12px;margin-top: 14px;}
 .hot-goods .hot-img {float: right;width: 50%;overflow: hidden;}
 .hot-goods .hot-img img {width: 100%;height: 100%;}
 .hot-goods .hot-by {font-size: 16px;color: #f00;border:1px solid #f00;border-radius: 15px;text-align: center;float: left;padding: 2px 10px;margin-top: 10px;}
@@ -134,3 +134,9 @@
 .right-fixed ul li.r8 {background: #FED9DE;}
 .right-fixed ul li.goTop {background: #D8D0CC;}
 .right-fixed ul li.goTop a {color: #f00;}
+
+.chanp .chap-img img {width: 225px;height: 120px;}
+.chanp .chanp-youh {float: right;text-decoration: line-through;}
+.chanp .hot-name {height: 32px;overflow: hidden;}
+.chanp .hot-by {float: right;font-size: 12px;}
+.chanp .hot-pri {width: 100%;}
