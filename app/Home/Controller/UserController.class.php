@@ -671,6 +671,7 @@ class UserController extends CommonController{
         $data=$_POST;
         if($data){
             $data['uid']=$user['id'];
+            $data['no']=microtime();
             $data['time']=time();
 
             $id = M('Book')->add($data);
