@@ -52,6 +52,14 @@ class BookController extends CommonController{
         $this->display();
     }
 
+    // 排行
+    public function ranking(){
+        global $user;
+
+        $this->display();
+    }
+    
+
 
     public function Book(){
         global $user;
