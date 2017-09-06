@@ -929,7 +929,32 @@
           $('body').on('dblclick','#add_form .attr_list_box tr',function(){
               $(this).remove();
               render_attr();
-          })  
+          });
+
+
+          //
+          $('body').on('click', '#add_form .image_box>div', function(){
+               $(this).remove();
+
+               var arr=[];
+               $.each($('#add_form .image_box img'), function(name, value){
+                   arr.push($(value).attr('src'));
+               });
+               var arr2str=arr.join('#');
+               $('#add_form .images').val(arr2str);
+          });
+
+          //
+          $('body').on('click', '#edit_form .image_box>div', function(){
+               $(this).remove();
+
+               var arr=[];
+               $.each($('#edit_form .image_box img'), function(name, value){
+                   arr.push($(value).attr('src'));
+               });
+               var arr2str=arr.join('#');
+               $('#edit_form .images').val(arr2str);
+          });
         
         
       });
