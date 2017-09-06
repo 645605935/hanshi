@@ -479,6 +479,36 @@
                       </div>
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">推荐</label>
+                          <div class="layui-input-inline">
+                            <select name="recommend" class="recommend">
+                              <option value="">请选择</option>
+                              <option value="1">是</option>
+                              <option value="0">否</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">状态</label>
+                          <div class="layui-input-inline">
+                            <select name="status" class="status">
+                              <option value="">请选择</option>
+                              <option value="0">禁止</option>
+                              <option value="1">正常</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
                 </tbody>
                 <tfoot>
                   <tr>
@@ -640,6 +670,36 @@
                           <label class="layui-form-label">联系方式</label>
                           <div class="layui-input-inline">
                             <input type="text" name="contact_phone" lay-verify="required" placeholder="" class="layui-input contact_phone">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">推荐</label>
+                          <div class="layui-input-inline">
+                            <select name="recommend" class="recommend">
+                              <option value="">请选择</option>
+                              <option value="1">是</option>
+                              <option value="0">否</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">状态</label>
+                          <div class="layui-input-inline">
+                            <select name="status" class="status">
+                              <option value="">请选择</option>
+                              <option value="0">禁止</option>
+                              <option value="1">正常</option>
+                            </select>
                           </div>
                         </div>
                       </div>
@@ -832,6 +892,22 @@
                           }
                       });
 
+                      if(data.status==1){
+                          $('#edit_form .status option[value=1]').attr('selected',true);
+                          $('#edit_form .status option[value=0]').removeAttr('selected');
+                      }else{
+                          $('#edit_form .status option[value=0]').attr('selected',true);
+                          $('#edit_form .status option[value=1]').removeAttr('selected');
+                      }
+
+                      if(data.recommend==1){
+                          $('#edit_form .recommend option[value=1]').attr('selected',true);
+                          $('#edit_form .recommend option[value=0]').removeAttr('selected');
+                      }else{
+                          $('#edit_form .recommend option[value=0]').attr('selected',true);
+                          $('#edit_form .recommend option[value=1]').removeAttr('selected');
+                      }
+
 
                       $('#edit_form .content').val(data.content);
 
@@ -958,11 +1034,21 @@
 
       }
 
+      //自定义报警列格式
       function statusFormatter(cellvalue, options, rowdata){ 
           if (cellvalue == "1"){
-              return '<span class="label label-success" alt="'+cellvalue+'">通过</span>';
+              return '<button class="btn btn-primary btn-xs">正常</button>';
           }else{
-              return '<span class="label label-danger" alt="'+cellvalue+'">待审核</span>';
+              return '<button class="btn btn-danger btn-xs">禁止</button>';
+          }
+      }
+
+      //自定义报警列格式
+      function recommendFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue == "1"){
+              return '<button class="btn btn-primary btn-xs">推荐</button>';
+          }else{
+              return '';
           }
       }
 
@@ -972,7 +1058,7 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '主题名称','活动图片','审核状态','活动类型','开始日期','结束日期','点击量','操作'],
+              colNames:['id', '主题名称','活动图片','审核状态','活动类型','开始日期','结束日期','点击量','状态','推荐','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
@@ -983,6 +1069,8 @@
                 {name:'start_time',index:'start_time', align : "center"},
                 {name:'end_time',index:'end_time', align : "center"},
                 {name:'eye',index:'eye', align : "center"},
+                {name:'status',index:'status', align : "center", formatter: statusFormatter},
+                {name:'recommend',index:'recommend', align : "center", formatter: recommendFormatter},
 
                 {name:'options',index:'options',align:'center',width:200}
               ], 
