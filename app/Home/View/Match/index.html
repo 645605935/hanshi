@@ -15,8 +15,10 @@
 <!-- 引用 -->
 <include file="Common/header" />
 
-
-<div class="baoming-ban" style="background: none;"><a href="{:U('Home/Index/rules1')}" style="background: url('{$ad_center.img}') no-repeat center center;display: inline-block;width: 1000px;height: 400px;"></a></div>
+<?php
+    $top_ad=M('Ad')->find(3);
+?>
+<div class="baoming-ban" style="background: none;"><a href="{$top_ad.url}" style="background: url('{$ad_center.img}') no-repeat center center;display: inline-block;width: 1000px;height: 400px;"></a></div>
 <div class="container">
     <div class="con">
         <div class="hezuo news">
