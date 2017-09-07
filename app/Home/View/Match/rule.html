@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/huodong.css">
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui-v1.0.4/layui/css/layui.css"  media="all">
 </head>
 <body>
 <!-- 引用 -->
@@ -25,7 +26,9 @@
                 </div>
                 <div class="wenzhang">
                     {$row.content}
-                    <div class="bm-bnn"><a href="{:U('Home/Match/baoming',array('type'=>$_GET['type'], 'id'=>$row['id']))}">我要报名</a></div>
+
+
+                    <div class="bm-bnn"><a id="baoming_btn" data-url="{:U('Home/Match/baoming',array('type'=>$_GET['type'], 'id'=>$row['id']))}">我要报名</a></div>
                 </div>
             </div>
         </div>
@@ -38,5 +41,45 @@
 
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
 <script src="__PUBLIC__/Home/js/index.js"></script>
+<script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
+
+<script type="text/javascript">
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
+      var form = layui.form()
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+
+      
+    });
+
+    $(function(){
+        $('#baoming_btn').click(function(){
+             var mid="{$_GET['id']}";
+             var url=$(this).attr('data-url');
+             if(mid){
+                $.ajax({  
+                    async:false,
+                    type:'get',  
+                    url : "{:U('Home/Match/ajax_check_to_baoming')}",
+                    data:{
+                        mid: mid
+                    },
+                    dataType : 'json',
+                    success  : function(json) { 
+                        if(json.code == 0){
+                            window.location.href=url;
+                        }else{
+                            layer.msg(json.msg);
+                        }
+                    },
+                    error  : function() {  
+                        layer.msg('error');
+                    }  
+                }); 
+             }
+        })
+    });
+</script>
 </body>
 </html>

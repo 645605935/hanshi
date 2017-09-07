@@ -92,10 +92,59 @@ class MatchController extends CommonController{
         $this->match=$match;
         $this->display();
     }
+    
+    public function ajax_check_to_baoming(){
+        global $user;
+
+        //如果比赛还没开始,不能报名
+        $id=$_GET['id'];
+
+        $match_info=M('match')->find($id);
+        if($match_info){
+            $start_time=$match_info['start_time'];
+            $end_time=$match_info['end_time'];
+            if( time()<$start_time ){
+                $data=array();
+                $data['code']=1;
+                $data['msg']='比赛还没开始不能报名';
+            }elseif( time()>$end_time ){
+                $data=array();
+                $data['code']=1;
+                $data['msg']='比赛已结束';
+            }else{
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }
+        }
+
+        echo json_encode($data);
+    }
 
     //添加
     public function ajax_add(){
         global $user;
+
+        //如果比赛还没开始,不能报名
+        $type=$_GET['type'];
+        $id=$_GET['id'];
+
+        $match_info=M('match')->find($id);
+        if($match_info){
+            $start_time=$match_info['start_time'];
+            $end_time=$match_info['end_time'];
+            if( time()<$start_time ){
+                $data=array();
+                $data['code']=1;
+                $data['msg']='比赛还没开始不能报名';
+                return false;
+            }elseif( time()>$end_time ){
+                $data=array();
+                $data['code']=1;
+                $data['msg']='比赛已结束';
+                return false;
+            }
+        }
 
         $data=array();
         $data=$_POST;
