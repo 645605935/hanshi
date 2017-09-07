@@ -181,7 +181,7 @@
         <div class="lon w1000">
             <div class="fr">
                 <if condition="$user">
-                    <a href="{:U('Home/User/personal_setting')}">{$user.username}</a>
+                    <a href="{:U('Home/User/personal_setting')}">【{$user.username}】个人中心</a>
                     <a href="{:U('Home/User/logout')}">退出</a>
                 <else/>
                     <a href="{:U('Home/Index/yindao')}">注册</a><span>|</span>
