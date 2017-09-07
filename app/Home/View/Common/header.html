@@ -87,7 +87,7 @@
             </ul> -->
         </li>
         <li>         
-            <a href="javascript:;" class="li-a 
+            <a href="{:U('Home/Match/index')}" class="li-a 
                 <if condition="stripos($_page_,'Match/index') nheq false">cur
                     <elseif  condition="stripos($_page_,'Match/rule') nheq false"/>cur
                     <elseif  condition="stripos($_page_,'Match/baoming') nheq false"/>cur
@@ -100,7 +100,7 @@
                 </if>
                 >
                 <li>
-                    <a href="javascript:;" 
+                    <a href="{:U('Home/Match/index')}" 
                         <if condition="(stripos($_page_,'Match/index') nheq false) and (!$_GET['type'])">class="color1"
                             <elseif  condition="(stripos($_page_,'Match/rule') nheq false) and (!$_GET['type'])"/>class="color1"
                             <elseif  condition="(stripos($_page_,'Match/baoming') nheq false) and (!$_GET['type'])"/>class="color1"
@@ -111,7 +111,7 @@
                 </li>
                 <foreach name="top_nav_saishihuodong" item="v">
                     <li>
-                        <a href="javascript:;" 
+                        <a href="{:U('Home/Match/index',array('type'=>$v['id']))}" 
                             <if condition="(stripos($_page_,'Match/index') nheq false) and ($v['id'] eq $_GET['type'])">class="color1"
                                 <elseif  condition="(stripos($_page_,'Match/rule') nheq false) and ($v['id'] eq $_GET['type'])"/>class="color1"
                                 <elseif  condition="(stripos($_page_,'Match/baoming') nheq false) and ($v['id'] eq $_GET['type'])"/>class="color1"
@@ -124,7 +124,7 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" class="li-a 
+            <a href="{:U('Home/Baoming/index')}" class="li-a 
                 <if condition="stripos($_page_,'Baoming/index') nheq false">cur
                     <elseif  condition="stripos($_page_,'Baoming/detail') nheq false"/>cur
                     <elseif  condition="stripos($_page_,'Baoming/baoming') nheq false"/>cur
@@ -137,7 +137,7 @@
                 </if>
                 >
                 <li>
-                    <a href="javascript:;" 
+                    <a href="{:U('Home/Baoming/index')}" 
                         <if condition="(stripos($_page_,'Baoming/index') nheq false) and (!$_GET['type'])">class="color1"
                             <elseif  condition="(stripos($_page_,'Baoming/detail') nheq false) and (!$_GET['type'])"/>class="color1"
                             <elseif  condition="(stripos($_page_,'Baoming/baoming') nheq false) and (!$_GET['type'])"/>class="color1"
@@ -148,7 +148,7 @@
                 </li>
                 <foreach name="top_nav_saishihuodong" item="v">
                     <li>
-                        <a href="javascript:;" 
+                        <a href="{:U('Home/Baoming/index',array('type'=>$v['id']))}" 
                             <if condition="(stripos($_page_,'Baoming/index') nheq false) and ($v['id'] eq $_GET['type'])">class="color1"
                                 <elseif  condition="(stripos($_page_,'Baoming/detail') nheq false) and ($v['id'] eq $_GET['type'])"/>class="color1"
                                 <elseif  condition="(stripos($_page_,'Baoming/baoming') nheq false) and ($v['id'] eq $_GET['type'])"/>class="color1"
