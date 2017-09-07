@@ -6,19 +6,19 @@
 
 <ul>
     <li><a><i class="stx"></i>主题市场</a></li>
-    <li><a href="{:U('Home/Tongchengjieyue/index')}">同城借阅</a></li>
-    <li><a href="huodong.html">活动视频</a></li>
+    <li><a href="javascript:;">同城借阅</a></li>
+    <li><a href="javascript:;">活动视频</a></li>
 	
 
 	<foreach name="left_video_types" item="v">
-		<li <if condition="$_GET['type'] eq $v['id']"> class="cur" </if>><a href="{:U('Home/Index/yanchu',array('type'=>$v['id']))}">{$v['title']}</a></li>
+		<li <if condition="$_GET['type'] eq $v['id']"> class="cur" </if>><a href="javascript:;">{$v['title']}</a></li>
 	</foreach>
 
 
 
-    <li><a href="shucheng-zhuye1.html">有声文学</a></li>
-    <li><a href="shucheng-zhuye1.html">文学阅读</a></li>
-    <li><a href="#4">创客空间</a></li>
-    <li><a href="#4">瞰世学院</a></li>
-    <li><a href="{:U('Home/Index/shop')}">瞰世商城</a></li>
+    <li><a href="javascript:;">有声文学</a></li>
+    <li><a href="javascript:;">文学阅读</a></li>
+    <li><a href="javascript:;">创客空间</a></li>
+    <li><a href="javascript:;">瞰世学院</a></li>
+    <li><a href="javascript:;">瞰世商城</a></li>
 </ul>
