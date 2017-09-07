@@ -284,7 +284,7 @@ class UserController extends AuthController {
 
     //根据ID获取用户信息
     public function ajax_get_user_info_by_id(){
-        if($id=$_GET['id']){
+        if($id=$_POST['id']){
 
             $row = D('User')->find($id);
             if($row){

@@ -27,7 +27,7 @@
 <div class="nav clearfix">
     <ul>
         <li>
-            <a href="javascript:;" class="li-a 
+            <a href="__APP__" class="li-a 
                 <if condition="stripos($_page_,'Index/index') nheq false">cur
                     <elseif  condition="stripos($_page_,'User/voice_') nheq false"/>cur
                     <elseif  condition="stripos($_page_,'User/book_') nheq false"/>cur
@@ -41,7 +41,7 @@
                     <elseif  condition="$_page_ eq ''"/>style="display:block"
                 </if>
                 >
-                <li><a <if condition="stripos($_page_,'Index/index') nheq false">class="color1"<elseif  condition="$_page_ eq ''"/>class="color1"</if>href="{:U('Home/Index/index')}">热门推荐</a></li>
+                <li><a <if condition="stripos($_page_,'Index/index') nheq false">class="color1"<elseif  condition="$_page_ eq ''"/>class="color1"</if>href="__APP__">热门推荐</a></li>
                 <li><a <if condition="stripos($_page_,'User/voice_') nheq false">class="color1"</if> href="javascript:;">人气主播</a></li>
                 <li><a <if condition="stripos($_page_,'User/book_') nheq false">class="color1"</if> href="javascript:;">人气作家</a></li>
                 <li><a href="javascript:;">赚钱途径</a></li>
