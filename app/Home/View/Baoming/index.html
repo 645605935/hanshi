@@ -14,8 +14,10 @@
 <!-- 头部引用 -->
 <include file="Common/header" />
 
-
-<div class="baoming-ban" style="background: url('{$ad_center.img}') no-repeat center center;"></div>
+<?php
+    $top_ad=M('Ad')->find(3);
+?>
+<div class="baoming-ban" style="background: none;"><a href="{$top_ad.url}" style="background: url('{$ad_center.img}') no-repeat center center;display: inline-block;width: 1000px;height: 400px;"></a></div>
 <div class="container p20">
     <div class="con">
         <div class="slideBox">
