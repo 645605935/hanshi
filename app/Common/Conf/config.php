@@ -15,10 +15,10 @@ return array(
 	'VIP_LIST_ROWS'=>10,  
 	'DB_TYPE'   => 'mysql', 	// 数据库类型
 
-	'DB_HOST'   => 'rm-2zec2y8pdjy02z6wbo.mysql.rds.aliyuncs.com', // 服务器地址
-	'DB_NAME'   => 'ks_chn001',// 数据库名
-	'DB_USER'   => 'ks_chn001',		// 用户名
-	'DB_PWD'    => 'ks_chn001', 			// 密码
+	'DB_HOST'   => 'rm-2zeoj5puv6483176ho.mysql.rds.aliyuncs.com', // 服务器地址
+	'DB_NAME'   => 'ztr_01_hanshi',// 数据库名
+	'DB_USER'   => 'ztr_01_hanshi',		// 用户名
+	'DB_PWD'    => 'ztr_01_hanshi', 			// 密码
 	'DB_PORT'   => '3306', 		// 端口
 	'DB_PREFIX' => 'ez_', 		// 数据库表前缀
 	'DEFAULT_MODULE'=>'Home', 
