@@ -358,9 +358,14 @@ class IndexController extends CommonController{
     }
 
     public function ajax_check_email_exist(){
+        global $user;
+
         if($_POST){
             $where=array();
             $where['email']=$_POST['email'];
+            if($user){
+                $where['id']=array('neq'=>$user['id']);
+            }
 
             $row=M('User')->where($where)->find();
             if($row){
