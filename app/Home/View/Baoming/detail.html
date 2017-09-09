@@ -45,15 +45,19 @@
                 <div class="wenzhang">
                     <div class="cs-con">
                         <if condition="$_GET['type'] eq 1284">
-                              <audio src="{$row['files']}" controls="controls">
-                              您的浏览器不支持 audio 标签。
-                              </audio>
+                              <foreach name="row['files']" item="v">
+                                  <audio src="{$v}" controls="controls">
+                                      您的浏览器不支持 audio 标签。
+                                  </audio>
+                              </foreach>
                         </if>
 
                         <if condition="$_GET['type'] eq 1285">
-                              <video src="{$row['files']}" controls="controls">
-                              您的浏览器不支持 video 标签。
-                              </video>
+                              <foreach name="row['files']" item="v">
+                                  <video src="{$v}" controls="controls">
+                                      您的浏览器不支持 video 标签。
+                                  </video>
+                              </foreach>
                         </if>
 
                         <if condition="in_array($_GET['type'], array('1286', '1288', '1289'))">  

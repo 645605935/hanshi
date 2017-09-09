@@ -36,6 +36,8 @@ class BaomingController extends CommonController{
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
 
+
+
         $this->page=$Page->show();
         $this->list=$list;
         $this->type=$type;
@@ -47,13 +49,9 @@ class BaomingController extends CommonController{
 
         $id=I('id');
         $row=D('Baoming')->relation(true)->find($id);
-        
-        if(in_array($row['type'], '1286,1288,1289')){
-            $row['files']=explode('#', $row['files']);
-        }
+        $row['files']=explode('#', $row['files']);
 
         $this->row=$row;
-        $this->files=$files;
         $this->display();
     }
 
