@@ -59,6 +59,8 @@ class MatchController extends CommonController{
         $id=$_GET['id'];
         $row=M('Match')->find($id);
 
+        M('Match')->where(array('id'=>$row['id']))->setInc('eye');
+
         $this->row=$row;
         $this->display();
     }
