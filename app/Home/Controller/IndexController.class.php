@@ -407,6 +407,32 @@ class IndexController extends CommonController{
         $this->display();
     }
 
+    // 检测输入的验证码是否正确，$code为用户输入的验证码字符串
+    public function verify_code(){
+        $Verify =     new \Think\Verify();
+        $Verify->fontSize = 30;
+        $Verify->length   = 3;
+        $Verify->useNoise = false;
+        $Verify->entry();
+    }
+
+    // 检测输入的验证码是否正确，$code为用户输入的验证码字符串
+    public function check_verify($code, $id = ''){
+        $verify = new \Think\Verify();
+        $res=  $verify->check($code, $id);
+
+        if($res){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='error';
+        }
+        echo json_encode($data);
+    }
+
     // 找回密码
     public function findpassword_2(){
         global $user;
