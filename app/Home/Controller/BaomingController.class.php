@@ -48,14 +48,10 @@ class BaomingController extends CommonController{
         global $user;
 
         $id=I('id');
-        $row=D('Baoming')->relation(true)->find($id);
-        
-        if(in_array($row['type'], '1286,1288,1289')){
-            $row['files']=explode('#', $row['files']);
-        }
+        $row=D('Baoming')->find($id);
+        $row['files']=explode('#', $row['files']);
 
         $this->row=$row;
-        $this->files=$files;
         $this->display();
     }
 
