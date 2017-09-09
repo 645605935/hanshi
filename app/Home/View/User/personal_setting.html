@@ -39,7 +39,7 @@
                         <tr>
                           <td class="center" colspan="2">
                             <div class="set_Inner">
-                              <div class="personal_verify verify_mail ">
+                              <div class="personal_verify verify_mail " style="background:url('__PUBLIC__/Home/images/v-email.png') no-repeat;">
                                 <div class="personal_verify_title">邮箱验证</div>
                                 <div class="personal_verify_email">{$row['email']}</div>
                                 <if condition="$row['email_authentication'] eq 1">
@@ -51,7 +51,7 @@
                                   <a id="email_bind2" href="{:U('Home/User/bd_email')}">更改邮箱</a>
                                 </div>
                               </div>
-                              <div class="personal_verify verify_mobile ">
+                              <div class="personal_verify verify_mobile "  style="background:url('__PUBLIC__/Home/images/v-phone.png') no-repeat;">
                                 <div class="personal_verify_title">绑定手机</div>
                                 <div class="personal_verify_mobile">{$row['phone']}</div>
                                 <if condition="$row['phone_authentication'] eq 1">
@@ -61,7 +61,7 @@
                                 </if>
                                 <div><a id="phone_bind" href="javascript:;">修改手机</a></div>
                               </div>
-                              <div class="personal_verify verify_vip ">
+                              <div class="personal_verify verify_vip "  style="background:url('__PUBLIC__/Home/images/v-v.png') no-repeat;">
                                 <div class="personal_verify_title">加V认证</div>
                                 <if condition="$row['phone_authentication'] eq 1">
                                     <div class="personal_verify_status2">已认证</div>
@@ -82,7 +82,7 @@
                                       <input type="text" value="【{$row.email}】/【{$row.phone}】" class="layui-input" disabled>
                                  </div>
                                  <label class="layui-form-label"><a href="">修改密码</a></label>
-                                 <div class="set_personal_title is-vip" style="float:right;">加V认证&nbsp;&nbsp;
+                                 <div class="set_personal_title is-vip" style="float:right;display:none;">加V认证&nbsp;&nbsp;
                                    <a class="BVIcon"></a><!-- 未认证时加grey -->
                                  </div>
                                </div>
