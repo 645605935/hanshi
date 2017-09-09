@@ -436,6 +436,9 @@ class IndexController extends CommonController{
     // 找回密码
     public function findpassword_2(){
         global $user;
+        $userinfo=M('User')->where(array('username'=>$_POST['username']))->find();
+        $userinfo['phone']=hidtel($userinfo['phone']);
+        $this->userinfo=$userinfo;
         $this->display();
     }
 

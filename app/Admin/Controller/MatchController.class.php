@@ -85,9 +85,9 @@ class MatchController extends AuthController {
         $list = $d->where($map)->order('id desc')->relation(true)->select();
 
         foreach ($list as $key => $value) {
-            $list[$key]['time']=date('Y-m-d H:i:s H:i',$value['time']);
-            $list[$key]['start_time']=date('Y-m-d H:i:s H:i',$value['start_time']);
-            $list[$key]['end_time']=date('Y-m-d H:i:s H:i',$value['end_time']);
+            $list[$key]['time']=date('Y-m-d H:i:s',$value['time']);
+            $list[$key]['start_time']=date('Y-m-d H:i:s',$value['start_time']);
+            $list[$key]['end_time']=date('Y-m-d H:i:s',$value['end_time']);
         }
 
         if($list){
@@ -180,9 +180,9 @@ class MatchController extends AuthController {
             }
             $row['_bmz']=$match_bmz_info;
 
-            $row['time']=date('Y-m-d H:i:s H:i',$row['time']);
-            $row['start_time']=date('Y-m-d H:i:s H:i',$row['start_time']);
-            $row['end_time']=date('Y-m-d H:i:s H:i',$row['end_time']);
+            $row['time']=date('Y-m-d H:i:s',$row['time']);
+            $row['start_time']=date('Y-m-d H:i:s',$row['start_time']);
+            $row['end_time']=date('Y-m-d H:i:s',$row['end_time']);
 
 
 // dump($row);die;
@@ -341,9 +341,9 @@ class MatchController extends AuthController {
 
                 $row= D('Match')->relation(true)->find($id);
 
-                $row['time']=date('Y-m-d H:i:s H:i',$row['time']);
-                $row['start_time']=date('Y-m-d H:i:s H:i',$row['start_time']);
-                $row['end_time']=date('Y-m-d H:i:s H:i',$row['end_time']);
+                $row['time']=date('Y-m-d H:i:s',$row['time']);
+                $row['start_time']=date('Y-m-d H:i:s',$row['start_time']);
+                $row['end_time']=date('Y-m-d H:i:s',$row['end_time']);
 
                 if($row){
                     $data=array();
@@ -442,9 +442,9 @@ class MatchController extends AuthController {
                 $id=$data['id'];
                 $row= D('Match')->relation(true)->find($id);
 
-                $row['time']=date('Y-m-d H:i:s H:i',$row['time']);
-                $row['start_time']=date('Y-m-d H:i:s H:i',$row['start_time']);
-                $row['end_time']=date('Y-m-d H:i:s H:i',$row['end_time']);
+                $row['time']=date('Y-m-d H:i:s',$row['time']);
+                $row['start_time']=date('Y-m-d H:i:s',$row['start_time']);
+                $row['end_time']=date('Y-m-d H:i:s',$row['end_time']);
 
                 if($row){
                     //先删除重置比赛报名组
