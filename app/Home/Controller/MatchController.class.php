@@ -39,6 +39,7 @@ class MatchController extends CommonController{
             $list[$key]['start_time_m_d']=date('m-d', $value['start_time']);
         }
 
+
         $this->ad_center=M('Ad')->where(array('type'=>1398))->find();
 
         //recommmend
