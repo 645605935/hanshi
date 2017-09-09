@@ -26,6 +26,15 @@ class ConfigController extends AuthController {
 			}else{
 				unset($data['logo']);
 			}
+
+			if($_FILES['erweima']['size']>0){
+				$img=eUpload(1,$_FILES['erweima'],'config');
+                $data['erweima']	=$img['url'];
+			}else{
+				unset($data['erweima']);
+			}
+
+
             if($d->save($data)){
             	cacheConfig(0);
             	$this->success('修改成功');

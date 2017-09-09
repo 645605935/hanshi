@@ -1,4 +1,5 @@
 <?php
+    $config=M('Config')->find(1);
     $top_nav_saishihuodong=M('Type')->where(array('pid'=>1283))->select();
     $top_nav_type_info=M('Type')->find($_GET['type']);
 
@@ -20,7 +21,7 @@
             <a href="javascript:;" class="yx"></a>
             <a href="javascript:;" class="sc"></a>
         </div>
-        <div class="erweima fr"><img src="__PUBLIC__/Home/images/erweima.jpg" alt=""></div>
+        <div class="erweima fr"><img src="__UPLOAD__/{$config.erweima}" alt=""></div>
     </div>
 </div>
 <div class="clear"></div>
