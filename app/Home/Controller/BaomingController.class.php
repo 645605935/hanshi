@@ -36,6 +36,8 @@ class BaomingController extends CommonController{
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
 
+        
+
         $this->page=$Page->show();
         $this->list=$list;
         $this->type=$type;

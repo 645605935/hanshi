@@ -46,7 +46,7 @@
                         <foreach name="list" item="v">
                             <li>
                                 <a href="{:U('Home/Baoming/detail',array('type'=>$_GET['type'], 'id'=>$v['id']))}">
-                                    <img style="width:238px;height:238px;" class="img1" src="{$v.images}" alt="">
+                                    <img style="width:238px;height:238px;" class="img1" src="{$v.img}" alt="">
                                     <div class="info-top first">
                                         <h2>{$v.title}</h2>
                                         <p><strong>作品编号：</strong>{$v.id}</p>
