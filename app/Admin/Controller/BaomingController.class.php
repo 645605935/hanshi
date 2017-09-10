@@ -37,6 +37,16 @@ class BaomingController extends AuthController {
         if($_GET['bmz']){
             $map['bmz']=$_GET['bmz'];
         }
+
+        if($_GET['start_time']){
+            $start_time=strtotime($_GET['start_time']);
+            $map['start_time']=array('lt', $start_time);
+        }
+
+        if($_GET['end_time']){
+            $end_time=strtotime($_GET['end_time']);
+            $map['end_time']=array('gt', $end_time);
+        }
         
         $d = D('Baoming');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
