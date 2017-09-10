@@ -114,6 +114,7 @@ class BaomingController extends CommonController{
         $where['sqz']=$sqz;
         $time_info=M('match_bmz')->where($where)->find();
 
+
         //初赛报名时间
         if(time()>$time_info['start_time_1'] && time()<$time_info['end_time_1']){
             $data=array();
@@ -146,62 +147,69 @@ class BaomingController extends CommonController{
 
 
 
-
-
-
-        if($user){
-            //一个比赛有好多人报名
-            //每一比赛的每个人每天最多可以投五个报名
-            $where=array();
-            $where['time']=array('between',array($_start_, $_end_));
-            $where['mid']=$mid;
-            $where['uid']=$user['id'];
-            $count=M('Votelog')->where($where)->count();
-
-            if($count<5){
+        if( 
+            ( time()>$time_info['start_time_2'] && time()<$time_info['end_time_2'] )||
+            ( time()>$time_info['start_time_4'] && time()<$time_info['end_time_4'] )||
+            ( time()>$time_info['start_time_6'] && time()<$time_info['end_time_6'] )
+            ){
+            if($user){
+                //一个比赛有好多人报名
+                //每一比赛的每个人每天最多可以投五个报名
                 $where=array();
                 $where['time']=array('between',array($_start_, $_end_));
+                $where['mid']=$mid;
                 $where['uid']=$user['id'];
-                $where['bid']=$id;
-                $votelog=M('Votelog')->where($where)->find();
-                if($votelog){
-                    $data=array();
-                    $data['code']=1;
-                    $data['msg']='该报名今天已投过！';
-                }else{
-                    $data=array();
-                    $data['type']=$type;
-                    $data['uid']=$user['id'];
-                    $data['mid']=$mid;
-                    $data['bid']=$id;
-                    $data['time']=time();
-                    M('Votelog')->add($data);
+                $count=M('Votelog')->where($where)->count();
 
+                if($count<5){
                     $where=array();
-                    $where['id']=$id;
-                    $res = M('Baoming')->where($where)->setInc('vote');
-                    if($res){
-                        $num=$this->getReward();
-
-                        $data=array();
-                        $data['code']=0;
-                        $data['msg']='success';
-                        $data['num']=$num;
-                    }else{
+                    $where['time']=array('between',array($_start_, $_end_));
+                    $where['uid']=$user['id'];
+                    $where['bid']=$id;
+                    $votelog=M('Votelog')->where($where)->find();
+                    if($votelog){
                         $data=array();
                         $data['code']=1;
-                        $data['msg']='error';
+                        $data['msg']='该报名今天已投过！';
+                    }else{
+                        $data=array();
+                        $data['type']=$type;
+                        $data['uid']=$user['id'];
+                        $data['mid']=$mid;
+                        $data['bid']=$id;
+                        $data['time']=time();
+                        M('Votelog')->add($data);
+
+                        $where=array();
+                        $where['id']=$id;
+                        $res = M('Baoming')->where($where)->setInc('vote');
+                        if($res){
+                            $num=$this->getReward();
+
+                            $data=array();
+                            $data['code']=0;
+                            $data['msg']='success';
+                            $data['num']=$num;
+                        }else{
+                            $data=array();
+                            $data['code']=1;
+                            $data['msg']='error';
+                        }
                     }
+                }else{
+                    $data=array();
+                    $data['code']=1;
+                    $data['msg']='比赛的报名今天已经投过五场了！';
                 }
             }else{
                 $data=array();
-                $data['code']=1;
-                $data['msg']='比赛的报名今天已经投过五场了！';
+                $data['code']=2;
+                $data['msg']='请登录';
             }
         }else{
             $data=array();
             $data['code']=2;
-            $data['msg']='请登录';
+            $data['msg']='当前时间不可投票';
         }
 
         echo json_encode($data);
