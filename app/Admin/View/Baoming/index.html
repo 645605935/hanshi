@@ -146,7 +146,7 @@
                                       <select name="sqz" class="sqz" lay-filter="sqz_select" id="sqz_select">
                                         <option value="">请选择</option>
                                         <foreach name="sqz" item="v">
-                                            <option value="{$v.title}">{$v.title}</option>
+                                            <option value="{$v.id}">{$v.title}</option>
                                         </foreach>
                                       </select>
                                     </div>
@@ -451,7 +451,7 @@
 
                 {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
 
-                      <option value="{{=it.data[i].title}}">{{=it.data[i].title}}</option>
+                      <option value="{{=it.data[i].id}}">{{=it.data[i].title}}</option>
 
                 {{ } }}
 
@@ -467,7 +467,7 @@
 
                 {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
 
-                      <option value="{{=it.data[i].title}}">{{=it.data[i].title}}</option>
+                      <option value="{{=it.data[i].id}}">{{=it.data[i].title}}</option>
 
                 {{ } }}
 
