@@ -38,14 +38,10 @@ class BaomingController extends AuthController {
             $map['bmz']=$_GET['bmz'];
         }
 
-        if($_GET['start_time']){
+        if($_GET['start_time']&&$_GET['end_time']){
             $start_time=strtotime($_GET['start_time']);
-            $map['time']=array('gt', $start_time);
-        }
-
-        if($_GET['end_time']){
             $end_time=strtotime($_GET['end_time']);
-            $map['time']=array('lt', $end_time);
+            $map['time']=array('between', array($start_time, $end_time));
         }
         
         $d = D('Baoming');
