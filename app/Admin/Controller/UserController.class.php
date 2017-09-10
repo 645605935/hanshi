@@ -197,7 +197,7 @@ class UserController extends AuthController {
 
         $map['id']=array('neq',1);
         $d = D('User');
-        $list = $d->where($map)->order('id desc')->relation(true)->select();
+        $list = $d->where($map)->order('time desc')->relation(true)->select();
 
         
         foreach ($list as $key => $value) {
