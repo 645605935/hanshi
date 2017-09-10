@@ -128,7 +128,7 @@
               
                 <!-- 搜索  start -->
                 <div class="row">
-                    <form class="layui-form layui-form-pane col-xs-12" action="" method="post">
+                    <form class="layui-form layui-form-pane col-xs-12">
 
                         <table class="layui-table" id="search_table">
                           <thead>
@@ -141,9 +141,36 @@
                               <td>
                                 <div class="layui-inline" style="margin-top: 5px;">
                                   <div class="layui-form-item">
-                                    <label class="layui-form-label">任务名称</label>
+                                    <label class="layui-form-label">赛区</label>
                                     <div class="layui-input-inline">
-                                      <input type="text" name="title" placeholder="" value="{$_POST['title']}" autocomplete="off" class="layui-input title">
+                                      <select name="sqz" class="sqz" lay-filter="sqz_select" id="sqz_select">
+                                        <option value="">请选择</option>
+                                        <foreach name="sqz" item="v">
+                                            <option value="{$v.title}">{$v.title}</option>
+                                        </foreach>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>  
+
+                                <div class="layui-inline" style="margin-top: 5px;">
+                                  <div class="layui-form-item">
+                                    <label class="layui-form-label">子站</label>
+                                    <div class="layui-input-inline">
+                                      <select name="sq" class="sq" id="sq_select">
+                                        <option value="">请选择</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>  
+
+                                <div class="layui-inline" style="margin-top: 5px;">
+                                  <div class="layui-form-item">
+                                    <label class="layui-form-label">组别</label>
+                                    <div class="layui-input-inline">
+                                      <select name="bmz" class="bmz" id="bmz_select">
+                                        <option value="">请选择</option>
+                                      </select>
                                     </div>
                                   </div>
                                 </div>  
@@ -167,7 +194,7 @@
                             <tr>
                               <td>
                                 <button style="float:left;" class="layui-btn id-btn-dialog2_add" title="id-btn-dialog2_add"> 批量添加票数 </button>
-                                <button style="float:right;" class="layui-btn search_btn" lay-submit="" title="search_btn">搜索</button>
+                                <button style="float:right;" class="layui-btn search_btn" lay-submit="" lay-filter="demo1_search" title="search_btn">搜索</button>
                               </td>
                             </tr> 
                           </tfoot>
@@ -419,6 +446,37 @@
 
         {{ } }}
     </script>
+    <script id="j-tmpl_sq_select" type="text/template">
+        {{ if(it.code==0){ }}
+
+                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+
+                      <option value="{{=it.data[i].title}}">{{=it.data[i].title}}</option>
+
+                {{ } }}
+
+        {{ }else{ }}
+
+                
+
+        {{ } }}
+    </script>
+
+    <script id="j-tmpl_bmz_select" type="text/template">
+        {{ if(it.code==0){ }}
+
+                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+
+                      <option value="{{=it.data[i].title}}">{{=it.data[i].title}}</option>
+
+                {{ } }}
+
+        {{ }else{ }}
+
+                
+
+        {{ } }}
+    </script>
     <script src="__PUBLIC__/Admin/doT-master/doT.js"></script>
 
 
@@ -500,16 +558,24 @@
 
     <script type="text/javascript">
       function init_page(){
-          var title=$('#search_table .title').val();
-          var Date1=$('#search_table .Date1').val();
-          var Date2=$('#search_table .Date2').val();
+          var sqz=$('#search_table .sqz').val();
+          var sq=$('#search_table .sq').val();
+          var bmz=$('#search_table .bmz').val();
+          var start_time=$('#search_table .start_time').val();
+          var end_time=$('#search_table .end_time').val();
 
-          var json=_ajax_get_list(title, Date1, Date2);
+          var json=_ajax_get_list(sqz, sq, bmz, start_time, end_time);
           init_grid_table(json.data);
       }
 
       //获取列表
-      function _ajax_get_list(title, Date1, Date2){
+      function _ajax_get_list(sqz, sq, bmz, start_time, end_time){
+        console.log(sqz);
+        console.log(sq);
+        console.log(bmz);
+        console.log(start_time);
+        console.log(end_time);
+
           var _data;
           $.ajax({   
               async:false,
@@ -517,12 +583,15 @@
               contentType:"application/x-www-form-urlencoded",
               url : "{:U('Admin/Baoming/ajax_get_list')}",
               data: {
-                'title':title, 
-                'Date1':Date1, 
-                'Date2':Date2
+                sqz:sqz, 
+                sq:sq, 
+                bmz:bmz, 
+                start_time:start_time, 
+                end_time:end_time
               },
               dataType : 'json',
               success  : function(json) { 
+
                   if(json.code==0){
                       _data=json;
                   }
@@ -747,7 +816,8 @@
     </script>
 
     <script>
-        layui.use('laydate', function(){
+        layui.use(['form', 'laydate'], function(){
+            var form = layui.form();
             var laydate = layui.laydate;
             var start = {
               istoday: false
@@ -772,6 +842,19 @@
             $('.LAY_demorange_e').click(function(){
                 end.elem = this;
                 laydate(end);
+            });
+
+            //监听提交
+            form.on('select(sqz_select)', function(data){
+              _ajax_get_sq(data.value);
+              _ajax_get_bmz(data.value);
+              return false;
+            });
+
+            //监听提交
+            form.on('submit(demo1_search)', function(data){
+              init_page();
+              return false;
             });
         });
 
@@ -854,6 +937,79 @@
                 return false;
               });
             });
+        }
+    </script>
+    <script type="text/javascript">
+      
+        //获取赛区
+        function _ajax_get_sq(sqz){
+            var _json;
+            $.ajax({  
+                async:false,
+                type:'get',  
+                url : "{:U('Admin/Baoming/ajax_get_sq')}",
+                data:{
+                    sqz: sqz
+                },
+                dataType : 'json',
+                success  : function(json) { 
+
+                    if(json.code == 0){
+                        var str='<option value="">请选择</option>';
+
+                        var tmpl = document.getElementById('j-tmpl_sq_select').innerHTML;
+                        var doTtmpl = doT.template(tmpl);
+                        var doT_Str=str+doTtmpl(json);
+                        $('#sq_select').html(doT_Str);
+
+                        layui.form().render();
+
+                        _json=json;
+                    }else{
+                        layer.msg(json.msg);
+                    }
+                },
+                error  : function() {  
+                    layer.msg('error');
+                }  
+            }); 
+            return _json;
+        }
+
+        //获取报名组
+        function _ajax_get_bmz(sqz){
+
+            var _json;
+            $.ajax({  
+                async:false,
+                type:'get',  
+                url : "{:U('Admin/Baoming/ajax_get_bmz')}",
+                data:{
+                    sqz: sqz
+                },
+                dataType : 'json',
+                success  : function(json) { 
+
+                    if(json.code == 0){
+                        var str='<option value="">请选择</option>';
+
+                        var tmpl = document.getElementById('j-tmpl_bmz_select').innerHTML;
+                        var doTtmpl = doT.template(tmpl);
+                        var doT_Str=str+doTtmpl(json);
+                        $('#bmz_select').html(doT_Str);
+
+                        layui.form().render();
+
+                        _json=json;
+                    }else{
+                        layer.msg(json.msg);
+                    }
+                },
+                error  : function() {  
+                    layer.msg('error');
+                }  
+            }); 
+            return _json;
         }
     </script>
   </body>

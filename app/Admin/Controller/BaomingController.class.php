@@ -19,31 +19,25 @@ class BaomingController extends AuthController {
     public function index(){
         global $user;
 
-        $group=M('auth_group')->where(array('pid'=>0))->select();
-        foreach ($group as $key => $value) {
-            $group[$key]['_child']=M('auth_group')->where(array('pid'=>$value['id']))->select();
-        }
-        $this->group=$group;
-
-
         $this->cur_v='Baoming-index';
-
-        $page="Baoming/index";
-        $page_buttons=M('PageButtons')->where(array('page'=>$page))->select();
-        $this->page_buttons=$page_buttons;
-        $this->page=$page;
-
         $this->type=M('Type')->where(array('pid'=>1283))->select();
+        $this->sqz=M('Type')->where(array('pid'=>1358))->select();
         $this->display();
     }
 
     //列表
     public function ajax_get_list(){
         $map=array();
-        if($_GET['title']){
-            $map['title']=array('like','%'.$_GET['title'].'%');
+        if($_GET['sqz']){
+            $map['sqz']=$_GET['sqz'];
         }
-
+        if($_GET['sq']){
+            $map['sq']=$_GET['sq'];
+        }
+        if($_GET['bmz']){
+            $map['bmz']=$_GET['bmz'];
+        }
+        
         $d = D('Baoming');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
 
@@ -211,6 +205,56 @@ class BaomingController extends AuthController {
             $data['msg']='error';
         }
 
+        echo json_encode($data);
+    }
+
+    public function ajax_get_sq(){
+        $sqz=I('sqz');
+
+        if(1359==$sqz){
+            $list=M('Type')->where(array('pid'=>1375))->select();
+        }
+
+        if(1360==$sqz){
+            $list=M('Type')->where(array('pid'=>1378))->select();
+        }
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
+    public function ajax_get_bmz(){
+        $sqz=I('sqz');
+
+        if(1359==$sqz){
+            $list=M('Type')->where(array('pid'=>1374))->select();
+        }
+
+        if(1360==$sqz){
+            $list=M('Type')->where(array('pid'=>1379))->select();
+        }
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
         echo json_encode($data);
     }
 
