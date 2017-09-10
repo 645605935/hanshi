@@ -745,7 +745,7 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '用户名','图片', '赛区','子站','组别', '报名单位','作者/单位','联系电话','作品主题','参赛项目','票数','时间','操作'],
+              colNames:['id', '用户名','图片', '赛区','子站','组别', '报名单位','姓名/单位','联系电话','作品主题','参赛项目','票数','时间','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
@@ -755,8 +755,8 @@
                 {name:'sq',index:'sq', align : "center"},
                 {name:'bmz',index:'bmz', align : "center"},
                 {name:'unit',index:'unit', align : "center", formatter: unitFormatter},
+                {name:'author',index:'author', align : "center"},
                 {name:'phone',index:'phone', align : "center"},
-                {name:'type',index:'type', align : "center"},
                 {name:'title',index:'title', align : "center"},
                 {name:'match',index:'match', align : "center"},
                 {name:'vote',index:'vote', align : "center"},
