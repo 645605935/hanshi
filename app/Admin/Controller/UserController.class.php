@@ -201,7 +201,7 @@ class UserController extends AuthController {
 
         
         foreach ($list as $key => $value) {
-            $list[$key]['register_time']=date('Y-m-d',$value['register_time']);
+            $list[$key]['time']=date('Y-m-d H:i:s',$value['time']);
             $list[$key]['img']=$_oss_url_ . $value['img']. "?x-oss-process=" . $_oss_style_48x48_;
         }
 
