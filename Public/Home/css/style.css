@@ -21,7 +21,7 @@
 .shot ul {wid th: 100%;position: relative;margin-left: -13px;}
 .shot ul li {width: 240px;margin-left: 13px;margin-bottom: 13px;float: left;border:1px solid #ddd;box-sizing: border-box}
 .shot ul li img.img1 {width: 100%}
-.info-top {position: relative;margin-top: 15px;padding-left: 10px;box-sizing: border-box;height: 110px}
+.info-top {position: relative;margin-top: 15px;padding-left: 10px;box-sizing: border-box;height: 147px !important;}
 .info-top h2 {font-size: 14px;color: #333;margin-bottom: 5px}
 .info-top p {line-height: 20px}
 .info-btn {box-sizing: border-box;width: 100%}
