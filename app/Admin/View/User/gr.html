@@ -362,6 +362,19 @@
           }
       }
 
+      //自定义报警列格式
+      function personal_authenticationFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue == "0"){
+              return '<button class="btn btn-primary btn-xs">未提交</button>';
+          }else if(cellvalue == "1"){
+              return '<button class="btn btn-danger btn-xs">待审核</button>';
+          }else if(cellvalue == "2"){
+              return '<button class="btn btn-danger btn-xs">审核通过</button>';
+          }else if(cellvalue == "-1"){
+              return '<button class="btn btn-danger btn-xs">未通过</button>';
+          }
+      }
+
       function pageInit(_username){
         var grid_data=_ajax_user_list(_username);
 
@@ -369,7 +382,7 @@
           caption: "个人列表",
           data: grid_data,
           datatype: "local",
-          colNames:['id', '姓名', '用户名', '邮箱', '手机', '头像', '状态', '推荐', '注册时间', '操作'],
+          colNames:['id', '姓名', '用户名', '邮箱', '手机', '头像', '状态', '个人认证状态', '推荐', '注册时间', '操作'],
           colModel:[
             {name:'id', index:'id', sorttype:"int", align:"center", hidden: true},
 
@@ -379,6 +392,7 @@
             {name:'phone',index:'phone',align:"center"},
             {name:'img',index:'img',align:"center", formatter: imgFormatter },
             {name:'status',index:'status',align:"center", formatter: statusFormatter },
+            {name:'personal_authentication',index:'personal_authentication',align:"center", formatter: personal_authenticationFormatter },
             {name:'recommend',index:'recommend',align:"center", formatter: recommendFormatter },
             {name:'time',index:'time',align:"center"},
 
