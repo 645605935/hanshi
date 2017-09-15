@@ -21,15 +21,20 @@ class BaomingController extends CommonController{
 
         $type=$_GET['type'];
         $map=array();
-        $where['title']  = $_GET['keyword'];
-        $where['author']  = $_GET['keyword'];
-        $where['id']  = $_GET['keyword'];
-        $where['_logic'] = 'or';
-        $map['_complex'] = $where;
-        $map['type']=$type;
+        if($_GET['keyword']){
+            $where['title']  = array('like', "%".$_GET['keyword']."%");
+            $where['author']  = array('like', "%".$_GET['keyword']."%");
+            $where['id']  = $_GET['keyword'];
+            $where['_logic'] = 'or';
+            $map['_complex'] = $where;
+        }
+        if($_GET['type']){
+            $map['type']=$type;
+        }
         
 
         $count      = M('Baoming')->where($map)->count();
+
         $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($map)->relation(true)->order('time desc')->select();
