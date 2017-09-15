@@ -19,19 +19,20 @@ class BaomingController extends CommonController{
         $this->ad_vote=M('Ad')->where(array('type'=>1400))->limit(10)->select();
 
 
-        $type=I('type');
-        $where=array();
-        if($type){
-            $where['type']=$type;
-            $match=M('Match')->where(array('type'=>$type))->select();
-        }else{
-            $match=M('Match')->select();
-        }
+        $type=$_GET['type'];
+        $map=array();
+        $where['title']  = $_GET['keyword'];
+        $where['author']  = $_GET['keyword'];
+        $where['id']  = $_GET['keyword'];
+        $where['_logic'] = 'or';
+        $map['_complex'] = $where;
+        $map['type']=$type;
+        
 
-        $count      = M('Baoming')->where($where)->count();
+        $count      = M('Baoming')->where($map)->count();
         $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
-        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->order('time desc')->select();
+        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($map)->relation(true)->order('time desc')->select();
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }

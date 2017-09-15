@@ -29,7 +29,12 @@
                         <if condition="$_GET['type']">{$top_nav_type_info.title}<else/>全部</if>
                     </span>
                 </div>
-                <div class="sousuo fl"><input type="text" class="ss-in" placeholder="作者/比赛项目/编号"><a href="javascript:;" class="ss-txt">搜索</a></div>
+                <div class="sousuo fl">
+                    <form action="" method="post">
+                        <input type="text" class="ss-in" name="keyword" placeholder="作者/比赛项目/编号" value="{$_POST['keyword']}">
+                        <input type="submit" class="ss-txt" value="搜索"></input>
+                    </form>
+                </div>
                 <div class="right-btn fr">
                     <if condition="$_GET['type']">
                         <a href="{:U('Home/Baoming/baoming',array('type'=>$type))}"><i class="icon-bm"></i>报名参赛</a>
