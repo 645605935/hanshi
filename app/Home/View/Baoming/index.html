@@ -30,8 +30,9 @@
                     </span>
                 </div>
                 <div class="sousuo fl">
-                    <form action="" method="post">
-                        <input type="text" class="ss-in" name="keyword" placeholder="作者/比赛项目/编号" value="{$_POST['keyword']}">
+                    <form action="" method="get">
+                        <input type="text" class="ss-in" name="keyword" placeholder="作者/比赛项目/编号" value="{$_GET['keyword']}">
+                        <input type="hidden" name="type" value="{$_GET['type']}">
                         <input type="submit" class="ss-txt" value="搜索"></input>
                     </form>
                 </div>
