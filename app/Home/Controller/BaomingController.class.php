@@ -33,11 +33,11 @@ class BaomingController extends CommonController{
         }
         
 
-        $count      = M('Baoming')->where($map)->count();
+        $count      = D('Baoming')->where($map)->count();
 
         $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
-        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($map)->relation(true)->order('time desc')->select();
+        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($map)->order('time desc')->select();
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
@@ -46,6 +46,9 @@ class BaomingController extends CommonController{
 
         $this->page=$Page->show();
         $this->list=$list;
+
+
+
         $this->type=$type;
         $this->display();
     }
@@ -118,37 +121,58 @@ class BaomingController extends CommonController{
         $where['mid']=$mid;
         $where['type']=$type;
         $where['sqz']=$sqz;
+
+
         $time_info=M('match_bmz')->where($where)->find();
 
 
+        // //初赛报名时间
+        // if(time()>$time_info['start_time_1'] && time()<$time_info['end_time_1']){
+        //     $data=array();
+        //     $data['code']=2;
+        //     $data['msg']='当前是：初赛报名时间，不可投票';
+        //     echo json_encode($data);return false;
+        // }
+        // if(time()>$time_info['start_time_2'] && time()<$time_info['end_time_2']){
+            
+        // }
+        // if(time()>$time_info['start_time_3'] && time()<$time_info['end_time_3']){
+        //     $data=array();
+        //     $data['code']=2;
+        //     $data['msg']='当前是：复赛报名时间，不可投票';
+        //     echo json_encode($data);return false;
+        // }
+        // if(time()>$time_info['start_time_4'] && time()<$time_info['end_time_4']){
+            
+        // }
+        // if(time()>$time_info['start_time_5'] && time()<$time_info['end_time_5']){
+        //     $data=array();
+        //     $data['code']=2;
+        //     $data['msg']='当前是：决赛投票时间，不可投票';
+        //     echo json_encode($data);return false;
+        // }
+        // if(time()>$time_info['start_time_6'] && time()<$time_info['end_time_6']){
+            
+        // }
+
+
+
+
         //初赛报名时间
-        if(time()>$time_info['start_time_1'] && time()<$time_info['end_time_1']){
+        if(
+            (time()>$time_info['start_time_2'] && time()<$time_info['end_time_2']) || 
+            (time()>$time_info['start_time_4'] && time()<$time_info['end_time_4']) ||
+            (time()>$time_info['start_time_6'] && time()<$time_info['end_time_6'])
+            ){
+            
+        }else{
             $data=array();
             $data['code']=2;
-            $data['msg']='当前是：初赛报名时间，不可投票';
+            $data['msg']='非投票时间，不可投票';
             echo json_encode($data);return false;
         }
-        if(time()>$time_info['start_time_2'] && time()<$time_info['end_time_2']){
-            
-        }
-        if(time()>$time_info['start_time_3'] && time()<$time_info['end_time_3']){
-            $data=array();
-            $data['code']=2;
-            $data['msg']='当前是：复赛报名时间，不可投票';
-            echo json_encode($data);return false;
-        }
-        if(time()>$time_info['start_time_4'] && time()<$time_info['end_time_4']){
-            
-        }
-        if(time()>$time_info['start_time_5'] && time()<$time_info['end_time_5']){
-            $data=array();
-            $data['code']=2;
-            $data['msg']='当前是：决赛投票时间，不可投票';
-            echo json_encode($data);return false;
-        }
-        if(time()>$time_info['start_time_6'] && time()<$time_info['end_time_6']){
-            
-        }
+        
+       
 
 
 
@@ -194,7 +218,7 @@ class BaomingController extends CommonController{
 
                             $data=array();
                             $data['code']=0;
-                            $data['msg']='success';
+                            $data['msg']='投票成功';
                             $data['num']=$num;
                         }else{
                             $data=array();
@@ -225,7 +249,7 @@ class BaomingController extends CommonController{
      * 抽奖
      * @param int $total
      */
-    public function getReward($total=1000){
+    public function getReward($total=100){
          $ad_vote=M('Ad')->where(array('type'=>1400))->limit(10)->select();
 
          $win1 = floor((intval($ad_vote[0]['bfb']) * $total) / 100);
@@ -274,7 +298,7 @@ class BaomingController extends CommonController{
         
          
          shuffle($return);
-         return $return[array_rand($return) ];
+         return  $return[array_rand($return) ];
     }
          
     
