@@ -10,6 +10,20 @@
 <link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/huodong.css">
+
+<if condition="!$_GET['download']">
+    <style type="text/css">
+        /*// 这个方式兼容所有版本的谷歌浏览器*/
+        audio::-webkit-media-controls {
+            overflow: hidden !important
+        }
+        audio::-webkit-media-controls-enclosure {
+            width: calc(100% + 32px);
+            margin-left: auto;
+        }
+    </style>
+</if>
+
 </head>
 <body>
 <!-- 头部引用 -->
@@ -46,7 +60,7 @@
                     <div class="cs-con">
                         <if condition="$row['type'] eq 1284">
                               <foreach name="row['files']" item="v">
-                                  <audio src="{$v}" controls="controls">
+                                  <audio src="{$v}" controls="controls" controlsList="nodownload" oncontextmenu="return false">
                                       您的浏览器不支持 audio 标签。
                                   </audio>
                               </foreach>
@@ -54,7 +68,7 @@
 
                         <if condition="$row['type'] eq 1285">
                               <foreach name="row['files']" item="v">
-                                  <video src="{$v}" controls="controls">
+                                  <video src="{$v}" controls="controls" controlsList="nodownload" oncontextmenu="return false">
                                       您的浏览器不支持 video 标签。
                                   </video>
                               </foreach>
