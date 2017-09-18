@@ -425,6 +425,30 @@
         </div>
     </div><!-- #dialog-confirm -->
 
+    <!-- 确认弹框 start-->
+    <div id="dialog-confirm_show" class="hide">
+       <div class="row">
+
+              <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                  <tr>
+                    <td>
+                      
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td style="text-align:right;">
+                      <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确认</button>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+       
+        </div>
+    </div><!-- #dialog-confirm -->
+
 
     <!-- 模板引擎doT.js    start -->
     <script id="j-tmpl_banliao_dialog" type="text/template">
@@ -526,6 +550,40 @@
                     $("div[aria-describedby='dialog-confirm_edit'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 编辑：</h4></div>");
                 }
             }
+          });
+
+          //试听
+          $( "body" ).on('click','.id-btn-dialog2_show', function(e) {
+            e.preventDefault();
+
+            //弹出即全屏
+            var index = layer.open({
+              type: 2,
+              content: 'http://layim.layui.com',
+              area: ['320px', '195px'],
+              maxmin: true
+            });
+
+
+
+            
+
+            // var id=$(this).attr('data-id');
+            // if(id){
+            //     var _json=_ajax_get_row_info(id);
+            //     if(_json.code==0){
+
+            //         $( "#dialog-confirm_edit" ).removeClass('hide').dialog({
+            //           resizable: false,
+            //           modal: true,
+            //           title: "",
+            //           width:800,
+            //           title_html: true,
+            //         });
+
+            //         $("div[aria-describedby='dialog-dialog2_show'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 试听：</h4></div>");
+            //     }
+            // }
           });
 
 
@@ -791,6 +849,7 @@
 
                       var options="";
                           options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.id+"'><i class='icon-edit bigger-110'></i>票数</button>";
+                          options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_show' title='id-btn-dialog2_show' data-id='"+_rowData.id+"'><i class='icon-edit bigger-110'></i>试听</button>";
                           options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del' title='id-btn-dialog2_del' data-id='"+_rowData.id+"'><i class='icon-trash bigger-110'></i>删除</button>";  
                       jQuery(grid_selector).jqGrid('setRowData', ids[i], { options: options });
                   }
