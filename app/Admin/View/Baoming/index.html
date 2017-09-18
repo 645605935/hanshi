@@ -556,34 +556,15 @@
           $( "body" ).on('click','.id-btn-dialog2_show', function(e) {
             e.preventDefault();
 
+            var detail_url="http://www.ks-chn.com/Home/Baoming/detail/id/"+$(this).attr('data-id')+".html";
+
             //弹出即全屏
             var index = layer.open({
               type: 2,
-              content: 'http://layim.layui.com',
-              area: ['320px', '195px'],
+              content: detail_url,
+              area: ['100%', '100%'],
               maxmin: true
             });
-
-
-
-            
-
-            // var id=$(this).attr('data-id');
-            // if(id){
-            //     var _json=_ajax_get_row_info(id);
-            //     if(_json.code==0){
-
-            //         $( "#dialog-confirm_edit" ).removeClass('hide').dialog({
-            //           resizable: false,
-            //           modal: true,
-            //           title: "",
-            //           width:800,
-            //           title_html: true,
-            //         });
-
-            //         $("div[aria-describedby='dialog-dialog2_show'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 试听：</h4></div>");
-            //     }
-            // }
           });
 
 
@@ -820,7 +801,7 @@
                 {name:'vote',index:'vote', align : "center"},
                 {name:'time',index:'time', align : "center"},
 
-                {name:'options',index:'options',align:'center',width:200}
+                {name:'options',index:'options',align:'center',width:350}
               ], 
               rownumbers:true,
               rownumWidth:50,//设置行号列宽度
