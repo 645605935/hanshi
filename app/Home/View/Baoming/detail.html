@@ -11,9 +11,9 @@
 <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/huodong.css">
 
-<if condition="!$_GET['download']">
-    <style type="text/css">
-        /*// 这个方式兼容所有版本的谷歌浏览器*/
+<style type="text/css">
+    <if condition="!$_GET['download']">
+        /*这个方式兼容所有版本的谷歌浏览器*/
         audio::-webkit-media-controls {
             overflow: hidden !important
         }
@@ -21,8 +21,10 @@
             width: calc(100% + 32px);
             margin-left: auto;
         }
-    </style>
-</if>
+
+    </if>
+</style>
+
 
 </head>
 <body>
@@ -52,7 +54,7 @@
                     </div>
                     <p class="tit-sub"><span>选手：{$row.author}</span><span>编号：{$row.id}</span><span>比赛项目：{$row.match}</span></p>
                     <div class="vote-add">
-                        <a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.type}" data-sqz="{$row.sqz}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a>
+                        <a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.bmz}" data-sqz="{$row.sqz}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a>
                         <p>{$row.vote}票</p>
                     </div>
                 </div>
@@ -60,17 +62,25 @@
                     <div class="cs-con">
                         <if condition="$row['type'] eq 1284">
                               <foreach name="row['files']" item="v">
-                                  <audio src="{$v}" controls="controls" controlsList="nodownload" oncontextmenu="return false">
+                                  <audio src="{$v}" controls="controls" oncontextmenu="return false">
                                       您的浏览器不支持 audio 标签。
                                   </audio>
+
+                                  <if condition="$_GET['download']">
+                                      <a href="{$v}">下载【右键】</a>
+                                  </if>
                               </foreach>
                         </if>
 
                         <if condition="$row['type'] eq 1285">
                               <foreach name="row['files']" item="v">
-                                  <video src="{$v}" controls="controls" controlsList="nodownload" oncontextmenu="return false">
+                                  <video src="{$v}" controls="controls" oncontextmenu="return false">
                                       您的浏览器不支持 video 标签。
                                   </video>
+
+                                  <if condition="$_GET['download']">
+                                      <a href="{$v}">下载【右键】</a>
+                                  </if>
                               </foreach>
                         </if>
 
