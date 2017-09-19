@@ -57,6 +57,10 @@
                         <a href="#4" data-id="{$row.id}" data-mid="{$row.mid}" data-type="{$row.bmz}" data-sqz="{$row.sqz}" data-uid="{$user.id}" class="tit-tp vote_btn">我要投票</a>
                         <p>{$row.vote}票</p>
                     </div>
+
+                    <div style="width:100%;text-align:center;">
+                        <iframe id="frame_content"  name="frame_content" src="{:U('Home/Baoming/qrcode',array('id'=>$_GET['id']))}" width="100%" height="auto" scrolling="no" frameborder="0"></iframe>
+                    </div>
                 </div>
                 <div class="wenzhang">
                     <div class="cs-con">

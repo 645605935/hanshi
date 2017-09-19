@@ -355,10 +355,10 @@
 
       //自定义报警列格式
       function imgFormatter(cellvalue, options, rowdata){ 
-          if (cellvalue != "0"){
+          if (cellvalue != ""){
               return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
           }else{
-              return '<img class="avatar" style="width:30px;height:30px;" src="'+cellvalue+'" alt="' + cellvalue + '" />';
+              return '';
           }
       }
 

@@ -202,7 +202,9 @@ class UserController extends AuthController {
         
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d H:i:s',$value['time']);
-            $list[$key]['img']=$_oss_url_ . $value['img']. "?x-oss-process=" . $_oss_style_48x48_;
+            if($value['img']!=''){
+                $list[$key]['img']=$_oss_url_ . $value['img']. "?x-oss-process=" . $_oss_style_48x48_;
+            }
         }
 
         if($list){
@@ -284,7 +286,7 @@ class UserController extends AuthController {
 
     //根据ID获取用户信息
     public function ajax_get_user_info_by_id(){
-        if($id=$_POST['id']){
+        if($id=$_GET['id']){
 
             $row = D('User')->find($id);
             if($row){
