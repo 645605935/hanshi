@@ -717,6 +717,8 @@
               if(_json.code==0){
                   var _user=_json.data;
 
+                  console.log(_user);
+
                   var tmpl = document.getElementById('j-tmpl_detail_show').innerHTML;
                   var doTtmpl = doT.template(tmpl);
                   var doT_Str=doTtmpl(_json);
