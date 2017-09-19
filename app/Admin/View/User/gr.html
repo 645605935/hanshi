@@ -512,8 +512,8 @@
 
             <table class="layui-table">
               <colgroup>
-                <col width="150">
-                <col>
+                <col width="50%">
+                <col width="50%">
               </colgroup>
               <tbody>
                 <tr>
@@ -523,6 +523,18 @@
                 <tr>
                   <td>用户名</td>
                   <td>{{=it.data.username}}</td>
+                </tr>
+                <tr>
+                  <td>身份证1</td>
+                  <td>
+                    <img src="{{=it.data.sfz_1}}" style="width: 100%;">
+                  </td>
+                </tr>
+                <tr>
+                  <td>身份证2</td>
+                  <td>
+                    <img src="{{=it.data.sfz_2}}" style="width: 100%;">
+                  </td>
                 </tr>
               </tbody>
             </table>
