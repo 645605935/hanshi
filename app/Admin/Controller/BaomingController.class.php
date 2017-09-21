@@ -70,11 +70,7 @@ class BaomingController extends AuthController {
         $id=I('id');
 
         if($id){
-            $row = D('Baoming')->relation(true)->find($id);
-
-            $row['time']=date('Y-m-d H:i',$row['time']);
-            $row['start_time']=date('Y-m-d H:i',$row['start_time']);
-            $row['end_time']=date('Y-m-d H:i',$row['end_time']);
+            $row = D('Baoming')->find($id);
 
             if($row){
                 $data=array();
