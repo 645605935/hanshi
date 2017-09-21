@@ -66,9 +66,17 @@
                     <div class="cs-con">
                         <if condition="$row['type'] eq 1284">
                               <foreach name="row['files']" item="v">
-                                  <audio src="{$v}" controls="controls" oncontextmenu="return false">
-                                      您的浏览器不支持 audio 标签。
-                                  </audio>
+                                  <if condition="stripos($v,'.wav') nheq false">
+                                      <video src="{$v}" controls="controls" oncontextmenu="return false">
+                                          您的浏览器不支持 video 标签。
+                                      </video>
+                                  </if>
+                                  <if condition="stripos($v,'.mp3') nheq false">
+                                      <audio src="{$v}" controls="controls" oncontextmenu="return false">
+                                          您的浏览器不支持 audio 标签。
+                                      </audio>
+                                  </if>
+                                  
 
                                   <if condition="$_GET['download']">
                                       <a href="{$v}">下载【右键】</a>
