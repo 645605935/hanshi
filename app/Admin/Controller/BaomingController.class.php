@@ -47,6 +47,8 @@ class BaomingController extends AuthController {
         $d = D('Baoming');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
 
+        $sql= $d->getlastsql();
+
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d H:i',$value['time']);
         }
@@ -56,11 +58,13 @@ class BaomingController extends AuthController {
             $data['code']=0;
             $data['msg']='success';
             $data['data']=$list;
+            $data['sql']=$sql;
         }else{
             $data=array();
             $data['code']=1;
             $data['msg']='未搜索到数据';
             $data['data']=array();
+            $data['sql']=$sql;
         }
         echo json_encode($data);
     }
@@ -96,7 +100,9 @@ class BaomingController extends AuthController {
         global $user;
 
         if($num=$_POST['num']){
-            $list=M('Baoming')->select();
+            $ids=$_POST['ids'];
+            $ids_arr=explode('_',$ids);
+            $list=M('Baoming')->where(array('id'=>array('in',$ids_arr)))->select();
 
             $res=0;
             foreach ($list as $key => $value) {
@@ -209,6 +215,24 @@ class BaomingController extends AuthController {
 
         echo json_encode($data);
     }
+
+    public function ajax_get_sqz(){
+        $list=M('Type')->where(array('pid'=>1358))->select();
+
+        if($list){
+            $data=array();
+            $data['code']=0;
+            $data['msg']='success';
+            $data['data']=$list;
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='未搜索到数据';
+            $data['data']=array();
+        }
+        echo json_encode($data);
+    }
+
 
     public function ajax_get_sq(){
         $sqz=I('sqz');

@@ -7,7 +7,7 @@ class BaomingModel extends RelationModel{
 			'mapping_type'=>self::BELONGS_TO,
 			'class_name'=>'User',
 			'foreign_key'=>'uid',
-			'as_fields' => 'username:username',
+			'as_fields' => 'username:username,id:user_id',
 		),
 		'_type'=>array(
 			'mapping_type'=>self::BELONGS_TO,
@@ -25,19 +25,19 @@ class BaomingModel extends RelationModel{
 			'mapping_type'=>self::BELONGS_TO,
 			'class_name'=>'Type',
 			'foreign_key'=>'sqz',
-			'as_fields' => 'title:sqz',
+			'as_fields' => 'title:sqz,id:sqz_id',
 		),
 		'_sq'=>array(
 			'mapping_type'=>self::BELONGS_TO,
 			'class_name'=>'Type',
 			'foreign_key'=>'sq',
-			'as_fields' => 'title:sq',
+			'as_fields' => 'title:sq,id:sq_id',
 		),
 		'_bmz'=>array(
 			'mapping_type'=>self::BELONGS_TO,
 			'class_name'=>'Type',
 			'foreign_key'=>'bmz',
-			'as_fields' => 'title:bmz',
+			'as_fields' => 'title:bmz,id:bmz_id',
 		)
 	);
 }

@@ -37,7 +37,7 @@ class BaomingController extends CommonController{
 
         $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
-        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($map)->order('time desc')->select();
+        $list=D('Baoming')->page($nowPage.','.$Page->listRows)->where($map)->order('id desc')->select();
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }

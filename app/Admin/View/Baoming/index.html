@@ -376,6 +376,7 @@
                 <tfoot>
                   <tr>
                     <td colspan="2" style="text-align:right;">
+                      <input type="hidden" name="ids" lay-verify="required" placeholder="" class="layui-input ids">
                       <button class="layui-btn" lay-submit="" lay-filter="demo1_add">确认</button>
                       <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
                     </td>
@@ -405,9 +406,6 @@
                           <div class="layui-input-inline">
                             <select name="sqz" lay-verify="required" class="sqz" lay-filter="sqz">
                               <option value="">请选择</option>
-                              <foreach name="sqz" item="v">
-                                  <option value="{$v.id}">{$v.title}</option>
-                              </foreach>
                             </select>
                           </div>
                         </div>
@@ -517,7 +515,8 @@
 
         {{ } }}
     </script>
-    <script id="j-tmpl_sq_select" type="text/template">
+
+     <script id="j-tmpl_sqz_select" type="text/template">
         {{ if(it.code==0){ }}
 
                 {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
@@ -533,12 +532,28 @@
         {{ } }}
     </script>
 
+    <script id="j-tmpl_sq_select" type="text/template">
+        {{ if(it.code==0){ }}
+
+                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+
+                      <option value="{{=it.data[i].id}}">【{{=it.data[i].id}}】{{=it.data[i].title}}【pid:{{=it.data[i].pid}}】</option>
+
+                {{ } }}
+
+        {{ }else{ }}
+
+                
+
+        {{ } }}
+    </script>
+
     <script id="j-tmpl_bmz_select" type="text/template">
         {{ if(it.code==0){ }}
 
                 {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
 
-                      <option value="{{=it.data[i].id}}">{{=it.data[i].title}}</option>
+                      <option value="{{=it.data[i].id}}">【{{=it.data[i].id}}】{{=it.data[i].title}}【pid:{{=it.data[i].pid}}】</option>
 
                 {{ } }}
 
@@ -564,6 +579,25 @@
             e.preventDefault();
 
             init_editer('editer_add');
+
+            //
+            var ids=$(grid_selector).jqGrid('getGridParam','selarrrow');
+
+            var real_ids_arr=[];
+            $.each(ids, function(name, value){
+                var rowData = $(grid_selector).jqGrid('getRowData',value); 
+                real_ids_arr.push(rowData.id);
+            });
+
+            var ids_arr=real_ids_arr.join('_');
+
+            if(ids_arr==''){
+                alert('请选择行');
+                return;
+            }
+            $('#add_form .ids').val(ids_arr);
+
+
 
             $( "#dialog-confirm_add" ).removeClass('hide').dialog({
               resizable: false,
@@ -677,7 +711,7 @@
               },
               dataType : 'json',
               success  : function(json) { 
-
+                console.log(json.sql);
                   if(json.code==0){
                       _data=json;
                   }
@@ -740,9 +774,38 @@
           render_type_bmz(sqz, bmz);
       }
 
+
       function render_type_sqz(sqz){
-          $("#edit_form .sqz").find("option[value='"+sqz+"']").attr("selected",true);
-          layui.form().render();
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Baoming/ajax_get_sqz')}",
+              dataType : 'json',
+              success  : function(json) { 
+
+                  if(json.code == 0){
+                      var str='<option value="">请选择</option>';
+
+                      var tmpl = document.getElementById('j-tmpl_sqz_select').innerHTML;
+                      var doTtmpl = doT.template(tmpl);
+                      var doT_Str=str+doTtmpl(json);
+                      $('#edit_form .sqz').html(doT_Str);
+
+                      $("#edit_form .sqz").find("option[value='"+sqz+"']").attr("selected",true);
+
+                      layui.form().render();
+
+                      _json=json;
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
       }
 
       function render_type_sq(sqz, sq){
@@ -923,15 +986,19 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '用户名','图片', '赛区','子站','组别', '报名单位','姓名/单位','联系电话','作品主题','参赛项目','票数','时间','操作'],
+              colNames:['id', 'user_id', '用户名','图片', '赛区','赛区id','子站','子站id','组别','组别id', '报名单位','姓名/单位','联系电话','作品主题','参赛项目','票数','时间','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
+                {name:'user_id',index:'user_id', align : "center"},
                 {name:'username',index:'username', align : "center"},
                 {name:'images',index:'images', align : "center", formatter: imgFormatter},
                 {name:'sqz',index:'sqz', align : "center"},
+                {name:'sqz_id',index:'sqz_id', align : "center"},
                 {name:'sq',index:'sq', align : "center"},
+                {name:'sq_id',index:'sq_id', align : "center"},
                 {name:'bmz',index:'bmz', align : "center"},
+                {name:'bmz_id',index:'bmz_id', align : "center"},
                 {name:'unit',index:'unit', align : "center", formatter: unitFormatter},
                 {name:'author',index:'author', align : "center"},
                 {name:'phone',index:'phone', align : "center"},
