@@ -36,6 +36,11 @@
     <link rel="stylesheet" href="__PUBLIC__/Admin/layui-v1.0.4/layui/css/layui.css"  media="all">
     <link rel="stylesheet" href="__PUBLIC__/Admin/css/my_diy_css.css"  media="all">
 
+
+    <style type="text/css">
+      .layui-form-switch{height: 24px;width: 55px;}
+    </style>
+
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="__PUBLIC__/Admin/assets/css/ace-ie.min.css" />
     <![endif]-->
@@ -471,6 +476,65 @@
     </div><!-- #dialog-confirm -->
 
     <!-- 确认弹框 start-->
+    <div id="dialog-confirm_check" class="hide">
+       <div class="row">
+
+           <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="check_form" enctype="multipart/form-data">
+            
+              <table class="table table-striped table-bordered table-hover">
+                <tbody>
+
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">初赛</label>
+                          <div class="layui-input-inline chusai_status_box">
+                             <!-- <input type="checkbox" name="chusai_status" lay-skin="switch" checked="checked" lay-text="通过|禁止"> -->
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">复赛</label>
+                          <div class="layui-input-inline fusai_status_box">
+                             <!-- <input type="checkbox" name="fusai_status" lay-skin="switch" lay-text="通过|禁止"> -->
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">决赛</label>
+                          <div class="layui-input-inline juesai_status_box">
+                             <!-- <input type="checkbox" name="juesai_status" lay-skin="switch" lay-text="通过|禁止"> -->
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" align="center">
+                      <input type="hidden" name="id" class="layui-input id">
+                      <button class="layui-btn" lay-submit="" lay-filter="demo1_check">确认</button>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+
+           </form>
+       
+        </div>
+    </div><!-- #dialog-confirm -->
+
+    <!-- 确认弹框 start-->
     <div id="dialog-confirm_show" class="hide">
        <div class="row">
 
@@ -633,6 +697,30 @@
             }
           });
 
+          //审核
+          $( "body" ).on('click','.id-btn-dialog2_check', function(e) {
+            e.preventDefault();
+
+            var id=$(this).attr('data-id');
+            if(id){
+                var _json=_ajax_get_row_info_for_check(id);
+                if(_json.code==0){
+                    init_editer('editer_check');
+
+                    $( "#dialog-confirm_check" ).removeClass('hide').dialog({
+                      resizable: false,
+                      modal: true,
+                      title: "",
+                      height:500,
+                      width:800,
+                      title_html: true,
+                    });
+
+                    $("div[aria-describedby='dialog-confirm_check'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 审核：</h4></div>");
+                }
+            }
+          });
+
           //试听
           $( "body" ).on('click','.id-btn-dialog2_show', function(e) {
             e.preventDefault();
@@ -726,6 +814,55 @@
           });  
           return _data;  
       } 
+
+      //审核
+      function _ajax_get_row_info_for_check(id){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Baoming/ajax_get_row_info')}",
+              data:{
+                id:id
+              },
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      var data=json.data;
+
+                      $('#check_form .id').val(data.id);
+                       
+                      if( data.chusai_status == 1 ){
+                          $('#check_form .chusai_status_box').html('<input type="checkbox" name="chusai_status" lay-skin="switch" checked="checked" lay-text="通过|禁止">');
+                      }else{
+                          $('#check_form .chusai_status_box').html('<input type="checkbox" name="chusai_status" lay-skin="switch" lay-text="通过|禁止">');
+                      }
+
+                      if( data.fusai_status == 1 ){
+                          $('#check_form .fusai_status_box').html('<input type="checkbox" name="fusai_status" lay-skin="switch" checked="checked" lay-text="通过|禁止">');
+                      }else{
+                          $('#check_form .fusai_status_box').html('<input type="checkbox" name="fusai_status" lay-skin="switch" lay-text="通过|禁止">');
+                      }
+
+                      if( data.juesai_status == 1 ){
+                          $('#check_form .juesai_status_box').html('<input type="checkbox" name="juesai_status" lay-skin="switch" checked="checked" lay-text="通过|禁止">');
+                      }else{
+                          $('#check_form .juesai_status_box').html('<input type="checkbox" name="juesai_status" lay-skin="switch" lay-text="通过|禁止">');
+                      }
+
+                      _json=json;
+
+                      layui.form().render();
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
 
       //获取单条信息
       function _ajax_get_row_info(id){
@@ -933,6 +1070,52 @@
           return _json;  
       }
 
+       //审核
+      function _ajax_check(_data){
+
+          if( _data.chusai_status && _data.chusai_status=='on'){
+              _data.chusai_status=1;
+          }else{
+              _data.chusai_status=0;
+          }
+
+          if( _data.fusai_status && _data.fusai_status=='on'){
+              _data.fusai_status=1;
+          }else{
+              _data.fusai_status=0;
+          }
+
+          if( _data.juesai_status && _data.juesai_status=='on'){
+              _data.juesai_status=1;
+          }else{
+              _data.juesai_status=0;
+          }
+
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'post',  
+              contentType:"application/x-www-form-urlencoded",
+              url : "{:U('Admin/Baoming/ajax_check')}",
+              data: _data,
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      layer.msg(json.msg);
+                      var selectID=$("#grid-table").getGridParam("selrow");
+                      $("#grid-table").setRowData(selectID, json.data);
+                      $("div[aria-describedby='dialog-confirm_check'] .ui-dialog-titlebar-close").trigger("click");
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;  
+      }
+
       //异步删除
       function _ajax_del(ids){
           var _json;
@@ -977,6 +1160,14 @@
           }
       }
 
+      function statusFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue==1){
+              return '通过';
+          }else{
+              return "";
+          }
+      }
+
 
       function init_grid_table(grid_data){
           $('#home').html('<table id="grid-table"></table><div id="grid-pager"></div>');
@@ -986,7 +1177,7 @@
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', 'user_id', '用户名','图片', '赛区','赛区id','子站','子站id','组别','组别id', '报名单位','姓名/单位','联系电话','作品主题','参赛项目','票数','时间','操作'],
+              colNames:['id', 'user_id', '用户名','图片', '赛区','赛区id','子站','子站id','组别','组别id', '报名单位','姓名/单位','联系电话','作品主题','参赛项目','票数','时间','初赛','复赛','决赛','操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
@@ -1006,6 +1197,9 @@
                 {name:'match',index:'match', align : "center"},
                 {name:'vote',index:'vote', align : "center"},
                 {name:'time',index:'time', align : "center"},
+                {name:'chusai_status',index:'chusai_status', align : "center", formatter: statusFormatter},
+                {name:'fusai_status',index:'fusai_status', align : "center", formatter: statusFormatter},
+                {name:'juesai_status',index:'juesai_status', align : "center", formatter: statusFormatter},
 
                 {name:'options',index:'options',align:'center',width:350}
               ], 
@@ -1037,6 +1231,7 @@
                       var options="";
                           options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_edit' title='id-btn-dialog2_edit' data-id='"+_rowData.id+"'><i class='icon-edit bigger-110'></i>编辑</button>";
                           options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_show' title='id-btn-dialog2_show' data-id='"+_rowData.id+"'><i class='icon-edit bigger-110'></i>试听</button>";
+                          options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_check' title='id-btn-dialog2_check' data-id='"+_rowData.id+"'><i class='icon-edit bigger-110'></i>审核</button>";
                           options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del' title='id-btn-dialog2_del' data-id='"+_rowData.id+"'><i class='icon-trash bigger-110'></i>删除</button>";  
                       jQuery(grid_selector).jqGrid('setRowData', ids[i], { options: options });
                   }
@@ -1191,6 +1386,13 @@
               //监听提交
               form.on('submit(demo1_edit)', function(data){
                 var _json=_ajax_edit(data.field);
+                return false;
+              });
+
+              //监听提交
+              form.on('submit(demo1_check)', function(data){
+                // console.log(data);
+                var _json=_ajax_check(data.field);
                 return false;
               });
             });

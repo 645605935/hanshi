@@ -216,6 +216,48 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
+    //审核
+    public function ajax_check(){
+        global $user;
+
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['time']=time();
+            
+            $res = M('Baoming')->save($data);
+            if($res){
+                $id=$data['id'];
+                $row= D('Baoming')->relation(true)->find($id);
+
+                $row['time']=date('Y-m-d H:i',$row['time']);
+                $row['start_time']=date('Y-m-d H:i',$row['start_time']);
+                $row['end_time']=date('Y-m-d H:i',$row['end_time']);
+
+                if($row){
+                    $data=array();
+                    $data['code']=0;
+                    $data['msg']='success';
+                    $data['data']=$row;
+                }else{
+                    $data=array();
+                    $data['code']=1;
+                    $data['msg']='error';
+                }
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
+
     public function ajax_get_sqz(){
         $list=M('Type')->where(array('pid'=>1358))->select();
 
