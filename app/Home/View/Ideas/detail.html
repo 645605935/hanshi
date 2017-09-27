@@ -7,194 +7,145 @@
 <title>获奖名单</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/huodong.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/huodong.css">
+<link rel="stylesheet" href="__PUBLIC__/Admin/layui-v1.0.4/layui/css/layui.css"  media="all">
 </head>
 <body>
-<div class="top-add"><a href="#4"><img src="images/img3.jpg" alt=""></a></div>
-<div class="head w1000">
-    <div class="header fl">
-        <div class="logo fl"><a href="#"><img src="images/logo.jpg" alt=""></a></div>
-        <div class="search fl">
-            <input type="text" class="fl">
-            <a href="javascript:;" class="fl"></a>
-        </div>
-        <div class="head-icon fl">
-            <a href="#4" class="gwc"></a>
-            <a href="#4" class="yx"></a>
-            <a href="#4" class="sc"></a>
-        </div>
-        <div class="erweima fr"><img src="images/erweima.jpg" alt=""></div>
-    </div>
-</div>
-<div class="clear"></div>
-<div class="nav clearfix">
-    <ul>
-        <li>
-            <a href="fenlei-remen.html" class="li-a">发现</a>
-            <ul>
-                <li><a href="fenlei-remen.html">热门推荐</a></li>
-                <li><a href="zuojiatuijian.html">人气主播</a></li>
-                <li><a href="zuojiatuijian.html">人气作家</a></li>
-                <li><a href="#2">赚钱途径</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="shucheng-zhuye1.html" class="li-a">书城</a>
-            <ul>
-                <li><a href="tongchengjieyue.html"><span class="color1">在线借阅</span></a></li>
-                <li><a href="shucheng-zhuye1.html">图书购买</a></li>
-                <li><a href="shucheng-zhuye1.html">电子书</a></li>
-                <li><a href="shucheng-zhuye1.html">有声读物</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="tongchengjieyue.html" class="li-a">分类清单</a>
-            <ul>
-                <li><a href="tongchengjieyue.html">同城借阅</a></li>
-                <li><a href="fenlei-zhiyuanzhe.html"><span class="color1">志愿者活动</span></a></li>
-                <li><a href="fenlei-remen.html">热门活动</a></li>
-                <li><a href="fenlei-chuantong.html">传统文化</a></li>
-                <li><a href="fenlei-yanchu.html">精彩演出</a></li>
-                <li><a href="fenlei-remen.html">热卖产品</a></li>
-                <li><a href="#2">创客空间</a></li>
-                <li><a href="fenlei-kecheng.html">精品课程</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="index.html" class="li-a">瞰世商城</a>
-            <ul>
-                <li><a href="#2"><span class="color1">在线配音</span></a></li>
-                <li><a href="#2">录音设备</a></li>
-                <li><a href="#2">出版图书</a></li>
-                <li><a href="#2">培训课程</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="saishihuodong.html" class="li-a">赛事活动</a>
-            <ul>
-                <li><a href="bisaibaoming.html"><span class="color1">赛事报名</span></a></li>
-                <li><a href="huodong.html">赛事活动</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="baoming1.html" class="li-a">参赛报名</a>
-            <ul>
-                <li><a href="baoming-yinpin.html"><span class="color1">音频类</span></a></li>
-                <li><a href="baoming-shipin.html">视频类</a></li>
-                <li><a href="baoming-tupian.html">图片类</a></li>
-                <li><a href="baoming-shufa.html">书法类</a></li>
-                <li><a href="baoming-qita.html">其他</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="javascript:;" class="li-a">合作通道</a>
-            <ul>
-                <li><a href="#2"><span class="color1">志愿者报名</span></a></li>
-                <li><a href="#2">平台建议</a></li>
-                <li><a href="#2">瞰世联线</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="javascript:;" class="li-a">认证</a>
-            <ul>
-                <li><a href="#2"><span class="color1">个人身份认证</span></a></li>
-                <li><a href="#2">作家认证</a></li>
-                <li><a href="#2">主播认证</a></li>
-            </ul>
-        </li>
-    </ul>
-    <div class="ul-con mt10">
-        <div class="lon w1000">
-            <div class="fr"><a href="#2">注册</a><span>|</span><a href="#2">登录</a></div>
-        </div>
-    </div>
-</div>
+<!-- 引用 -->
+<include file="Common/header" />
+
+
 <div class="container">
     <div class="con">
         <div class="discus-new">
-            <h2>alskdfjalsdjflaskdfj<span class="fr"><a href="#2">收藏</a><a href="#2">回复</a></span></h2>
+            <h2>{$row.title}<span class="fr"><a href="#2">收藏</a><a href="#2">回复</a></span></h2>
             <div class="discus-con">
-                <div class="discus-list">
-                    <div class="discus-left">
-                        <div class="discus-img"><img src="images/tu.jpg" alt=""></div>
-                        <div class="discus-name">名字mingzi</div>
-                        <div class="discus-ft">发帖:2</div>
-                        <div class="discus-hf">回复:2</div>
-                    </div>
-                    <div class="discus-right">
-                        <div class="discus-rcon">
-                            <p>sladkfjasldkfj</p>
-                            <div class="discus-time">1楼 2017-02 13:22 <a href="#2" class="ml10 discus-hff">回复</a></div>
+
+                <foreach name="list" item="v">
+                    <div class="discus-list">
+                        <div class="discus-left">
+                            <div class="discus-img"><img src="{$v.avatar}" alt=""></div>
+                            <div class="discus-name">{$v.username}</div>
+                            <div class="discus-ft">发帖:2</div>
+                            <div class="discus-hf">回复:2</div>
+                        </div>
+                        <div class="discus-right">
+                            <div class="discus-rcon">
+                                <p>{$v.content}</p>
+                                <div class="discus-time">1楼 {$v.time|date="Y-m-d H:i",###} <a href="#2" class="ml10 discus-hff">回复</a></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="discus-list">
-                    <div class="discus-left">
-                        <div class="discus-img"><img src="images/tu.jpg" alt=""></div>
-                        <div class="discus-name">mingzi</div>
-                        <div class="discus-ft">发帖:2</div>
-                        <div class="discus-hf">回复:2</div>
-                    </div>
-                    <div class="discus-right">
-                        <div class="discus-rcon">
-                            <p>sladkfjasldkfj</p>
-                            <div class="discus-time">1楼 2017-02 13:22 <a href="#2" class="ml10 discus-hff">回复</a></div>
-                        </div>
-                    </div>
-                </div>
+                </foreach>
+
             </div>
-            <div class="discus-add">
-                <h4>发表回复</h4>
-                <div class="discus-i"><input type="file"><a href="#2" class="ml20 discus-img">添加图片</a></div>
-                <textarea name="" id="" class="discus-text"></textarea>
-                <a href="javascript:;" class="discus-btn">回复</a>
+            <div class="discus-add" style="margin-left: 0px;">
+                <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="add_form" enctype="multipart/form-data">
+                   <table class="layui-table">
+                      <tbody>
+                        <tr>
+                          <td align="center">
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label" style="width: 100%!important;text-align: left;">发表回复</label>
+                                <div class="layui-input-block">
+                                    <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_add"></textarea>
+                                </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td align="center">
+                            <input type="hidden" name="iid" lay-verify="required" class="layui-input iid" value="{$_GET['id']}">
+                            <input type="hidden" name="uid" lay-verify="uid" class="layui-input uid" value="{$user['id']}">
+                            <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="demo1_add">确认</button>
+                          </td>
+                        </tr>
+                      </tfoot>
+                   </table>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 <div class="clear"></div>
-<div id="bot">
-    <div class="bot1">
-        <div class="w1000 clear">
-            <div class="fl colorMain clear left">
-                <span class="icon-yqlj mr5 mt5 fl"></span><b class="fl">友情链接：</b>       
-            </div>
-            <div class="right">
-                <ul>
-                    <li><a href="#">足球协会</a></li>
-                    <li><a href="#">篮球协会</a></li>
-                    <li><a href="#">天津市体育局</a></li>
-                    <li><a href="#">国家体育总局</a></li>
-                    <li><a href="#">全运组委会</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="bot2">
-        <div class="w1000 marok">
-            <div class="sinak">
-                <span class="jt"></span>
-                <img src="images/erweima.jpg" class="ma">
-            </div>
-            <div class="wxk">
-                <span class="jt"></span>
-                <img src="images/erweima.jpg" class="ma">
-            </div>
-            <a href="javascript:;" class="bgsinaRed"><img src="images/xing.png" alt=""></a>
-            <a href="javascript:;" class="bgwxGreen"><img src="images/xing.png" alt=""></a>
-            <a href="index.html" class="botlogo"><img src="images/logoo.png"></a>
-        </div>
-    </div>
-    <div class="bot3">
-        <div class="w1000">
-            Tian Jin Bei Li Jian Sports Consulting Co., Ltd. ©2017 All Rights Reserved 津ICP备00000000号
-        </div>
-    </div>
-</div>
-<script src="js/jquery.min.js"></script>
-<script src="js/index.js"></script>
+<!-- 引用 -->
+<include file="Common/footer" />
+
+
+
+<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Home/js/index.js"></script>
+<script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
 </body>
 </html>
+
+
+<script>
+    //添加
+    function _ajax_add(_data){
+         var _json;
+         $.ajax({  
+             async:false,
+             type:'post',  
+             contentType:"application/x-www-form-urlencoded",
+             url : "{:U('Home/Ideas/ajax_add')}",
+             data: _data,
+             dataType : 'json',
+             success  : function(json) {
+                 if(json.code==0){
+                     alert(json.msg);
+                     window.location.reload();
+                 }else{
+                     layer.msg(json.msg);
+                 }
+             },
+             error  : function() {  
+                 layer.msg('error');
+             }  
+         }); 
+         return _json;
+    }
+
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
+      var form = layui.form()
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+      
+      //上传图片接口：注意：layedit.set 一定要放在 build前面，否则配置全局接口将无效
+      layedit.set({
+          uploadImage: {
+              url: "{:U('Home/Index/lay_upload_file')}", //接口url
+              type: 'post', //默认post
+          }
+      });
+      
+      //创建一个编辑器
+      var editIndex = layedit.build('editer_add');
+
+      //自定义验证规则
+      form.verify({
+        uid: function(value){
+          if(!value){
+            return '请先登录';
+          }
+        }
+        ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+        ,content: function(value){
+          layedit.sync(editIndex);
+        }
+      });
+
+      //监听提交
+      form.on('submit(demo1_add)', function(data){
+        var _json=_ajax_add(data.field);
+        return false;
+      });
+
+    });
+</script>
