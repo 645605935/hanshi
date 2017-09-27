@@ -3707,3 +3707,35 @@ a {
 .article-con h1 {font-size: 20px;text-align: center;margin-bottom: 30px;}
 .article-con p {font-size: 16px;text-indent: 2em;line-height: 1.6;}
 .article-con h2 {font-size: 18px;margin: 15px 0;}
+
+.prize-list {margin-bottom: 30px;float: left;width: 100%;}
+.prize-con {padding: 30px 50px 0;box-sizing: border-box;float: left;width: 100%;}
+.prize-con h2 {font-size: 16px;margin-bottom: 15px;}
+.newsdetail .wenzhang .prize-con h3 {font-size: 14px;margin-bottom: 5px;line-height: 16px;}
+.prize-con ul {margin-bottom: 20px;float: left;width: 100%;}
+.prize-con ul li {width: 33%;float: left;margin-top: 5px;}
+.prize-con ul li a {color: #333;}
+
+.discus-new {margin-top: 60px;}
+.discus-new h2 a {font-size: 14px;font-weight: normal;border:1px solid #ddd;border-radius: 3px;padding: 2px 15px;margin-left: 10px;}
+.discus-left {background: #F5F7FA;width: 130px;float: left;box-sizing: border-box;padding-left: 25px;padding-top: 20px;min-height: 200px;}
+.discus-img img {width: 80px;height: 80px;}
+.discus-con {border:1px solid #ddd;float: left;width: 100%;margin-top: 20px;overflow: hidden;}
+.discus-name {font-size: 16px;color: #005566;margin: 15px 0;}
+.discus-ft,.discus-hf {color: #005566;line-height: 1.6;font-size: 14px;}
+.discus-right {padding: 50px 50px 0;float: left;position: relative;width: 870px;box-sizing: border-box;min-height: 200px;}
+.discus-right,.discus-left {padding-bottom: 3000px;margin-bottom: -3000px;}
+.discus-time {position: absolute;bottom: 10px;right: 10px;}
+.discus-hff {color: #005566;}
+.discus-list {float: left;width: 100%;min-height: 200px;border-top: 1px solid #ddd;}
+.discus-rcon {position: relative;min-height: 200px;padding-bottom: 50px;}
+.discus-con .discus-list:first-child {border-top: none;}
+.discus-add {margin: 20px 0 50px 130px;float: left;width: 100%;}
+.discus-add h4 {font-size: 15px;font-weight: normal;margin-bottom: 8px;float: left;}
+.discus-add .discus-img {color: #005566;float: left;}
+.discus-add .discus-img:before {content:'';display: inline-block;background:url(../images/yiwen.png) no-repeat;background-size: 100%;vertical-align: middle;width: 15px;height: 15px;margin-right: 5px}
+.discus-add textarea {width: 470px;height: 180px;resize: none;padding: 10px;float: left;clear: left;border-top: 1px solid #ddd;}
+.discus-btn {clear: left;float: left;background: #398BFC;color: #fff;width: 70px;height: 30px;line-height: 30px;text-align: center;margin-top: 10px;}
+.discus-btn:hover {color: #fff;}
+.discus-i {position: relative;float: left;}
+.discus-i input[type='file'] {opacity: 0;position: absolute;left: 15px;width: 80px;cursor: pointer;z-index: 999;}

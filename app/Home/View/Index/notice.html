@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<title>获奖名单</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/reset.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/huodong.css">
+</head>
+<body>
+<!-- 引用 -->
+<include file="Common/header" />
+
+
+<div class="container">
+    <div class="con">
+        <div class="hezuo newsdetail">
+            <div class="bgfff newsdetailMaxWidth">
+                <div class="titArea">
+                    <h3>网络赛区获奖名单</h3>
+                </div>
+                <div class="wenzhang">
+                    <div class="prize-list">
+                        <div class="prize-con">
+                            <h2>一、线下赛区</h2>
+                            <h3>1、少儿组</h3>
+                            <ul>
+                                <foreach name="list_online" item="v">
+                                    <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;{$v.title}</li>
+                                </foreach>
+                            </ul>
+                            <h3>2、少儿组</h3>
+                            <ul>
+                                <foreach name="list_offline_child" item="v">
+                                    <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;{$v.title}</li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <div class="prize-con">
+                            <h2>二、线下赛区</h2>
+                            <ul>
+                                <foreach name="list_offline_man" item="v">
+                                    <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;{$v.title}</li>
+                                </foreach>
+                            </ul>
+                        </div>
+                        <h2 class="fs16 pl20">{$setting_info.match_notice}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+<!-- 引用 -->
+<include file="Common/footer" />
+
+
+<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Home/js/index.js"></script>
+</body>
+</html>

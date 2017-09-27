@@ -40,6 +40,21 @@ class IndexController extends CommonController{
         $this->display();
     }
 
+    //比赛公告
+    public function notice(){
+        $list_online=D('Baoming')->where(array('sqz'=>1359, 'sq'=>1384, 'bmz'=>1387, 'chusai_status'=>1))->relation(true)->select();
+        $list_offline_child=D('Baoming')->where(array('sqz'=>1360, 'sq'=>1392, 'bmz'=>1396, 'chusai_status'=>1))->relation(true)->select();
+        $list_offline_man=D('Baoming')->where(array('sqz'=>1360, 'sq'=>1384, 'bmz'=>1387, 'chusai_status'=>1))->relation(true)->select();
+
+        $this->list_online=$list_online;
+        $this->list_offline_child=$list_offline_child;
+        $this->list_offline_man=$list_offline_man;
+
+        $setting_info=M('Config')->find(1);
+        $this->setting_info=$setting_info;
+        $this->display();
+    }
+
     //志愿者报名入口
     public function volunteer_join(){
         $this->display();
