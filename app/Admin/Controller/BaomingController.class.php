@@ -28,6 +28,14 @@ class BaomingController extends AuthController {
     //列表
     public function ajax_get_list(){
         $map=array();
+        $where=array();
+        if($_GET['keyword']){
+            $where['author'] = array('like', '%'.$_GET['keyword'].'%');
+            $where['title']  = array('like', '%'.$_GET['keyword'].'%');
+            $where['_logic'] = 'or';
+            $map['_complex'] = $where;
+        }
+
         if($_GET['sqz']){
             $map['sqz']=$_GET['sqz'];
         }
@@ -43,6 +51,7 @@ class BaomingController extends AuthController {
             $end_time=strtotime($_GET['end_time']);
             $map['time']=array('between', array($start_time, $end_time));
         }
+
         
         $d = D('Baoming');
         $list = $d->where($map)->order('id desc')->relation(true)->select();
