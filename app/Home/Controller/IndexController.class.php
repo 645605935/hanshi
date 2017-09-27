@@ -50,8 +50,9 @@ class IndexController extends CommonController{
         $this->list_offline_child=$list_offline_child;
         $this->list_offline_man=$list_offline_man;
 
-        $setting_info=M('Config')->find(1);
-        $this->setting_info=$setting_info;
+        $notice=M('Type')->find(1401);
+        $notice['text']=htmlspecialchars($notice['text']);
+        $this->notice=$notice;
         $this->display();
     }
 

@@ -72,7 +72,9 @@ class TypeController extends AuthController {
             !$_POST['title'] ? exit($this->error('标题不能为空')) : null;
             $d=D('Type');
             $data=$d->create();
-            
+
+            $data['content']=htmlspecialchars_decode($data['content']);
+
             if($data['pid']){
                 $plevel=$d->where(array('id'=>$data['pid']))->getField('level');
                 $data['level']=$plevel+1;
