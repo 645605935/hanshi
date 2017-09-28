@@ -181,18 +181,26 @@
 
                 <!-- PAGE CONTENT BEGINS -->
 
-                <div class="row"> 
-
-                      <div class="col-xs-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">列表</div>
-                            <div class="panel-body">
-                              <table id="grid-table"></table>
-                              <div id="grid-pager"></div>
-                            </div>
+                <div class="row">
+                  <div class="col-xs-7">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">点子列表</div>
+                          <div class="panel-body">
+                            <table id="grid-table"></table>
+                            <div id="grid-pager"></div>
                           </div>
-                      </div>
+                        </div>
+                    </div>
 
+                    <div class="col-xs-5">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">回复列表</div>
+                          <div class="panel-body">
+                            <table id="grid-table-2"></table>
+                            <div id="grid-pager-2"></div>
+                          </div>
+                        </div>
+                    </div>
                 </div>
 
                
@@ -361,10 +369,6 @@
                     </td>
                   </tr>
 
-                  
-
-
-
                   <tr>
                     <td>
                       <div class="layui-inline">
@@ -449,7 +453,7 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动主题</label>
+                          <label class="layui-form-label">智囊主题</label>
                           <div class="layui-input-inline">
                             <input type="text" name="title" lay-verify="required" placeholder="" class="layui-input title">
                           </div>
@@ -459,10 +463,10 @@
                     <td>
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动类型</label>
+                          <label class="layui-form-label">智囊用途</label>
                           <div class="layui-input-inline">
                             <select name="type" class="type">
-                               <option value="请选择">请选择</option>
+                               <option value="">请选择</option>
                                <foreach name="type" item="v">
                                   <option value="{$v.id}" alt="{$v.title}">{$v.title}</option>
                                </foreach>
@@ -474,11 +478,78 @@
                   </tr>
 
                   <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">上传图片</label>
+                          <div class="layui-input-inline">
+                            <input type="file" id="edit_upload_img" name="file" class="layui-upload-file">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="layui-inline" style="display:none;">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">图片</label>
+                          <div class="layui-input-inline">
+                            <input type="text" name="img" lay-verify="required" class="layui-input img" readonly>
+                          </div>
+                        </div>
+                      </div>
+                      <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <td class="center" colspan="2">
+                      <div class="layui-form-item layui-form-text">
+                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">请求问题</label>
+                          <div class="layui-input-block">
+                              <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_edit"></textarea>
+                          </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">是否推存</label>
+                          <div class="layui-input-inline">
+                            <select name="recommend" class="recommend">
+                               <option value="0">不推存</option>
+                               <option value="1">推存</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div> 
+                    </td>
+
+                    <td>
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">状态</label>
+                          <div class="layui-input-inline">
+                            <select name="status" class="status">
+                               <option value="-1">禁止</option>
+                               <option value="0">待审核</option>
+                               <option value="1">通过</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div> 
+                    </td>
+                  </tr>
+
+                  <tr>
                     <td colspan="2">
 
                       <div class="layui-inline">
                         <div class="layui-form-item">
-                          <label class="layui-form-label">活动时间</label>
+                          <label class="layui-form-label">时间</label>
                           <div class="layui-input-inline">
                             <input class="layui-input start_time LAY_demorange_s" name="start_time" placeholder="开始日">
                           </div>
@@ -491,102 +562,8 @@
 
                     </td>
                   </tr>
-
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">活动图片</label>
-                          <div class="layui-input-inline">
-                            <input type="file" id="edit_upload_img" name="file" class="layui-upload-file">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline" style="display:none;">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">LOGO</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="img" lay-verify="required" class="layui-input img" readonly>
-                          </div>
-                        </div>
-                      </div>
-                      <img class="show_img" data-src="holder.js/140x140" class="img-thumbnail" alt="140x140" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWQ1MzI3ODU3YiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZDUzMjc4NTdiIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ1IiB5PSI3NC44Ij4xNDB4MTQwPC90ZXh0PjwvZz48L2c+PC9zdmc+" data-holder-rendered="true" style="width: 140px; height: 140px;">
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">活动视频</label>
-                          <div class="layui-input-inline">
-                            <input type="file" id="edit_upload_Ideas" name="file_Ideas" lay-type="Ideas" class="layui-upload-file">
-                          </div>
-                          <a target="_blank" class="layui-form-label show_Ideas_btn" style="width:61px!important;display: none;">
-                            预览
-                          </a>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline" style="display:none;">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">视频</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="Ideas" lay-verify="required" class="layui-input Ideas" readonly>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td class="center" colspan="2">
-                      <div class="layui-form-item layui-form-text">
-                          <label class="layui-form-label" style="width: 100%!important;text-align: left;">活动内容</label>
-                          <div class="layui-input-block">
-                              <textarea class="layui-textarea layui-hide content" name="content" lay-verify="content" id="editer_edit"></textarea>
-                          </div>
-                      </div>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td colspan="2">
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">开通报名通道</label>
-                          <div class="layui-input-inline open_box">
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">活动联络人</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="contact_people" lay-verify="required" placeholder="" autocomplete="off" class="layui-input contact_people">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="layui-inline">
-                        <div class="layui-form-item">
-                          <label class="layui-form-label">联系方式</label>
-                          <div class="layui-input-inline">
-                            <input type="text" name="contact_phone" lay-verify="required" placeholder="" class="layui-input contact_phone">
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                 
+                 
                 </tbody>
                 <tfoot>
                   <tr>
@@ -594,6 +571,46 @@
                       <input type="hidden" name="id" class="layui-input id">
                       <button class="layui-btn" lay-submit="" lay-filter="demo1_edit">确认</button>
                       <button type="reset" class="layui-btn layui-btn-primary reset">重置</button>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+
+           </form>
+       
+        </div>
+    </div><!-- #dialog-confirm -->
+
+
+    <!-- 确认弹框 start-->
+    <div id="dialog-confirm_setting" class="hide">
+       <div class="row">
+
+           <form class="layui-form layui-form-pane col-xs-12" method="post" action="" id="setting_form" enctype="multipart/form-data">
+            
+              <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                  <tr>
+                    <td align="center">
+                      <div class="layui-inline">
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">显示</label>
+                          <div class="layui-input-inline">
+                            <select name="status" class="status">
+                               <option value="0">不显示</option>
+                               <option value="1">显示</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div> 
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td align="center">
+                      <input type="hidden" name="id" class="layui-input id">
+                      <button class="layui-btn" lay-submit="" lay-filter="demo1_edit_ideasItem">确认</button>
                     </td>
                   </tr>
                 </tfoot>
@@ -727,12 +744,44 @@
             }
           });
 
+          //设置
+          $( "body" ).on('click','.id-btn-dialog2_setting', function(e) {
+            e.preventDefault();
+
+            var id=$(this).attr('data-id');
+            if(id){
+                var _json=_ajax_get_row_info_ideasItem(id);
+                if(_json.code==0){
+                    init_editer('editer_setting');
+
+                    $( "#dialog-confirm_setting" ).removeClass('hide').dialog({
+                      resizable: false,
+                      modal: true,
+                      title: "",
+                      width:800,
+                      title_html: true,
+                    });
+
+                    $("div[aria-describedby='dialog-confirm_setting'] div span.ui-dialog-title").html("<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> 设置：</h4></div>");
+                }
+            }
+          });
+
+
 
           //删除
           $( "body" ).on('click', '.id-btn-dialog2_del', function() {
             if(confirm("确定要删除？")){
                 var ids=$(this).attr('data-id');
                 _ajax_del(ids);
+            }
+          });
+
+          //删除
+          $( "body" ).on('click', '.id-btn-dialog2_del_ideasItem', function() {
+            if(confirm("确定要删除？")){
+                var ids=$(this).attr('data-id');
+                _ajax_del_ideasItem(ids);
             }
           });
 
@@ -827,18 +876,6 @@
                           $('#edit_form .show_img').attr('src', '').hide();
                       }
 
-                      if(data.Ideas){
-                          $('#edit_form .Ideas').val(data.Ideas);
-                          $('#edit_form .show_Ideas_btn').attr('href', data.Ideas).show();
-                      }else{
-                          $('#edit_form .show_Ideas_btn').attr('href', '').hide();
-                      }
-                      
-                      
-                      if(data.type){
-
-                      }
-
                       $.each($("#edit_form .type option"), function(name, value){
                           if($(value).attr('alt')==data.type){
                               $(value).attr('selected','selected');
@@ -847,25 +884,73 @@
                           }
                       });
 
-
                       $('#edit_form .content').val(data.content);
 
 
-                      var str='';
-                      if(1==data.open){
-                          str+='<input type="radio" name="open" class="open" value="1" title="开" checked="checked">';
-                          str+='<input type="radio" name="open" class="open" value="0" title="关">';
-                      }else{
-                          str+='<input type="radio" name="open" class="open" value="1" title="开">';
-                          str+='<input type="radio" name="open" class="open" value="0" title="关" checked="checked">';
+                      if(data.recommend==1){
+                          $('#edit_form .recommend option[value=1]').attr('selected', true);
+                          $('#edit_form .recommend option[value=0]').removeAttr('selected');
+                      }else if(data.recommend==0){
+                          $('#edit_form .recommend option[value=0]').attr('selected', true);
+                          $('#edit_form .recommend option[value=1]').removeAttr('selected');
                       }
-                      $("#edit_form .open_box").html(str);
-                      
+
+                      if(data.status==1){
+                          $('#edit_form .status option[value=-1]').removeAttr('selected');
+                          $('#edit_form .status option[value=1]').attr('selected', true);
+                          $('#edit_form .status option[value=0]').removeAttr('selected');
+                      }else if(data.status==0){
+                          $('#edit_form .status option[value=-1]').removeAttr('selected');
+                          $('#edit_form .status option[value=1]').removeAttr('selected');
+                          $('#edit_form .status option[value=0]').attr('selected', true);
+                      }else if(data.status==-1){
+                          $('#edit_form .status option[value=-1]').attr('selected', true);
+                          $('#edit_form .status option[value=1]').removeAttr('selected');
+                          $('#edit_form .status option[value=0]').removeAttr('selected');
+                      }
+
+                      $('#edit_form .start_time').val(data.start_time);
+                      $('#edit_form .end_time').val(data.end_time);
 
 
-                      $('#edit_form .contact_people').val(data.contact_people);
-                      $('#edit_form .contact_phone').val(data.contact_phone);
+                      _json=json;
 
+                      layui.form().render();
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //获取单条信息
+      function _ajax_get_row_info_ideasItem(id){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'get',  
+              url : "{:U('Admin/Ideas/ajax_get_row_info_ideasItem')}",
+              data:{
+                id:id
+              },
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      var data=json.data;
+
+                      $('#setting_form .id').val(data.id);
+
+                      if(data.status==1){
+                          $('#setting_form .status option[value=1]').attr('selected', true);
+                          $('#setting_form .status option[value=0]').removeAttr('selected');
+                      }else{
+                          $('#setting_form .status option[value=0]').attr('selected', true);
+                          $('#setting_form .status option[value=1]').removeAttr('selected');
+                      }
 
                       _json=json;
 
@@ -1117,6 +1202,33 @@
           return _json;  
       }
 
+       //编辑
+      function _ajax_edit_ideasItem(_data){
+          var _json;
+          $.ajax({  
+              async:false,
+              type:'post',  
+              contentType:"application/x-www-form-urlencoded",
+              url : "{:U('Admin/Ideas/ajax_edit_ideasItem')}",
+              data: _data,
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      layer.msg(json.msg);
+                      var selectID=$("#grid-table-2").getGridParam("selrow");
+                      $("#grid-table-2").setRowData(selectID, json.data);
+                      $("div[aria-describedby='dialog-confirm_setting'] .ui-dialog-titlebar-close").trigger("click");
+                  }else{
+                      layer.msg(json.msg);
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;  
+      }
+
       //异步删除
       function _ajax_del(ids){
           var _json;
@@ -1133,6 +1245,34 @@
                       layer.msg(json.msg);
                       var selectRow = $("#grid-table").jqGrid('getGridParam','selrow');
                       $("#grid-table").delRowData(selectRow);
+                  }else{
+                      layer.msg(json.msg);
+                      _json=json;
+                  }
+              },
+              error  : function() {  
+                  layer.msg('error');
+              }  
+          }); 
+          return _json;
+      }
+
+      //异步删除
+      function _ajax_del_ideasItem(ids){
+          var _json;
+          $.ajax({  
+              type:'get',  
+              url : "{:U('Admin/Ideas/ajax_del_ideasItem')}",
+              data:{ 
+                id:ids 
+              },
+              dataType : 'json',
+              success  : function(json) {  
+                  if(json.code == 0){
+                      _json=json;
+                      layer.msg(json.msg);
+                      var selectRow = $("#grid-table-2").jqGrid('getGridParam','selrow');
+                      $("#grid-table-2").delRowData(selectRow);
                   }else{
                       layer.msg(json.msg);
                       _json=json;
@@ -1163,22 +1303,31 @@
           }
       }
 
+      function recommendFormatter(cellvalue, options, rowdata){ 
+          if (cellvalue==1){
+              return '<span class="label label-success" alt="'+cellvalue+'">推荐</span>';
+          }else{
+              return "";
+          }
+      }
+
       function init_grid_table(grid_data){
           $(grid_selector).jqGrid({
               caption: "列表",
               data: grid_data,
               datatype: "local",
               height: 430,
-              colNames:['id', '智囊主题','智囊分类','状态','开始日期','结束日期','回复量','操作'],
+              colNames:['id', '智囊主题', '智囊分类', '开始日期', '结束日期', '回复量', '状态', '推荐', '操作'],
               colModel:[
                 {name:'id',index:'id',  sorttype:"int",align : "center", hidden: true},
 
                 {name:'title',index:'title', align : "center"},
                 {name:'type',index:'type', align : "center"},
-                {name:'status',index:'status', align : "center", formatter: statusFormatter},
                 {name:'start_time',index:'start_time', align : "center"},
                 {name:'end_time',index:'end_time', align : "center"},
                 {name:'reply',index:'reply', align : "center"},
+                {name:'status',index:'status', align : "center", formatter: statusFormatter},
+                {name:'recommend',index:'recommend', align : "center", formatter: recommendFormatter},
 
                 {name:'options',index:'options',align:'center',width:200}
               ], 
@@ -1201,6 +1350,20 @@
                 }, 0);
               },
 
+              onSelectRow : function(ids) {
+                  var rowData = $(grid_selector).jqGrid('getRowData',ids); 
+                  var id=rowData.id;
+                  var title=rowData.title;
+
+                  //零件列表
+                  $('#grid-table-2').jqGrid('clearGridData');
+                  jQuery("#grid-table-2").jqGrid('setGridParam', {
+                        url : "index.php?s=/Admin/Ideas/ajax_get_ideas_relation_ideasItem.html&id=" + id,
+                        page : 1
+                  });
+                  jQuery("#grid-table-2").jqGrid('setCaption',"回复列表: " + title).trigger('reloadGrid');
+              },
+
               gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
                   var ids=jQuery(grid_selector).jqGrid('getDataIDs');
                   for(var i=0; i<ids.length; i++){
@@ -1215,6 +1378,71 @@
               }
           });
       }
+
+
+      function status2Formatter(cellvalue, options, rowdata){ 
+          if (cellvalue == "1"){
+              return '<span class="label label-success" alt="'+cellvalue+'">显示</span>';
+          }else{
+              return '<span class="label label-danger" alt="'+cellvalue+'">不显示</span>';
+          }
+      }
+
+      // 零件列表
+      jQuery("#grid-table-2").jqGrid({
+        caption : "回复列表",
+        datatype: "json",
+        colNames:['id', '用户名', '内容', '时间', '状态', '操作'],
+        colModel:[
+          {name:'id', index:'id', sorttype:"int", align:"center", hidden: true},
+
+          {name:'username',index:'username',align:"center"},
+          {name:'content',index:'content',align:"center"},
+          {name:'time',index:'time',align:"center"},
+          {name:'status',index:'status',align:"center", formatter: status2Formatter},
+
+          {name:'options',index:'options',align:'center'}
+        ], 
+        rownumbers:true,
+        rownumWidth:50,//设置行号列宽度
+        rowNum:500,
+        rowList:[500,1000,1500],
+        pager : '',
+        viewrecords : true,
+        autowidth:true,
+        shrinkToFit:true,//ture，则按比例初始化列宽度。如果为false，则列宽度使用colModel指定的宽度
+        height : 'auto',
+        
+
+        loadComplete : function(data) {
+          var table = this;
+          setTimeout(function(){
+            updatePagerIcons(table);
+          }, 0);
+        },
+
+
+
+        gridComplete:function(){  //在此事件中循环为每一行添加修改和删除链接
+            var ids=jQuery("#grid-table-2").jqGrid('getDataIDs');
+            for(var i=0; i<ids.length; i++){
+                var id=ids[i];  
+                var _rowData = $("#grid-table-2").jqGrid('getRowData',id);  
+
+                var options="";
+                    options+= "<button style='margin-right:5px;' class='btn btn-primary btn-xs id-btn-dialog2_setting' title='id-btn-dialog2_setting' data-id='"+_rowData.id+"'><i class='icon-trash bigger-110'></i>设置</button>"; 
+                    options+= "<button class='btn btn-danger btn-xs id-btn-dialog2_del_ideasItem' title='id-btn-dialog2_del_ideasItem' data-id='"+_rowData.id+"'><i class='icon-trash bigger-110'></i>删除</button>"; 
+                jQuery("#grid-table-2").jqGrid('setRowData', ids[i], { options: options});
+            }
+        },
+
+      }).navGrid('#grid-pager-2', {
+        add : false,
+        edit : false,
+        del : false
+      });
+
+      jQuery('#grid-table-2').closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });//去除jqgrid横向滚动条
 
       //replace icons with FontAwesome icons like above   //更新分页图标  
       function updatePagerIcons(table) {
@@ -1238,6 +1466,7 @@
             var laydate = layui.laydate;
             var start = {
               istoday: false
+              ,format: 'YYYY-MM-DD hh:mm'
               ,choose: function(datas){
                 end.min = datas; //开始日选好后，重置结束日的最小日期
                 end.start = datas //将结束日的初始值设定为开始日
@@ -1246,6 +1475,7 @@
 
             var end = {
               istoday: false
+              ,format: 'YYYY-MM-DD hh:mm'
               ,choose: function(datas){
                 start.max = datas; //结束日选好后，重置开始日的最大日期
               }
@@ -1338,6 +1568,12 @@
               //监听提交
               form.on('submit(demo1_edit)', function(data){
                 var _json=_ajax_edit(data.field);
+                return false;
+              });
+
+              //监听提交
+              form.on('submit(demo1_edit_ideasItem)', function(data){
+                var _json=_ajax_edit_ideasItem(data.field);
                 return false;
               });
 

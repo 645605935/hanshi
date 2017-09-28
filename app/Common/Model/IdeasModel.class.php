@@ -7,8 +7,14 @@ class IdeasModel extends RelationModel{
 			'mapping_type'=>self::BELONGS_TO,
 			'class_name'=>'User',
 			'foreign_key'=>'uid',
-			'as_fields' => 'truename:_truename',
-		)
+			'as_fields' => 'username:username',
+		),
+		'_type'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'type',
+			'as_fields' => 'title:type, id:type_id',
+		),
 	);
 }
 
