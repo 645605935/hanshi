@@ -59,6 +59,19 @@ class BookController extends CommonController{
         $this->display();
     }
     
+    // 目录
+    public function directory(){
+        global $user;
+
+        $this->display();
+    }
+
+    // 阅读页
+    public function look(){
+        global $user;
+
+        $this->display();
+    }
 
 
     public function Book(){
