@@ -148,7 +148,9 @@ class BaomingController extends AuthController {
             foreach ($Baoming_list as $key => $value) {
                 $list[$key]['user_id']=$value['uid'];
                 $list[$key]['username']=$value['username'];
-                $list[$key]['img']=$value['img'];
+                $list[$key]['img']="http://".$_SERVER['HTTP_HOST'].$value['img'];
+                $list[$key]['sfz_1']="http://".$_SERVER['HTTP_HOST'].$value['sfz_1'];
+                $list[$key]['sfz_2']="http://".$_SERVER['HTTP_HOST'].$value['sfz_2'];
                 $list[$key]['sqz']=$value['sqz'];
                 $list[$key]['sqz_id']=$value['sqz_id'];
 
@@ -179,6 +181,8 @@ class BaomingController extends AuthController {
                 "user_id", 
                 "用户名",
                 "图片", 
+                "身份证1", 
+                "身份证2", 
                 "赛区",
                 "赛区id",
                 "子站",
