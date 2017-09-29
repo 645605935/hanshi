@@ -27,55 +27,145 @@ class BaomingController extends AuthController {
 
     //列表
     public function ajax_get_list(){
-        $map=array();
-        $where=array();
-        if($_GET['keyword']){
-            $where['author'] = array('like', '%'.$_GET['keyword'].'%');
-            $where['title']  = array('like', '%'.$_GET['keyword'].'%');
-            $where['_logic'] = 'or';
-            $map['_complex'] = $where;
-        }
+        if($_GET['print']==1){
 
-        if($_GET['sqz']){
-            $map['sqz']=$_GET['sqz'];
-        }
-        if($_GET['sq']){
-            $map['sq']=$_GET['sq'];
-        }
-        if($_GET['bmz']){
-            $map['bmz']=$_GET['bmz'];
-        }
+            $map=array();
+            $where=array();
+            if($_GET['keyword']){
+                $where['author'] = array('like', '%'.$_GET['keyword'].'%');
+                $where['title']  = array('like', '%'.$_GET['keyword'].'%');
+                $where['_logic'] = 'or';
+                $map['_complex'] = $where;
+            }
 
-        if($_GET['start_time']&&$_GET['end_time']){
-            $start_time=strtotime($_GET['start_time']);
-            $end_time=strtotime($_GET['end_time']);
-            $map['time']=array('between', array($start_time, $end_time));
-        }
+            if($_GET['sqz']){
+                $map['sqz']=$_GET['sqz'];
+            }
 
-        
-        $d = D('Baoming');
-        $list = $d->where($map)->order('id desc')->relation(true)->select();
+            if($_GET['chusai_status']){
+                $map['chusai_status']=$_GET['chusai_status'];
+            }
 
-        $sql= $d->getlastsql();
+            if($_GET['fusai_status']){
+                $map['fusai_status']=$_GET['fusai_status'];
+            }
 
-        foreach ($list as $key => $value) {
-            $list[$key]['time']=date('Y-m-d H:i',$value['time']);
-        }
+            if($_GET['juesai_status']){
+                $map['juesai_status']=$_GET['juesai_status'];
+            }
 
-        if($list){
-            $data=array();
-            $data['code']=0;
-            $data['msg']='success';
-            $data['data']=$list;
-            $data['sql']=$sql;
+            if($_GET['sq']){
+                $map['sq']=$_GET['sq'];
+            }
+            if($_GET['bmz']){
+                $map['bmz']=$_GET['bmz'];
+            }
+
+            if($_GET['start_time']&&$_GET['end_time']){
+                $start_time=strtotime($_GET['start_time']);
+                $end_time=strtotime($_GET['end_time']);
+                $map['time']=array('between', array($start_time, $end_time));
+            }
+
+            $d = D('Baoming');
+            $list = $d->where($map)->order('id desc')->relation(true)->select();
+
+            $sql= $d->getlastsql();
+
+            foreach ($list as $key => $value) {
+                $list[$key]['time']=date('Y-m-d H:i',$value['time']);
+            }
+
+            
+            if($list){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+                $data['data']=$list;
+                $data['sql']=$sql;
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='未搜索到数据';
+                $data['data']=array();
+                $data['sql']=$sql;
+            }
+            echo json_encode($data);
         }else{
-            $data=array();
-            $data['code']=1;
-            $data['msg']='未搜索到数据';
-            $data['data']=array();
-            $data['sql']=$sql;
+            /**
+             *导出预定产品用户信息
+             * 大白驴   675835721
+             *2016-12-12
+             **/
+
+
+            // $p_name = $_POST['order_p_name'];
+             $m = M('User');
+            // $datas['order_p_name'] = $p_name;
+             $list = $m->field('id,username,time')->select();
+             foreach ($list as $k => $v){
+                 $list[$k]['time']=$v['time']=date('Y-m-d',$v['time']);
+             }
+             //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
+             import("Org.Util.PHPExcel");
+             import("Org.Util.PHPExcel.Writer.Excel5");
+             import("Org.Util.PHPExcel.IOFactory.php");
+             $filename="test_excel";
+             $headArr=array("uid","用户名","注册时间");
+             $this->getExcel($filename,$headArr,$list);
         }
-        echo json_encode($data);
+    }
+
+
+
+
+    private function getExcel($fileName,$headArr,$data){
+        //对数据进行检验
+        if(empty($data) || !is_array($data)){
+            die("data must be a array");
+        }
+        //检查文件名
+        if(empty($fileName)){
+            exit;
+        }
+        $date = date("Y_m_d",time());
+        $fileName .= "_{$date}.xls";
+        //创建PHPExcel对象，注意，不能少了\
+        $objPHPExcel = new \PHPExcel();
+        $objProps = $objPHPExcel->getProperties();
+
+        //设置表头
+        $key = ord("A");
+        foreach($headArr as $v){
+            $colum = chr($key);
+            $objPHPExcel->setActiveSheetIndex(0) ->setCellValue($colum.'1', $v);
+            $key += 1;
+        }
+        $column = 2;
+        $objActSheet = $objPHPExcel->getActiveSheet();
+        foreach($data as $key => $rows){ //行写入
+            $span = ord("A");
+            foreach($rows as $keyName=>$value){// 列写入
+                $j = chr($span);
+                $objActSheet->setCellValue($j.$column, $value);
+                $span++;
+            }
+            $column++;
+        }
+        $fileName = iconv("utf-8", "gb2312", $fileName);
+        //重命名表
+        // $objPHPExcel->getActiveSheet()->setTitle('test');
+        //设置活动单指数到第一个表,所以Excel打开这是第一个表
+        $objPHPExcel->setActiveSheetIndex(0);
+        ob_end_clean();
+        ob_start();
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=\"$fileName\"");
+        header('Cache-Control: max-age=0');
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output'); //文件通过浏览器下载
+        exit;
+
     }
 
     //获取单条信息

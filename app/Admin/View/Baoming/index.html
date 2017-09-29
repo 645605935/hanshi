@@ -192,6 +192,57 @@
 
                                 <div class="layui-inline" style="margin-top: 5px;">
                                   <div class="layui-form-item">
+                                    <label class="layui-form-label">初赛</label>
+                                    <div class="layui-input-inline">
+                                      <select name="chusai_status" class="chusai_status">
+                                        <option value="">请选择</option>
+                                        <option value="1">通过</option>
+                                        <option value="0">未通过</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="layui-inline" style="margin-top: 5px;">
+                                  <div class="layui-form-item">
+                                    <label class="layui-form-label">复赛</label>
+                                    <div class="layui-input-inline">
+                                      <select name="fusai_status" class="fusai_status">
+                                        <option value="">请选择</option>
+                                        <option value="1">通过</option>
+                                        <option value="0">未通过</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="layui-inline" style="margin-top: 5px;">
+                                  <div class="layui-form-item">
+                                    <label class="layui-form-label">决赛</label>
+                                    <div class="layui-input-inline">
+                                      <select name="juesai_status" class="juesai_status">
+                                        <option value="">请选择</option>
+                                        <option value="1">通过</option>
+                                        <option value="0">未通过</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="layui-inline" style="margin-top: 5px;">
+                                  <div class="layui-form-item">
+                                    <label class="layui-form-label">打印</label>
+                                    <div class="layui-input-inline">
+                                      <select name="print" class="print">
+                                        <option value="1">不打印</option>
+                                        <option value="2">打印</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="layui-inline" style="margin-top: 5px;">
+                                  <div class="layui-form-item">
                                     <label class="layui-form-label">时间范围</label>
                                     <div class="layui-input-inline">
                                       <input class="layui-input start_time LAY_demorange_s" name="start_time" value="{$_POST['start_time']}" placeholder="开始日">
@@ -782,18 +833,17 @@
           var bmz=$('#search_table .bmz').val();
           var start_time=$('#search_table .start_time').val();
           var end_time=$('#search_table .end_time').val();
+          var chusai_status=$('#search_table .chusai_status').val();
+          var fusai_status=$('#search_table .fusai_status').val();
+          var juesai_status=$('#search_table .juesai_status').val();
+          var print=$('#search_table .print').val();
 
-          var json=_ajax_get_list(keyword, sqz, sq, bmz, start_time, end_time);
+          var json=_ajax_get_list(keyword, sqz, sq, bmz, start_time, end_time, chusai_status, fusai_status, juesai_status, print);
           init_grid_table(json.data);
       }
 
       //获取列表
-      function _ajax_get_list(keyword, sqz, sq, bmz, start_time, end_time){
-        console.log(sqz);
-        console.log(sq);
-        console.log(bmz);
-        console.log(start_time);
-        console.log(end_time);
+      function _ajax_get_list(keyword, sqz, sq, bmz, start_time, end_time, chusai_status, fusai_status, juesai_status, print){
 
           var _data;
           $.ajax({   
@@ -807,7 +857,11 @@
                 sq:sq, 
                 bmz:bmz, 
                 start_time:start_time, 
-                end_time:end_time
+                end_time:end_time,
+                chusai_status:chusai_status,
+                fusai_status:fusai_status,
+                juesai_status:juesai_status,
+                print:print
               },
               dataType : 'json',
               success  : function(json) { 
