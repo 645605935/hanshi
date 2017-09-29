@@ -77,16 +77,26 @@ class UserController extends CommonController{
             $this->editable=0;
         }
         if(time()>$time_info['start_time_3'] && time()<$time_info['end_time_3']){
-            $time_info['_tip']="当前是：复赛报名时间，可编辑";
-            $this->editable=1;
+            if($temp['chusai_status']==1){
+                $time_info['_tip']="【恭喜您进入复赛，请上传作品】当前是：复赛报名时间，可编辑";
+                $this->editable=1;
+            }else{
+                $time_info['_tip']="【没进入复赛不可以上传作品，再次抱歉】";
+                $this->editable=0;
+            }
         }
         if(time()>$time_info['start_time_4'] && time()<$time_info['end_time_4']){
-            $time_info['_tip']="当前是：初赛投票时间，不可编辑";
+            $time_info['_tip']="当前是：复赛投票时间，不可编辑";
             $this->editable=0;
         }
         if(time()>$time_info['start_time_5'] && time()<$time_info['end_time_5']){
-            $time_info['_tip']="当前是：决赛报名时间，可编辑";
-            $this->editable=1;
+            if($temp['fusai_status']==1){
+                $time_info['_tip']="【恭喜您进入决赛，请上传作品】当前是：决赛报名时间，可编辑";
+                $this->editable=1;
+            }else{
+                $time_info['_tip']="【没进入决赛不可以上传作品，再次抱歉】";
+                $this->editable=0;
+            }
         }
         if(time()>$time_info['start_time_6'] && time()<$time_info['end_time_6']){
             $time_info['_tip']="当前是：初赛报名时间，不可编辑";
@@ -95,6 +105,8 @@ class UserController extends CommonController{
         
 
         $row=D('Baoming')->relation(true)->find($_GET['id']);
+
+
         $row['_files']=explode('#', $row['files']);
         $this->row=$row;
 
