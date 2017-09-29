@@ -65,6 +65,7 @@ class UserController extends CommonController{
         $where['mid']=$temp['mid'];
         $where['sqz']=$temp['sqz'];
         $time_info=M('MatchBmz')->where($where)->find();
+        $time_info['_tip']="当前时间不可编辑";
 
         //初赛报名时间
         if(time()>$time_info['start_time_1'] && time()<$time_info['end_time_1']){
