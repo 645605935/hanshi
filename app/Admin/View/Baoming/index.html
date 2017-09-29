@@ -838,8 +838,27 @@
           var juesai_status=$('#search_table .juesai_status').val();
           var print=$('#search_table .print').val();
 
-          var json=_ajax_get_list(keyword, sqz, sq, bmz, start_time, end_time, chusai_status, fusai_status, juesai_status, print);
-          init_grid_table(json.data);
+          if(print==1){
+              var json=_ajax_get_list(keyword, sqz, sq, bmz, start_time, end_time, chusai_status, fusai_status, juesai_status, print);
+              init_grid_table(json.data);
+          }else{
+              var param="&keyword="+keyword;
+                  param+="&sqz="+sqz;
+                  param+="&sq="+sq;
+                  param+="&bmz="+bmz;
+                  param+="&start_time="+start_time;
+
+                  param+="&end_time="+end_time;
+                  param+="&chusai_status="+chusai_status;
+                  param+="&fusai_status="+fusai_status;
+                  param+="&juesai_status="+juesai_status;
+                  param+="&print="+print;
+
+              window.location.href="index.php?s=/Admin/Baoming/baoming_excel.html"+param;
+              // var json=_ajax_print(keyword, sqz, sq, bmz, start_time, end_time, chusai_status, fusai_status, juesai_status, print);
+          }
+
+          
       }
 
       //获取列表
@@ -865,14 +884,44 @@
               },
               dataType : 'json',
               success  : function(json) { 
-                console.log(json.sql);
                   if(json.code==0){
                       _data=json;
                   }
                   if(json.code==1){
                       _data=json;
-                      // layer.msg(json.msg);
                   }
+              },
+              error  : function(json) {  
+                  layer.msg(json.msg);
+              }  
+          });  
+          return _data;  
+      } 
+
+      //打印
+      function _ajax_print(keyword, sqz, sq, bmz, start_time, end_time, chusai_status, fusai_status, juesai_status, print){
+
+          var _data;
+          $.ajax({   
+              async:false,
+              type:'get',  
+              contentType:"application/x-www-form-urlencoded",
+              url : "{:U('Admin/Baoming/ajax_print')}",
+              data: {
+                keyword:keyword,
+                sqz:sqz, 
+                sq:sq, 
+                bmz:bmz, 
+                start_time:start_time, 
+                end_time:end_time,
+                chusai_status:chusai_status,
+                fusai_status:fusai_status,
+                juesai_status:juesai_status,
+                print:print
+              },
+              dataType : 'json',
+              success  : function(json) { 
+                  layer.msg('success');
               },
               error  : function(json) {  
                   layer.msg(json.msg);

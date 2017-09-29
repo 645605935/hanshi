@@ -27,7 +27,6 @@ class BaomingController extends AuthController {
 
     //列表
     public function ajax_get_list(){
-        if($_GET['print']==1){
 
             $map=array();
             $where=array();
@@ -91,29 +90,113 @@ class BaomingController extends AuthController {
                 $data['sql']=$sql;
             }
             echo json_encode($data);
-        }else{
+       
+    }
+
+    //打印
+    public function baoming_excel(){
+        
             /**
              *导出预定产品用户信息
              * 大白驴   675835721
              *2016-12-12
              **/
+            $map=array();
+            $where=array();
+            if($_GET['keyword']){
+                $where['author'] = array('like', '%'.$_GET['keyword'].'%');
+                $where['title']  = array('like', '%'.$_GET['keyword'].'%');
+                $where['_logic'] = 'or';
+                $map['_complex'] = $where;
+            }
+
+            if($_GET['sqz']){
+                $map['sqz']=$_GET['sqz'];
+            }
+
+            if($_GET['chusai_status']){
+                $map['chusai_status']=$_GET['chusai_status'];
+            }
+
+            if($_GET['fusai_status']){
+                $map['fusai_status']=$_GET['fusai_status'];
+            }
+
+            if($_GET['juesai_status']){
+                $map['juesai_status']=$_GET['juesai_status'];
+            }
+
+            if($_GET['sq']){
+                $map['sq']=$_GET['sq'];
+            }
+            if($_GET['bmz']){
+                $map['bmz']=$_GET['bmz'];
+            }
+
+            if($_GET['start_time']&&$_GET['end_time']){
+                $start_time=strtotime($_GET['start_time']);
+                $end_time=strtotime($_GET['end_time']);
+                $map['time']=array('between', array($start_time, $end_time));
+            }
+
+            $d = D('Baoming');
 
 
-            // $p_name = $_POST['order_p_name'];
-             $m = M('User');
-            // $datas['order_p_name'] = $p_name;
-             $list = $m->field('id,username,time')->select();
-             foreach ($list as $k => $v){
-                 $list[$k]['time']=$v['time']=date('Y-m-d',$v['time']);
-             }
+            $Baoming_list = $d->where($map)->order('id desc')->relation(true)->select();
+
+            $list=array();
+            foreach ($Baoming_list as $key => $value) {
+                $list[$key]['user_id']=$value['uid'];
+                $list[$key]['username']=$value['username'];
+                $list[$key]['img']=$value['img'];
+                $list[$key]['sqz']=$value['sqz'];
+                $list[$key]['sqz_id']=$value['sqz_id'];
+
+                $list[$key]['sq']=$value['sq'];
+                $list[$key]['sq_id']=$value['sq_id'];
+                $list[$key]['bmz']=$value['bmz'];
+                $list[$key]['bmz_id']=$value['bmz_id'];
+                $list[$key]['unit']=$value['unit'];
+
+                $list[$key]['author']=$value['author'];
+                $list[$key]['phone']=$value['phone'];
+                $list[$key]['title']=$value['title'];
+                $list[$key]['match']=$value['match'];
+                $list[$key]['vote']=$value['vote'];
+
+                $list[$key]['time']=date('Y-m-d H:i',$value['time']);
+                $list[$key]['chusai_status']=$value['chusai_status'];
+                $list[$key]['fusai_status']=$value['fusai_status'];
+                $list[$key]['juesai_status']=$value['juesai_status'];
+            }
+
              //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
              import("Org.Util.PHPExcel");
              import("Org.Util.PHPExcel.Writer.Excel5");
              import("Org.Util.PHPExcel.IOFactory.php");
              $filename="test_excel";
-             $headArr=array("uid","用户名","注册时间");
+             $headArr=array(
+                "user_id", 
+                "用户名",
+                "图片", 
+                "赛区",
+                "赛区id",
+                "子站",
+                "子站id",
+                "组别",
+                "组别id", 
+                "报名单位",
+                "姓名/单位",
+                "联系电话",
+                "作品主题",
+                "参赛项目",
+                "票数",
+                "时间",
+                "初赛",
+                "复赛",
+                "决赛"
+                );
              $this->getExcel($filename,$headArr,$list);
-        }
     }
 
 
