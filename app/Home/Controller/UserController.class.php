@@ -99,7 +99,7 @@ class UserController extends CommonController{
             }
         }
         if(time()>$time_info['start_time_6'] && time()<$time_info['end_time_6']){
-            $time_info['_tip']="当前是：初赛报名时间，不可编辑";
+            $time_info['_tip']="当前是：决赛投票时间，不可编辑";
             $this->editable=0;
         }
         
