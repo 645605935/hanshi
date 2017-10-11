@@ -126,6 +126,7 @@ class ApiController extends CommonController{
         $list = M('Auisvideo')->where($where)->order('id desc')->select();
         foreach ($list as $key => $value) {
             $list[$key]['image']=$base_url . $value['image']. "?x-oss-process=" . $_oss_style_150x150_;
+            $list[$key]['video']=$base_url . $value['video'];
         }
 
         echo json_encode($list);
