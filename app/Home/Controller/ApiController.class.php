@@ -132,6 +132,27 @@ class ApiController extends CommonController{
         echo json_encode($list);
     }
 
+    public function get_video_list(){
+        $base_url="http://zhangtengrui.oss-cn-beijing.aliyuncs.com/";
+        $_oss_style_150x150_='image/resize,m_fill,w_300,h_300,limit_0/auto-orient,0/quality,q_100';
+
+        $where=array();
+        // if($_GET['city']){
+        //     $where['city']=$_GET['city'];
+        // }
+        // if($_GET['type']){
+        //     $where['type']=$_GET['type'];
+        // }
+        
+        $list = M('Auivideo')->where($where)->order('id desc')->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['img']=$base_url . $value['img']. "?x-oss-process=" . $_oss_style_150x150_;
+            $list[$key]['ali_video']=$base_url . $value['ali_video'];
+        }
+
+        echo json_encode($list);
+    }
+
 
     // 查找用户-登录
     public function find_user_by_wx_id(){
