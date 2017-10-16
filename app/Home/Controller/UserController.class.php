@@ -416,7 +416,8 @@ class UserController extends CommonController{
         $count      = D('Book')->where($where)->count();
         $Page       = new \Common\Extend\Page($count,5);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
-        $list=D('Book')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->select();
+        $list=D('Book')->page($nowPage.','.$Page->listRows)->where($where)->select();
+
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
@@ -813,8 +814,9 @@ class UserController extends CommonController{
         $where['status']=0;
 
         $res=M('Book')->where($where)->find();
+
         // if(!$res){
-        if($res){
+        if(!$res){
             $data=array();
             $data['code']=0;
             $data['msg']='success';
