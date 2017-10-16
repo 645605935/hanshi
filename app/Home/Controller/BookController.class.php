@@ -86,6 +86,9 @@ class BookController extends CommonController{
     public function look(){
         global $user;
 
+        $row=M('BookZhang')->find($_GET['id']);
+        
+        $this->row=$row;
         $this->display();
     }
 
