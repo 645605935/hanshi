@@ -171,7 +171,7 @@
                 <div class="right-book">
                     <div class="right-book-top bg2 mt10 p20 clearfix">
                         <div class="right-book-tit">
-                            <h1>《XXXXX》</h1>
+                            <h1>《{$book.title}》</h1>
                             <a href="javascript:;" class="fr">订阅</a>
                         </div>
                         <div class="book-msg">
@@ -196,29 +196,18 @@
                                     <b>正文卷·共108章</b>
                                     <span class="book-money">免费</span>
                                     <span>本卷共11111字</span>
-                                    <select name="" class="lists-sel fr">
-                                        <option value="1">1</option>
-                                        <option value="1">1</option>
-                                        <option value="1">1</option>
-                                        <option value="1">1</option>
-                                        <option value="1">1</option>
+                                    <select name="" class="lists-sel fr juan_select">
+                                        <foreach name="book_juan" item="v">
+                                            <option value="{$v.id}" <if condition="$_GET['bjid'] eq $v['id']">selected</if>>{$v.title}</option>
+                                        </foreach>
                                     </select>
                                     <a href="#4" class="book-read fr">分卷阅读</a>
                                 </div>
                                 <div class="right-book-ul clearfix">
                                     <ul>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
-                                        <li><a href="shucheng-yuedu.html">第一章（上）</a></li>
+                                        <foreach name="book_zhang" item="v">
+                                            <li><a href="{:U('Home/Book/look', array('bid'=>$_GET['bid'], 'bjid'=>$v['id']))}">{$v.title}</a></li>
+                                        </foreach>
                                     </ul>
                                 </div>
                             </div>
@@ -255,6 +244,16 @@
         }
      });
      
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $('.juan_select').change(function(){
+            var bid="{$_GET['bid']}";
+            var bjid=$('.juan_select option:selected').val();
+            window.location.href="http://{$base_url}/Home/Book/directory/bid/"+bid+"/bjid/"+bjid+".html";
+        });
+    });
 </script>
 </body>
 </html>

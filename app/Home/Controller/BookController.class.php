@@ -22,7 +22,7 @@ class BookController extends CommonController{
         $count      = M('Book')->where($where)->count();
         $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
-        $list=D('Book')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->select();
+        $list=D('Book')->page($nowPage.','.$Page->listRows)->where($where)->relation(true)->order('id desc')->select();
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
         }
@@ -63,6 +63,22 @@ class BookController extends CommonController{
     public function directory(){
         global $user;
 
+        $bid=$_GET['bid'];
+        if($_GET['bjid']){
+            $bjid=$_GET['bjid'];
+        }else{
+            $bjid=1;
+        }
+
+        $book=M('Book')->find($bid);
+        $book_juan=M('BookJuan')->where(array('bid'=>$bid))->select();
+        $book_zhang=M('BookZhang')->where(array('bid'=>$bid, 'bjid'=>$bjid))->select();
+
+        $this->base_url=$_SERVER['HTTP_HOST'];
+
+        $this->book=$book;
+        $this->book_juan=$book_juan;
+        $this->book_zhang=$book_zhang;
         $this->display();
     }
 

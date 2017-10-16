@@ -487,7 +487,8 @@ class UserController extends CommonController{
         $where['bid']=$_GET['id'];
 
         $juan_list=M('BookJuan')->where($where)->select();
-
+        // echo M('BookJuan')->getlastsql();die;
+// dump($juan_list);die;
 
         $all_zhang_count=0;
         foreach ($juan_list as $key => $value) {
@@ -685,7 +686,7 @@ class UserController extends CommonController{
         $data=$_POST;
         if($data){
             $data['uid']=$user['id'];
-            $data['no']=microtime();
+            $data['no']=time().mt_rand(10000000,99999999);
             $data['time']=time();
 
             $id = M('Book')->add($data);
