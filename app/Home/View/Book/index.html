@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="__PUBLIC__/Home/css/style.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/shucheng.css">
 <link rel="stylesheet" href="__PUBLIC__/Home/css/book.css">
+<link href="__PUBLIC__/Home/filter/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <!-- 引用 -->
@@ -210,6 +211,47 @@
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
 <script src="__PUBLIC__/Home/js/index.js"></script>
 <script src="__PUBLIC__/Home/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="__PUBLIC__/Home/filter/js/bootstrap.min.js"></script>
+<script>
+    $(function() { <?php
+        if ($_GET) {
+            echo 'var obj='.json_encode($_GET).';';
+        } ?>
+        if (typeof(obj) != 'undefined') {
+            for (k in obj) {
+                $("#" + k).val(obj[k]);
+                $("a[" + k + "=" + obj[k] + "]").parent().addClass("in").siblings().removeClass("in");
+            }
+        }
+    })
+</script>
+<script>
+    function Filter(a, b) {
+        var $ = function(e) {
+            return document.getElementById(e);
+        }
+        var ipts = $('filterForm').getElementsByTagName('input'),
+        result = [];
+        for (var i = 0,
+        l = ipts.length; i < l; i++) {
+            if (ipts[i].getAttribute('to') == 'filter') {
+                result.push(ipts[i]);
+            }
+        }
+        if ($(a)) {
+            $(a).value = b;
+            for (var j = 0,
+            len = result.length; j < len; j++) {
+
+                if (result[j].value == '' || result[j].value == '0') {
+                    result[j].parentNode.removeChild(result[j]);
+                }
+            }
+            document.forms['filterForm'].submit();
+        }
+        return false;
+    }
+</script>
 <script type="text/javascript">
     jQuery(".slider .bd li").first().before( jQuery(".slider .bd li").last() );
     jQuery(".slider .pnBtn").hover(function(){ jQuery(this).find(".arrow").show() },function(){ jQuery(this).find(".arrow").hide() });
