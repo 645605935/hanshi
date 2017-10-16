@@ -27,26 +27,36 @@
                     <div class="prize-list">
                         <div class="prize-con">
                             <h2>一、线下赛区</h2>
-                            <h3>1、少儿组</h3>
-                            <ul>
-                                <foreach name="list_offline_child" item="v">
-                                    <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;{$v.title}</li>
-                                </foreach>
-                            </ul>
-                            <h3>2、成人组</h3>
-                            <ul>
-                                <foreach name="list_offline_man" item="v">
-                                    <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;{$v.title}</li>
-                                </foreach>
-                            </ul>
+                                
+
+                            <if condition="$list_offline_child">
+                                <h3>1、少儿组</h3>
+                                <ul>
+                                    <foreach name="list_offline_child" item="v">
+                                        <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;</li>
+                                    </foreach>
+                                </ul>
+                            </if>
+                            
+                            <if condition="$list_offline_man">
+                                <h3>2、成人组</h3>
+                                <ul>
+                                    <foreach name="list_offline_man" item="v">
+                                        <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;</li>
+                                    </foreach>
+                                </ul>
+                            </if>
                         </div>
                         <div class="prize-con">
                             <h2>二、网络赛区</h2>
+                            
+                            <if condition="$list_online">
                             <ul>
                                 <foreach name="list_online" item="v">
-                                    <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;{$v.title}</li>
+                                    <li>编号:{$v.id}&nbsp;&nbsp;&nbsp;{$v.author}&nbsp;&nbsp;&nbsp;</li>
                                 </foreach>
                             </ul>
+                            </if>
                         </div>
                         <h2 class="fs16 pl20">{$notice.content}</h2>
                     </div>
