@@ -142,8 +142,8 @@ class BookController extends CommonController{
         $bid=$_GET['bid'];
         $bjid=$_GET['bjid'];
 
-        $zhang_prev=M('BookZhang')->where(array('id'=>array('lt',$id)))->order('id desc')->find();
-        $zhang_next=M('BookZhang')->where(array('id'=>array('gt',$id)))->order('id asc')->find();
+        $zhang_prev=M('BookZhang')->where(array('bid'=>$bid, 'bjid'=>$bjid, 'id'=>array('lt',$id)))->order('id desc')->find();
+        $zhang_next=M('BookZhang')->where(array('bid'=>$bid, 'bjid'=>$bjid, 'id'=>array('gt',$id)))->order('id asc')->find();
 
         //目录
         $directory=M('BookZhang')->where(array('bid'=>$bid, 'bjid'=>$bjid))->select();
