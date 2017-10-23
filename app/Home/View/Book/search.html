@@ -29,66 +29,14 @@
                 <div class="rightt-con fl">
                     <div class="rightt-paixu clearfix">
                         <ul>
-                            <li class="cur"><a href="<?php echo $_SERVER['REQUEST_URI'];?>/stype/1">人气排序<i class="i-xia"></i></a></li>
-                            <li><a href="<?php echo $_SERVER['REQUEST_URI'];?>/stype/2">更新时间<i class="i-xia"></i></a></li>
-                            <li><a href="<?php echo $_SERVER['REQUEST_URI'];?>/stype/3">总收藏<i class="i-xia"></i></a></li>
-                            <li><a href="<?php echo $_SERVER['REQUEST_URI'];?>/stype/4">总字数<i class="i-xia"></i></a></li>
+                            <li class="cur"><a href="{:U('Home/Book/search',array('stype'=>1))}">人气排序<i class="i-xia"></i></a></li>
+                            <li><a href="{:U('Home/Book/search',array('stype'=>2))}">更新时间<i class="i-xia"></i></a></li>
+                            <li><a href="{:U('Home/Book/search',array('stype'=>3))}">总收藏<i class="i-xia"></i></a></li>
+                            <li><a href="{:U('Home/Book/search',array('stype'=>4))}">总字数<i class="i-xia"></i></a></li>
                         </ul>
                         <span class="rightt-spann fr">共<span>{$count}</span>本相关作品<i class="i-yiwen"></i><p class="yiwen-tip">由于政策和内容原因部分作品未能显示</p></span>
                     </div>
                     <div class="right-bb p20 bg2 clearfix">
-                        <div class="right-bl right-bll fl bg5 pt10 pb10 pr10">
-                            <div class="slider">
-                                <div class="bd">
-                                    <ul>
-                                        <foreach name="list_left" item="v">
-                                            <li>
-                                                <a href="{:U('Home/Book/detail',array('id'=>$v['id']))}"><img src="{$v.img}" /></a>
-                                            </li>
-                                        </foreach>
-                                    </ul>
-                                </div>
-                                <div class="txt">
-                                    <ul>
-                                        <foreach name="list_left" item="v">
-                                            <li>
-                                                <div class="right-blcon">
-                                                    <div class="bok-n">《{$v.title}》<span class="fr">9.6分</span></div>
-                                                    <p><span>作者：</span>{$v.author}<span class="ml20">主播：</span>{$v.title}</p>
-                                                    <p><span>简介：</span>{$v.desc}</p>
-                                                </div>
-                                            </li>
-                                        </foreach>
-                                    </ul>
-                                </div>
-                                <div class="pnBtn prev">
-                                    <span class="blackBg"></span>
-                                    <span class="arrow"></span>
-                                </div>
-                                <div class="pnBtn next">
-                                    <span class="blackBg"></span>
-                                    <span class="arrow"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right-br right-brr fl pl10">
-                            <ul class="rightt-ul rightt-ul11">
-                                <foreach name="list_right" item="v">
-                                    <li>
-                                        <a href="{:U('Home/Book/detail',array('id'=>$v['id']))}">
-                                            <span class="shu-imgg"><img src="{$v.img}" alt=""></span>
-                                            <div class="shu-r">
-                                                <h3>《{$v.title}》</h3>
-                                                <div class="shu-fl mt10 mb10"><span class="fs16">分类</span><span class="color1">水电费</span><span class="fr">9.6分</span></div>
-                                                <p><span class="fs16">作者</span>{$v.author}</p>
-                                                <p><span class="fs16">主播</span>{$v.author}</p>
-                                                <p class="mt5 jj"><span class="fs16">简介</span>{$v.desc}</p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </foreach>
-                            </ul>
-                        </div>
                         <div class="right-blb right-blb11 fl">
                             <ul class="rightt-ul">
                                 <foreach name="list" item="v">

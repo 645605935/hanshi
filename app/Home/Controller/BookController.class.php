@@ -39,6 +39,46 @@ class BookController extends CommonController{
         $this->list_right=$list_right;
         $this->recommend_bookers=$recommend_bookers;
         $this->recommend_voicers=$recommend_voicers;
+        $this->count=$count;
+        $this->display();
+    }
+
+    public function search(){
+        global $user;
+
+        $where=array();
+        if($_GET['stype']==1){
+            $order="eye desc";
+        }
+        if($_GET['stype']==2){
+            $order="time desc";
+        }
+        if($_GET['stype']==3){
+            $order="collect desc";
+        }
+        if($_GET['stype']==4){
+            $order="sum desc";
+        }
+
+        $count      = M('Book')->where($where)->count();
+        $Page       = new \Common\Extend\Page($count,8);
+        $nowPage = isset($_GET['p'])?$_GET['p']:1;
+        $list=D('Book')->page($nowPage.','.$Page->listRows)->where($where)->order($order)->relation(true)->order('id desc')->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['time']=date('Y-m-d',$value['time']);
+        }
+
+        //作家
+        $recommend_bookers=M('User')->where(array('is_booker'=>1))->limit(3)->select();
+
+        //主播
+        $recommend_voicers=M('User')->where(array('is_voicer'=>1))->limit(3)->select();
+
+        $this->page=$Page->show();
+        $this->list=$list;
+        $this->recommend_bookers=$recommend_bookers;
+        $this->recommend_voicers=$recommend_voicers;
+        $this->count=$count;
         $this->display();
     }
 
@@ -47,8 +87,14 @@ class BookController extends CommonController{
 
         $id=I('id');
         $row=M('Book')->find($id);
+        $tags=explode('_', $row['tags']);
+        foreach ($tags as $key => $value) {
+            $tags[$key]=M('Type')->find($value);
+        }
+
 
         $this->row=$row;
+        $this->tags=$tags;
         $this->display();
     }
 

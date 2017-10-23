@@ -54,16 +54,16 @@
                             </div>
                             <div class="book-xx">
                                 <span class="fs16">作者：</span>{$row.author}
-                                <span class="fs16">主播：</span>XXX
+                                <span class="fs16">主播：</span>{$row.author}
                             </div>
                             <div class="book-js">
                                 <span class="fs16">简介：</span>{$row.desc}
                             </div>
                             <div class="book-bq">
                                 <span class="fs16">标签：</span>
-                                <a href="javascript:;" class="bq1">标签1</a>
-                                <a href="javascript:;" class="bq2">标签2</a>
-                                <a href="javascript:;" class="bq3">标签3</a>
+                                <foreach name="tags" item="v">
+                                    <a href="javascript:;" class="bq{$key+1}">{$v.title}</a>
+                                </foreach>
                             </div>
                             <div class="book-cz">
                                 <ul>
