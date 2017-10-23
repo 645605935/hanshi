@@ -35,7 +35,7 @@
                         <if condition="$zhang_prev">
                             <li><a href="{:U('Home/Book/look',array('id'=>$zhang_prev['id'],'bid'=>$_GET['bid'],'bjid'=>$_GET['bjid']))}" class="read-icon6">上一章</a></li>
                         </if>
-                        <if condition="$zhang_prev">
+                        <if condition="$zhang_next">
                             <li><a href="{:U('Home/Book/look',array('id'=>$zhang_next['id'],'bid'=>$_GET['bid'],'bjid'=>$_GET['bjid']))}" class="read-icon7">下一章</a></li>
                         </if>
                         <li><a href="#1" class="read-icon8">听书</a></li>
