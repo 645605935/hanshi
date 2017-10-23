@@ -32,8 +32,12 @@
                         <li><a href="javascript:;" class="read-icon3 cellphoneBtn">手机</a></li>
                         <li><a href="#1" class="read-icon4">书架</a></li>
                         <li><a href="#1" class="read-icon5">书签</a></li>
-                        <li><a href="#1" class="read-icon6">上一章</a></li>
-                        <li><a href="#1" class="read-icon7">下一章</a></li>
+                        <if condition="$zhang_prev">
+                            <li><a href="{:U('Home/Book/look',array('id'=>$zhang_prev['id'],'bid'=>$_GET['bid'],'bjid'=>$_GET['bjid']))}" class="read-icon6">上一章</a></li>
+                        </if>
+                        <if condition="$zhang_prev">
+                            <li><a href="{:U('Home/Book/look',array('id'=>$zhang_next['id'],'bid'=>$_GET['bid'],'bjid'=>$_GET['bjid']))}" class="read-icon7">下一章</a></li>
+                        </if>
                         <li><a href="#1" class="read-icon8">听书</a></li>
                     </ul>
                     <div class="panel-wrap catalog">
@@ -47,16 +51,9 @@
                                     <div class="catalog-list-wrap">
                                         <div class="volume-list">
                                             <ul>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
-                                                <li><a href="#2">章节章节章节章节</a></li>
+                                                <foreach name="directory" item="v">
+                                                    <li><a href="{:U('Home/Book/look',array('id'=>$v['id'],'bid'=>$_GET['bid'],'bjid'=>$_GET['bjid']))}">{$v.title}</a></li>
+                                                </foreach>
                                             </ul>
                                         </div>
                                     </div>

@@ -110,14 +110,17 @@ class BookController extends CommonController{
         global $user;
 
         $bid=$_GET['bid'];
-        if($_GET['bjid']){
-            $bjid=$_GET['bjid'];
-        }else{
-            $bjid=1;
-        }
+        
 
         $book=M('Book')->find($bid);
         $book_juan=M('BookJuan')->where(array('bid'=>$bid))->select();
+
+        if($_GET['bjid']){
+            $bjid=$_GET['bjid'];
+        }else{
+            $bjid=$book_juan[0]['id'];
+        }
+
         $book_zhang=M('BookZhang')->where(array('bid'=>$bid, 'bjid'=>$bjid))->select();
 
         $this->base_url=$_SERVER['HTTP_HOST'];
@@ -133,8 +136,22 @@ class BookController extends CommonController{
         global $user;
 
         $row=M('BookZhang')->find($_GET['id']);
+
+        //上一章//下一章
+        $id=$_GET['id'];
+        $bid=$_GET['bid'];
+        $bjid=$_GET['bjid'];
+
+        $zhang_prev=M('BookZhang')->where(array('id'=>array('lt',$id)))->order('id desc')->find();
+        $zhang_next=M('BookZhang')->where(array('id'=>array('gt',$id)))->order('id asc')->find();
+
+        //目录
+        $directory=M('BookZhang')->where(array('bid'=>$bid, 'bjid'=>$bjid))->select();
         
         $this->row=$row;
+        $this->zhang_prev=$zhang_prev;
+        $this->zhang_next=$zhang_next;
+        $this->directory=$directory;
         $this->display();
     }
 
