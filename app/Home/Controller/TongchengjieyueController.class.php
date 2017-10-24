@@ -11,10 +11,12 @@ class TongchengjieyueController extends CommonController{
         $user=session('userinfo');
         $this->user=$user;
 
-        $company_id=$_GET['cid'];
-        if($company_id){
+        $where=array();
+        $where['uid']=$_GET['cid'];
+        
+        if($_GET['cid']){
             //产品分类
-            $types_1=M('Product')->where(array('uid'=>$company_id))->distinct(true)->field('type_3')->select();
+            $types_1=M('Product')->where($where)->distinct(true)->field('type_3')->select();
             $product_type_ids=array();
             foreach ($types_1 as $key => $value) {
                 $product_type_ids[]=$value['type_3'];
@@ -22,7 +24,7 @@ class TongchengjieyueController extends CommonController{
             $this->product_types=M('Type')->where(array('id'=>array('in', $product_type_ids)))->select();
 
             //精彩演出
-            $types_2=M('Video')->where(array('uid'=>$company_id))->distinct(true)->field('type')->select();
+            $types_2=M('Video')->where($where)->distinct(true)->field('type')->select();
             $video_type_ids=array();
             foreach ($types_2 as $key => $value) {
                 $video_type_ids[]=$value['type'];
@@ -115,7 +117,9 @@ class TongchengjieyueController extends CommonController{
         global $user;
 
         //热门产品推荐
-        $this->hot_product=M('Product')->limit(5)->select();
+        $where=array();
+        $where['uid']=$_GET['cid'];
+        $this->hot_product=M('Product')->where($where)->limit(5)->select();
 
         $this->display();
     }

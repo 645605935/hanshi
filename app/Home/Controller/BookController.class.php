@@ -93,8 +93,21 @@ class BookController extends CommonController{
         }
 
 
+        //作品总数
+        $books_list=M('Book')->where(array('uid'=>$user['id']))->select();
+        $words_sum=0;
+        $write_days=0;
+        foreach ($books_list as $key => $value) {
+            $words_sum=$value['sum']+$words_sum;
+            $write_days=$value['days']+$write_days;
+        }
+
+
         $this->row=$row;
         $this->tags=$tags;
+        $this->books_count=count($books_list);
+        $this->words_sum=$words_sum;
+        $this->write_days=$write_days;
         $this->display();
     }
 

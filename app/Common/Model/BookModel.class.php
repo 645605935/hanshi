@@ -15,6 +15,12 @@ class BookModel extends RelationModel{
 			'foreign_key'=>'type',
 			'as_fields' => 'title:type',
 		),
+		'_type_1'=>array(
+			'mapping_type'=>self::BELONGS_TO,
+			'class_name'=>'Type',
+			'foreign_key'=>'type_1',
+			'as_fields' => 'title:type_1',
+		),
 		'_match'=>array(
 			'mapping_type'=>self::BELONGS_TO,
 			'class_name'=>'match',

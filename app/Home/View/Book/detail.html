@@ -145,25 +145,33 @@
                 <div class="right-pcon bg2 p20">
                     <a href="#4" class="r-yx"></a>
                     <div class="r-head mb15">
-                        <span class="r-himg"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""><i class="r-vip"></i></span>
-                        <p class="mt10">笔名<span class="r-tx">作家</span></p>
+                        <span class="r-himg">
+                            <if condition="$user['img'] neq ''">
+                                <img src="{$user.img}" alt="">
+                            <else/>
+                                <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
+                            </if>
+                            
+                            <i class="r-vip"></i>
+                        </span>
+                        <p class="mt10">笔名<span class="r-tx">{$user.truename}</span></p>
                     </div>
                     <div class="r-zp">
                         <ul>
                             <li>
                                 <p class="r-t1"><i></i></p>
                                 <p class="mb5 mt10">作品总数</p>
-                                <p class="r-num">4</p>
+                                <p class="r-num">{$books_count}</p>
                             </li>
                             <li>
                                 <p class="r-t2"><i></i></p>
                                 <p class="mb5 mt10">累计字数</p>
-                                <p class="r-num">114万</p>
+                                <p class="r-num">{$books_sum}</p>
                             </li>
                             <li>
                                 <p class="r-t3"><i></i></p>
                                 <p class="mb5 mt10">创作天数</p>
-                                <p class="r-num">44442</p>
+                                <p class="r-num">{$write_days}</p>
                             </li>
                         </ul>
                     </div>
@@ -172,16 +180,17 @@
                     <p class="mt10"><span class="fs16 mr10">民族</span>xxx</p>
                     <p class="mt10"><span class="fs16 mr10">圈子</span><a href="#2" class="join-qz">点击加入</a></p>
                     <p class="mt10"><span class="fs16">擅长创作类型</span></p>
-                    <div class="r-lx">
+                    <div class="r-lx" style="overflow: hidden;">
                         <ul>
-                            <li class="lx1"><a href="javascript:;">类型</a></li>
-                            <li class="lx2"><a href="javascript:;">类型</a></li>
-                            <li class="lx3"><a href="javascript:;">类型</a></li>
+                            <foreach name="tags" item="v">
+                                <li class="lx{$key+1}"><a href="javascript:;">{$v.title}</a></li>
+                            </foreach>
                         </ul>
                     </div>
-                    <p><span class="fs16">简介</span> 是的发生都发打反手</p>
+                    <p><span class="fs16">简介</span></p>
+                    <p>{$row.desc}</p>
                     <p class="mt15 fs16">代表作品</p>
-                    <p class="mt5">是的发生都发打反手</p>
+                    <p class="mt5">{$row.title}</p>
                 </div>
             </div>
         </div>
