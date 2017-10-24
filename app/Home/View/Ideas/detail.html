@@ -20,7 +20,10 @@
 <div class="container">
     <div class="con">
         <div class="discus-new">
-            <h2>{$row.title}<span class="fr"><a href="#2">收藏</a><a href="#2">回复</a></span></h2>
+            <h2>{$row.title}<span class="fr"><a href="#2">收藏</a><a href="#2">回复</a></span></h2><br>
+            <div>
+              {$row.content}
+            </div>
             <div class="discus-con">
 
                 <foreach name="list" item="v">
@@ -33,7 +36,12 @@
                         </div>
                         <div class="discus-right">
                             <div class="discus-rcon">
-                                <p>{$v.content}</p>
+                                <if condition="$v['status'] eq 1">
+                                  <p>******</p>
+                                <else/>
+                                  <p>{$v.content}</p>
+                                </if>
+                                
                                 <div class="discus-time">1楼 {$v.time|date="Y-m-d H:i",###} <a href="#2" class="ml10 discus-hff">回复</a></div>
                             </div>
                         </div>

@@ -59,6 +59,7 @@ class IdeasController extends CommonController{
         $row=D('Ideas')->find($id);
 
         $list=D('IdeasItem')->where(array('iid'=>$id))->order('time desc')->relation(true)->select();
+        
         $this->list=$list;
         $this->row=$row;
         $this->display();
