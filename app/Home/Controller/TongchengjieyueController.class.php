@@ -44,6 +44,8 @@ class TongchengjieyueController extends CommonController{
 
 
         $where=array();
+        $where['gid']=33;
+        $where['username']=array('like',"%".'图书馆'."%");
 
         $count      = M('User')->where($where)->count();
         $Page       = new \Common\Extend\Page($count,4);
@@ -58,37 +60,40 @@ class TongchengjieyueController extends CommonController{
         $this->list=$list;
 
 
-        $block1=M('User')->limit(8)->select();
+        $map=array();
+        $map['gid']=33;
+        $map['username']=array('like',"%".'图书馆'."%");
+        $block1=M('User')->where($map)->limit(8)->select();
         foreach ($block1 as $key => $value) {
             $block1[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
 
-        $block2=M('User')->limit(3)->select();
+        $block2=M('User')->where($map)->limit(3)->select();
         foreach ($block2 as $key => $value) {
             $block2[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
-        $block2_big=M('User')->find(1);
+        $block2_big=M('User')->where($map)->find(1);
         $block2_big['company_logo']=$_oss_url_ . $block2_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
 
-        $block3=M('User')->limit(9)->select();
+        $block3=M('User')->where($map)->limit(9)->select();
         foreach ($block3 as $key => $value) {
             $block3[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
-        $block4=M('User')->limit(3)->select();
+        $block4=M('User')->where($map)->limit(3)->select();
         foreach ($block4 as $key => $value) {
             $block4[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
-        $block4_big=M('User')->find(1);
+        $block4_big=M('User')->where($map)->find(1);
         $block4_big['company_logo']=$_oss_url_ . $block4_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
-        $block5=M('User')->limit(24)->select();
+        $block5=M('User')->where($map)->limit(24)->select();
         foreach ($block5 as $key => $value) {
             $block5[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
-        $block6=M('User')->limit(3)->select();
+        $block6=M('User')->where($map)->limit(3)->select();
         foreach ($block6 as $key => $value) {
             $block6[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
-        $block6_big=M('User')->find(1);
+        $block6_big=M('User')->where($map)->find(1);
         $block6_big['company_logo']=$_oss_url_ . $block6_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
 
 
