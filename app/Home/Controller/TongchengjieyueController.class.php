@@ -72,7 +72,7 @@ class TongchengjieyueController extends CommonController{
         foreach ($block2 as $key => $value) {
             $block2[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
-        $block2_big=M('User')->where($map)->find(1);
+        $block2_big=M('User')->where($map)->find();
         $block2_big['company_logo']=$_oss_url_ . $block2_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
 
         $block3=M('User')->where($map)->limit(9)->select();
@@ -83,7 +83,7 @@ class TongchengjieyueController extends CommonController{
         foreach ($block4 as $key => $value) {
             $block4[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
-        $block4_big=M('User')->where($map)->find(1);
+        $block4_big=M('User')->where($map)->find();
         $block4_big['company_logo']=$_oss_url_ . $block4_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
         $block5=M('User')->where($map)->limit(24)->select();
         foreach ($block5 as $key => $value) {
@@ -93,7 +93,7 @@ class TongchengjieyueController extends CommonController{
         foreach ($block6 as $key => $value) {
             $block6[$key]['company_logo']=$_oss_url_ . $value['company_logo']. "?x-oss-process=" . $_oss_style_50x50_;
         }
-        $block6_big=M('User')->where($map)->find(1);
+        $block6_big=M('User')->where($map)->find();
         $block6_big['company_logo']=$_oss_url_ . $block6_big['company_logo']. "?x-oss-process=" . $_oss_style_150x150_;
 
 
