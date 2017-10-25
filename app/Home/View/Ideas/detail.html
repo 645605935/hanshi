@@ -24,29 +24,35 @@
             <div>
               {$row.content}
             </div>
+
+
             <div class="discus-con">
 
-                <foreach name="list" item="v">
-                    <div class="discus-list">
-                        <div class="discus-left">
-                            <div class="discus-img"><img src="{$v.avatar}" alt=""></div>
-                            <div class="discus-name">{$v.username}</div>
-                            <div class="discus-ft">发帖:2</div>
-                            <div class="discus-hf">回复:2</div>
-                        </div>
-                        <div class="discus-right">
-                            <div class="discus-rcon">
-                                <if condition="$v['status'] eq 1">
-                                  <p>******</p>
-                                <else/>
-                                  <p>{$v.content}</p>
-                                </if>
-                                
-                                <div class="discus-time">1楼 {$v.time|date="Y-m-d H:i",###} <a href="#2" class="ml10 discus-hff">回复</a></div>
+                <if condition="$is_show eq 1">
+                    <foreach name="list" item="v">
+                        <div class="discus-list">
+                            <div class="discus-left">
+                                <div class="discus-img"><img src="{$v.avatar}" alt=""></div>
+                                <div class="discus-name">{$v.username}</div>
+                                <div class="discus-ft">发帖:2</div>
+                                <div class="discus-hf">回复:2</div>
+                            </div>
+                            <div class="discus-right">
+                                <div class="discus-rcon">
+                                    <if condition="$v['status'] eq 1">
+                                      <p>******</p>
+                                    <else/>
+                                      <p>{$v.content}</p>
+                                    </if>
+                                    
+                                    <div class="discus-time">1楼 {$v.time|date="Y-m-d H:i",###} <a href="#2" class="ml10 discus-hff">回复</a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </foreach>
+                    </foreach>
+                <else/>
+                    当前时间评论不显示
+                </if>
 
             </div>
             <div class="discus-add" style="margin-left: 0px;">

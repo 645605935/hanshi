@@ -58,10 +58,24 @@ class IdeasController extends CommonController{
         $id=I('id');
         $row=D('Ideas')->find($id);
 
-        $list=D('IdeasItem')->where(array('iid'=>$id))->order('time desc')->relation(true)->select();
+        //在设置结束时间前评论不显示
+        if(time()<$row['start_time']){
+            $is_show=0;
+        }
+
+        if(time()>$row['start_time'] && time()<$row['end_time']){
+            $is_show=0;
+        }
+        
+        if(time()>$row['end_time']){
+            $is_show=1;
+        }
+
+        $list=D('IdeasItem')->where(array('iid'=>$id,'status'=>0))->order('time desc')->relation(true)->select();
         
         $this->list=$list;
         $this->row=$row;
+        $this->is_show=$is_show;
         $this->display();
     }
 
