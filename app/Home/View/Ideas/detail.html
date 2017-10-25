@@ -106,7 +106,6 @@
              dataType : 'json',
              success  : function(json) {
                  if(json.code==0){
-                     alert(json.msg);
                      window.location.reload();
                  }else{
                      layer.msg(json.msg);
