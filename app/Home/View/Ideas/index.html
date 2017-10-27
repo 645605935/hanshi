@@ -20,85 +20,50 @@
     <div class="con">
         <div class="dis-list">
             <ul>
-                <li>
-                    <div class="dis-user">
-                        <div class="dis-img"><a href="#2"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a></div>
-                        <div class="dis-name"><a href="#2">mingzi</a></div>
-                    </div>
-                    <div class="dis-info">
-                        <div class="dis-link"><a href="#2">标题标题标题标题标题</a></div>
-                        <div class="dis-detail">内容内容内容内容内容内容内容内容</div>
-                        <div class="dis-img">
-                            <ul>
-                                <li><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></li>
-                                <li><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></li>
-                                <li><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></li>
-                            </ul>
+
+                <foreach name="list" item="vo">
+                    <li>
+                        <div class="dis-user">
+                            <div class="dis-img">
+                                <a href="#2">
+                                <if condition="$vo['_user']['img']">
+                                    <img src="{$vo['_user']['img']}" alt="">
+                                <else/>
+                                    <img src="__PUBLIC__/Home/images/img1.jpg" alt="">
+                                </if>
+                                    
+                                </a>
+                            </div>
+                            <div class="dis-name"><a href="#2">{$vo._user.username}</a></div>
                         </div>
-                    </div>
-                    <div class="dis-other">
-                        <div class="dis-time">2017-10-26 12:00</div>
-                        <div class="dis-ope">
-                            <a href="javascript:;" class="dis-zan">77</a>
-                            <a href="javascript:;" class="dis-pl">36</a>
+                        <div class="dis-info">
+                            <div class="dis-link"><a href="{:U('Home/Ideas/detail',array('id'=>$vo['id']))}">{$vo.title}</a></div>
+                            <!-- <div class="dis-detail">{$vo.content}</div> -->
+                            <if condition="$vo['images']">
+                                <div class="dis-img">
+                                    <ul>
+                                        <foreach name="vo[images]" item="v">
+                                            <li><img src="{$v}" alt=""></li>
+                                        </foreach>
+                                    </ul>
+                                </div>
+                            </if>
                         </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="dis-user">
-                        <div class="dis-img"><a href="#2"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a></div>
-                        <div class="dis-name"><a href="#2">mingzi</a></div>
-                    </div>
-                    <div class="dis-info">
-                        <div class="dis-link"><a href="#2">标题标题标题标题标题</a></div>
-                        <div class="dis-detail">内容内容内容内容内容内容内容内容</div>
-                        <div class="dis-img">
-                            <ul>
-                                <li><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></li>
-                                <li><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></li>
-                                <li><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></li>
-                            </ul>
+                        <div class="dis-other">
+                            <div class="dis-time">{$vo.time}</div>
+                            <div class="dis-ope">
+                                <a href="javascript:;" class="dis-zan" data-id="{$vo.id}">{$vo.zan}</a>
+                                <a href="{:U('Home/Ideas/detail',array('id'=>$vo['id']))}" class="dis-pl">{$vo.pinglun}</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="dis-other">
-                        <div class="dis-time">2017-10-26 12:00</div>
-                        <div class="dis-ope">
-                            <a href="javascript:;" class="dis-zan1">77</a>
-                            <a href="javascript:;" class="dis-pl">36</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="dis-user">
-                        <div class="dis-img"><a href="#2"><img src="__PUBLIC__/Home/images/img1.jpg" alt=""></a></div>
-                        <div class="dis-name"><a href="#2">mingzi</a></div>
-                    </div>
-                    <div class="dis-info">
-                        <div class="dis-link"><a href="#2">标题标题标题标题标题</a></div>
-                        <div class="dis-detail">内容内容内容内容内容内容内容内容</div>
-                    </div>
-                    <div class="dis-other">
-                        <div class="dis-time">2017-10-26 12:00</div>
-                        <div class="dis-ope">
-                            <a href="javascript:;" class="dis-zan">77</a>
-                            <a href="javascript:;" class="dis-pl">36</a>
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                </foreach>
+               
             </ul>
         </div>
         <div class="page-con">
             <div class="page-group mt20 mb20">
-                <a href="#1" class="a1">首页</a>
-                <a href="javascript:void(0);" class="a1 a1f">上一页</a>
-                <a href="#1" class="a1">上一页</a>
-                <span>1</span>
-                <a href="#2">2</a>
-                <a href="#2">3</a>
-                <i>...</i>
-                <a href="#2" class="a1">下一页</a>
-                <a href="javascript:void(0);" class="a1 a1f">下一页</a>
-                <a href="#2" class="a1">尾页</a>
+                {$page}
             </div>
         </div>
     </div>
@@ -110,5 +75,35 @@
 
 <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
 <script src="__PUBLIC__/Home/js/index.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $('.dis-zan').click(function(){
+            var id=$(this).attr('data-id');
+            var obj=$(this);
+            $.ajax({  
+                async:false,
+                type:'get',  
+                contentType:"application/x-www-form-urlencoded",
+                url : "{:U('Home/Ideas/ajax_dianzan')}",
+                data: {
+                    id:id
+                },
+                dataType : 'json',
+                success  : function(json) {  
+                    if(json.code == 0){
+                        alert(json.msg);
+                        obj.html(json.data.zan);
+                    }else{
+                        alert(json.msg);
+                    }
+                },
+                error  : function() {  
+                    alert('接口错误');
+                }  
+            }); 
+        });
+    });
+</script>
 </body>
 </html>

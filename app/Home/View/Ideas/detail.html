@@ -20,7 +20,15 @@
 <div class="container">
     <div class="con">
         <div class="discus-new">
-            <h2>{$row.title}<span class="fr"><a href="#2">收藏</a><a href="#2">回复</a></span></h2><br>
+            <h2>{$row.title}
+            <span class="fr">
+                <if condition="$is_collect eq 1">
+                    <a href="#2" data-id="{$row.id}" id="cancel_collect">已收藏</a>
+                <else/>
+                    <a href="#2" data-id="{$row.id}" id="collect">收藏</a>
+                </if>
+                <a href="#2">回复</a>
+            </span></h2><br>
             <div>
               {$row.content}
             </div>
@@ -97,11 +105,77 @@
 <script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+    $(function(){
+        $('#collect').click(function(){
+            if(!username){
+                alert('请先登录');return;
+            }
 
+            var id=$(this).attr('data-id');
+            var obj=$(this);
+            $.ajax({  
+                async:false,
+                type:'get',  
+                contentType:"application/x-www-form-urlencoded",
+                url : "{:U('Home/Ideas/ajax_collect')}",
+                data: {
+                    id:id
+                },
+                dataType : 'json',
+                success  : function(json) {  
+                    if(json.code == 0){
+                        alert('收藏成功');
+                        obj.html('已收藏').attr('id','cancel_collect');
+                    }else{
+                        alert(json.msg);
+                    }
+                },
+                error  : function() {  
+                    alert('接口错误');
+                }  
+            }); 
+        });
+
+        $('#cancel_collect').click(function(){
+            if(!username){
+                alert('请先登录');return;
+            }
+
+            var id=$(this).attr('data-id');
+            var obj=$(this);
+            $.ajax({  
+                async:false,
+                type:'get',  
+                contentType:"application/x-www-form-urlencoded",
+                url : "{:U('Home/Ideas/ajax_cancel_collect')}",
+                data: {
+                    id:id
+                },
+                dataType : 'json',
+                success  : function(json) {  
+                    if(json.code == 0){
+                        alert('取消收藏成功');
+                        obj.html('收藏').attr('id','collect');
+                    }else{
+                        alert(json.msg);
+                    }
+                },
+                error  : function() {  
+                    alert('接口错误');
+                }  
+            }); 
+        });
+    });
+</script>
 
 <script>
     //添加
     function _ajax_add(_data){
+         if(!username){
+             alert('请先登录');return;
+         }
+         
          var _json;
          $.ajax({  
              async:false,
