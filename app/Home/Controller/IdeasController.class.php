@@ -15,42 +15,31 @@ class IdeasController extends CommonController{
     public function index(){
         global $user;
 
-      
-
-
-        $type=$_GET['type'];
         $map=array();
-        if($_GET['keyword']){
-            $where['title']  = array('like', "%".$_GET['keyword']."%");
-            $where['author']  = array('like', "%".$_GET['keyword']."%");
-            $where['id']  = $_GET['keyword'];
-            $where['_logic'] = 'or';
-            $map['_complex'] = $where;
-        }
-        if($_GET['type']){
-            $map['type']=$type;
-        }
-        
-
         $count      = D('Ideas')->where($map)->count();
-
         $Page       = new \Common\Extend\Page($count,8);
         $nowPage = isset($_GET['p'])?$_GET['p']:1;
         $list=D('Ideas')->page($nowPage.','.$Page->listRows)->where($map)->order('id desc')->select();
+
         foreach ($list as $key => $value) {
             $list[$key]['time']=date('Y-m-d',$value['time']);
+
+            
+
+
+            $str=$value['content']; 
+            $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/"; 
+            preg_match_all($pattern,$str,$match); 
+            dump($match); 
+
         }
-
-        
-
+die;
         $this->page=$Page->show();
         $this->list=$list;
-
-
-
-        $this->type=$type;
         $this->display();
     }
+
+
 
     public function detail(){
         global $user;

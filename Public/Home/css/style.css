@@ -3739,3 +3739,22 @@ a {
 .discus-btn:hover {color: #fff;}
 .discus-i {position: relative;float: left;}
 .discus-i input[type='file'] {opacity: 0;position: absolute;left: 15px;width: 80px;cursor: pointer;z-index: 999;}
+
+.dis-list li {padding: 20px 0;border-bottom: 1px solid #ddd;float: left;width: 100%;}
+.dis-user {width: 150px;float: left;text-align: center;}
+.dis-user .dis-img img {width: 84px;height: 84px;border-radius: 50%;margin-bottom: 10px;}
+.dis-info {float: left;width: 630px;}
+.dis-info .dis-link a {font-size: 18px;color: #333;line-height: 1.6;}
+.dis-info .dis-link a:hover {color: #f00;text-decoration: underline;}
+.dis-detail {color: #666;font-size: 14px;margin:18px 0 12px;line-height: 1.4;}
+.dis-img li {padding: 0;border: none;width: auto;}
+.dis-img li img {width: 140px;height: 91px;float: left;margin-right: 16px;}
+.dis-other {width: 220px;float: right;}
+.dis-time {font-size: 16px;color:#666;line-height: 1.8;text-align: right;margin-bottom: 10px;}
+.dis-time:before {content:'';width: 20px;height: 20px;background: url(../images/time.png) no-repeat;background-size: 100%;display: inline-block;vertical-align: middle;margin-right: 7px;}
+.dis-ope {text-align: right;font-size: 14px;}
+.dis-zan,.dis-zan1 {margin-right: 15px;}
+.dis-ope a:hover {color: #666;}
+.dis-zan:before {content:'';width: 20px;height: 20px;background: url(../images/dis-xin.png) no-repeat;background-size: 100%;display: inline-block;vertical-align: middle;margin-right: 7px;}
+.dis-zan1:before {content:'';width: 20px;height: 20px;background: url(../images/dis-xinh.png) no-repeat;background-size: 100%;display: inline-block;vertical-align: middle;margin-right: 7px;}
+.dis-pl:before {content:'';width: 16px;height: 16px;background: url(../images/dis-pl.png) no-repeat;background-size: 100%;display: inline-block;vertical-align: middle;margin-right: 7px;}
