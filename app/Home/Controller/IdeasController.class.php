@@ -165,7 +165,35 @@ class IdeasController extends CommonController{
     
 
     
+    //添加
+    public function ajax_add(){
+        global $user;
 
+        $data=array();
+        $data=$_POST;
+        if($data){
+            $data['uid']=$user['id'];
+            $data['time']=time();
+
+            $id = M('IdeasItem')->add($data);
+            if($id){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+                $data['data']=$row;
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+        }else{
+            $data=array();
+            $data['code']=2;
+            $data['msg']='error';
+        }
+
+        echo json_encode($data);
+    }
 
 
 
