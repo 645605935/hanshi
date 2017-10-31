@@ -16,6 +16,9 @@ class MatchController extends AuthController {
         }
     }
 
+    /**
+     * @cc index主页面
+     */
     public function index(){
         global $user;
 
@@ -47,6 +50,9 @@ class MatchController extends AuthController {
         $this->display();
     }
 
+    /**
+     * @cc ajax_get_type_sq获取赛区
+     */
     public function ajax_get_type_sq(){
         $type_sqz=I('id');
 
@@ -66,7 +72,9 @@ class MatchController extends AuthController {
         echo json_encode($data);
     }
 
-    //列表
+    /**
+     * @cc ajax_get_list列表
+     */
     public function ajax_get_list(){
         $map=array();
         if($_GET['title']){
@@ -104,7 +112,9 @@ class MatchController extends AuthController {
         echo json_encode($data);
     }
 
-    //获取单条信息
+    /**
+     * @cc ajax_get_row_info获取单条信息
+     */
     public function ajax_get_row_info(){
         $id=I('id');
 
@@ -206,7 +216,9 @@ class MatchController extends AuthController {
     }
 
 
-    //添加
+    /**
+     * @cc ajax_add添加
+     */
     public function ajax_add(){
         global $user;
 
@@ -369,7 +381,9 @@ class MatchController extends AuthController {
         echo json_encode($data);
     }
 
-    //编辑
+    /**
+     * @cc ajax_edit编辑
+     */
     public function ajax_edit(){
         global $user;
 
@@ -537,7 +551,9 @@ class MatchController extends AuthController {
         echo json_encode($data);
     }
 
-    //删除
+    /**
+     * @cc ajax_del删除
+     */
     public function ajax_del(){
         $id=I('id'); 
 
@@ -562,8 +578,9 @@ class MatchController extends AuthController {
         echo json_encode($data);
     }
 
-
-    // 上传图片
+    /**
+     * @cc lay_upload_file上传图片
+     */
     public function lay_upload_file(){
         if($_FILES['file']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
@@ -595,7 +612,9 @@ class MatchController extends AuthController {
     }
 
 
-    // 上传视频
+    /**
+     * @cc lay_upload_file_video上传视频
+     */
     public function lay_upload_file_video(){
         if($_FILES['file_video']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
@@ -625,7 +644,7 @@ class MatchController extends AuthController {
             }
 
             //上传到阿里云OSS
-            oss_upload( '/Uploads/layui/'.$video );
+            // oss_upload( '/Uploads/layui/'.$video );
 
             echo json_encode($data);
         }

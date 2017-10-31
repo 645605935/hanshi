@@ -39,10 +39,11 @@ class LoginController extends Controller{
                 $login['uid']=$row['id'];
                 $login['username']=$row['username'];
                 $login['gid']=$row['gid'];
+                $login['group']=$row['_auth_group_title'];
                 $login['avatar']=$row['img'];
 
 
-                if($row['gid']==427){
+                if($row['gid']==0){
                     $login['group']="超级管理员";               
                 }elseif($row['gid']>1){
                     $login['auth_controller_names']=$auth_controller_names;
@@ -109,10 +110,10 @@ class LoginController extends Controller{
         $user=session('auth');
         if($user['gid']==4||$user['gid']==3){
             session('[destory]');
-            $this->success('退出成功',"http://".$_SERVER['SERVER_NAME']);
+            $this->success('退出成功',U('Admin/Login/index'));
         }else{
             session('[destory]');
-            $this->success('退出成功',"http://".$_SERVER['SERVER_NAME']);
+            $this->success('退出成功',U('Admin/Login/index'));
         }
     }	
 

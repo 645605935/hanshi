@@ -461,26 +461,40 @@
 
 
 		<script type="text/javascript">
-
 			$(function() {
-
-			  	$(".bootbox-confirm").on(ace.click_event, function() {
-
-			  		var delUrl=$(this).attr('data-url');
-
-					bootbox.confirm("Are you sure?", function(result) {
-
-						if(result) {
-
-							location.href =delUrl;
-
-						}
-
-					});
-
+			  	$(".del").on(ace.click_event, function() {
+			  		var obj_tr=$(this).parents('tr');
+			  		var id=$(this).attr('data-id');
+					// bootbox.confirm("Are you sure?", function(result) {
+						// if(result) {
+							_ajax_del(obj_tr, id);
+						// }
+					// });
 				});
-
 			});
+
+
+			//异步删除
+			function _ajax_del(obj_tr, id){
+			    $.ajax({  
+			        type:'get',  
+			        url : "{:U('Admin/AuthRule/ajax_del')}",
+			        data:{ 
+			          id:id 
+			        },
+			        dataType : 'json',
+			        success  : function(json) {  
+			            if(json.code == 0){
+			                obj_tr.remove();
+			            }else{
+			                alert(json.msg);
+			            }
+			        },
+			        error  : function() {  
+			            alert('error');
+			        }  
+			    }); 
+			}
 
 		</script>
 

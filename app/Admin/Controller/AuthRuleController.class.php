@@ -29,7 +29,7 @@ class AuthRuleController extends AuthController {
 			$r['status']  = $r['status']==1 ? '<i class="icon-eye-open" style="color: green;font-size: 28px;"></i>' :'<i class="icon-eye-close" style="color: red;font-size: 28px;"></i>';
 			$r['submenu'] = $r['level']==3 ? '<font color="#cccccc">添加子菜单</font>' : "<a href='".U('/Admin/AuthRule/add/pid/'.$r['id'])."'>添加子菜单</a>";
 			$r['edit']    = $r['level']==1 ? '<font color="#cccccc">修改</font>' : "<a href='".U('/Admin/AuthRule/edit/id/'.$r['id'].'/pid/'.$r['pid'])."'>修改</a>";
-			$r['del']     = $r['level']==1 ? '<font color="#cccccc">删除</font>' : "<a class='bootbox-confirm' data-url='".U('/Admin/AuthRule/del/id/'.$r['id'])."' href='javascript:void(0)'>删除</a>";
+			$r['del']     = $r['level']==1 ? '<font color="#cccccc">删除</font>' : "<a class='del' data-id='".$r['id']."' data-url='".U('/Admin/AuthRule/del/id/'.$r['id'])."' href='javascript:void(0)'>删除</a>";
 
 			switch ($r['display']) {
 				case 0:
@@ -205,12 +205,17 @@ class AuthRuleController extends AuthController {
 		            foreach ($all_controller as $controller) {
 		                $controller_name = $controller;
 		                $all_action = $this->getAction($module, $controller_name);
+
 		                foreach ($all_action as $action) {
 		                	if($action){
+
+		                		$desc_cc = $this->get_cc_desc($module, $controller_name, $action);
+
 		                		$_temp_title=$module . '/' . $controller . '/' . $action;
 		                		$data[$i] = array(
 		                		    'name' => $_temp_title,
-		                		    'short_name' => $action
+		                		    'short_name' => $action,
+		                		    'desc_cc' => $desc_cc
 		                		);
 
 		                		//如果已经添加
@@ -227,6 +232,7 @@ class AuthRuleController extends AuthController {
 		        }
 		        $this->assign('all_functions',$data);
 			}
+
 			$this->display();
 		}
 	}
@@ -302,20 +308,28 @@ class AuthRuleController extends AuthController {
 	}
 
 	//删除
-	public function del(){
+	public function ajax_del(){
 		$id = I('id','intval',0);
 		if(!$id)$this->error('参数错误!');
 		$db = D('AuthRule');
 		$info = $db -> getAuthRule(array('id'=>$id),'id');
 		if($db->childAuthRule($info['id'])){
-			$this->error('存在子菜单，不可删除!');
-		}
-		if($db->delAuthRule('id='.$id)){
-			$this->assign("jumpUrl",U('/Admin/AuthRule/index'));
-			$this->success('删除成功！');
+			$data=array();
+			$data['code']=1;
+			$data['msg']='存在子菜单，不可删除!';
 		}else{
-			$this->error('删除失败!');
+			if($db->delAuthRule('id='.$id)){
+				$data=array();
+				$data['code']=0;
+				$data['msg']='删除成功！';
+			}else{
+				$data=array();
+				$data['code']=0;
+				$data['msg']='删除失败！';
+			}
 		}
+
+		echo json_encode($data); 
 	}
 
 	//获取所有控制器名称
@@ -352,6 +366,20 @@ class AuthRuleController extends AuthController {
             }
         }
         return $customer_functions;
+    }
+
+    /**
+     * @cc 获取函数的注释
+     */
+    protected function get_cc_desc($module,$controller,$action){
+        $desc=$module.'\Controller\\'.$controller.'Controller';
+    
+        $func  = new \ReflectionMethod(new $desc(),$action);
+        $tmp   = $func->getDocComment();
+        $flag  = preg_match_all('/@cc(.*?)\n/',$tmp,$tmp);
+        $tmp   = trim($tmp[1][0]);
+        $tmp   = $tmp !='' ? $tmp:'无';
+        return $tmp;
     }
 
     //异步排序

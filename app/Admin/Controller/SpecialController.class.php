@@ -16,6 +16,9 @@ class SpecialController extends AuthController {
         }
     }
 
+    /**
+     * @cc index主页面
+     */
     public function index(){
         global $user;
 
@@ -36,7 +39,9 @@ class SpecialController extends AuthController {
         $this->display();
     }
 
-    //列表
+    /**
+     * @cc ajax_get_list获取列表
+     */
     public function ajax_get_list(){
         $map=array();
         if($_GET['title']){
@@ -59,7 +64,9 @@ class SpecialController extends AuthController {
         echo json_encode($data);
     }
 
-    //获取单条信息
+    /**
+     * @cc ajax_get_row_info获取单条信息
+     */
     public function ajax_get_row_info(){
         $id=I('id');
 
@@ -89,8 +96,9 @@ class SpecialController extends AuthController {
         echo json_encode($data);
     }
 
-
-    //添加
+    /**
+     * @cc ajax_add添加
+     */
     public function ajax_add(){
         global $user;
 
@@ -127,7 +135,9 @@ class SpecialController extends AuthController {
         echo json_encode($data);
     }
 
-    //编辑
+    /**
+     * @cc ajax_edit编辑
+     */
     public function ajax_edit(){
         global $user;
 
@@ -165,7 +175,9 @@ class SpecialController extends AuthController {
         echo json_encode($data);
     }
 
-    //删除
+    /**
+     * @cc ajax_del删除
+     */
     public function ajax_del(){
         $id=I('id'); 
 
@@ -190,8 +202,9 @@ class SpecialController extends AuthController {
         echo json_encode($data);
     }
 
-
-    // 上传图片
+    /**
+     * @cc lay_upload_file上传图片
+     */
     public function lay_upload_file(){
         if($_FILES['file']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
@@ -215,15 +228,16 @@ class SpecialController extends AuthController {
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$img;
+                $data['data']["src"]='/Uploads/layui/'.$img;
             }
 
             echo json_encode($data);
         }
     }
 
-
-    // 上传视频
+    /**
+     * @cc lay_upload_file_Special上传视频
+     */
     public function lay_upload_file_Special(){
         if($_FILES['file_Special']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
@@ -244,7 +258,7 @@ class SpecialController extends AuthController {
                 $data['msg']=$upload->getError();
             }else{
                 $Special=$info['file_Special']['savename'];
-                $Special_url='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$Special;
+                $Special_url='/Uploads/layui/'.$Special;
 
                 $data=array();
                 $data['code']=0;
@@ -253,7 +267,7 @@ class SpecialController extends AuthController {
             }
 
             //上传到阿里云OSS
-            oss_upload( './Uploads/layui/'.$Special );
+            // oss_upload( './Uploads/layui/'.$Special );
 
             echo json_encode($data);
         }

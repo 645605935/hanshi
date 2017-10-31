@@ -16,6 +16,9 @@ class BaomingController extends AuthController {
         }
     }
 
+    /**
+     * @cc index主页面
+     */
     public function index(){
         global $user;
 
@@ -25,7 +28,9 @@ class BaomingController extends AuthController {
         $this->display();
     }
 
-    //列表
+    /**
+     * @cc ajax_get_list获取列表
+     */
     public function ajax_get_list(){
 
             $map=array();
@@ -93,7 +98,9 @@ class BaomingController extends AuthController {
        
     }
 
-    //打印
+    /**
+     * @cc baoming_excel导出报名列表EXCEL
+     */
     public function baoming_excel(){
         
             /**
@@ -204,8 +211,6 @@ class BaomingController extends AuthController {
     }
 
 
-
-
     private function getExcel($fileName,$headArr,$data){
         //对数据进行检验
         if(empty($data) || !is_array($data)){
@@ -255,7 +260,9 @@ class BaomingController extends AuthController {
 
     }
 
-    //获取单条信息
+    /**
+     * @cc ajax_get_row_info获取单条信息
+     */
     public function ajax_get_row_info(){
         $id=I('id');
 
@@ -281,7 +288,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
-    //添加票数
+    /**
+     * @cc ajax_add_num批量添加票数
+     */
     public function ajax_add_num(){
         global $user;
 
@@ -314,7 +323,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
-    //添加
+    /**
+     * @cc ajax_add添加
+     */
     public function ajax_add(){
         global $user;
 
@@ -358,7 +369,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
-    //编辑
+    /**
+     * @cc ajax_edit编辑
+     */
     public function ajax_edit(){
         global $user;
 
@@ -402,7 +415,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
-    //审核
+    /**
+     * @cc ajax_check审核
+     */
     public function ajax_check(){
         global $user;
 
@@ -444,6 +459,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
+    /**
+     * @cc ajax_get_sqz获取赛区组
+     */
     public function ajax_get_sqz(){
         $list=M('Type')->where(array('pid'=>1358))->select();
 
@@ -461,7 +479,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
-
+    /**
+     * @cc ajax_get_sq获取赛区
+     */
     public function ajax_get_sq(){
         $sqz=I('sqz');
 
@@ -487,6 +507,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
+    /**
+     * @cc ajax_get_bmz获取报名组
+     */
     public function ajax_get_bmz(){
         $sqz=I('sqz');
 
@@ -512,7 +535,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
-    //删除
+    /**
+     * @cc ajax_del删除
+     */
     public function ajax_del(){
         $id=I('id'); 
 
@@ -537,8 +562,9 @@ class BaomingController extends AuthController {
         echo json_encode($data);
     }
 
-
-    // 上传图片
+    /**
+     * @cc lay_upload_file上传图片
+     */
     public function lay_upload_file(){
         if($_FILES['file']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
@@ -562,15 +588,16 @@ class BaomingController extends AuthController {
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$img;
+                $data['data']["src"]='/Uploads/layui/'.$img;
             }
 
             echo json_encode($data);
         }
     }
 
-
-    // 上传视频
+    /**
+     * @cc lay_upload_file_video上传视频
+     */
     public function lay_upload_file_video(){
         if($_FILES['file_video']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
@@ -591,7 +618,7 @@ class BaomingController extends AuthController {
                 $data['msg']=$upload->getError();
             }else{
                 $video=$info['file_video']['savename'];
-                $video_url='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$video;
+                $video_url='/Uploads/layui/'.$video;
 
                 $data=array();
                 $data['code']=0;
@@ -600,7 +627,7 @@ class BaomingController extends AuthController {
             }
 
             //上传到阿里云OSS
-            oss_upload( './Uploads/layui/'.$video );
+            // oss_upload( './Uploads/layui/'.$video );
 
             echo json_encode($data);
         }

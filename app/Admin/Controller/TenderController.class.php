@@ -10,12 +10,11 @@ class TenderController extends AuthController {
         $user=session('auth');
         $this->user=$user;
         $this->cur_c='Tender';
-
-        if($_POST){
-            $this->_POST=$_POST;
-        }
     }
 
+    /**
+     * @cc index主页面
+     */
     public function index(){
         global $user;
 
@@ -39,9 +38,9 @@ class TenderController extends AuthController {
         $this->display();
     }
 
-
-
-    //列表
+    /**
+     * @cc ajax_get_list获取列表
+     */
     public function ajax_get_list(){
         $map=array();
         // if($_GET['types']){
@@ -73,7 +72,7 @@ class TenderController extends AuthController {
     }
 
 
-    public function ids_to_types($types){
+    protected function ids_to_types($types){
         $types_arr=explode('_',$types);
 
         $str='';
@@ -86,8 +85,9 @@ class TenderController extends AuthController {
         return $str;
     }
 
-   
-    //根据ID获取用户关联的信息
+    /**
+     * @cc ajax_get_user_relation_logs根据ID获取用户关联的信息
+     */
     public function ajax_get_user_relation_logs(){
 
         $id=$_GET['id'];
@@ -100,7 +100,9 @@ class TenderController extends AuthController {
         echo json_encode($list);
     }
 
-    //获取单条信息
+    /**
+     * @cc ajax_get_row_info获取单条信息
+     */
     public function ajax_get_row_info(){
         $id=I('id');
 
@@ -126,7 +128,9 @@ class TenderController extends AuthController {
         echo json_encode($data);
     }
 
-    //获取分类
+    /**
+     * @cc ajax_get_type获取分类
+     */
     public function ajax_get_type(){
 
         $type=M('Type')->where(array('pid'=>1273))->select();
@@ -146,7 +150,9 @@ class TenderController extends AuthController {
     }
 
 
-    //添加
+    /**
+     * @cc ajax_add添加
+     */
     public function ajax_add(){
         global $user;
 
@@ -188,7 +194,9 @@ class TenderController extends AuthController {
         echo json_encode($data);
     }
 
-    //编辑
+    /**
+     * @cc ajax_edit编辑
+     */
     public function ajax_edit(){
         global $user;
 
@@ -229,7 +237,9 @@ class TenderController extends AuthController {
         echo json_encode($data);
     }
 
-    //删除
+    /**
+     * @cc ajax_del删除
+     */
     public function ajax_del(){
         $id=I('id'); 
 
@@ -255,7 +265,9 @@ class TenderController extends AuthController {
     }
 
 
-    // 上传文件
+    /**
+     * @cc 编辑器上传图片【不选则图片上传不了】
+     */
     public function lay_upload_file(){
         if($_FILES['file']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
@@ -279,7 +291,7 @@ class TenderController extends AuthController {
                 $data=array();
                 $data['code']=0;
                 $data['msg']='success';
-                $data['data']["src"]='http://'.$_SERVER['HTTP_HOST'].'/Uploads/layui/'.$img;
+                $data['data']["src"]='/Uploads/layui/'.$img;
             }
 
             echo json_encode($data);
