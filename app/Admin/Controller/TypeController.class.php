@@ -168,28 +168,41 @@ class TypeController extends AuthController {
             foreach ($allChildren as $key => $value) {
                 $allChildrenIds[]=$value['id'];
             }
-            $list = D('Type')->where(array('id'=>array('in',$allChildrenIds)))->select();
+            $list = D('Type')->where(array('id'=>array('in',$allChildrenIds)))->order('sort desc')->select();
         }else{
-            $list = D('Type')->select();
+            $list = D('Type')->order('sort desc')->select();
         }
+        
 
+        $this->level_list=M('Type')->distinct(true)->field('level')->select();
 
         $array = array();
         foreach($list as $k => $r) {
             $r['id']      = $r['id'];
+
+            if($r['level']<=1){
+                $r['disabled']="disabled";
+            }else{
+                $r['disabled']="";
+            }
+            
             $r['submenu'] = "<a href='javascript:void(0)' data-pid=\"".$r['id']."\" data-title=\"".$r['title']."\" data-level=\"".$r['level']."\" class=\"_add\">添加子分类</a>";
             $r['edit']    = "<a href='".U('/Admin/Type/edit/id/'.$r['id'].'/pid/'.$r['pid'])."'>修改</a>";
             $r['del']     = "<a class='del' data-id='".$r['id']."' href='javascript:void(0)'>删除</a>";
             $array[]      = $r;
         }
 
-        $str  = "<tr class='tr'>
+        $str  = "<tr class='tr' data-level='\$level'>
                     <td class='center'>
                         <input type='text' class='sort_input' data-id='\$id' value='\$sort' size='2' name='sort[\$id]'>
                     </td>
                     <td>\$id</td>
-                    <td class='hidden-480'>\$spacer \$title</td>
-                    <td>\$level</td>
+                    <td class='hidden-480'>\$spacer 
+                        <input type='text' class='title_input' \$disabled data-id='\$id' value='\$title'>
+                    </td>
+                    <td>
+                        <img src='/Public/Admin/images/number/\$level.gif' style='height:30px;' />
+                    </td>
                     <td>
                         <button class='btn btn-xs btn-success'>\$submenu
                             <i class='icon-ok bigger-120'></i>
@@ -259,6 +272,38 @@ class TypeController extends AuthController {
             echo json_encode($data);
         }
     }
+
+    /**
+     * @cc ajax_edit_title异步编辑标题
+     */
+    public function ajax_edit_title(){
+        $id=$_POST['id'];
+        $title=$_POST['title'];
+
+        $d=D('Type');
+        
+        if($id&&$title){
+            $data=array();
+            $data['id']=$id;
+            $data['title']=$title;
+            $data['time']=time();
+
+            $res=$d->save($data);
+            if($res){
+                $data=array();
+                $data['code']=0;
+                $data['msg']='success';
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']='error';
+            }
+
+            echo json_encode($data);
+        }
+    }
+
+    
    
 
 }

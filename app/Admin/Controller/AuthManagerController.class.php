@@ -166,9 +166,6 @@ class AuthManagerController extends AuthController{
             }
             $this->group=$group;
 
-            
-
-
             $this->cur_v='AuthManager-authSet';
             $this->display('authSet');
         }

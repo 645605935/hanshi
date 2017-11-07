@@ -152,13 +152,23 @@
                                                 <dd class="bd">
                                                     <present name="node['children']">
                                                     <volist name="node['children']" id="child" >
-                                                        <div class="rule_check">
-                                                            <div>
-                                                               <label class="checkbox" page="{$child.name}"  <notempty name="child['remark']">title='{$child.remark}'</notempty>>
-                                                                    <input class="auth_rules rules_row" type="checkbox" name="rules[]" value="<?php echo $child['id'] ?>" <?php if(in_array($child['id'], explode(',', $group['rules']))){echo "checked='checked'";}else{ echo '';}?>/>{$child.title}
-                                                               </label>
+                                                        <if condition="$child['is_show'] eq 0">
+                                                            <div class="rule_check" style="display: none;">
+                                                                <div>
+                                                                   <label class="checkbox" page="{$child.name}"  <notempty name="child['remark']">title='{$child.remark}'</notempty>>
+                                                                        <input class="auth_rules rules_row" type="checkbox" name="rules[]" value="<?php echo $child['id'] ?>" checked='checked' />{$child.title}
+                                                                   </label>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        <else/>
+                                                            <div class="rule_check">
+                                                                <div>
+                                                                   <label class="checkbox" page="{$child.name}"  <notempty name="child['remark']">title='{$child.remark}'</notempty>>
+                                                                        <input class="auth_rules rules_row" type="checkbox" name="rules[]" value="<?php echo $child['id'] ?>" <?php if(in_array($child['id'], explode(',', $group['rules']))){echo "checked='checked'";}else{ echo '';}?>/>{$child.title}
+                                                                   </label>
+                                                                </div>
+                                                            </div>
+                                                        </if>
                                                     </volist>
                                                     </present>
                                                 </dd>

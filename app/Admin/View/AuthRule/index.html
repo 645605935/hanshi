@@ -80,6 +80,11 @@
 		<script src="__PUBLIC__/Admin/layui-v1.0.4/layui/layui.js"></script>
 		<script src="__PUBLIC__/layer/layer.js"></script>
 
+		<style type="text/css">
+			.tr_red .level{color: red;font-size: 20px;font-weight: bold;}
+			.tr_greed .level{color: green;}
+		</style>
+
 	</head>
 
 
@@ -471,6 +476,18 @@
 						// }
 					// });
 				});
+
+			  	//设置在权限设置列表是否显示
+				$("tr").dblclick(function() {
+			  		var id=$(this).attr('id');
+			  		var level=$(this).attr('level');
+			  		var is_show=$(this).attr('is_show');
+			  		var obj_tr=$(this);
+			  		if(level=='方法'){
+			  			_ajax_set_is_show(obj_tr, id, is_show);
+			  		}
+					
+				});
 			});
 
 
@@ -486,6 +503,36 @@
 			        success  : function(json) {  
 			            if(json.code == 0){
 			                obj_tr.remove();
+			            }else{
+			                alert(json.msg);
+			            }
+			        },
+			        error  : function() {  
+			            alert('error');
+			        }  
+			    }); 
+			}
+
+			//异步设置在权限设置列表是否显示
+			function _ajax_set_is_show(obj_tr, id, is_show){
+			    $.ajax({  
+			        type:'get',  
+			        url : "{:U('Admin/AuthRule/ajax_set_is_show')}",
+			        data:{ 
+			          id:id,
+			          is_show:is_show 
+			        },
+			        dataType : 'json',
+			        success  : function(json) {  
+			            if(json.code == 0){
+			            	if(is_show==1){
+			            		is_show=0;
+			            		obj_tr.attr('is_show', is_show).removeClass('tr_red');
+			            	}else{
+			            		is_show=1;
+			            		obj_tr.attr('is_show', is_show).addClass('tr_red');
+			            	}
+			                
 			            }else{
 			                alert(json.msg);
 			            }

@@ -97,6 +97,11 @@
 					                （显示该分类的下一级分类）
 								</small>
 							</h1>
+							<h1>
+								<foreach name="level_list" item="v">
+									<input type="radio" class="level_show" name="level" value="{$v.level}">{$v.level}
+								</foreach>
+							</h1>
 						</div><!-- /.page-header -->
 
 						<div class="row">
@@ -295,6 +300,47 @@
 			      	    }  
 			      	});  
 				});
+
+				//编辑标题
+				$('body').on('blur' ,'.title_input', function(){
+					var id = $(this).attr('data-id');
+					var title=$(this).val();
+					
+			      	if(id&&title){
+			      		$.ajax({  
+			      		    async:false,
+			      		    type:'post',  
+			      		    url : "{:U('Admin/Type/ajax_edit_title')}",
+			      		    dataType : 'json',
+			      		    data:{
+			      		    	id:id,
+			      		    	title:title
+			      		    },
+			      		    success  : function(json) { 
+			      		        if(json.code!=0){
+			      		            alert(json.msg);
+			      		        }
+			      		    },
+			      		    error  : function(json) {  
+			      		        alert(json.msg);
+			      		    }  
+			      		});  
+			      	}
+				});
+
+				//选择某一类
+				$('.level_show').click(function(){
+					var level=$(this).val();
+					$.each($('#sample-table-1 tbody tr'), function(key, value){
+						if($(value).attr('data-level')==level){
+							$(value).show();
+						}else{
+							$(value).hide();
+						}
+					});
+
+				});
+
 			})
 		</script>
 

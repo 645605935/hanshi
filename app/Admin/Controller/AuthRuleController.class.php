@@ -30,6 +30,7 @@ class AuthRuleController extends AuthController {
 			$r['submenu'] = $r['level']==3 ? '<font color="#cccccc">添加子菜单</font>' : "<a href='".U('/Admin/AuthRule/add/pid/'.$r['id'])."'>添加子菜单</a>";
 			$r['edit']    = $r['level']==1 ? '<font color="#cccccc">修改</font>' : "<a href='".U('/Admin/AuthRule/edit/id/'.$r['id'].'/pid/'.$r['pid'])."'>修改</a>";
 			$r['del']     = $r['level']==1 ? '<font color="#cccccc">删除</font>' : "<a class='del' data-id='".$r['id']."' data-url='".U('/Admin/AuthRule/del/id/'.$r['id'])."' href='javascript:void(0)'>删除</a>";
+			$r['is_show']   = $r['is_show'];
 
 			switch ($r['display']) {
 				case 0:
@@ -62,10 +63,16 @@ class AuthRuleController extends AuthController {
 					break;
 			}
 
+			if($r['is_show']==1 && $r['level']=='方法'){
+				$r['color_class']='tr_red';
+			}else{
+				$r['color_class']='';
+			}
+
 			$array[]      = $r;
 		}
 
-		$str  = "<tr level='\$level'>
+		$str  = "<tr level='\$level' id='\$id' is_show='\$is_show' class='\$color_class'>
 			<td class='center'>
 				<input type='text' data-id='\$id' class='sort_input' value='\$sort' size='2' name='sort[\$id]'>
 			</td>
@@ -73,7 +80,7 @@ class AuthRuleController extends AuthController {
 				<span class='label label-xlg label-grey arrowed-in-right arrowed-in'>\$title</span>
 				<span class='\$style'>\$name</span>
 			</td>
-			<td class='hidden-480'>\$level</td>
+			<td class='hidden-480 level'>\$level</td>
 			<td>\$status</td>
 			<td class='hidden-480'>
 				<span class='label label-sm label-warning'>\$display</span>
@@ -120,6 +127,7 @@ class AuthRuleController extends AuthController {
         $this->user=$user;
 
 		if(IS_POST) {
+			// dump($_POST);die;
 			$db = M("AuthRule");
 			if($db->create()){
 				if($db->add()){
@@ -134,9 +142,9 @@ class AuthRuleController extends AuthController {
 					D('Log')->addLog($title,$url,$model,$controller,$action);
 					// 日志记录  end
 
-    				$this->success('添加成功！',U('/Admin/AuthRule/index'));
+    				$this->success('添加成功');
 				}else{
-					 $this->error('添加失败!');
+					 $this->error('添加失败');
 				}
 			}else{
 				$this->error($db->getError());
@@ -220,8 +228,14 @@ class AuthRuleController extends AuthController {
 
 		                		//如果已经添加
 		                		if($temp_row=M('AuthRule')->where(array('name'=>$_temp_title))->find()){
+		                			if($temp_row['title']==$desc_cc){
+		                				$data[$i]['is_same'] = 1;
+		                			}else{
+		                				$data[$i]['is_same'] = 0;
+		                			}
 		                			$data[$i]['status'] = 1;
-		                			$data[$i]['title'] = "功能：".$temp_row['title'];
+		                			$data[$i]['title'] = $temp_row['title'];
+		                			$data[$i]['id'] = $temp_row['id'];
 		                		}else{
 		                			$data[$i]['status'] = 0;
 		                		}
@@ -233,6 +247,7 @@ class AuthRuleController extends AuthController {
 		        $this->assign('all_functions',$data);
 			}
 
+
 			$this->display();
 		}
 	}
@@ -241,9 +256,12 @@ class AuthRuleController extends AuthController {
 	public function edit(){
 		global $user;
         $this->user=$user;
+
+
         
 		$db = D('AuthRule');
-		if(IS_POST) {
+		if(IS_POST) { 
+			// dump($_POST);die;
 			if($db->create()){
 				if($db->save()){
 
@@ -257,9 +275,9 @@ class AuthRuleController extends AuthController {
 					D('Log')->addLog($title,$url,$model,$controller,$action);
 					// 日志记录  end
 					
-    				$this->success('编辑成功！',U('Admin/AuthRule/index'));
+    				$this->success('编辑成功');
 				}else{
-					 $this->error('编辑失败!');
+					 $this->error('编辑失败');
 				}
 			}else{
 				$this->error($db->getError());
@@ -331,6 +349,36 @@ class AuthRuleController extends AuthController {
 
 		echo json_encode($data); 
 	}
+
+	//异步设置在权限设置列表是否显示
+	public function ajax_set_is_show(){
+		$id = I('id','intval',0);
+		$is_show = I('is_show','intval',0);
+		if(!$id)$this->error('参数错误!');
+		$db = D('AuthRule');
+
+		$data=array();
+		if($is_show==1){
+			$data['is_show']=0;
+		}else{
+			$data['is_show']=1;
+		}
+
+		$res = $db -> where(array('id'=>$id))->save($data);
+		if($res){
+			$data=array();
+			$data['code']=0;
+			$data['msg']='success';
+		}else{
+			$data=array();
+			$data['code']=1;
+			$data['msg']='error';
+		}
+
+		echo json_encode($data); 
+	}
+
+	
 
 	//获取所有控制器名称
     protected function getController($module){
