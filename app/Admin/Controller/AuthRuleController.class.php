@@ -21,6 +21,8 @@ class AuthRuleController extends AuthController {
 
 		$array = array();
 
+		// dump($AuthRule);die;
+
 		// 构建生成树中所需的数据
 		foreach($AuthRule as $k => $r) {
 			$r['id']      = $r['id'];
@@ -47,18 +49,22 @@ class AuthRuleController extends AuthController {
 			switch ($r['level']) {
 				case 0:
 					$r['level'] = '非节点';
+					$r['level_style'] = 'layui-badge layui-bg-gray';
 					$r['style'] = 'label label-warning';
 					break;
 				case 1:
 					$r['level'] = '应用';
+					$r['level_style'] = 'layui-badge layui-bg-orange';
 					$r['style'] = 'label label-danger arrowed-in';
 					break;
 				case 2:
 					$r['level'] = '模块';
+					$r['level_style'] = 'layui-badge layui-bg-blue';
 					$r['style'] = 'label';
 					break;
 				case 3:
 					$r['level'] = '方法';
+					$r['level_style'] = 'layui-badge layui-bg-green';
 					$r['style'] = 'label label-success arrowed';
 					break;
 			}
@@ -80,7 +86,9 @@ class AuthRuleController extends AuthController {
 				<span class='label label-xlg label-grey arrowed-in-right arrowed-in'>\$title</span>
 				<span class='\$style'>\$name</span>
 			</td>
-			<td class='hidden-480 level'>\$level</td>
+			<td class='hidden-480'>
+				<span class='\$level_style'>\$level</span>
+			</td>
 			<td>\$status</td>
 			<td class='hidden-480'>
 				<span class='label label-sm label-warning'>\$display</span>
@@ -113,6 +121,36 @@ class AuthRuleController extends AuthController {
         }else{
             $html_tree = $Tree->get_tree(0, $str);
         }
+
+
+        if($_POST['pid_color']){
+        	$module_row=M('AuthRule')->where(array('pid'=>$_POST['pid_color']))->find();
+
+        	$already_list=M('AuthRule')->where(array('pid'=>$module_row['id']))->distinct(true)->field('name')->select();
+        	$already_arr=array();
+        	foreach ($already_list as $key => $value) {
+        		$already_arr[]=$value['name'];
+        	}
+
+        	$module='Admin';
+        	$controller=$module_row['name'];
+        	$actions = $this->getAction($module, $controller);
+
+        	$action_list=array();
+        	foreach ($actions as $key => $value) {
+        		$temp_name=$module."/".$controller."/".$value;
+        		if(in_array($temp_name, $already_arr)){
+        			$action_list[$key]['status']=1;
+        		}else{
+        			$action_list[$key]['status']=0;
+        		}
+        		$action_list[$key]['name']=$temp_name;
+        		$action_list[$key]['action']=$value;
+        		$action_list[$key]['desc_cc']=$this->get_cc_desc($module, $controller, $value);
+        	}
+        	$this->assign('action_list',$action_list);
+        }
+        
 
 		$this->assign('html_tree',$html_tree);
 		$this->select=M('AuthRule')->where(array('pid'=>1))->select();

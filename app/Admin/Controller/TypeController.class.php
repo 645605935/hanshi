@@ -12,7 +12,9 @@ class TypeController extends AuthController {
         $this->cur_c='Type';
     }
     
-    // 添加分类
+    /**
+     * @cc 添加
+     */
     public function add(){
         global $user;
         $this->user=$user;
@@ -63,7 +65,9 @@ class TypeController extends AuthController {
         }
     }
 
-    // 编辑分类
+    /**
+     * @cc 编辑
+     */
     public function edit(){
         global $user;
         $this->user=$user;
@@ -110,20 +114,9 @@ class TypeController extends AuthController {
         }
     }
 
-    //查看班级ID是否存在
-    public function checkclassid(){ 
-        if(IS_POST){
-            $class_id=I('class_id');
-            $d=D('Type');
-            if($d->where(array('class_id'=>$class_id))->select()){
-                $this->success('该班级ID已存在，可以更改也可以不改，请按需求操作','','',$row);
-            }else{
-                $this->error('可以使用','','',$row);
-            }
-        }
-    }
-
-    // 删除分类
+    /**
+     * @cc 删除
+     */
     public function del(){
         $id=I('post.id');
         $id ? null : exit($this->error('参数错误!'));
@@ -155,7 +148,9 @@ class TypeController extends AuthController {
         }
     }
 
-    // 分类列表
+    /**
+     * @cc 列表
+     */
     public function index(){
         global $user;
         $this->user=$user;
@@ -234,21 +229,9 @@ class TypeController extends AuthController {
         $this->display();
     }
 
-    // 分类排序
-    public function sort(){
-        $sorts = I('post.sort');
-        is_array($sorts) ?  null : exit($this->error('参数错误!'));
-        $d=D('Type');
-        foreach ($sorts as $id => $sort) {
-            $d->save( array('id' =>$id , 'sort' =>intval($sort) ) );
-        }
-        cacheType(0);
-
-        $this->success('更新完成',U('/Admin/Type/index'));
-    }
-
-
-    
+    /**
+     * @cc 异步排序
+     */
     public function ajax_sort(){
         $id=$_POST['id'];
         $sort=$_POST['sort'];
@@ -274,7 +257,7 @@ class TypeController extends AuthController {
     }
 
     /**
-     * @cc ajax_edit_title异步编辑标题
+     * @cc 异步编辑标题
      */
     public function ajax_edit_title(){
         $id=$_POST['id'];
@@ -307,5 +290,3 @@ class TypeController extends AuthController {
    
 
 }
-
-?>
