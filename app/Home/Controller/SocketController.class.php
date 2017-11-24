@@ -1,6 +1,4 @@
 <?php
-
-
 namespace Home\Controller;
 use Think\CommonController;
 class SocketController extends CommonController {
@@ -20,6 +18,8 @@ class SocketController extends CommonController {
         $msg = array('type' => 'msg', 'msg' => '你好',);
         $msg = json_encode($msg);
         $gateway::sendToUid($uid, $msg);
+
+        
         $this->display();
     }
 
