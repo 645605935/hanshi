@@ -9,7 +9,7 @@
 <meta name="keywords" content="">
 </head>
 <body>
-1111
+WebSocket
 </body>
 </html>
 
@@ -17,6 +17,12 @@
 <script type="text/javascript">
     $(function(){
         ws = new WebSocket("ws://127.0.0.1:8282");
+
+
+        ws.onopen=function(){
+                ws.send('32323');
+        };
+        
         // 服务端主动推送消息时会触发这里的onmessage
         ws.onmessage = function(e) {
 
@@ -27,7 +33,7 @@
                 // Events.php中返回的init类型的消息，将client_id发给后台进行uid绑定
             case 'init':
                 // 利用jquery发起ajax请求，将client_id发给后端进行uid绑定
-                $.post("{:U('Home/Socket/bind')}", {
+                $.post("{:U('Home/Socket/index')}", {
                     client_id: data.client_id
                 },
                 function(data) {},

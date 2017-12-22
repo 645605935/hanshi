@@ -13,7 +13,7 @@ class IndexController extends AuthController {
     }
     
     /**
-     * @cc index主页面
+     * @cc 列表页
      */
     public function index(){
         global $user;
@@ -24,7 +24,7 @@ class IndexController extends AuthController {
     }
 
     /**
-     * @cc ajax_get_user_list获取用户列表
+     * @cc 异步获取用户列表
      */
     public function ajax_get_user_list(){
         $map=array();
@@ -59,7 +59,7 @@ class IndexController extends AuthController {
     }
 
     /**
-     * @cc upload_img上传图片--不对图进行任何处理
+     * @cc 上传图片【不对图进行任何处理】
      */
     public function upload_img(){
         if($_FILES['img']['size']>0){
@@ -92,7 +92,7 @@ class IndexController extends AuthController {
     }
 
     /**
-     * @cc upload_img_3上传图片--生成三种大小的图片
+     * @cc 上传图片【生成三种大小的图片】
      */
     public function upload_img_3(){
         global $user;
