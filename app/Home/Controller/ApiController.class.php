@@ -8,6 +8,12 @@ class ApiController extends CommonController{
         parent::_initialize();
     }
 
+    // 微信小程序上传文件时要用的一些参数
+    public function get_wx_upload_oss_params(){
+        $data = oss_qianming();
+        echo json_encode($data);
+    }
+
     public function ajax_add_image(){
         $_json=file_get_contents('php://input');
         $_arr=json_decode($_json,true);
