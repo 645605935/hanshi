@@ -552,6 +552,8 @@ class IndexController extends CommonController{
     public function lay_upload_file(){
         global $user;
 
+        dump(I('post.'));die;
+
         if($_FILES['file']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类               
             $upload->maxSize   =     314572800000 ;// 设置附件上传大小
@@ -559,7 +561,7 @@ class IndexController extends CommonController{
             $upload->uploadReplace  = false;// 存在同名文件是否覆盖
             $upload->autoSub   =     false;//是否启用子目录保存
             $upload->rootPath  =     './Uploads/'; // 设置附件上传根目录
-            $upload->savePath  =     'layui/'; // 设置附件上传（子）目录
+            $upload->savePath  =     'layui_oss/'; // 设置附件上传（子）目录
             $upload->saveRule  =     ''; // 设置附件上传（子）目录
              
             // 上传文件 
@@ -572,7 +574,7 @@ class IndexController extends CommonController{
                 $data['msg']=$upload->getError();
             }else{
                 $file=$info['file']['savename'];
-                $file_url='/Uploads/layui/'.$file;
+                $file_url='/Uploads/layui_oss/'.$file;
 
                 $data=array();
                 $data['code']=0;
@@ -580,7 +582,7 @@ class IndexController extends CommonController{
                 $data['data']["src"]=$file_url;
 
                 //上传到阿里云OSS
-                oss_upload( './Uploads/layui/'.$file );
+                oss_upload( './Uploads/layui_oss/'.$file );
             }
 
             echo json_encode($data);

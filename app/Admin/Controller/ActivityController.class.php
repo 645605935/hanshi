@@ -211,6 +211,7 @@ class ActivityController extends AuthController {
 
     // 上传图片
     public function lay_upload_file(){
+        
         if($_FILES['file']['size']>0){
             $upload = new \Think\Upload();// 实例化上传类
             $upload->maxSize   =     31457280 ;// 设置附件上传大小

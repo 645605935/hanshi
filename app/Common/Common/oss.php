@@ -55,7 +55,7 @@
 
         $id= $KEY_ID;  
         $key= $KEY_SECRET;  
-        $host = 'http://jishanstore.oss-cn-beijing.aliyuncs.com';  
+        $host = 'https://oss.jishanstore.com';  
       
         $now = time();  
         $expire = 30; //设置该policy超时时间是10s. 即这个policy过了这个有效时间，将不能访问  
@@ -83,11 +83,11 @@
       
         $response = array();  
         $response['accessid'] = $id;  
-        $response['host'] = $host;  
+        $response['uploadUrl'] = $host;  
         $response['policy'] = $base64_policy;  
         $response['signature'] = $signature;  
         $response['expire'] = $end;  
         //这个参数是设置用户上传指定的前缀  
-        $response['dir'] = $dir;  
+        $response['uploadUrlend'] = $dir;  
         return $response;  
     }  
