@@ -78,6 +78,8 @@ class ApiController extends CommonController{
                     break;
             }
             $list_new[$key]['pic']= $_str;
+            $list_new[$key]['id']= $value['id'];
+            $list_new[$key]['type']= $value['type'];
             $list_new[$key]['height']=0;
         }
         if($list){
@@ -123,6 +125,102 @@ class ApiController extends CommonController{
             } else {
                 echo($errCode);
             }
+        }
+    }
+
+    
+    //绑定手机号
+    public function ajax_register_phone(){
+        $uid=$_POST['uid'];
+        $phone=$_POST['phone'];
+        $code=$_POST['code'];
+        $msg_id=$_POST['msg_id'];
+
+        if($this->checkCode($msg_id, $code)){
+                //保存手机号
+                $data=array();
+                $data['phone']=$phone;
+
+                $where=array();
+                $where['id']=$uid;
+                
+                $res=M('User')->where($where)->save($data);
+                if($res){
+                    $data=array();
+                    $data['code']=0;
+                    $data['msg']='绑定成功';
+                }else{
+                    $data=array();
+                    $data['code']=1;
+                    $data['msg']='绑定失败';
+                }
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='验证码失效';
+        }
+
+        echo json_encode($data);
+    }
+
+    //获取验证码
+    public function ajax_getCode(){
+        if($phone=$_POST['phone']){
+            $res= send_code($phone);
+            if($res['http_code']==200){
+                $body_data=json_decode($res['body'],true);
+
+                //记录短信验证码信息
+                $data=array();
+                $data['phone']=$phone;
+                $data['msg_id']=$body_data['msg_id'];
+                $data['time']=time();
+                $data['ip']=get_client_ip();
+                $id=M('JsmsLog')->add($data);
+
+                if($id){
+                    $data=array();
+                    $data['code']=0;
+                    $data['data']=array('msg_id'=>$body_data['msg_id']);
+                    $data['msg']='短信验证码发送成功';
+                }else{
+                    $data=array();
+                    $data['code']=1;
+                    $data['msg']='短信验证码发送失败';
+                }
+            }else{
+                $data=array();
+                $data['code']=1;
+                $data['msg']=$res['error']['msg'];
+            }
+        }else{
+            $data=array();
+            $data['code']=1;
+            $data['msg']='异常操作';
+        }
+
+        echo json_encode($data);
+    }
+
+    //验证验证码
+    public function checkCode(){
+        $msg_id=$_POST['msg_id'];
+        $code=$_POST['code'];
+
+        if($msg_id && $code){
+            $res=check_code($msg_id, $code);
+            if($res['http_code']==200){
+                $body_data=json_decode($res['body'],true);
+                if($body_data['is_valid']==true){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
         }
     }
 
@@ -302,6 +400,8 @@ class ApiController extends CommonController{
 
         echo json_encode($data);
     }
+
+
 
     public function ajax_add_video(){
         $_json=file_get_contents('php://input');

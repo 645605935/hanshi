@@ -2181,4 +2181,5 @@ require './app/Common/Common/cache.php';
 require './app/Common/Common/oss.php';
 require './app/Common/Common/email.php';
 require './app/Common/Common/weixin.php';
+require './app/Common/Common/jsms.php';
 ?>
